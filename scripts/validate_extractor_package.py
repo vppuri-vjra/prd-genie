@@ -30,6 +30,10 @@ REQUIRED_PROMPT_PHRASES = [
     "{{source_location}}",
     "{{input_type}}",
     "{{source_text}}",
+    "extraction_status` must be exactly `complete`, `partial`, or `no_requirements`",
+    "FR-001`, never `FR001`",
+    "confidence` must be a JSON number from `0` through `1`",
+    "MISS-001",
 ]
 
 

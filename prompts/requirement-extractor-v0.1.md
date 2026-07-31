@@ -53,6 +53,16 @@ Use these item types and ID prefixes:
 
 IDs start at `001` within each prefix and increment without gaps.
 
+### Exact contract values
+
+- `extraction_status` must be exactly `complete`, `partial`, or `no_requirements`. Never emit alternatives such as `requirements_extracted`.
+- Item IDs must contain the hyphen and match `^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$`; for example, `FR-001`, never `FR001`.
+- Item `type` must use the complete taxonomy value, such as `functional_requirement`; never use an abbreviated prefix such as `FR` as the type.
+- `confidence` must be a JSON number from `0` through `1`, such as `1.0`; never use text such as `high`, `medium`, or `low`.
+- Missing-information IDs must match `^MISS-[0-9]{3}$`; for example, `MISS-001`, never `MI001`.
+- Contradiction IDs must match `^CTR-[0-9]{3}$`, and `resolution_status` must be exactly `unresolved`.
+- Use JSON `null` for an unknown optional value. Do not use the string `"Unspecified"` except in the `priority` field, whose allowed values are `Must Have`, `Should Have`, `Nice to Have`, and `Unspecified`.
+
 ### Classification guidance
 
 - Preserve exact acceptance criteria as separate `acceptance_criterion` items even when related to a functional requirement.
