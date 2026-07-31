@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Validated contracts; Requirement Extractor implementation next
+**Phase:** Requirement Extractor prompt ready; initial n8n workflow implementation next
 
 The planned implementation uses:
 
@@ -90,6 +90,15 @@ The contracts, field documentation, and controlled values are in [`schemas/`](sc
 
 Fifteen representative payloads cover T1, T2, T3, and T9 under [`examples/contracts/`](examples/contracts/). All schemas and examples pass automated validation.
 
+## Requirement Extractor package
+
+The initial extractor implementation package includes:
+
+- [`prompts/requirement-extractor-v0.1.md`](prompts/requirement-extractor-v0.1.md) - provider-neutral system prompt and runtime template
+- [`evaluation/fixtures/t01-t10-extractor-cases.json`](evaluation/fixtures/t01-t10-extractor-cases.json) - machine-readable T1-T10 expectations
+- [`workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`](workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md) - initial node sequence, data mapping, validation, and retry behavior
+- [`scripts/validate_extractor_package.py`](scripts/validate_extractor_package.py) - offline integrity checks for prompt controls and baseline coverage
+
 ## Baseline evaluation
 
 The project includes 12 required baseline cases:
@@ -120,6 +129,7 @@ The n8n workflow is not implemented yet. To validate the current contract packag
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python scripts/validate_contracts.py
+.venv/bin/python scripts/validate_extractor_package.py
 ```
 
 No credentials or secrets should be committed. Copy `.env.example` to your local secret-management approach and configure credentials directly in n8n and Langfuse.

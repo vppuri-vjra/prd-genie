@@ -1,0 +1,96 @@
+{
+  "fixture_version": "1.0.0",
+  "capability": "requirement_extraction",
+  "cases": [
+    {
+      "test_id": "T1",
+      "input": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+      "expected_status": "complete",
+      "required_exact_values": ["date range", "category", "status", "under 2 seconds", "Sarah", "Q3"],
+      "required_item_types": ["functional_requirement", "non_functional_requirement", "stakeholder", "deadline"],
+      "required_behaviors": ["All extracted items contain verbatim evidence."],
+      "prohibited_content": ["requirements not present in the input"]
+    },
+    {
+      "test_id": "T2",
+      "input": "We need better reporting. Something like what Competitor X has.",
+      "expected_status": "partial",
+      "required_exact_values": ["Competitor X"],
+      "required_item_types": ["functional_requirement"],
+      "required_behaviors": ["Flag the request as ambiguous.", "Identify missing metrics, format, and users."],
+      "prohibited_content": ["invented reporting requirements", "invented competitor capabilities"]
+    },
+    {
+      "test_id": "T3",
+      "input": "The dashboard should auto-refresh every 5 seconds. [Later in same meeting] Performance is critical, minimize API calls.",
+      "expected_status": "partial",
+      "required_exact_values": ["every 5 seconds", "minimize API calls"],
+      "required_item_types": ["functional_requirement", "non_functional_requirement"],
+      "required_behaviors": ["Identify the contradiction.", "Flag the conflict for stakeholder resolution."],
+      "prohibited_content": ["silently resolving the contradiction", "selecting a refresh implementation"]
+    },
+    {
+      "test_id": "T4",
+      "input": "Users need to export reports as PDF and CSV. PDF must include company logo. CSV must preserve formulas.",
+      "expected_status": "complete",
+      "required_exact_values": ["PDF", "CSV", "company logo", "preserve formulas"],
+      "required_item_types": ["functional_requirement", "acceptance_criterion"],
+      "required_behaviors": ["Preserve acceptance criteria without modification."],
+      "prohibited_content": ["additional acceptance criteria", "XLSX"]
+    },
+    {
+      "test_id": "T5",
+      "input": "Discussed dashboard... John mentioned something about real-time... budget TBD...",
+      "expected_status": "partial",
+      "required_exact_values": ["John", "real-time", "budget TBD"],
+      "required_item_types": [],
+      "required_behaviors": ["Flag the input as insufficient.", "Identify what dashboard, what real-time behavior, and what budget are missing."],
+      "prohibited_content": ["invented dashboard scope", "invented budget", "invented real-time requirement"]
+    },
+    {
+      "test_id": "T6",
+      "input": "Engineering wants microservices. Design wants single-page app. PM wants it shipped by March.",
+      "expected_status": "partial",
+      "required_exact_values": ["Engineering", "microservices", "Design", "single-page app", "PM", "March"],
+      "required_item_types": ["constraint", "deadline"],
+      "required_behaviors": ["Capture all three viewpoints.", "Identify tensions without favoring a stakeholder."],
+      "prohibited_content": ["choosing microservices", "choosing single-page app"]
+    },
+    {
+      "test_id": "T7",
+      "input": "API must support 10,000 concurrent users. Response time < 200ms at p95. Must integrate with Salesforce REST API v52.",
+      "expected_status": "complete",
+      "required_exact_values": ["10,000 concurrent users", "< 200ms at p95", "Salesforce REST API v52"],
+      "required_item_types": ["non_functional_requirement"],
+      "required_behaviors": ["Classify the exact scale, performance, and integration requirements as NFRs."],
+      "prohibited_content": ["10K users", "200ms average", "Salesforce v53"]
+    },
+    {
+      "test_id": "T8",
+      "input": "Admins need bulk user management. End users need a simplified view. Auditors need read-only access with full history.",
+      "expected_status": "complete",
+      "required_exact_values": ["Admins", "End users", "Auditors", "bulk user management", "simplified view", "read-only access with full history"],
+      "required_item_types": ["persona", "functional_requirement"],
+      "required_behaviors": ["Keep Admin, End User, and Auditor separate."],
+      "prohibited_content": ["merging all personas into a generic user"]
+    },
+    {
+      "test_id": "T9",
+      "input": "Meeting happened. Notes: none.",
+      "expected_status": "no_requirements",
+      "required_exact_values": [],
+      "required_item_types": [],
+      "required_behaviors": ["Return an empty items array.", "State that no requirements are extractable."],
+      "prohibited_content": ["generated requirements", "generated PRD content"]
+    },
+    {
+      "test_id": "T10",
+      "input": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown.",
+      "expected_status": "complete",
+      "required_exact_values": ["SSO login", "new auth service", "Team Alpha", "ETA unknown"],
+      "required_item_types": ["functional_requirement", "dependency", "risk"],
+      "required_behaviors": ["Capture the auth-service dependency and unknown ETA risk."],
+      "prohibited_content": ["invented ETA", "invented auth-service status"]
+    }
+  ]
+}
