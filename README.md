@@ -10,6 +10,7 @@ The planned implementation uses:
 
 - **n8n** for sequential workflow orchestration
 - **Langfuse** for observability and evaluation
+- **OpenAI `gpt-5.6-terra`** with medium reasoning as the initial extraction baseline
 - **Gap Analysis** as the extended capability
 - **Human approval** between requirement extraction and PRD generation
 
@@ -98,6 +99,8 @@ The initial extractor implementation package includes:
 - [`evaluation/fixtures/t01-t10-extractor-cases.json`](evaluation/fixtures/t01-t10-extractor-cases.json) - machine-readable T1-T10 expectations
 - [`workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`](workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md) - initial node sequence, data mapping, validation, and retry behavior
 - [`scripts/validate_extractor_package.py`](scripts/validate_extractor_package.py) - offline integrity checks for prompt controls and baseline coverage
+
+The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md).
 
 ## Baseline evaluation
 

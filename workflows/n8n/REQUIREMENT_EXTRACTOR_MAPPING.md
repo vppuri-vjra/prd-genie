@@ -12,6 +12,20 @@ Manual Trigger / Form / Webhook
   -> Success or Structured Error
 ```
 
+## Initial OpenAI configuration
+
+| Setting | Baseline |
+|---|---|
+| Provider | OpenAI |
+| Model | `gpt-5.6-terra` |
+| API | Responses API where the installed n8n node supports it; otherwise use an authenticated HTTP Request node |
+| Reasoning effort | `medium` |
+| Output | Strict structured JSON using `requirement-extraction.schema.json` |
+| Streaming | Off for the evaluation baseline |
+| Retries | One schema-correction retry only |
+
+`gpt-5.6-terra` is the initial balance of extraction quality and cost. Compare it with `gpt-5.6-sol` only if T1-T10 results show a measurable quality gap. Do not change models during a baseline batch without recording a new workflow/evaluation version.
+
 ## Node responsibilities
 
 | Node | Responsibility | Contract |
@@ -45,6 +59,8 @@ Use n8n expressions to map these values at implementation time. Do not hard-code
 5. If invalid, retry once with concise schema errors plus the original prompt inputs.
 6. If the retry fails, stop the branch and record the failure for Langfuse and evaluation.
 7. Do not send invalid extraction data to the Gap Analyzer.
+
+If the available n8n OpenAI node does not expose the selected model or strict response schema, use an HTTP Request node against the OpenAI Responses API. Do not silently downgrade the model or remove schema enforcement.
 
 ## Semantic checks beyond JSON Schema
 
