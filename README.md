@@ -101,6 +101,7 @@ The initial extractor implementation package includes:
 - [`workflows/n8n/prd-genie-requirement-extractor-v0.1.json`](workflows/n8n/prd-genie-requirement-extractor-v0.1.json) - importable inactive six-node T1 workflow
 - [`workflows/n8n/IMPORT_AND_TEST.md`](workflows/n8n/IMPORT_AND_TEST.md) - n8n Cloud import, configuration, and first-test guide
 - [`scripts/validate_extractor_package.py`](scripts/validate_extractor_package.py) - offline integrity checks for prompt controls and baseline coverage
+- [`evaluation/results/t1-requirement-extractor-rerun.md`](evaluation/results/t1-requirement-extractor-rerun.md) - successful corrected T1 run evidence and learning
 
 The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md).
 
