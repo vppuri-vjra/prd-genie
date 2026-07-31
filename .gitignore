@@ -12,6 +12,7 @@
 node_modules/
 __pycache__/
 *.pyc
+.venv/
 tmp/
 temp/
 *.log
@@ -19,4 +20,3 @@ temp/
 # Local exports that may contain sensitive content
 private/
 secrets/
-

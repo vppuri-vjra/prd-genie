@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-001",
+  "extraction_status": "partial",
+  "summary": "The source contains conflicting refresh-frequency and API-call requirements.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The dashboard should auto-refresh every 5 seconds.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "Refresh",
+      "target": "every 5 seconds",
+      "evidence": [{ "quote": "The dashboard should auto-refresh every 5 seconds.", "source_name": "eval_prdgenie_inputs.txt", "location": "T3", "speaker": null }],
+      "confidence": 1.0,
+      "related_item_ids": ["NFR-001"]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Performance is critical and API calls should be minimized.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "Performance",
+      "target": "minimize API calls",
+      "evidence": [{ "quote": "Performance is critical, minimize API calls.", "source_name": "eval_prdgenie_inputs.txt", "location": "T3", "speaker": null }],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Refreshing every 5 seconds may conflict with the requirement to minimize API calls.",
+      "item_ids": ["FR-001", "NFR-001"],
+      "resolution_status": "unresolved",
+      "clarification_question": "Which requirement takes precedence, or what refresh mechanism satisfies both constraints?"
+    }
+  ],
+  "missing_information": [],
+  "extractor_notes": ["The contradiction is preserved for stakeholder resolution."]
+}

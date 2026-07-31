@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/human-review.schema.json",
+  "title": "PRD Genie Human Review",
+  "description": "Human approval record for extracted requirements.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "review_status", "reviewer", "approved_requirement_ids", "rejected_requirement_ids", "modifications", "review_notes", "reviewed_at"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "review_status": { "enum": ["approved", "changes_requested", "rejected"] },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "approved_requirement_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "rejected_requirement_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "modifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement_id", "original_statement", "revised_statement", "reason"],
+        "properties": {
+          "requirement_id": { "type": "string" },
+          "original_statement": { "type": "string" },
+          "revised_statement": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "review_notes": { "type": "string" },
+    "reviewed_at": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "review_status": { "const": "approved" } }, "required": ["review_status"] },
+      "then": { "properties": { "approved_requirement_ids": { "minItems": 1 } } }
+    },
+    {
+      "if": { "properties": { "review_status": { "const": "rejected" } }, "required": ["review_status"] },
+      "then": { "properties": { "approved_requirement_ids": { "maxItems": 0 } } }
+    }
+  ]
+}

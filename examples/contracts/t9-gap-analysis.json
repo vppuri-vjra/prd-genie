@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-001",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "block_generation",
+  "decision_reason": "No meaningful requirements are extractable, so a grounded PRD cannot be generated.",
+  "gaps": [
+    { "id": "GAP-001", "category": "requirements", "description": "No requirements or substantive notes were provided.", "severity": "blocking", "clarification_question": "Please provide the meeting transcript, decisions, or product requirements to document.", "related_item_ids": [] }
+  ],
+  "contradictions": [],
+  "risks": []
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/workflow-input.schema.json",
+  "title": "PRD Genie Workflow Input",
+  "description": "Normalized input envelope for every PRD Genie run.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "input_type", "source_name", "source_text", "submitted_at"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "test_id": { "type": ["string", "null"], "pattern": "^T(?:[1-9]|1[0-2])$" },
+    "input_type": {
+      "enum": ["meeting_transcript", "product_brief", "stakeholder_notes", "evaluation_test"]
+    },
+    "source_name": { "type": "string", "minLength": 1 },
+    "source_text": { "type": "string", "minLength": 1 },
+    "submitted_by": { "type": ["string", "null"] },
+    "submitted_at": { "type": "string", "format": "date-time" },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "meeting_date": { "type": ["string", "null"], "format": "date" },
+        "document_version": { "type": ["string", "null"] },
+        "language": { "type": "string", "default": "en" }
+      }
+    }
+  }
+}

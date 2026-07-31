@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-001",
+  "test_id": "T9",
+  "input_type": "evaluation_test",
+  "source_name": "eval_prdgenie_inputs.txt",
+  "source_text": "Meeting happened. Notes: none.",
+  "submitted_by": "Capstone evaluator",
+  "submitted_at": "2026-07-31T17:30:00Z",
+  "metadata": { "meeting_date": null, "document_version": "baseline-v1", "language": "en" }
+}

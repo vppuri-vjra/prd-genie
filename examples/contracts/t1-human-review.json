@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-001",
+  "review_status": "approved",
+  "reviewer": "PM reviewer",
+  "approved_requirement_ids": ["FR-001", "NFR-001", "STK-001", "DDL-001"],
+  "rejected_requirement_ids": [],
+  "modifications": [],
+  "review_notes": "Approved for baseline T11 generation. Missing template fields must remain TBD.",
+  "reviewed_at": "2026-07-31T17:05:00Z"
+}

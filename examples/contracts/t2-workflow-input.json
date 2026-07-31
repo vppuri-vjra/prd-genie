@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-001",
+  "test_id": "T2",
+  "input_type": "evaluation_test",
+  "source_name": "eval_prdgenie_inputs.txt",
+  "source_text": "We need better reporting. Something like what Competitor X has.",
+  "submitted_by": "Capstone evaluator",
+  "submitted_at": "2026-07-31T17:10:00Z",
+  "metadata": { "meeting_date": null, "document_version": "baseline-v1", "language": "en" }
+}

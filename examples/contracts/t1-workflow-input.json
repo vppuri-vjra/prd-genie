@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-001",
+  "test_id": "T1",
+  "input_type": "evaluation_test",
+  "source_name": "eval_prdgenie_inputs.txt",
+  "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+  "submitted_by": "Capstone evaluator",
+  "submitted_at": "2026-07-31T17:00:00Z",
+  "metadata": {
+    "meeting_date": null,
+    "document_version": "baseline-v1",
+    "language": "en"
+  }
+}

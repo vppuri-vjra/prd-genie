@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Design and contract definition
+**Phase:** Validated contracts; Requirement Extractor implementation next
 
 The planned implementation uses:
 
@@ -74,6 +74,22 @@ prd-genie/
 
 See [`docs/REPOSITORY_GUIDE.md`](docs/REPOSITORY_GUIDE.md) for artifact placement and naming conventions.
 
+## Validated workflow contracts
+
+Seven standalone JSON Schema Draft 2020-12 contracts define the boundaries between workflow stages:
+
+- Workflow input
+- Requirement extraction
+- Gap analysis and generation gate
+- Human review
+- PRD output
+- Story breakdown
+- Evaluation result
+
+The contracts, field documentation, and controlled values are in [`schemas/`](schemas/README.md). The grounding rules and traceability model are in [`docs/architecture/GROUNDING_POLICY.md`](docs/architecture/GROUNDING_POLICY.md) and [`docs/architecture/TRACEABILITY.md`](docs/architecture/TRACEABILITY.md).
+
+Fifteen representative payloads cover T1, T2, T3, and T9 under [`examples/contracts/`](examples/contracts/). All schemas and examples pass automated validation.
+
 ## Baseline evaluation
 
 The project includes 12 required baseline cases:
@@ -98,7 +114,15 @@ Results will be summarized in [`evaluation/results/baseline-summary.md`](evaluat
 
 ## Running the project
 
-Setup and execution instructions will be added after the initial n8n workflow is implemented. No credentials or secrets should be committed. Copy `.env.example` to your local secret-management approach and configure credentials directly in n8n and Langfuse.
+The n8n workflow is not implemented yet. To validate the current contract package:
+
+```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-dev.txt
+.venv/bin/python scripts/validate_contracts.py
+```
+
+No credentials or secrets should be committed. Copy `.env.example` to your local secret-management approach and configure credentials directly in n8n and Langfuse.
 
 ## Submission evidence
 
@@ -119,4 +143,3 @@ The final repository will contain:
 - PRD Genie assists product managers; it does not replace stakeholder validation.
 - Priority and scope suggestions must be reviewed before approval.
 - Generated documents are only as reliable as their source material and configured validation gates.
-

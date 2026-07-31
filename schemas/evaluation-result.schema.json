@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/evaluation-result.schema.json",
+  "title": "PRD Genie Evaluation Result",
+  "description": "Standardized baseline result and observability evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "test_id", "workflow_version", "prompt_versions", "result", "expected_elements", "prohibited_behaviors", "unsupported_claims", "validation", "observability", "reviewer_notes"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "test_id": { "type": "string", "pattern": "^T(?:[1-9]|1[0-2])$" },
+    "workflow_version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "prompt_versions": { "type": "object", "additionalProperties": { "type": "string", "minLength": 1 } },
+    "result": { "enum": ["pass", "fail", "needs_review"] },
+    "expected_elements": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+    "prohibited_behaviors": { "type": "array", "items": { "$ref": "#/$defs/check" } },
+    "unsupported_claims": { "type": "array", "items": { "type": "string" } },
+    "validation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_valid", "exact_values_preserved", "traceability_complete"],
+      "properties": {
+        "schema_valid": { "type": "boolean" },
+        "exact_values_preserved": { "type": "boolean" },
+        "traceability_complete": { "type": "boolean" }
+      }
+    },
+    "observability": {
+      "type": "object", "additionalProperties": false,
+      "required": ["langfuse_trace_id", "model", "latency_ms", "input_tokens", "output_tokens", "estimated_cost_usd"],
+      "properties": {
+        "langfuse_trace_id": { "type": ["string", "null"] },
+        "model": { "type": "string", "minLength": 1 },
+        "latency_ms": { "type": "integer", "minimum": 0 },
+        "input_tokens": { "type": "integer", "minimum": 0 },
+        "output_tokens": { "type": "integer", "minimum": 0 },
+        "estimated_cost_usd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "reviewer_notes": { "type": "string" }
+  },
+  "$defs": {
+    "check": {
+      "type": "object", "additionalProperties": false,
+      "required": ["description", "passed", "evidence"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1 },
+        "passed": { "type": "boolean" },
+        "evidence": { "type": "string" }
+      }
+    }
+  }
+}

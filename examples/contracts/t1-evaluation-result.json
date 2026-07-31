@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-001",
+  "test_id": "T1",
+  "workflow_version": "v0.1.0",
+  "prompt_versions": { "requirement_extractor": "extractor-v0.1" },
+  "result": "pass",
+  "expected_elements": [
+    { "description": "Date range, category, and status filters are extracted.", "passed": true, "evidence": "FR-001" },
+    { "description": "Under 2 seconds is preserved exactly.", "passed": true, "evidence": "NFR-001" },
+    { "description": "Sarah and Q3 are captured.", "passed": true, "evidence": "STK-001 and DDL-001" }
+  ],
+  "prohibited_behaviors": [
+    { "description": "No unsupported requirements are added.", "passed": true, "evidence": "unsupported_claims is empty" }
+  ],
+  "unsupported_claims": [],
+  "validation": {
+    "schema_valid": true,
+    "exact_values_preserved": true,
+    "traceability_complete": true
+  },
+  "observability": {
+    "langfuse_trace_id": null,
+    "model": "not-run-example",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_cost_usd": 0
+  },
+  "reviewer_notes": "Contract-validation example only; replace observability values after a real run."
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-001",
+  "extraction_status": "partial",
+  "summary": "The source expresses a vague desire for better reporting without testable requirements.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Better reporting is desired, but the requested capability is ambiguous.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [{
+        "quote": "We need better reporting. Something like what Competitor X has.",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T2",
+        "speaker": null
+      }],
+      "confidence": 1.0,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    { "id": "MISS-001", "category": "metrics", "description": "Required reporting metrics are not specified.", "clarification_question": "Which metrics should the reports contain?" },
+    { "id": "MISS-002", "category": "format", "description": "The required report format is not specified.", "clarification_question": "What report format or presentation is required?" },
+    { "id": "MISS-003", "category": "users", "description": "Target users are not identified.", "clarification_question": "Which users need the improved reporting?" }
+  ],
+  "extractor_notes": ["The competitor reference does not provide extractable requirements."]
+}

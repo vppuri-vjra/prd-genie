@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/prd-output.schema.json",
+  "title": "PRD Genie PRD Output",
+  "description": "Structured representation of the official ten-section PRD template.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "document", "product_overview", "goals_and_objectives", "user_personas", "functional_requirements", "non_functional_requirements", "acceptance_criteria", "out_of_scope", "dependencies", "assumptions", "open_questions", "timeline"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["product_name", "document_version", "author", "date", "status"],
+      "properties": {
+        "product_name": { "type": "string", "minLength": 1 },
+        "document_version": { "type": "string", "minLength": 1 },
+        "author": { "type": "string", "minLength": 1 },
+        "date": { "type": "string", "format": "date" },
+        "status": { "enum": ["Draft", "In Review", "Approved"] }
+      }
+    },
+    "product_overview": { "$ref": "#/$defs/sourcedText" },
+    "goals_and_objectives": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["business_goal", "user_goal", "success_metrics"],
+      "properties": {
+        "business_goal": { "$ref": "#/$defs/sourcedText" },
+        "user_goal": { "$ref": "#/$defs/sourcedText" },
+        "success_metrics": { "type": "array", "items": { "$ref": "#/$defs/sourcedText" } }
+      }
+    },
+    "user_personas": { "type": "array", "items": { "$ref": "#/$defs/persona" } },
+    "functional_requirements": { "type": "array", "items": { "$ref": "#/$defs/functionalRequirement" } },
+    "non_functional_requirements": { "type": "array", "items": { "$ref": "#/$defs/nonFunctionalRequirement" } },
+    "acceptance_criteria": { "type": "array", "items": { "$ref": "#/$defs/acceptanceCriterion" } },
+    "out_of_scope": { "type": "array", "items": { "$ref": "#/$defs/sourcedText" } },
+    "dependencies": { "type": "array", "items": { "$ref": "#/$defs/dependency" } },
+    "assumptions": { "type": "array", "items": { "$ref": "#/$defs/sourcedText" } },
+    "open_questions": { "type": "array", "items": { "$ref": "#/$defs/openQuestion" } },
+    "timeline": { "type": "array", "items": { "$ref": "#/$defs/milestone" } }
+  },
+  "$defs": {
+    "sourceIds": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "sourcedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "status", "source_requirement_ids"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["grounded", "tbd"] },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "grounded" } }, "required": ["status"] },
+          "then": { "properties": { "source_requirement_ids": { "minItems": 1 } } }
+        },
+        {
+          "if": { "properties": { "status": { "const": "tbd" } }, "required": ["status"] },
+          "then": { "properties": { "value": { "const": "TBD - stakeholder input required" } } }
+        }
+      ]
+    },
+    "persona": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name_or_role", "key_need", "current_workaround", "source_requirement_ids"],
+      "properties": {
+        "name_or_role": { "type": "string", "minLength": 1 },
+        "key_need": { "$ref": "#/$defs/sourcedText" },
+        "current_workaround": { "$ref": "#/$defs/sourcedText" },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds" }
+      }
+    },
+    "functionalRequirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "requirement", "priority", "source_requirement_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^FR-[0-9]{3}$" },
+        "requirement": { "type": "string", "minLength": 1 },
+        "priority": { "enum": ["Must Have", "Should Have", "Nice to Have", "Unspecified"] },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds", "minItems": 1 }
+      }
+    },
+    "nonFunctionalRequirement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "requirement", "category", "target", "source_requirement_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^NFR-[0-9]{3}$" },
+        "requirement": { "type": "string", "minLength": 1 },
+        "category": { "type": "string", "minLength": 1 },
+        "target": { "type": "string", "minLength": 1 },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds", "minItems": 1 }
+      }
+    },
+    "acceptanceCriterion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "feature", "criterion", "source_requirement_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^AC-[0-9]{3}$" },
+        "feature": { "type": "string", "minLength": 1 },
+        "criterion": { "type": "string", "minLength": 1 },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds", "minItems": 1 }
+      }
+    },
+    "dependency": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dependency", "owner", "status", "risk", "source_requirement_ids"],
+      "properties": {
+        "dependency": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "risk": { "type": "string", "minLength": 1 },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds", "minItems": 1 }
+      }
+    },
+    "openQuestion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "question", "related_requirement_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^OQ-[0-9]{3}$" },
+        "question": { "type": "string", "minLength": 1 },
+        "related_requirement_ids": { "$ref": "#/$defs/sourceIds" }
+      }
+    },
+    "milestone": {
+      "type": "object", "additionalProperties": false,
+      "required": ["milestone", "target_date", "status", "source_requirement_ids"],
+      "properties": {
+        "milestone": { "type": "string", "minLength": 1 },
+        "target_date": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["grounded", "tbd"] },
+        "source_requirement_ids": { "$ref": "#/$defs/sourceIds" }
+      }
+    }
+  }
+}

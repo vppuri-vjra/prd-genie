@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/gap-analysis.schema.json",
+  "title": "PRD Genie Gap Analysis",
+  "description": "Generation gate and clarification output from the Gap Analyzer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "information_sufficiency", "generation_allowed", "recommended_action", "gaps", "contradictions", "risks"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "information_sufficiency": { "enum": ["sufficient", "partially_sufficient", "insufficient"] },
+    "generation_allowed": { "type": "boolean" },
+    "recommended_action": { "enum": ["proceed", "proceed_with_tbd", "request_clarification", "block_generation"] },
+    "decision_reason": { "type": "string", "minLength": 1 },
+    "gaps": { "type": "array", "items": { "$ref": "#/$defs/gap" } },
+    "contradictions": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
+    "risks": { "type": "array", "items": { "$ref": "#/$defs/issue" } }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "recommended_action": { "enum": ["request_clarification", "block_generation"] } }, "required": ["recommended_action"] },
+      "then": { "properties": { "generation_allowed": { "const": false } } }
+    },
+    {
+      "if": { "properties": { "recommended_action": { "enum": ["proceed", "proceed_with_tbd"] } }, "required": ["recommended_action"] },
+      "then": { "properties": { "generation_allowed": { "const": true } } }
+    }
+  ],
+  "$defs": {
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "description", "severity", "clarification_question"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^GAP-[0-9]{3}$" },
+        "category": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "blocking"] },
+        "clarification_question": { "type": "string", "minLength": 1 },
+        "related_item_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "severity", "related_item_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^(CTR|RSK)-[0-9]{3}$" },
+        "description": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "blocking"] },
+        "related_item_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } }
+      }
+    }
+  }
+}

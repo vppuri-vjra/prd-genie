@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-001",
+  "document": {
+    "product_name": "Report Filtering",
+    "document_version": "0.1",
+    "author": "Sarah",
+    "date": "2026-07-31",
+    "status": "Draft"
+  },
+  "product_overview": {
+    "value": "Enable users to filter reports by date range, category, and status, with results loading in under 2 seconds.",
+    "status": "grounded",
+    "source_requirement_ids": ["FR-001", "NFR-001"]
+  },
+  "goals_and_objectives": {
+    "business_goal": {
+      "value": "TBD - stakeholder input required",
+      "status": "tbd",
+      "source_requirement_ids": []
+    },
+    "user_goal": {
+      "value": "Filter reports by date range, category, and status.",
+      "status": "grounded",
+      "source_requirement_ids": ["FR-001"]
+    },
+    "success_metrics": [
+      {
+        "value": "Results load in under 2 seconds.",
+        "status": "grounded",
+        "source_requirement_ids": ["NFR-001"]
+      },
+      {
+        "value": "TBD - stakeholder input required",
+        "status": "tbd",
+        "source_requirement_ids": []
+      }
+    ]
+  },
+  "user_personas": [],
+  "functional_requirements": [
+    {
+      "id": "FR-001",
+      "requirement": "Users should be able to filter reports by date range, category, and status.",
+      "priority": "Unspecified",
+      "source_requirement_ids": ["FR-001"]
+    }
+  ],
+  "non_functional_requirements": [
+    {
+      "id": "NFR-001",
+      "requirement": "Results must load in under 2 seconds.",
+      "category": "Performance",
+      "target": "under 2 seconds",
+      "source_requirement_ids": ["NFR-001"]
+    }
+  ],
+  "acceptance_criteria": [],
+  "out_of_scope": [],
+  "dependencies": [],
+  "assumptions": [],
+  "open_questions": [
+    {
+      "id": "OQ-001",
+      "question": "Which user persona needs report filtering?",
+      "related_requirement_ids": ["FR-001"]
+    },
+    {
+      "id": "OQ-002",
+      "question": "Which business KPIs, beyond the stated performance target, will determine success?",
+      "related_requirement_ids": []
+    }
+  ],
+  "timeline": [
+    {
+      "milestone": "Deadline",
+      "target_date": "Q3",
+      "status": "grounded",
+      "source_requirement_ids": ["DDL-001"]
+    }
+  ]
+}
