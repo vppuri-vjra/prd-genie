@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Requirement Extractor prompt ready; initial n8n workflow implementation next
+**Phase:** Inactive Requirement Extractor workflow configured; first T1 execution pending
 
 The planned implementation uses:
 
@@ -98,6 +98,8 @@ The initial extractor implementation package includes:
 - [`prompts/requirement-extractor-v0.1.md`](prompts/requirement-extractor-v0.1.md) - provider-neutral system prompt and runtime template
 - [`evaluation/fixtures/t01-t10-extractor-cases.json`](evaluation/fixtures/t01-t10-extractor-cases.json) - machine-readable T1-T10 expectations
 - [`workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`](workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md) - initial node sequence, data mapping, validation, and retry behavior
+- [`workflows/n8n/prd-genie-requirement-extractor-v0.1.json`](workflows/n8n/prd-genie-requirement-extractor-v0.1.json) - importable inactive six-node T1 workflow
+- [`workflows/n8n/IMPORT_AND_TEST.md`](workflows/n8n/IMPORT_AND_TEST.md) - n8n Cloud import, configuration, and first-test guide
 - [`scripts/validate_extractor_package.py`](scripts/validate_extractor_package.py) - offline integrity checks for prompt controls and baseline coverage
 
 The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md).
