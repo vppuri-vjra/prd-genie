@@ -1,0 +1,22 @@
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+
+# Operating system and editor files
+.DS_Store
+.idea/
+.vscode/
+
+# Runtime and temporary files
+node_modules/
+__pycache__/
+*.pyc
+tmp/
+temp/
+*.log
+
+# Local exports that may contain sensitive content
+private/
+secrets/
+
