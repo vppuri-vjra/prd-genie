@@ -10,7 +10,7 @@
 | T4 | Acceptance criteria | Partial | `5afe3913965ca6bbf5177b3e67a2c6d3` | Conditions returned as functional requirements |
 | T5 | Incomplete input | Partial | `4581cbb1e21b8aab1813f58ab91739e7` | Clarifications passed; returned `no_requirements` instead of `partial` |
 | T6 | Multiple stakeholders | Fail | No success trace | Viewpoints preserved; invalid evidence shape and constraint classification gap |
-| T7 | Technical NFRs | Not run | - | - |
+| T7 | Technical NFRs | Partial | `3eeaca0fc62825d3442ca98276ba0dc9` | Exact values passed; integration returned as FR plus AC instead of NFR |
 | T8 | Persona separation | Not run | - | - |
 | T9 | Empty-input refusal | Not run | - | - |
 | T10 | Dependency and risk | Not run | - | - |
