@@ -153,7 +153,8 @@
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "errorWorkflow": "ydNRRELKulEfzCeo"
   },
   "versionId": "9d3da1d9-bc6c-4c24-a2b2-001000000099",
   "meta": {
