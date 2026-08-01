@@ -63,3 +63,7 @@ T4 used one billable OpenAI call. The output preserved the requested export form
 ## Recommended Correction
 
 Add a generic acceptance-criterion rule: when a statement gives a testable condition that qualifies an already extracted behavior, preserve it verbatim as a separate `acceptance_criterion` and link it to the functional requirement. Do not rerun T4 without explicit approval because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved and applied on 2026-08-01 without a model call. The canonical and live n8n prompts now require qualifying testable conditions to be preserved verbatim as separate acceptance criteria linked to their functional requirement. Langfuse prompt metadata was advanced to `extractor-v0.3-acceptance-criteria-fix`. T4 was not rerun; the original result above remains the evaluation evidence.

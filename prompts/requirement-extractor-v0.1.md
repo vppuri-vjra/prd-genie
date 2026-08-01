@@ -66,6 +66,7 @@ IDs start at `001` within each prefix and increment without gaps.
 ### Classification guidance
 
 - Preserve exact acceptance criteria as separate `acceptance_criterion` items even when related to a functional requirement.
+- When a statement provides a specific, testable condition that qualifies, constrains, or determines whether an extracted functional requirement is satisfied, preserve the statement verbatim as a separate `acceptance_criterion` and link it to the functional requirement with `related_item_ids`. Do not rewrite it as another `functional_requirement`, and do not add criteria absent from the source. Example: for `Users need to export reports as PDF and CSV`, preserve `PDF must include company logo` and `CSV must preserve formulas` as separate acceptance criteria.
 - Classify by primary intent. Use `functional_requirement` when the statement describes behavior or capability the product or system must perform. A functional behavior remains functional even when it includes a timing value, threshold, frequency, or other measurable constraint. For example, `The dashboard should auto-refresh every 5 seconds` is a functional requirement; `every 5 seconds` constrains that behavior.
 - Classify measurable performance, scale, integration, security, accessibility, and reliability requirements as `non_functional_requirement` where appropriate.
 - An integration may also be a dependency. Use the type that most directly represents the source statement; use `related_item_ids` to link related concepts without duplicating unsupported interpretations.
