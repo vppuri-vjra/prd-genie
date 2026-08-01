@@ -58,3 +58,14 @@ Strengthen the extractor prompt with two generic rules:
 2. Any unresolved contradiction or clarification dependency requires `extraction_status: partial`.
 
 Do not rerun T3 until the prompt correction is approved, because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved on 2026-08-01 and applied without a model call:
+
+- The canonical and live n8n prompts now classify product behavior by primary intent and retain functional classification when timing or frequency constrains that behavior.
+- The prompt now requires `partial` for every unresolved contradiction.
+- The parser now deterministically rejects an unresolved contradiction paired with any status other than `partial`.
+- Langfuse prompt metadata was advanced to `extractor-v0.2-classification-status-fix`.
+
+T3 has not been rerun; the result above remains the evidence for the original execution.
