@@ -57,3 +57,7 @@ Combining dashboard scope and real-time behavior in `MISS-001` is acceptable bec
 ## Recommended Correction
 
 Clarify the status boundary: use `partial` when the source contains product-relevant fragments that can be structured into missing-information or clarification records, even if no reliable requirement item can yet be extracted. Reserve `no_requirements` for empty or genuinely non-requirement input. Do not rerun T5 without explicit approval because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved and applied on 2026-08-01 without a model call. The canonical and live n8n prompts now require `partial` for product-relevant fragments that support actionable missing-information records and reserve `no_requirements` for empty or genuinely non-product input. Langfuse prompt metadata was advanced to `extractor-v0.4-status-boundary-fix`. T5 was not rerun; the original result above remains the evaluation evidence.

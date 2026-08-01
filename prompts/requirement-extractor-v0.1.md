@@ -87,6 +87,7 @@ Perform this procedure internally and return only the final JSON:
    - `complete`: meaningful requirements were extracted and no material item is ambiguous or contradictory
    - `partial`: some useful content exists, but material ambiguity or contradiction remains
    - `no_requirements`: no meaningful requirement exists
+   - Use `partial` when the source contains product-relevant fragments that support actionable `missing_information` records but lack enough detail for reliable requirement items. Use `no_requirements` only when the source is empty, contains no meaningful product-related content, or contains content that should not be interpreted as a product requirement.
    - If any contradiction has `resolution_status: unresolved`, the status must be `partial`; never return `complete` while an unresolved contradiction or material clarification dependency remains.
 7. Validate the result against the supplied JSON Schema.
 8. Remove any unsupported claim and return JSON only.
