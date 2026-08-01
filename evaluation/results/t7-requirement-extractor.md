@@ -63,3 +63,7 @@ T7 used one billable OpenAI call. It preserved all scale, performance, and integ
 ## Recommended Correction
 
 Add an explicit fixture-aligned classification rule that a stated requirement to integrate with a named external API and exact version is an integration `non_functional_requirement` for this evaluation contract. Preserve the exact API name and version and do not duplicate the same source statement as a functional requirement plus acceptance criterion. Do not rerun T7 without explicit approval because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved and applied on 2026-08-01 without a model call. The canonical and live n8n prompts now classify a named external system, API, protocol, or exact API version as one integration NFR for this evaluation contract, preserve its exact identifiers, and prohibit duplicating the same statement as a functional requirement, acceptance criterion, or dependency. Langfuse prompt metadata was advanced to `extractor-v0.6-integration-nfr-fix`. T7 was not rerun; the original result above remains the evaluation evidence.
