@@ -9,7 +9,7 @@
 | T3 | Contradiction detection | Partial | `4d1d08ec201a3faa552101b307f0a27c` | Classification and status gaps; controls subsequently corrected |
 | T4 | Acceptance criteria | Partial | `5afe3913965ca6bbf5177b3e67a2c6d3` | Conditions returned as functional requirements |
 | T5 | Incomplete input | Partial | `4581cbb1e21b8aab1813f58ab91739e7` | Clarifications passed; returned `no_requirements` instead of `partial` |
-| T6 | Multiple stakeholders | Not run | - | - |
+| T6 | Multiple stakeholders | Fail | No success trace | Viewpoints preserved; invalid evidence shape and constraint classification gap |
 | T7 | Technical NFRs | Not run | - | - |
 | T8 | Persona separation | Not run | - | - |
 | T9 | Empty-input refusal | Not run | - | - |
