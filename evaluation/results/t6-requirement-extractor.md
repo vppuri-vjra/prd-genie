@@ -58,3 +58,16 @@ The model call completed and its raw response remains visible in the n8n executi
 3. Require a neutral unresolved relationship record when multiple stakeholder architecture preferences need reconciliation, without asserting that different system layers are inherently incompatible.
 
 Do not rerun T6 without explicit approval because another run would make an additional billable model call.
+
+## Corrections Applied
+
+Approved and applied on 2026-08-01 without a model call:
+
+- `evidence` is explicitly required to be an array, even for one quote.
+- `extractor_notes` is explicitly required to be an array of strings.
+- Stakeholder technology and architecture preferences are classified as suggested constraints while attribution remains in `evidence.speaker`.
+- Multiple viewpoints requiring reconciliation must receive a neutral unresolved relationship record.
+- Parser validation now emits explicit array-shape errors instead of attempting to iterate an invalid object.
+- Langfuse prompt metadata was advanced to `extractor-v0.5-viewpoint-contract-fix`.
+
+T6 was not rerun; the original result above remains the evaluation evidence.

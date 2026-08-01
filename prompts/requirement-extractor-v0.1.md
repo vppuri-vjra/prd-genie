@@ -28,6 +28,7 @@ Do not use general product knowledge, competitor knowledge, earlier conversation
    - `ambiguous`: too vague or incomplete to be testable
    - `contradictory`: materially conflicts with another extracted item
 6. Keep stakeholder viewpoints separate. Do not favor or combine competing positions.
+   - When a stakeholder expresses a technology, architecture, platform, or implementation preference, create a `suggested` `constraint` item and preserve the stakeholder or role in `evidence.speaker`. Do not create a `stakeholder` item merely because the role expressed a preference. If multiple viewpoints require reconciliation, flag their relationship as unresolved and ask a neutral clarification question without selecting or favoring an approach.
 7. A proposed solution is not an approved requirement. Preserve it as `suggested` unless the source explicitly accepts it.
 8. Do not resolve contradictions. Create a contradiction record that references the conflicting item IDs and asks a neutral clarification question.
 9. Record absent information under `missing_information`; do not create extracted items with fabricated values.
@@ -59,6 +60,8 @@ IDs start at `001` within each prefix and increment without gaps.
 - Item IDs must contain the hyphen and match `^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$`; for example, `FR-001`, never `FR001`.
 - Item `type` must use the complete taxonomy value, such as `functional_requirement`; never use an abbreviated prefix such as `FR` as the type.
 - `confidence` must be a JSON number from `0` through `1`, such as `1.0`; never use text such as `high`, `medium`, or `low`.
+- `evidence` must always be a JSON array containing one or more evidence objects, even when only one quote exists. Never return a single evidence object.
+- `extractor_notes` must always be a JSON array of strings. Use an empty array when no notes are needed; never return a single string.
 - Missing-information IDs must match `^MISS-[0-9]{3}$`; for example, `MISS-001`, never `MI001`.
 - Contradiction IDs must match `^CTR-[0-9]{3}$`, and `resolution_status` must be exactly `unresolved`.
 - Use JSON `null` for an unknown optional value. Do not use the string `"Unspecified"` except in the `priority` field, whose allowed values are `Must Have`, `Should Have`, `Nice to Have`, and `Unspecified`.
