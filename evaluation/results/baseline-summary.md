@@ -4,10 +4,10 @@
 
 | Test | Capability | Result | Trace | Notes |
 |---|---|---|---|---|
-| T1 | Detailed extraction | Not run | - | - |
-| T2 | Ambiguity handling | Not run | - | - |
-| T3 | Contradiction detection | Not run | - | - |
-| T4 | Acceptance criteria | Not run | - | - |
+| T1 | Detailed extraction | Pass after correction | `6509203ccdf044f9dd98047eda2c4a13` | Contract and semantic pass |
+| T2 | Ambiguity handling | Partial | `a0857ea498c09dd4c36fdf2c18ad0244` | Missing report format was not explicit |
+| T3 | Contradiction detection | Partial | `4d1d08ec201a3faa552101b307f0a27c` | Classification and status gaps; controls subsequently corrected |
+| T4 | Acceptance criteria | Partial | `5afe3913965ca6bbf5177b3e67a2c6d3` | Conditions returned as functional requirements |
 | T5 | Incomplete input | Not run | - | - |
 | T6 | Multiple stakeholders | Not run | - | - |
 | T7 | Technical NFRs | Not run | - | - |
@@ -16,4 +16,3 @@
 | T10 | Dependency and risk | Not run | - | - |
 | T11 | PRD generation | Not run | - | - |
 | T12 | Story breakdown | Not run | - | - |
-
