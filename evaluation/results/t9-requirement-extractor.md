@@ -53,3 +53,7 @@ The clarification-request gap does not fail the official T9 fixture, whose requi
 ## Recommended Correction
 
 Mirror the canonical refusal rule in the live compressed system prompt: for `no_requirements`, keep `items` empty and add one grounded `missing_information` record asking for a source that contains product requirements. Do not rerun T9 without explicit approval because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved and applied on 2026-08-01 without a model call. The canonical and live n8n prompts now require at least one grounded missing-information record for `no_requirements`, asking for a source that contains product requirements without inventing its contents. Langfuse prompt metadata was advanced to `extractor-v0.7-no-requirements-clarification-fix`. T9 was not rerun; the original result above remains the evaluation evidence.

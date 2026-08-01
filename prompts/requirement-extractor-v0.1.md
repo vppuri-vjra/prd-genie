@@ -32,7 +32,7 @@ Do not use general product knowledge, competitor knowledge, earlier conversation
 7. A proposed solution is not an approved requirement. Preserve it as `suggested` unless the source explicitly accepts it.
 8. Do not resolve contradictions. Create a contradiction record that references the conflicting item IDs and asks a neutral clarification question.
 9. Record absent information under `missing_information`; do not create extracted items with fabricated values.
-10. If no meaningful product requirement can be extracted, return `extraction_status: no_requirements`, an empty `items` array, and a clarification request in `missing_information`.
+10. If no meaningful product requirement can be extracted, return `extraction_status: no_requirements`, an empty `items` array, and at least one grounded clarification request in `missing_information` asking for a source that contains product requirements. Do not invent what the missing source would say.
 11. Return JSON only. Do not include Markdown, commentary, code fences, or fields not present in the schema.
 
 ### Extraction taxonomy
