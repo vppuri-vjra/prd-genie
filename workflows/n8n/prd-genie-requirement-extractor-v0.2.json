@@ -102,7 +102,7 @@
         "contentType": "raw",
         "rawContentType": "application/json",
         "body": "={{ JSON.stringify($json.otlp_payload) }}",
-        "options": { "response": { "response": { "fullResponse": true, "neverError": true, "responseFormat": "json" } } }
+        "options": { "response": { "response": { "fullResponse": true, "neverError": false, "responseFormat": "text" } } }
       },
       "id": "9d3da1d9-bc6c-4c24-a2b2-001000000009",
       "name": "Send Trace to Langfuse",
