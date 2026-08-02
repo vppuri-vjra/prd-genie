@@ -7,6 +7,15 @@
 - [ ] Q3 Build write-up includes architecture, orchestration, tools, agents, human approval, implementation, cost, and evaluation
 - [ ] Q4 Reflection includes trace findings, improvement plan, risks of generated PRDs, and evaluation lessons
 
+## Instructor-required documentation
+
+- [ ] Business Requirements Document (BRD) is complete in Markdown
+- [ ] Product Requirements Document (PRD) is complete in Markdown
+- [ ] Consolidated Architecture Design is complete in Markdown
+- [ ] Material architecture decisions are documented as ADRs
+- [ ] Versioned, human-reviewed T1-T12 ground truth dataset is complete
+- [ ] Final evaluation compares actual outputs with the approved ground truth
+
 ## Implementation and evidence
 
 - [ ] Requirement extraction works end-to-end
@@ -31,4 +40,3 @@
 - [ ] GitHub repository link is ready for submission
 - [ ] Repository contains no credentials or sensitive information
 - [ ] All internal links work from GitHub
-
