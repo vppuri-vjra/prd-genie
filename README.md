@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Inactive Requirement Extractor workflow configured; first T1 execution pending
+**Phase:** Iteration 1 in progress. Requirement Extractor and Langfuse observability are implemented; T1-T10 initial runs are documented; the T10 correction is pending.
 
 The planned implementation uses:
 
@@ -44,6 +44,14 @@ flowchart TD
 
 The sequential pattern is intentional: each stage depends on an approved output from the previous stage. Material ambiguity or insufficient input blocks downstream generation.
 
+Foundational documentation:
+
+- [`BRD.md`](docs/requirements/BRD.md) - why the business needs PRD Genie
+- [`PRODUCT_PRD.md`](docs/requirements/PRODUCT_PRD.md) - what the product must deliver
+- [`ARCHITECTURE_DESIGN.md`](docs/architecture/ARCHITECTURE_DESIGN.md) - how the system is designed and how it will evolve
+- [`ITERATION_PLAN.md`](docs/planning/ITERATION_PLAN.md) - formal four-week plan and compressed execution target
+- [`evaluation/ground-truth/`](evaluation/ground-truth/README.md) - human-reviewed canonical evaluation-data plan
+
 ## Repository structure
 
 ```text
@@ -53,6 +61,8 @@ prd-genie/
 ├── .gitignore
 ├── docs/
 │   ├── architecture/
+│   ├── requirements/
+│   ├── planning/
 │   ├── assignments/
 │   ├── decisions/
 │   └── submission/
@@ -62,6 +72,7 @@ prd-genie/
 ├── schemas/
 ├── evaluation/
 │   ├── fixtures/
+│   ├── ground-truth/
 │   ├── results/
 │   └── scorecards/
 ├── examples/
@@ -117,6 +128,8 @@ The target release gate is **12/12 baseline tests passing with zero unsupported 
 
 Results will be summarized in [`evaluation/results/baseline-summary.md`](evaluation/results/baseline-summary.md) and supported by detailed run evidence.
 
+T1-T10 have initial Requirement Extractor results. T10 remains open for an approved prompt correction and before/after rerun. T11-T12 will be executed after the remaining agents and human-approval gate are implemented.
+
 ## Grounding principles
 
 - Use only the supplied input or approved upstream output.
@@ -129,7 +142,7 @@ Results will be summarized in [`evaluation/results/baseline-summary.md`](evaluat
 
 ## Running the project
 
-The n8n workflow is not implemented yet. To validate the current contract package:
+The Requirement Extractor and its Langfuse/failure-observability path are implemented. Remaining agents are planned. To validate the current contract package:
 
 ```bash
 python3 -m venv .venv

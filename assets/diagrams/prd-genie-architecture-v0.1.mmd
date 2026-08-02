@@ -1,0 +1,21 @@
+flowchart TD
+    A[Source transcript, brief, notes, or test input] --> B[Normalize and validate input]
+    B --> C[Requirement Extractor]
+    C --> D[Structured-output validation]
+    D --> E[Gap Analyzer]
+    E --> F{Generation gate}
+    F -- Block or clarify --> G[Clarification or refusal output]
+    F -- Eligible --> H[Human approval]
+    H -- Reject or revise --> C
+    H -- Approve --> I[PRD Generator]
+    I --> J[PRD validation]
+    J --> K[Story Breakdown]
+    K --> L[Cross-stage consistency validation]
+    L --> M[Markdown output]
+    C -. traces .-> N[Langfuse]
+    E -. traces .-> N
+    I -. traces .-> N
+    K -. traces .-> N
+    D -. validation .-> N
+    J -. validation .-> N
+    L -. validation .-> N
