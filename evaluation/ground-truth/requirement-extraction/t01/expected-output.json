@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "extraction_status": "complete",
+  "summary": "Users require report filtering with a stated performance target, PM owner, and Q3 deadline.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter reports by date range, category, and status.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "The user should be able to filter reports by date range, category, and status.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Performance",
+      "target": "under 2 seconds",
+      "evidence": [
+        {
+          "quote": "Results must load in under 2 seconds.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Owner",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "PM: Sarah.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "The deadline is Q3.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Delivery",
+      "target": "Q3",
+      "evidence": [
+        {
+          "quote": "Deadline: Q3.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "persona",
+      "description": "The source identifies only a generic user and provides no specific persona.",
+      "clarification_question": "Which user persona needs report filtering?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "deadline",
+      "description": "The year and calendar dates represented by Q3 are not specified.",
+      "clarification_question": "Which year and calendar dates define the Q3 deadline?"
+    }
+  ],
+  "extractor_notes": [
+    "No priority was stated; priority remains Unspecified."
+  ]
+}

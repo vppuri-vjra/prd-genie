@@ -1,0 +1,72 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T1",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the canonical interpretation, classifications, evidence grounding, missing-information handling, allowed variations, and prohibited claims. The passing model output was used only as comparison evidence, not as the authority for ground truth.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T1",
+    "input_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t01/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "complete",
+    "required_exact_values": [
+      "date range",
+      "category",
+      "status",
+      "under 2 seconds",
+      "Sarah",
+      "Q3"
+    ],
+    "required_item_types": [
+      "functional_requirement",
+      "non_functional_requirement",
+      "stakeholder",
+      "deadline"
+    ],
+    "required_relationships": [
+      "The performance requirement relates to the report-filtering functional requirement.",
+      "Sarah and the Q3 deadline relate to the report-filtering requirement."
+    ],
+    "required_evidence": [
+      "The user should be able to filter reports by date range, category, and status.",
+      "Results must load in under 2 seconds.",
+      "PM: Sarah.",
+      "Deadline: Q3."
+    ]
+  },
+  "allowed_variations": [
+    "Summary and statement wording may be semantically equivalent while retaining every required exact value.",
+    "Item identifiers may differ if they remain schema-valid and relationships resolve to the correct items.",
+    "Category labels may use semantically equivalent capitalization or wording, such as Performance or performance.",
+    "Grounded missing-information records may additionally ask for the specific user persona, Q3 year/calendar dates, success metrics, or priority; these do not change the complete extraction status.",
+    "Confidence may vary as a schema-valid numeric value when all required facts and verbatim evidence are present."
+  ],
+  "prohibited_claims": [
+    "Any filter dimension other than date range, category, and status.",
+    "A load-time target other than under 2 seconds.",
+    "A named persona, Q3 year, calendar dates, business KPI, or priority not stated in the source.",
+    "Any implementation, platform, API, UI design, or report behavior not present in the source.",
+    "Treating Sarah as an end-user persona rather than the stated PM.",
+    "Treating Q3 as a precise date without clarification."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "No ambiguity prevents extraction; optional grounded clarification may identify unspecified details.",
+    "contradictions": "None.",
+    "missing_information": "Optional grounded questions are allowed but must not invent answers.",
+    "refusal_or_tbd": "Not applicable."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t1-requirement-extractor-rerun.md",
+    "baseline_outcome": "pass",
+    "langfuse_trace_id": "6509203ccdf044f9dd98047eda2c4a13"
+  }
+}
