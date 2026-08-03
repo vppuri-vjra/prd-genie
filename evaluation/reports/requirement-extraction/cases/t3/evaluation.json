@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T3-GROUND-TRUTH",
+  "run_id": "RUN-T3-1785785367852",
   "test_id": "T3",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "pass",
+  "result": "fail",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -15,8 +15,8 @@
     },
     {
       "description": "Extraction status equals partial.",
-      "passed": true,
-      "evidence": "Actual: 'partial'"
+      "passed": false,
+      "evidence": "Actual: 'complete'"
     },
     {
       "description": "All required exact values are preserved.",
@@ -45,8 +45,8 @@
     },
     {
       "description": "Required contradiction handling is preserved.",
-      "passed": true,
-      "evidence": "Contradiction expectations satisfied"
+      "passed": false,
+      "evidence": "No unresolved contradiction links ['FR-001', 'NFR-001']"
     },
     {
       "description": "Required missing-information coverage is present.",
@@ -72,12 +72,12 @@
     "traceability_complete": true
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "3f9f1b1481ec0fa9c02a8d07c07d33a5",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.202627+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.255208+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

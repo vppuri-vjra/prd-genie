@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T6-GROUND-TRUTH",
+  "run_id": "RUN-T6-1785785469598",
   "test_id": "T6",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "pass",
+  "result": "fail",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -40,13 +40,13 @@
     },
     {
       "description": "Canonical item relationships are preserved after ID mapping.",
-      "passed": true,
-      "evidence": "Verified 2 directed links"
+      "passed": false,
+      "evidence": "CON-001 does not link to CON-002; CON-002 does not link to CON-001"
     },
     {
       "description": "Required contradiction handling is preserved.",
-      "passed": true,
-      "evidence": "Contradiction expectations satisfied"
+      "passed": false,
+      "evidence": "No unresolved contradiction links ['CON-001', 'CON-002']"
     },
     {
       "description": "Required missing-information coverage is present.",
@@ -72,12 +72,12 @@
     "traceability_complete": true
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "4fce9e18c478ff7a2543045d9cb5e2af",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.207031+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.259469+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

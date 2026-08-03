@@ -1,10 +1,10 @@
 # T7 Requirement Extraction Evaluation
 
 - Result: **pass**
-- Run ID: `RUN-T7-GROUND-TRUTH`
+- Run ID: `RUN-T7-1785785487491`
 - Workflow version: `v0.2.0`
 - Prompt version: `extractor-v0.8-dependency-risk-fix`
-- Langfuse trace: `not supplied`
+- Langfuse trace: `a2ad67495b52580a4c7f00d411b27237`
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -21,4 +21,4 @@
 | Prohibited literal is absent: 200ms average | Pass | Absent |
 | Prohibited literal is absent: Salesforce v53 | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T19:35:31.208629+00:00. Zero observability values mean they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:38:14.260853+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

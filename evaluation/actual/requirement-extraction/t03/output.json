@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-1785785367852",
+  "extraction_status": "complete",
+  "summary": "The source states a dashboard auto-refresh behavior and a performance-related expectation to minimize API calls.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The dashboard should auto-refresh every 5 seconds.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "dashboard",
+      "target": "dashboard",
+      "evidence": [
+        {
+          "quote": "The dashboard should auto-refresh every 5 seconds.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "NFR-001"
+      ]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Performance is critical, minimize API calls.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "API calls",
+      "evidence": [
+        {
+          "quote": "Performance is critical, minimize API calls.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.96,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}

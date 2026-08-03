@@ -1,10 +1,10 @@
 # T10 Requirement Extraction Evaluation
 
 - Result: **pass**
-- Run ID: `RUN-T10-GROUND-TRUTH`
+- Run ID: `RUN-T10-1785785594605`
 - Workflow version: `v0.2.0`
 - Prompt version: `extractor-v0.8-dependency-risk-fix`
-- Langfuse trace: `not supplied`
+- Langfuse trace: `8fab0448df0cc05ddda2f4f2ec0ba2fc`
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -20,4 +20,4 @@
 | Prohibited literal is absent: invented ETA | Pass | Absent |
 | Prohibited literal is absent: invented auth-service status | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T19:35:31.213134+00:00. Zero observability values mean they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:38:14.264662+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

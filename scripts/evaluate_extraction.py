@@ -354,7 +354,7 @@ def evaluate_case(
         "reviewer_notes": (
             "Deterministic evaluation generated "
             + datetime.now(timezone.utc).isoformat()
-            + ". Zero observability values mean they were not supplied to this local evaluator."
+            + ". Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
         ),
     }
     evaluation_errors = list(Draft202012Validator(load_json(EVALUATION_SCHEMA)).iter_errors(report))
@@ -423,6 +423,8 @@ def main() -> int:
     reports: list[dict[str, Any]] = []
     for test_id in test_ids:
         case_name = f"t{int(test_id[1:]):02d}"
+        case_trace_id = args.trace_id
+        case_model = args.model
         if args.self_check_ground_truth:
             actual_path = GROUND_TRUTH_ROOT / case_name / "expected-output.json"
         elif args.test:
@@ -431,6 +433,12 @@ def main() -> int:
             actual_path = args.actual
         else:
             actual_path = args.actual_root / case_name / "output.json"
+        run_metadata_path = actual_path.parent / "run-metadata.json"
+        if not args.self_check_ground_truth and run_metadata_path.exists():
+            run_metadata = load_json(run_metadata_path)
+            case_trace_id = case_trace_id or run_metadata.get("trace_id")
+            if case_model == "not-supplied":
+                case_model = run_metadata.get("model", case_model)
         if not actual_path.exists():
             print(f"Missing actual output: {actual_path}", file=sys.stderr)
             return 2
@@ -439,8 +447,8 @@ def main() -> int:
             actual_path,
             args.workflow_version,
             args.prompt_version,
-            args.model,
-            args.trace_id,
+            case_model,
+            case_trace_id,
         )
         write_report(report, args.report_root)
         reports.append(report)

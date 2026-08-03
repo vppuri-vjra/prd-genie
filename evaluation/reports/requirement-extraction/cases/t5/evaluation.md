@@ -1,10 +1,10 @@
 # T5 Requirement Extraction Evaluation
 
 - Result: **pass**
-- Run ID: `RUN-T5-GROUND-TRUTH`
+- Run ID: `RUN-T5-1785785388617`
 - Workflow version: `v0.2.0`
 - Prompt version: `extractor-v0.8-dependency-risk-fix`
-- Langfuse trace: `not supplied`
+- Langfuse trace: `4ecffacd6cb2847e3921e2e22ec43540`
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -21,4 +21,4 @@
 | Prohibited literal is absent: invented budget | Pass | Absent |
 | Prohibited literal is absent: invented real-time requirement | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T19:35:31.205114+00:00. Zero observability values mean they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:38:14.258063+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

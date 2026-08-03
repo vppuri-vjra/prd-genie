@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-1785785469598",
+  "extraction_status": "partial",
+  "summary": "Engineering expressed a microservices architecture preference, Design expressed a single-page app preference, and PM expressed a March shipment goal.",
+  "items": [
+    {
+      "id": "CON-001",
+      "type": "constraint",
+      "statement": "Engineering wants microservices.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "microservices",
+      "evidence": [
+        {
+          "quote": "Engineering wants microservices.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Engineering"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "CON-002",
+      "type": "constraint",
+      "statement": "Design wants single-page app.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "implementation",
+      "target": "single-page app",
+      "evidence": [
+        {
+          "quote": "Design wants single-page app.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Design"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "PM wants it shipped by March.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "delivery",
+      "target": "March",
+      "evidence": [
+        {
+          "quote": "PM wants it shipped by March.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "PM"
+        }
+      ],
+      "confidence": 0.97,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "deadline",
+      "description": "The shipment deadline is stated only as \"by March\" and does not specify a year.",
+      "clarification_question": "Which year is intended for the March shipment deadline?"
+    }
+  ],
+  "extractor_notes": []
+}

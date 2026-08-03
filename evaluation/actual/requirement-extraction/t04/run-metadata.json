@@ -1,0 +1,14 @@
+{
+  "run_id": "RUN-T4-1785785318388",
+  "test_id": "T4",
+  "trace_id": "a425cccdb06959ca22568c98e0a15d62",
+  "langfuse_region": "US",
+  "ingestion_status_code": 200,
+  "ingestion_accepted": true,
+  "validation": {
+    "schema_version": "1.0.0",
+    "structurally_valid": true,
+    "validated_at": "2026-08-03T19:28:42.043Z"
+  },
+  "recorded_at": "2026-08-03T19:28:42.646Z"
+}

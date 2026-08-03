@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785785349585",
+  "extraction_status": "partial",
+  "summary": "The source expresses a need for improved reporting but does not specify report capabilities, users, or measurable outcomes.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "functional_scope",
+      "description": "Reporting is requested as \"better reporting,\" with a comparison to \"what Competitor X has,\" but the needed reporting capabilities are not specified.",
+      "clarification_question": "What specific reporting capabilities are needed, and which Competitor X reporting features should be matched or used as reference?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "users_and_outcomes",
+      "description": "The source does not identify who needs reporting or what decisions or outcomes the reports must support.",
+      "clarification_question": "Who will use the reporting, and what decisions or outcomes should it support?"
+    }
+  ],
+  "extractor_notes": []
+}

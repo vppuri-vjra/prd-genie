@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T10-GROUND-TRUTH",
+  "run_id": "RUN-T10-1785785594605",
   "test_id": "T10",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
@@ -72,12 +72,12 @@
     "traceability_complete": true
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "8fab0448df0cc05ddda2f4f2ec0ba2fc",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.213134+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.264662+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

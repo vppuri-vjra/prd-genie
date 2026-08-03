@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T2-GROUND-TRUTH",
+  "run_id": "RUN-T2-1785785349585",
   "test_id": "T2",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "pass",
+  "result": "fail",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -25,8 +25,8 @@
     },
     {
       "description": "All required item types are present.",
-      "passed": true,
-      "evidence": "Required: ['functional_requirement']; actual: ['functional_requirement']"
+      "passed": false,
+      "evidence": "Required: ['functional_requirement']; actual: []"
     },
     {
       "description": "Every extracted item has verbatim evidence in the source.",
@@ -35,8 +35,8 @@
     },
     {
       "description": "Every canonical item has a deterministic actual-item match.",
-      "passed": true,
-      "evidence": "Mapping: {'FR-001': 'FR-001'}"
+      "passed": false,
+      "evidence": "Unmatched: ['FR-001']; mapping: {}"
     },
     {
       "description": "Canonical item relationships are preserved after ID mapping.",
@@ -50,8 +50,8 @@
     },
     {
       "description": "Required missing-information coverage is present.",
-      "passed": true,
-      "evidence": "Covered: metrics, format, users"
+      "passed": false,
+      "evidence": "Not found: metrics, format"
     },
     {
       "description": "Prohibited literal is absent: invented reporting requirements",
@@ -69,15 +69,15 @@
   "validation": {
     "schema_valid": true,
     "exact_values_preserved": true,
-    "traceability_complete": true
+    "traceability_complete": false
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "26c2b3b387205a095feab2d51694fa50",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.201171+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.253764+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

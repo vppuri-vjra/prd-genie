@@ -3,23 +3,23 @@
   "capability": "requirement_extraction",
   "tests": 10,
   "counts": {
-    "pass": 10,
-    "fail": 0,
-    "needs_review": 0
+    "pass": 4,
+    "fail": 5,
+    "needs_review": 1
   },
-  "release_gate_passed": true,
+  "release_gate_passed": false,
   "results": [
     {
       "test_id": "T1",
-      "result": "pass"
+      "result": "fail"
     },
     {
       "test_id": "T2",
-      "result": "pass"
+      "result": "fail"
     },
     {
       "test_id": "T3",
-      "result": "pass"
+      "result": "fail"
     },
     {
       "test_id": "T4",
@@ -31,7 +31,7 @@
     },
     {
       "test_id": "T6",
-      "result": "pass"
+      "result": "fail"
     },
     {
       "test_id": "T7",
@@ -39,11 +39,11 @@
     },
     {
       "test_id": "T8",
-      "result": "pass"
+      "result": "fail"
     },
     {
       "test_id": "T9",
-      "result": "pass"
+      "result": "needs_review"
     },
     {
       "test_id": "T10",

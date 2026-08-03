@@ -1,10 +1,10 @@
 # T4 Requirement Extraction Evaluation
 
 - Result: **pass**
-- Run ID: `RUN-T4-GROUND-TRUTH`
+- Run ID: `RUN-T4-1785785318388`
 - Workflow version: `v0.2.0`
 - Prompt version: `extractor-v0.8-dependency-risk-fix`
-- Langfuse trace: `not supplied`
+- Langfuse trace: `a425cccdb06959ca22568c98e0a15d62`
 
 | Check | Result | Evidence |
 |---|---|---|
@@ -20,4 +20,4 @@
 | Prohibited literal is absent: additional acceptance criteria | Pass | Absent |
 | Prohibited literal is absent: XLSX | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T19:35:31.203881+00:00. Zero observability values mean they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:38:14.256705+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

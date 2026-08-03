@@ -1,0 +1,14 @@
+{
+  "run_id": "RUN-T8-1785785538033",
+  "test_id": "T8",
+  "trace_id": "0aa11a39d9c1f4a0e8a5f3225edd4706",
+  "langfuse_region": "US",
+  "ingestion_status_code": 200,
+  "ingestion_accepted": true,
+  "validation": {
+    "schema_version": "1.0.0",
+    "structurally_valid": true,
+    "validated_at": "2026-08-03T19:32:21.321Z"
+  },
+  "recorded_at": "2026-08-03T19:32:21.934Z"
+}

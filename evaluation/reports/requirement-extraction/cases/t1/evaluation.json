@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T1-GROUND-TRUTH",
+  "run_id": "RUN-T1-1785784795912",
   "test_id": "T1",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "pass",
+  "result": "fail",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -40,8 +40,8 @@
     },
     {
       "description": "Canonical item relationships are preserved after ID mapping.",
-      "passed": true,
-      "evidence": "Verified 3 directed links"
+      "passed": false,
+      "evidence": "NFR-001 does not link to FR-001; STK-001 does not link to FR-001; DDL-001 does not link to FR-001"
     },
     {
       "description": "Required contradiction handling is preserved.",
@@ -67,12 +67,12 @@
     "traceability_complete": true
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "6458a575491564c119c686bc6d401379",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.198955+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.250747+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

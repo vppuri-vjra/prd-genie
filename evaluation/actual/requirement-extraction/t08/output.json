@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T8-1785785538033",
+  "extraction_status": "complete",
+  "summary": "The source states requirements for bulk user management for admins, a simplified view for end users, and read-only access with full history for auditors.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Admins need bulk user management.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "user_management",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Admins need bulk user management.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-002",
+      "type": "functional_requirement",
+      "statement": "End users need a simplified view.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "user_interface",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "End users need a simplified view.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-003",
+      "type": "functional_requirement",
+      "statement": "Auditors need read-only access with full history.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "access_control",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Auditors need read-only access with full history.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}

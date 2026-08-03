@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T8-GROUND-TRUTH",
+  "run_id": "RUN-T8-1785785538033",
   "test_id": "T8",
   "workflow_version": "v0.2.0",
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "pass",
+  "result": "fail",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -25,8 +25,8 @@
     },
     {
       "description": "All required item types are present.",
-      "passed": true,
-      "evidence": "Required: ['functional_requirement', 'persona']; actual: ['functional_requirement', 'persona']"
+      "passed": false,
+      "evidence": "Required: ['functional_requirement', 'persona']; actual: ['functional_requirement']"
     },
     {
       "description": "Every extracted item has verbatim evidence in the source.",
@@ -35,13 +35,13 @@
     },
     {
       "description": "Every canonical item has a deterministic actual-item match.",
-      "passed": true,
-      "evidence": "Mapping: {'PER-001': 'PER-001', 'FR-001': 'FR-001', 'PER-002': 'PER-002', 'FR-002': 'FR-002', 'PER-003': 'PER-003', 'FR-003': 'FR-003'}"
+      "passed": false,
+      "evidence": "Unmatched: ['PER-001', 'PER-002', 'PER-003']; mapping: {'FR-001': 'FR-001', 'FR-002': 'FR-002', 'FR-003': 'FR-003'}"
     },
     {
       "description": "Canonical item relationships are preserved after ID mapping.",
-      "passed": true,
-      "evidence": "Verified 6 directed links"
+      "passed": false,
+      "evidence": "FR-001 relation target PER-001 is unmatched; FR-002 relation target PER-002 is unmatched; FR-003 relation target PER-003 is unmatched"
     },
     {
       "description": "Required contradiction handling is preserved.",
@@ -64,15 +64,15 @@
   "validation": {
     "schema_valid": true,
     "exact_values_preserved": true,
-    "traceability_complete": true
+    "traceability_complete": false
   },
   "observability": {
-    "langfuse_trace_id": null,
+    "langfuse_trace_id": "0aa11a39d9c1f4a0e8a5f3225edd4706",
     "model": "not-supplied",
     "latency_ms": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.210298+00:00. Zero observability values mean they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.262238+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

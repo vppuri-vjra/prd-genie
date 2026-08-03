@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-1785785388617",
+  "extraction_status": "partial",
+  "summary": "The source mentions a dashboard, an unclear reference to real-time behavior, and an unspecified budget, but does not provide reliable requirement details.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "functional_scope",
+      "description": "The source only states: \"Discussed dashboard...\"",
+      "clarification_question": "What dashboard capability, users, and behavior were discussed?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "requirement_detail",
+      "description": "The source states: \"John mentioned something about real-time...\"",
+      "clarification_question": "What specifically must be real-time, and what timing or freshness expectation applies?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "budget",
+      "description": "The source states: \"budget TBD...\"",
+      "clarification_question": "What is the budget?"
+    }
+  ],
+  "extractor_notes": [
+    "No requirement items were extracted because the dashboard and real-time references are too incomplete to state a reliable product requirement."
+  ]
+}
