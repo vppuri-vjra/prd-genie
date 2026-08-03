@@ -7,6 +7,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `requirement-extractor-v0.1.md` | Superseded working file; retained for repository continuity | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v0.9.md` | Current candidate prompt; adds grounded relationships, ambiguity dimensions, unresolved tensions, and explicit persona links | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v1.0.md` | Current correction candidate; addresses v0.9 T5, T6, and T10 release-gate findings | `schemas/requirement-extraction.schema.json` |
+| `requirement-extractor-v1.1.md` | Current candidate; prevents embedded functional timing from becoming a duplicate acceptance criterion | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
@@ -25,6 +26,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `extractor-v0.8-dependency-risk-fix` | 2026-08-02 | T10 v0.7 returned only a dependency with `partial` status and omitted the SSO functional requirement and explicit unknown-ETA risk | When a capability requires another service, emit the capability, dependency, and grounded risk separately; preserve explicit unknown-ETA wording; do not let clarification replace risk | Verified by passing T10 rerun. Langfuse trace `ca05ea0e1c143d6f1a9fe8e66fc8fe8a` | `ef22072` |
 | `extractor-v0.9-relationships-conflicts-personas` | 2026-08-03 | Actual-output scorecard `0.1.1` exposed missing NFR links, ambiguous needs, unresolved tensions, constraint links, and persona items in T1/T2/T3/T6/T8 | Add evidence-bounded relationship, ambiguity, conflict, competing-constraint, persona, exact constraint-prefix, and stakeholder-preservation rules without weakening grounding | Full T1–T10 regression completed: 7 pass, 2 needs review (T5, T6), 1 fail (T10). Release gate not passed; do not promote. See `evaluation/results/t01-t10-v0.9-regression-scorecard-2026-08-03.md` | Pending |
 | `extractor-v1.0-fragments-speakers-risk-links` | 2026-08-03 | v0.9 promoted T5 fragments into items, added speaker roles as T6 stakeholders, and emitted invalid/unlinked T10 risk data | Keep fragments and undecided values as gaps unless explicitly requirements/risks; distinguish speakers from stakeholders; enforce `RSK-`; require dependency-risk links | Targeted T5/T6/T10 passed. Full release gate: 7 pass, T3/T4 needs review, T8 fail; not promoted. See `evaluation/results/t01-t10-v1.0-release-gate-2026-08-03.md` | Pending |
+| `extractor-v1.1-embedded-condition-fix` | 2026-08-03 | v1.0 T3 duplicated the five-second refresh interval as `AC-001` even though it was embedded in `FR-001` | Keep an embedded timing/frequency/threshold inside its functional requirement; create an AC only for a separately stated test condition | Targeted T3 rerun passed; Langfuse trace `e485cd3c1841c122b03dd110cf507312` | Pending |
 
 ## Version-Control Rules
 
@@ -38,8 +40,8 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 
 ## Current Baseline
 
-- Candidate version: `extractor-v1.0-fragments-speakers-risk-links`
-- Candidate prompt: `prompts/requirement-extractor-v1.0.md`
+- Candidate version: `extractor-v1.1-embedded-condition-fix`
+- Candidate prompt: `prompts/requirement-extractor-v1.1.md`
 - Last verified baseline: `extractor-v0.8-dependency-risk-fix`
 - Output contract: `schemas/requirement-extraction.schema.json`
 - Workflow export: `workflows/n8n/prd-genie-requirement-extractor-v0.2.json`
