@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Product Requirements Document
-version: 0.1
+version: 0.2
 status: Draft
-last_updated: 2026-08-02
+last_updated: 2026-08-03
 owner: Vipin Puri
 ---
 
@@ -44,36 +44,50 @@ No additional demographic or organizational attributes are assumed.
 
 ## 4. Feature requirements
 
+Every product requirement links to the business or project requirement it supports and identifies whether its implementation is directly required, derived as a measurable control, or selected through an architecture decision.
+
 ### Functional requirements
 
-| ID | Requirement | Priority |
-|---|---|---|
-| FR-001 | Accept meeting transcripts, product briefs, stakeholder notes, and evaluation-test text through a normalized workflow input contract. | Must Have |
-| FR-002 | Extract functional and non-functional requirements, acceptance criteria, personas, stakeholders, constraints, deadlines, dependencies, assumptions, risks, contradictions, and missing information. | Must Have |
-| FR-003 | Attach source evidence and stable identifiers to extracted factual items. | Must Have |
-| FR-004 | Analyze gaps and produce targeted clarification questions without inventing answers. | Must Have |
-| FR-005 | Gate generation according to sufficiency, ambiguity, contradiction, and no-requirement conditions. | Must Have |
-| FR-006 | Require a recorded human decision before PRD generation. | Must Have |
-| FR-007 | Generate a Markdown PRD using only approved extraction content and the official ten-section template. | Must Have |
-| FR-008 | Represent unsupported mandatory PRD fields as `TBD - stakeholder input required` and create open questions. | Must Have |
-| FR-009 | Generate epics, features, and `As a [user], I want [capability], so that [benefit]` stories from the approved PRD. | Must Have |
-| FR-010 | Preserve requirement IDs through PRD and story outputs. | Must Have |
-| FR-011 | Record agent-level and run-level evidence in Langfuse. | Must Have |
-| FR-012 | Validate structured outputs before allowing downstream execution. | Must Have |
-| FR-013 | Export final product documentation as Markdown. | Must Have |
+| ID | Requirement | Category | Priority | BRD link | Source | Classification |
+|---|---|---|---|---|---|---|
+| FR-001 | Accept meeting transcripts, product briefs, stakeholder notes, and evaluation-test text through a normalized workflow input contract. | Input management | Must Have | BR-001, BR-002 | SRC-PS inputs; SRC-ADR-002 structured contract | Direct requirement plus design decision |
+| FR-002 | Extract functional and non-functional requirements, acceptance criteria, personas, stakeholders, constraints, deadlines, dependencies, assumptions, risks, contradictions, and missing information. | Requirement Extraction | Must Have | BR-002, BR-004, BR-005 | SRC-PS required capabilities and evaluation cases | Direct source requirement |
+| FR-003 | Attach source evidence and stable identifiers to extracted factual items. | Grounding and traceability | Must Have | BR-004, BR-005 | SRC-GP; SRC-ADR-002 | Derived control plus design decision |
+| FR-004 | Analyze gaps and produce targeted clarification questions without inventing answers. | Gap Analysis | Must Have | BR-003, BR-005 | SRC-PS extended capability; SRC-ADR-001 selects Gap Analysis | Direct requirement plus design decision |
+| FR-005 | Gate generation according to sufficiency, ambiguity, contradiction, and no-requirement conditions. | Generation safety | Must Have | BR-004, BR-005 | SRC-GP generation gate | Derived architecture control |
+| FR-006 | Require a recorded human decision before PRD generation. | Human approval | Must Have | BR-006 | SRC-ADR-001 | Architecture decision |
+| FR-007 | Generate a Markdown PRD using only approved extraction content and the official ten-section template. | PRD generation | Must Have | BR-002, BR-004 | SRC-PS PRD capability; SRC-PT official template | Direct source requirement |
+| FR-008 | Represent unsupported mandatory PRD fields as `TBD - stakeholder input required` and create open questions. | Missing-information handling | Must Have | BR-004, BR-005 | SRC-PT mandatory sections; SRC-GP | Derived grounding control |
+| FR-009 | Generate epics, features, and `As a [user], I want [capability], so that [benefit]` stories from the approved PRD. | Story breakdown | Must Have | BR-002, BR-004 | SRC-PS story-breakdown capability | Direct source requirement |
+| FR-010 | Preserve requirement IDs through PRD and story outputs. | Cross-stage traceability | Must Have | BR-004 | SRC-GP; SRC-ADR-002 | Derived control plus design decision |
+| FR-011 | Record agent-level and run-level evidence in Langfuse. | Observability | Must Have | BR-007 | SRC-PS evaluation; SRC-PB Step 6; SRC-ADR-001 | Direct requirement plus tool decision |
+| FR-012 | Validate structured outputs before allowing downstream execution. | Validation | Must Have | BR-004, BR-007 | SRC-ADR-002; SRC-GP | Architecture decision |
+| FR-013 | Export final product documentation as Markdown. | Output management | Must Have | BR-002, BR-008 | SRC-PS output/tools and submission guidance; SRC-IR | Direct and instructor requirement |
 
 ### Non-functional requirements
 
-| ID | Requirement |
-|---|---|
-| NFR-001 | Every factual generated item shall be supported by approved source evidence or an approved upstream requirement ID. |
-| NFR-002 | The final evaluated baseline shall contain zero unsupported requirements. |
-| NFR-003 | JSON stage outputs shall validate against versioned JSON Schema Draft 2020-12 contracts. |
-| NFR-004 | Exact names, numbers, dates, API versions, thresholds, and units shall be preserved. |
-| NFR-005 | Credentials and secret values shall not be stored in GitHub, exported workflows, screenshots, or documentation. |
-| NFR-006 | Every LLM stage shall expose input, output, prompt version, model, latency, token usage, cost, errors, run ID, and test ID where available. |
-| NFR-007 | The repository shall be public, organized, documented, and reproducible for graders. |
-| NFR-008 | Material ambiguity or blocking contradiction shall stop or defer generation rather than be resolved automatically. |
+| ID | Requirement | Category | Target | BRD link | Source | Classification |
+|---|---|---|---|---|---|---|
+| NFR-001 | Every factual generated item shall be supported by approved source evidence or an approved upstream requirement ID. | Grounding | 100% factual traceability | BR-004 | SRC-PS grounding; SRC-GP | Source-supported objective plus derived target |
+| NFR-002 | The final evaluated baseline shall contain zero unsupported requirements. | Quality | 0 unsupported claims | BR-004 | SRC-PS evaluation; SRC-GP | Derived release target |
+| NFR-003 | JSON stage outputs shall validate against versioned JSON Schema Draft 2020-12 contracts. | Reliability | 100% accepted stage outputs structurally valid | BR-004, BR-007 | SRC-ADR-002 | Architecture decision and measurable control |
+| NFR-004 | Exact names, numbers, dates, API versions, thresholds, and units shall be preserved. | Data fidelity | 100% of required exact values preserved | BR-004, BR-005 | SRC-PS extraction/evaluation requirements; SRC-GP | Direct source requirement |
+| NFR-005 | Credentials and secret values shall not be stored in GitHub, exported workflows, screenshots, or documentation. | Security | 0 exposed secrets | BR-008 | SRC-RG security policy | Derived security control |
+| NFR-006 | Every LLM stage shall expose input, output, prompt version, model, latency, token usage, cost, errors, run ID, and test ID where available. | Observability | 100% of LLM stages traced | BR-007 | SRC-PS evaluation; SRC-PB Step 6; SRC-ADR-001 | Direct requirement plus tool decision |
+| NFR-007 | The repository shall be public, organized, documented, and reproducible for graders. | Reproducibility | All required artifacts linked and reproducible | BR-008 | SRC-PS submission; SRC-PB Step 7 | Direct submission requirement |
+| NFR-008 | Material ambiguity or blocking contradiction shall stop or defer generation rather than be resolved automatically. | Safety | 0 downstream generations when gate decision blocks | BR-005, BR-006 | SRC-PS ambiguity behavior; SRC-GP; SRC-ADR-001 | Direct behavior plus architecture control |
+
+### Requirement-source register
+
+This PRD reuses the source IDs defined in `docs/requirements/BRD.md` and adds the following implementation sources:
+
+| Source ID | Source | Relevant coverage |
+|---|---|---|
+| SRC-PT | `Resources/prd_template.md` | Official ten-section PRD output structure |
+| SRC-ADR-002 | `docs/decisions/ADR-002-structured-contracts.md` | Versioned JSON contracts, validation, evidence, and stable identifiers |
+| SRC-RG | `docs/REPOSITORY_GUIDE.md` | Public-repository security, privacy, evidence, and reproducibility rules |
+
+`SRC-PS`, `SRC-PB`, `SRC-IR`, `SRC-ADR-001`, and `SRC-GP` retain the meanings defined in the BRD source register.
 
 ## 5. Acceptance criteria
 
