@@ -1,0 +1,58 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T4",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the export functional requirement, two linked acceptance criteria, complete status, exact-value preservation, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its classification of the two qualifying conditions as functional requirements is not adopted.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T4",
+    "input_text": "Users need to export reports as PDF and CSV. PDF must include company logo. CSV must preserve formulas."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t04/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "complete",
+    "required_exact_values": ["PDF", "CSV", "company logo", "preserve formulas"],
+    "required_item_types": ["functional_requirement", "acceptance_criterion"],
+    "required_relationships": [
+      "The PDF company-logo criterion and CSV formula-preservation criterion are linked to the report-export functional requirement."
+    ],
+    "required_evidence": [
+      "Users need to export reports as PDF and CSV.",
+      "PDF must include company logo.",
+      "CSV must preserve formulas."
+    ]
+  },
+  "allowed_variations": [
+    "The PDF and CSV export behavior may be represented as one combined functional requirement or two functional requirements if both formats and criterion links are preserved.",
+    "Summary wording and functional-requirement wording may be semantically equivalent while retaining PDF and CSV.",
+    "Item identifiers may differ if schema-valid and all relationships resolve correctly.",
+    "Category capitalization or semantically equivalent category labels may vary.",
+    "Confidence may vary as a schema-valid numeric value."
+  ],
+  "prohibited_claims": [
+    "Any export format other than PDF and CSV, including XLSX.",
+    "Any acceptance criterion other than inclusion of company logo in PDF and preservation of formulas in CSV.",
+    "Any statement that CSV displays, calculates, evaluates, or executes formulas.",
+    "Any logo placement, size, format, branding rule, or source not stated in the input.",
+    "Any priority, stakeholder, deadline, platform, storage location, delivery method, or implementation detail not stated in the source.",
+    "Classifying both qualifying conditions only as functional requirements rather than acceptance criteria."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "No ambiguity prevents complete extraction.",
+    "contradictions": "None.",
+    "missing_information": "Optional grounded questions may request unspecified export details, but they are not required for this test and must not change complete status.",
+    "refusal_or_tbd": "Not applicable."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t4-requirement-extractor.md",
+    "baseline_outcome": "contract pass; semantic partial pass",
+    "langfuse_trace_id": "5afe3913965ca6bbf5177b3e67a2c6d3"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T4-GROUND-TRUTH",
+  "extraction_status": "complete",
+  "summary": "Users need PDF and CSV report exports with a company logo in PDF and preserved formulas in CSV.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users need to export reports as PDF and CSV.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Report export",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Users need to export reports as PDF and CSV.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["AC-001", "AC-002"]
+    },
+    {
+      "id": "AC-001",
+      "type": "acceptance_criterion",
+      "statement": "PDF must include company logo.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "PDF export",
+      "target": "include company logo",
+      "evidence": [
+        {
+          "quote": "PDF must include company logo.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "AC-002",
+      "type": "acceptance_criterion",
+      "statement": "CSV must preserve formulas.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "CSV export",
+      "target": "preserve formulas",
+      "evidence": [
+        {
+          "quote": "CSV must preserve formulas.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": [
+    "The PDF and CSV conditions are acceptance criteria linked to the report-export functional requirement."
+  ]
+}
