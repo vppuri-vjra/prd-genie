@@ -1,0 +1,11 @@
+{
+  "test_id": "T4",
+  "run_id": "RUN-T4-1785797532181",
+  "prompt_version": "extractor-v1.2-generic-user-persona-fix",
+  "workflow_version": "v0.2.0",
+  "model": "gpt-5.6-terra",
+  "trace_id": "145aae12cb410afe288ed6bc529fe359",
+  "langfuse_region": "US",
+  "ingestion_accepted": true,
+  "executed_at": "2026-08-03"
+}
