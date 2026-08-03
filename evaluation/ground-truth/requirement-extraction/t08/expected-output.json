@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T8-GROUND-TRUTH",
+  "extraction_status": "complete",
+  "summary": "Admins, End users, and Auditors are distinct personas with bulk user management, a simplified view, and read-only access with full history respectively.",
+  "items": [
+    {
+      "id": "PER-001",
+      "type": "persona",
+      "statement": "Admins are a distinct persona.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Admin",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Admins need bulk user management.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Provide bulk user management for Admins.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "User management",
+      "target": "bulk user management",
+      "evidence": [
+        {
+          "quote": "Admins need bulk user management.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["PER-001"]
+    },
+    {
+      "id": "PER-002",
+      "type": "persona",
+      "statement": "End users are a distinct persona.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "End user",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "End users need a simplified view.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-002"]
+    },
+    {
+      "id": "FR-002",
+      "type": "functional_requirement",
+      "statement": "Provide a simplified view for End users.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "User experience",
+      "target": "simplified view",
+      "evidence": [
+        {
+          "quote": "End users need a simplified view.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["PER-002"]
+    },
+    {
+      "id": "PER-003",
+      "type": "persona",
+      "statement": "Auditors are a distinct persona.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Auditor",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Auditors need read-only access with full history.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-003"]
+    },
+    {
+      "id": "FR-003",
+      "type": "functional_requirement",
+      "statement": "Provide read-only access with full history for Auditors.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Audit access",
+      "target": "read-only access with full history",
+      "evidence": [
+        {
+          "quote": "Auditors need read-only access with full history.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T8",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["PER-003"]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": [
+    "Each persona remains separate and is linked only to its stated capability."
+  ]
+}

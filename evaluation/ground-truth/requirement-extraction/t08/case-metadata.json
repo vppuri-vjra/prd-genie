@@ -1,0 +1,62 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T8",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the three separate personas, three correctly linked functional requirements, complete status, exact capability preservation, allowed variations, and prohibited claims. The earlier passing model output is comparison evidence only and did not define the ground truth.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T8",
+    "input_text": "Admins need bulk user management. End users need a simplified view. Auditors need read-only access with full history."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t08/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "complete",
+    "required_exact_values": ["Admins", "End users", "Auditors", "bulk user management", "simplified view", "read-only access with full history"],
+    "required_item_types": ["persona", "functional_requirement"],
+    "required_relationships": [
+      "Admins link only to bulk user management.",
+      "End users link only to a simplified view.",
+      "Auditors link only to read-only access with full history."
+    ],
+    "required_evidence": [
+      "Admins need bulk user management.",
+      "End users need a simplified view.",
+      "Auditors need read-only access with full history."
+    ]
+  },
+  "allowed_variations": [
+    "Functional statements may use directive wording such as provide or support if the persona and exact capability remain unchanged.",
+    "Persona statements may identify each role directly without adding demographics, goals, permissions, or characteristics.",
+    "The source sentence may serve as evidence for both its persona item and linked functional item.",
+    "Category wording and capitalization may vary semantically.",
+    "Item identifiers may differ if all three personas, three functional requirements, and correct one-to-one links remain schema-valid.",
+    "Confidence may vary as a schema-valid numeric value."
+  ],
+  "prohibited_claims": [
+    "Merging Admins, End users, and Auditors into one generic user persona.",
+    "Assigning bulk user management to End users or Auditors.",
+    "Assigning a simplified view to Admins or Auditors.",
+    "Assigning read-only access with full history to Admins or End users.",
+    "Adding create, edit, delete, approve, export, search, filtering, administration, or audit capabilities not stated in the source.",
+    "Inferring that full history means immutable logs, specific retention, export, timestamps, identity details, or compliance controls.",
+    "Inventing persona goals, demographics, stakeholder names, priorities, deadlines, technologies, or implementation details."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "No material ambiguity prevents complete extraction; simplified and full history remain intentionally undefined beyond the source wording.",
+    "contradictions": "None.",
+    "missing_information": "No missing-information record is required for this test.",
+    "refusal_or_tbd": "Not applicable."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t8-requirement-extractor.md",
+    "baseline_outcome": "contract and semantic pass",
+    "langfuse_trace_id": "0773d9e9cbed86f174fcf30be8c42b10"
+  }
+}
