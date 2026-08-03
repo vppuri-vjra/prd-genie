@@ -10,6 +10,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `requirement-extractor-v1.1.md` | Current candidate; prevents embedded functional timing from becoming a duplicate acceptance criterion | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v1.2.md` | Current candidate; prevents generic user references from becoming personas | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v1.3.md` | Current candidate; distinguishes optional clarification from a materially partial extraction | `schemas/requirement-extraction.schema.json` |
+| `requirement-extractor-v1.4.md` | Targeted candidate; audits bidirectional NFR-to-FR relationships | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
@@ -31,6 +32,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `extractor-v1.1-embedded-condition-fix` | 2026-08-03 | v1.0 T3 duplicated the five-second refresh interval as `AC-001` even though it was embedded in `FR-001` | Keep an embedded timing/frequency/threshold inside its functional requirement; create an AC only for a separately stated test condition | Targeted T3 rerun passed; Langfuse trace `e485cd3c1841c122b03dd110cf507312` | Pending |
 | `extractor-v1.2-generic-user-persona-fix` | 2026-08-03 | v1.0 T4 created `PER-001` from the generic word `Users` | Keep generic user terms inside requirements; create personas only for explicit distinguishable groups or roles with distinct needs | Targeted T4 rerun passed; Langfuse trace `145aae12cb410afe288ed6bc529fe359` | Pending |
 | `extractor-v1.3-complete-optional-clarification` | 2026-08-03 | v1.0 T8 captured all canonical items and links but returned `partial` because `simplified view` could be refined | Return `complete` when all stated information is faithfully captured and optional clarification does not block extraction | Targeted T8 passed. Full release gate: 8 pass; T1 failed relationship and T5 failed status boundary. Not promoted. See `evaluation/results/t01-t10-v1.3-release-gate-2026-08-03.md` | Pending |
+| `extractor-v1.4-bidirectional-relationship-audit` | 2026-08-03 | v1.3 T1 extracted the correct FR and NFR but omitted their required relationship | Audit `related_item_ids`; link a qualifying NFR and FR in both directions, including across adjacent sentences; prohibit proximity-only stakeholder/deadline links | Targeted T1 passed deterministic evaluation; Langfuse trace `2fd30f89209d1e35befda538496b5600`. Full release gate pending after T5 correction | Pending |
 
 ## Version-Control Rules
 

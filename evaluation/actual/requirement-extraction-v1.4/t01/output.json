@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-1785799162938",
+  "extraction_status": "complete",
+  "summary": "One report-filtering capability, one related performance requirement, one named stakeholder, and one deadline were stated.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The user should be able to filter reports by date range, category, and status.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "report filtering",
+      "target": "reports",
+      "evidence": [{"quote": "The user should be able to filter reports by date range, category, and status.", "source_name": "eval_prdgenie_inputs.txt", "location": "T1", "speaker": null}],
+      "confidence": 1,
+      "related_item_ids": ["NFR-001"]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "Results",
+      "evidence": [{"quote": "Results must load in under 2 seconds.", "source_name": "eval_prdgenie_inputs.txt", "location": "T1", "speaker": null}],
+      "confidence": 1,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "PM: Sarah.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "stakeholder",
+      "target": "Sarah",
+      "evidence": [{"quote": "PM: Sarah.", "source_name": "eval_prdgenie_inputs.txt", "location": "T1", "speaker": null}],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "Deadline: Q3.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "deadline",
+      "target": "Q3",
+      "evidence": [{"quote": "Deadline: Q3.", "source_name": "eval_prdgenie_inputs.txt", "location": "T1", "speaker": null}],
+      "confidence": 1,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}
