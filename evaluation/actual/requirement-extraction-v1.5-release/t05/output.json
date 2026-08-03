@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-1785800016736",
+  "extraction_status": "partial",
+  "summary": "The source contains incomplete product-related fragments about a dashboard, possible real-time behavior, and \"budget TBD\", but does not provide reliable requirement details.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "scope",
+      "description": "The source references a dashboard without describing its purpose, users, capabilities, or scope.",
+      "clarification_question": "What dashboard is being discussed, and what capabilities must it provide?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "requirement",
+      "description": "The source says John \"mentioned something about real-time\" but does not specify the intended real-time behavior, data, timing, or applicable product area.",
+      "clarification_question": "What does \"real-time\" mean in this context, and which product behavior or data should operate in real time?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "budget",
+      "description": "The source states \"budget TBD\" without a budget value or budget status details.",
+      "clarification_question": "What is the budget, and when will the TBD budget be determined?"
+    }
+  ],
+  "extractor_notes": [
+    "No requirement items were extracted because the dashboard and real-time references are incomplete fragments rather than reliably stated product requirements."
+  ]
+}
+

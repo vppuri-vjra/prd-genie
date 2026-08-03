@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-1785800145644",
+  "extraction_status": "complete",
+  "summary": "SSO login requires the new auth service, which is being built by Team Alpha; the service ETA is unknown.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "SSO login requires the new auth service.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "authentication",
+      "target": "SSO login",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "DEP-001"
+      ]
+    },
+    {
+      "id": "DEP-001",
+      "type": "dependency",
+      "statement": "SSO login requires the new auth service, which is being built by Team Alpha. ETA unknown.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "service dependency",
+      "target": "new auth service",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "FR-001",
+        "RSK-001"
+      ]
+    },
+    {
+      "id": "RSK-001",
+      "type": "risk",
+      "statement": "The new auth service required for SSO login has an unknown ETA.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "delivery risk",
+      "target": "new auth service",
+      "evidence": [
+        {
+          "quote": "ETA unknown.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "DEP-001"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}
+

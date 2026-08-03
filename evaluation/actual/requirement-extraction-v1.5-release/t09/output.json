@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-1785800094102",
+  "extraction_status": "no_requirements",
+  "summary": "The source states: \"Meeting happened. Notes: none.\" No product requirements or product-relevant details were provided.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "source_content",
+      "description": "The source contains no product requirements; it states \"Notes: none.\"",
+      "clarification_question": "Please provide a source containing product requirements, constraints, dependencies, or relevant product details."
+    }
+  ],
+  "extractor_notes": []
+}
+

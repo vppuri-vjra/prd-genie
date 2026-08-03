@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T4-1785799992705",
+  "extraction_status": "complete",
+  "summary": "Users need report exports in PDF and CSV, with specified output conditions for each format.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users need to export reports as PDF and CSV.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "reporting",
+      "target": "reports",
+      "evidence": [
+        {
+          "quote": "Users need to export reports as PDF and CSV.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "AC-001",
+        "AC-002"
+      ]
+    },
+    {
+      "id": "AC-001",
+      "type": "acceptance_criterion",
+      "statement": "PDF must include company logo.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "output_format",
+      "target": "PDF",
+      "evidence": [
+        {
+          "quote": "PDF must include company logo.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    },
+    {
+      "id": "AC-002",
+      "type": "acceptance_criterion",
+      "statement": "CSV must preserve formulas.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "output_format",
+      "target": "CSV",
+      "evidence": [
+        {
+          "quote": "CSV must preserve formulas.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T4",
+          "speaker": null
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}
+

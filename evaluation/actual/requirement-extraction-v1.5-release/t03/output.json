@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-1785799977673",
+  "extraction_status": "partial",
+  "summary": "The dashboard is stated to auto-refresh every 5 seconds, while performance is stated to be critical and API calls should be minimized. These statements present an unresolved tension.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The dashboard should auto-refresh every 5 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "dashboard",
+      "target": "dashboard",
+      "evidence": [
+        {
+          "quote": "The dashboard should auto-refresh every 5 seconds.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "NFR-001"
+      ]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Performance is critical, minimize API calls.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "API calls",
+      "evidence": [
+        {
+          "quote": "Performance is critical, minimize API calls.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "The required dashboard auto-refresh interval may increase API calls, while API calls are required to be minimized.",
+      "item_ids": [
+        "FR-001",
+        "NFR-001"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the dashboard auto-refresh every 5 seconds while minimizing API calls?"
+    }
+  ],
+  "missing_information": [],
+  "extractor_notes": []
+}
+

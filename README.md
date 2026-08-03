@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Iteration 1 complete. Requirement Extractor and Langfuse observability are implemented; T1-T10 initial results are documented; the corrected T10 rerun passes. Iteration 2 ground-truth work is next.
+**Phase:** Iterations 1 and 2 are complete for the current T1–T10 scope. Human-approved ground truth, automated evaluation, n8n execution evidence, and Langfuse traces are recorded; the promoted v1.5 Requirement Extractor passed the unchanged T1–T10 release gate 10/10.
 
 The planned implementation uses:
 

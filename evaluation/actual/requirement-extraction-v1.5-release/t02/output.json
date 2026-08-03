@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785799953595",
+  "extraction_status": "partial",
+  "summary": "The source expresses a broad need for better reporting and references Competitor X as an example, but does not define users, reporting outputs, or success measures.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "We need better reporting.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "We need better reporting.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T2",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.82,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "users",
+      "description": "The source does not identify who needs the reporting capability.",
+      "clarification_question": "Which user groups need better reporting?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "metrics",
+      "description": "The source does not define what “better reporting” means or how improvement will be measured.",
+      "clarification_question": "What measures or outcomes define better reporting?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "output_format",
+      "description": "The source does not specify the required report types, contents, formats, or delivery method.",
+      "clarification_question": "What reports, data, formats, and delivery methods are needed?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "reference_scope",
+      "description": "The source references Competitor X but does not identify which reporting capabilities should be used as a reference.",
+      "clarification_question": "Which specific reporting capabilities of Competitor X should be considered?"
+    }
+  ],
+  "extractor_notes": [
+    "The reference \"Something like what Competitor X has.\" is insufficient to establish specific reporting requirements."
+  ]
+}
+

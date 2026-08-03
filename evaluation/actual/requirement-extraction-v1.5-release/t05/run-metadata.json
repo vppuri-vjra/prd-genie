@@ -1,0 +1,15 @@
+{
+  "test_id": "T5",
+  "run_id": "RUN-T5-1785800016736",
+  "workflow_version": "v0.2.0",
+  "prompt_version": "extractor-v1.5-product-fragment-status-boundary",
+  "model": "gpt-5.6-terra",
+  "langfuse_region": "US",
+  "langfuse_trace_id": "e6fd722a4449e6447b486cfd567038e1",
+  "langfuse_ingestion_status_code": 200,
+  "langfuse_ingestion_accepted": true,
+  "structurally_valid": true,
+  "n8n_execution_status": "success",
+  "recorded_at": "2026-08-03"
+}
+
