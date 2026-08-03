@@ -64,9 +64,13 @@ If the available n8n OpenAI node does not expose the selected model or strict re
 
 ## Semantic checks beyond JSON Schema
 
+Status selection and boundary rules are defined in `docs/architecture/EXTRACTION_STATUS_GUIDE.md`.
+
 - Every extracted item has verbatim evidence found in the source text.
 - Exact-value strings expected by the evaluation fixture are preserved.
 - No prohibited content appears.
 - Contradiction records reference existing item IDs.
 - `no_requirements` has an empty `items` array.
+- `partial` may have an empty `items` array when product-relevant fragments support actionable missing-information records but are too vague for reliable items.
+- Any unresolved contradiction requires `partial`.
 - No downstream generation occurs for an invalid extraction.

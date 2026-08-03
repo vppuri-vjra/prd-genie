@@ -49,6 +49,7 @@ Foundational documentation:
 - [`BRD.md`](docs/requirements/BRD.md) - why the business needs PRD Genie
 - [`PRODUCT_PRD.md`](docs/requirements/PRODUCT_PRD.md) - what the product must deliver
 - [`ARCHITECTURE_DESIGN.md`](docs/architecture/ARCHITECTURE_DESIGN.md) - how the system is designed and how it will evolve
+- [`EXTRACTION_STATUS_GUIDE.md`](docs/architecture/EXTRACTION_STATUS_GUIDE.md) - authoritative human-readable definitions for `complete`, `partial`, and `no_requirements`
 - [`ITERATION_PLAN.md`](docs/planning/ITERATION_PLAN.md) - formal four-week plan and compressed execution target
 - [`evaluation/ground-truth/`](evaluation/ground-truth/README.md) - human-reviewed canonical evaluation-data plan
 
