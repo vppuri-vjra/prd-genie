@@ -1,0 +1,11 @@
+{
+  "test_id": "T8",
+  "run_id": "RUN-T8-1785792963763",
+  "prompt_version": "extractor-v0.9-relationships-conflicts-personas",
+  "workflow_version": "v0.2.0",
+  "model": "gpt-5.6-terra",
+  "trace_id": "148ae9a59c4905672d3ff60572bd8b07",
+  "langfuse_region": "US",
+  "ingestion_accepted": true,
+  "executed_at": "2026-08-03"
+}

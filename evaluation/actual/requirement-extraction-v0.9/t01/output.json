@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-1785792855930",
+  "extraction_status": "complete",
+  "summary": "The source states a report-filtering capability, a results load-time target, identifies PM Sarah, and gives a Q3 deadline.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The user should be able to filter reports by date range, category, and status.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "report filtering",
+      "target": "reports",
+      "evidence": [
+        {
+          "quote": "The user should be able to filter reports by date range, category, and status.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "NFR-001"
+      ]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "Results",
+      "evidence": [
+        {
+          "quote": "Results must load in under 2 seconds.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    },
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "stakeholder",
+      "target": "Sarah",
+      "evidence": [
+        {
+          "quote": "PM: Sarah.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": "Sarah"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "Deadline: Q3.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "deadline",
+      "target": "Q3",
+      "evidence": [
+        {
+          "quote": "Deadline: Q3.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T1",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}

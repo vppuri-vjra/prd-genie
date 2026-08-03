@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785792783408",
+  "extraction_status": "partial",
+  "summary": "The source expresses an ambiguous need for improved reporting, referencing Competitor X as an informal comparison.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Provide better reporting, with a comparison to “what Competitor X has.”",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": "reporting",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "We need better reporting. Something like what Competitor X has.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T2",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.84,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "users",
+      "description": "The intended users of the reporting capability are not specified.",
+      "clarification_question": "Which users need better reporting?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "metrics",
+      "description": "The source does not define what “better reporting” means or provide measurable reporting goals.",
+      "clarification_question": "What measures or outcomes should define better reporting?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "output_format",
+      "description": "The required reporting outputs, formats, and content are not specified.",
+      "clarification_question": "What report formats, contents, or delivery methods are needed?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "competitive_reference",
+      "description": "The specific Competitor X reporting capabilities to emulate are not identified.",
+      "clarification_question": "Which specific reporting capabilities of Competitor X should be used as the reference?"
+    }
+  ],
+  "extractor_notes": []
+}

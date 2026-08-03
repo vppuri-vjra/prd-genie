@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-1785792616560",
+  "extraction_status": "partial",
+  "summary": "The source contains an ambiguous dashboard-related product need, an unclear reference to real-time behavior, and an undetermined budget.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "A dashboard was discussed.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": "dashboard",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Discussed dashboard...",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T5",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.55,
+      "related_item_ids": []
+    },
+    {
+      "id": "RSK-001",
+      "type": "risk",
+      "statement": "Budget is TBD.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "budget",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "budget TBD...",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T5",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.95,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "users",
+      "description": "The intended users of the dashboard are not specified.",
+      "clarification_question": "Who are the intended users of the dashboard?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "metrics",
+      "description": "The meaning and measurable target for \"real-time\" are not specified.",
+      "clarification_question": "What does \"real-time\" mean for the dashboard, including any required latency or refresh measure?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "output_or_report_format",
+      "description": "The dashboard's required outputs, content, or report format are not specified.",
+      "clarification_question": "What information, outputs, or report format must the dashboard provide?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "budget",
+      "description": "The budget is stated as \"TBD\" without an amount or decision date.",
+      "clarification_question": "What is the budget, and when will it be determined?"
+    }
+  ],
+  "extractor_notes": [
+    "\"John mentioned something about real-time\" is too incomplete to reliably extract a specific requirement or stakeholder role."
+  ]
+}

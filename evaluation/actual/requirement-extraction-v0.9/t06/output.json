@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-1785792927926",
+  "extraction_status": "partial",
+  "summary": "Engineering expresses a preference for microservices, Design expresses a preference for a single-page app, and PM wants shipment by March. The implementation preferences require reconciliation.",
+  "items": [
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Engineering",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Engineering wants microservices.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Engineering"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "STK-002",
+      "type": "stakeholder",
+      "statement": "Design",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Design wants single-page app.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Design"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "STK-003",
+      "type": "stakeholder",
+      "statement": "PM",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "PM wants it shipped by March.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "PM"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "CON-001",
+      "type": "constraint",
+      "statement": "Engineering wants microservices.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "microservices",
+      "evidence": [
+        {
+          "quote": "Engineering wants microservices.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Engineering"
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "CON-002"
+      ]
+    },
+    {
+      "id": "CON-002",
+      "type": "constraint",
+      "statement": "Design wants single-page app.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "implementation",
+      "target": "single-page app",
+      "evidence": [
+        {
+          "quote": "Design wants single-page app.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Design"
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "CON-001"
+      ]
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "PM wants it shipped by March.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": null,
+      "target": "shipped by March",
+      "evidence": [
+        {
+          "quote": "PM wants it shipped by March.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "PM"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Engineering prefers microservices while Design prefers a single-page app; the source does not state how these implementation preferences will be reconciled.",
+      "item_ids": [
+        "CON-001",
+        "CON-002"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the microservices and single-page app preferences be reconciled?"
+    }
+  ],
+  "missing_information": [],
+  "extractor_notes": []
+}

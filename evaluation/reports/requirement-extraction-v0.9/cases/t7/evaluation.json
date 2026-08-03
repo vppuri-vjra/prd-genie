@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T7-1785792677112",
+  "test_id": "T7",
+  "workflow_version": "v0.2.0",
+  "prompt_versions": {
+    "requirement_extractor": "extractor-v0.9-relationships-conflicts-personas"
+  },
+  "result": "pass",
+  "expected_elements": [
+    {
+      "description": "Actual output conforms to the extraction schema.",
+      "passed": true,
+      "evidence": "Schema valid"
+    },
+    {
+      "description": "Extraction status equals complete.",
+      "passed": true,
+      "evidence": "Actual: 'complete'"
+    },
+    {
+      "description": "All required exact values are preserved.",
+      "passed": true,
+      "evidence": "All exact values found"
+    },
+    {
+      "description": "All required item types are present.",
+      "passed": true,
+      "evidence": "Required: ['non_functional_requirement']; actual: ['non_functional_requirement']"
+    },
+    {
+      "description": "Every extracted item has verbatim evidence in the source.",
+      "passed": true,
+      "evidence": "All evidence quotes found in source"
+    },
+    {
+      "description": "Every canonical item has a deterministic actual-item match.",
+      "passed": true,
+      "evidence": "Mapping: {'NFR-001': 'NFR-001', 'NFR-002': 'NFR-002', 'NFR-003': 'NFR-003'}"
+    },
+    {
+      "description": "Canonical item relationships are preserved after ID mapping.",
+      "passed": true,
+      "evidence": "Verified 0 directed links"
+    },
+    {
+      "description": "Required contradiction handling is preserved.",
+      "passed": true,
+      "evidence": "Contradiction expectations satisfied"
+    },
+    {
+      "description": "Required missing-information coverage is present.",
+      "passed": true,
+      "evidence": "No mandatory gaps"
+    },
+    {
+      "description": "Prohibited literal is absent: 10K users",
+      "passed": true,
+      "evidence": "Absent"
+    },
+    {
+      "description": "Prohibited literal is absent: 200ms average",
+      "passed": true,
+      "evidence": "Absent"
+    },
+    {
+      "description": "Prohibited literal is absent: Salesforce v53",
+      "passed": true,
+      "evidence": "Absent"
+    }
+  ],
+  "prohibited_behaviors": [],
+  "unsupported_claims": [],
+  "validation": {
+    "schema_valid": true,
+    "exact_values_preserved": true,
+    "traceability_complete": true
+  },
+  "observability": {
+    "langfuse_trace_id": "c910ab981104da5e2f45abba52e3b7ac",
+    "model": "gpt-5.6-terra",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_cost_usd": 0
+  },
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T21:44:13.450800+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
+}
