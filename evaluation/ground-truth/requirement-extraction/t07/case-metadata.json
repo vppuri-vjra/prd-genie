@@ -1,0 +1,57 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T7",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the three separate NFR classifications, complete status, exact-value preservation, non-duplication rule, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its functional-requirement and acceptance-criterion duplication of the integration statement is not adopted.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T7",
+    "input_text": "API must support 10,000 concurrent users. Response time < 200ms at p95. Must integrate with Salesforce REST API v52."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t07/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "complete",
+    "required_exact_values": ["10,000 concurrent users", "< 200ms at p95", "Salesforce REST API v52"],
+    "required_item_types": ["non_functional_requirement"],
+    "required_relationships": [],
+    "required_evidence": [
+      "API must support 10,000 concurrent users.",
+      "Response time < 200ms at p95.",
+      "Must integrate with Salesforce REST API v52."
+    ]
+  },
+  "allowed_variations": [
+    "Scalability may be labelled capacity, load, concurrency, or scalability if the exact target remains unchanged.",
+    "Performance category wording may vary if less than 200ms and p95 are both preserved exactly.",
+    "Integration category capitalization may vary.",
+    "Summary wording may vary while preserving all three exact requirements.",
+    "Item identifiers may differ if all three items remain separate, schema-valid NFRs.",
+    "Confidence may vary as a schema-valid numeric value."
+  ],
+  "prohibited_claims": [
+    "Changing 10,000 concurrent users to 10K users, total users, requests, sessions, or another load measure.",
+    "Changing < 200ms at p95 to 200ms average, less than or equal to 200ms, another percentile, or another threshold.",
+    "Changing Salesforce REST API v52 to Salesforce v52, another API type, another version such as v53, or a generic Salesforce integration.",
+    "Duplicating the Salesforce integration as a functional requirement, acceptance criterion, or dependency.",
+    "Adding availability, throughput, geography, authentication, retry, rate-limit, security, or implementation requirements not stated in the source.",
+    "Inventing a priority, stakeholder, deadline, measurement window, test environment, or traffic profile."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "No material ambiguity prevents complete extraction; unspecified measurement context may be clarified later without changing the explicit targets.",
+    "contradictions": "None.",
+    "missing_information": "No missing-information record is required for this test.",
+    "refusal_or_tbd": "Not applicable."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t7-requirement-extractor.md",
+    "baseline_outcome": "contract pass; semantic partial pass",
+    "langfuse_trace_id": "3eeaca0fc62825d3442ca98276ba0dc9"
+  }
+}
