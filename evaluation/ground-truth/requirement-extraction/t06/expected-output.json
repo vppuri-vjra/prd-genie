@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-GROUND-TRUTH",
+  "extraction_status": "partial",
+  "summary": "Engineering prefers microservices, Design prefers a single-page app, and the PM wants delivery by March; the architecture viewpoints require neutral reconciliation.",
+  "items": [
+    {
+      "id": "CON-001",
+      "type": "constraint",
+      "statement": "Engineering wants microservices.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "Architecture preference",
+      "target": "microservices",
+      "evidence": [
+        {
+          "quote": "Engineering wants microservices.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Engineering"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["CON-002"]
+    },
+    {
+      "id": "CON-002",
+      "type": "constraint",
+      "statement": "Design wants a single-page app.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "Architecture preference",
+      "target": "single-page app",
+      "evidence": [
+        {
+          "quote": "Design wants single-page app.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Design"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["CON-001"]
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "The PM wants it shipped by March.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Delivery",
+      "target": "March",
+      "evidence": [
+        {
+          "quote": "PM wants it shipped by March.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "PM"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Engineering and Design expressed separate architecture or technology preferences that require reconciliation; the source does not approve, prioritize, or establish incompatibility between them.",
+      "item_ids": ["CON-001", "CON-002"],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the Engineering and Design preferences be evaluated and reconciled, and has either preference been approved?"
+    }
+  ],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "decision_status",
+      "description": "The source does not state whether either architecture preference is approved.",
+      "clarification_question": "Have microservices or the single-page app been approved, or are both still proposals?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "deadline",
+      "description": "The year and exact date represented by March are not specified.",
+      "clarification_question": "Which year and exact date define the March deadline?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "scope",
+      "description": "The product or deliverable referred to as it is not identified.",
+      "clarification_question": "What product or deliverable must be shipped by March?"
+    }
+  ],
+  "extractor_notes": [
+    "The viewpoints remain separate and neither architecture preference is selected.",
+    "Microservices and a single-page app may concern different system layers; the source supports a need for reconciliation, not a claim of technical incompatibility."
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T6",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the separate suggested constraints, PM deadline, neutral unresolved relationship, partial status, grounded gaps, allowed variations, and prohibited claims. The earlier model output was comparison evidence only; its stakeholder-item classifications and invalid array shapes are not adopted.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T6",
+    "input_text": "Engineering wants microservices. Design wants single-page app. PM wants it shipped by March."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t06/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "partial",
+    "required_exact_values": ["Engineering", "microservices", "Design", "single-page app", "PM", "March"],
+    "required_item_types": ["constraint", "deadline"],
+    "required_relationships": [
+      "Engineering's and Design's suggested constraints remain separate and are linked by a neutral unresolved reconciliation record."
+    ],
+    "required_evidence": [
+      "Engineering wants microservices.",
+      "Design wants single-page app.",
+      "PM wants it shipped by March."
+    ]
+  },
+  "allowed_variations": [
+    "The two preferences may be called architecture, technology, or implementation constraints if both remain suggested and separately attributed.",
+    "The unresolved relationship may be described as a tension, differing viewpoints, or reconciliation need; it must not assert inherent incompatibility.",
+    "Missing approval status, March year/date, and the identity of it may be separate or combined grounded clarification records.",
+    "Semantically equivalent statement wording is allowed if Engineering, microservices, Design, single-page app, PM, and March are preserved.",
+    "Item identifiers may differ if schema-valid and relationships remain correct."
+  ],
+  "prohibited_claims": [
+    "Selecting, approving, recommending, or prioritizing microservices or a single-page app.",
+    "Claiming that microservices and a single-page app are technically incompatible or mutually exclusive.",
+    "Treating Engineering, Design, or PM as separately extracted stakeholder items solely because they expressed a viewpoint in this input.",
+    "Treating either preference as a stated approved constraint rather than a suggestion.",
+    "Inventing a March year, exact date, product scope, delivery plan, architecture rationale, owner, or priority.",
+    "Merging the Engineering and Design viewpoints into one item."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "Approval status, product scope, and the precise March deadline are unknown.",
+    "contradictions": "A neutral unresolved relationship is required for viewpoint reconciliation, without asserting technical incompatibility.",
+    "missing_information": "Approval status, March year/date, and the deliverable referred to as it are grounded gaps.",
+    "refusal_or_tbd": "Do not select an architecture; preserve both proposals for human review."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t6-requirement-extractor.md",
+    "baseline_outcome": "contract fail; semantic partial pass",
+    "langfuse_trace_id": null,
+    "generated_trace_id_not_ingested": "bf53aa54535811717a34c15de015110b"
+  }
+}
