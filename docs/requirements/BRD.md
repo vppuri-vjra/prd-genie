@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Business Requirements Document
-version: 0.1
+version: 0.2
 status: Draft
-last_updated: 2026-08-02
+last_updated: 2026-08-03
 owner: Vipin Puri
 ---
 
@@ -60,18 +60,47 @@ PRD Genie can reduce documentation effort while improving consistency, traceabil
 - Fine-tuning unless prompt and workflow improvements are exhausted and time remains.
 - Full enterprise content-management or document-permission integrations.
 
-## 7. Business requirements
+## 7. Requirements and source traceability
 
-| ID | Requirement |
+The table deliberately distinguishes direct source requirements from project selections, architecture decisions, derived measurable targets, and submission requirements. A design decision is grounded in its ADR but must not be presented as a verbatim instructor requirement.
+
+| ID | Requirement | Category | Source | Classification |
+|---|---|---|---|---|
+| BR-001 | The solution shall reduce manual conversion of product source material into structured documentation. | Business outcome | SRC-PS problem statement and SRC-PB Step 1 | Direct source requirement |
+| BR-002 | The solution shall support at least three core capabilities end-to-end: requirement extraction, PRD generation, and story breakdown. | Product/capstone scope | SRC-PS concepts, required capabilities, and assignments | Direct source requirement |
+| BR-003 | The solution shall implement at least one extended capability. PRD Genie selects Gap Analysis as that capability. | Product scope and solution selection | SRC-PS extended-capability requirement; SRC-ADR-001 and project review select Gap Analysis | Direct requirement plus design decision |
+| BR-004 | Every generated factual requirement, PRD element, epic, feature, and story shall be traceable to approved evidence; the target unsupported-claim rate is 0%. | Trust and quality objective | SRC-PS grounding/evaluation requirements; SRC-GP grounding policy | Source-supported objective plus derived measurable target |
+| BR-005 | Ambiguous, missing, suggested, or contradictory information shall be labelled and shall not be silently promoted to an approved fact. | Trust and quality objective | SRC-PS concepts, required behavior, and T2/T3/T5/T9 evaluation cases | Direct source requirement |
+| BR-006 | The architecture shall include a human approval checkpoint before PRD generation, as established by ADR-001. | Architecture control | SRC-PS human-in-the-loop concept; SRC-ADR-001 | Design decision based on an applicable source concept |
+| BR-007 | The solution shall provide observable and reproducible evaluation evidence for all baseline tests. | Evaluation requirement | SRC-PS evaluation requirements and SRC-PB Steps 5-6 | Direct source requirement |
+| BR-008 | The project shall prepare the required Markdown documentation, workflow exports, ground truth, evaluation results, diagrams, screenshots, slides, and assignment responses for submission. | Project/submission requirement | SRC-PS submission guidelines; SRC-PB Step 7; SRC-IR verbal instructor guidance dated 2026-08-02 | Combined direct and instructor requirement; not a business outcome |
+
+### 7.1 Classification definitions
+
+| Classification | Meaning |
 |---|---|
-| BR-001 | The solution shall reduce manual conversion of product source material into structured documentation. |
-| BR-002 | The solution shall support at least three core capabilities end-to-end: requirement extraction, PRD generation, and story breakdown. |
-| BR-003 | The solution shall implement Gap Analysis as an extended capability. |
-| BR-004 | Every generated factual requirement, PRD element, epic, feature, and story shall be traceable to approved evidence; the target unsupported-claim rate is 0%. |
-| BR-005 | Ambiguous, missing, suggested, or contradictory information shall be labelled and shall not be silently promoted to an approved fact. |
-| BR-006 | A human approval checkpoint shall control progression from extracted requirements to PRD generation. |
-| BR-007 | The solution shall provide observable and reproducible evaluation evidence for all baseline tests. |
-| BR-008 | The final submission shall include Markdown documentation, workflow exports, ground truth, evaluation results, diagrams, screenshots, slides, and required assignment responses. |
+| Direct source requirement | Explicitly required by an authoritative project source |
+| Design decision | Selected by the project and justified through an ADR or approved design record |
+| Derived measurable target | A quantified acceptance target created to make a source objective testable |
+| Instructor requirement | Additional guidance communicated verbally and recorded with its date |
+| Submission requirement | Evidence or artifact required to complete and grade the capstone rather than operate the product |
+
+### 7.2 Source register
+
+| Source ID | Source | Relevant coverage |
+|---|---|---|
+| SRC-PS | `Problem Statement - PRD Genie_ AI-Powered Product Documentation Assistant.pdf` | Problem, concepts, orchestration, required capabilities, evaluation, assignments, reflection, and submission guidelines |
+| SRC-PB | `Capstone Project Playbook.pdf` | Step 1 problem framing, Step 3 agent design, Steps 5-6 baseline evaluation and observability, and Step 7 documentation/submission |
+| SRC-IR | Instructor guidance captured on 2026-08-02 | BRD, project PRD, Architecture Design, architecture decisions in Markdown, and ground-truth data |
+| SRC-ADR-001 | `docs/decisions/ADR-001-platform-and-observability.md` | n8n, Langfuse, sequential orchestration, Gap Analyzer, and human approval selection |
+| SRC-GP | `docs/architecture/GROUNDING_POLICY.md` | Evidence rules, exact-value preservation, generation gates, traceability, and zero-unsupported-claim release control |
+
+### 7.3 Interpretation notes
+
+- BR-003 contains two layers: the source requires an extended capability; the project selects Gap Analysis.
+- BR-004's grounding principle is source-supported, while the exact 0% unsupported-claim threshold is the project's measurable release target.
+- BR-006 is an architecture control selected through ADR-001, not a claim that the source mandates one exact implementation.
+- BR-008 is retained for completeness but is classified as a project/submission requirement rather than a business outcome.
 
 ## 8. Success measures
 
