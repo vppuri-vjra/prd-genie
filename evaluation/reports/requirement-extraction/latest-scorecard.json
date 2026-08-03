@@ -1,11 +1,11 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.1.1",
   "capability": "requirement_extraction",
   "tests": 10,
   "counts": {
-    "pass": 4,
+    "pass": 5,
     "fail": 5,
-    "needs_review": 1
+    "needs_review": 0
   },
   "release_gate_passed": false,
   "results": [
@@ -43,7 +43,7 @@
     },
     {
       "test_id": "T9",
-      "result": "needs_review"
+      "result": "pass"
     },
     {
       "test_id": "T10",

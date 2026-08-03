@@ -1,6 +1,6 @@
 # T9 Requirement Extraction Evaluation
 
-- Result: **needs_review**
+- Result: **pass**
 - Run ID: `RUN-T9-1785785556246`
 - Workflow version: `v0.2.0`
 - Prompt version: `extractor-v0.8-dependency-risk-fix`
@@ -16,8 +16,8 @@
 | Every canonical item has a deterministic actual-item match. | Pass | Mapping: {} |
 | Canonical item relationships are preserved after ID mapping. | Pass | Verified 0 directed links |
 | Required contradiction handling is preserved. | Pass | Contradiction expectations satisfied |
-| Required missing-information coverage is present. | Pass | Semantic review required for: request a source containing product requirements |
+| Required missing-information coverage is present. | Pass | Covered: request a source containing product requirements |
 | Prohibited literal is absent: generated requirements | Pass | Absent |
 | Prohibited literal is absent: generated PRD content | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T20:38:14.263415+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:55:25.949536+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

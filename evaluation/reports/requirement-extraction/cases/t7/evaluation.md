@@ -21,4 +21,4 @@
 | Prohibited literal is absent: 200ms average | Pass | Absent |
 | Prohibited literal is absent: Salesforce v53 | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T20:38:14.260853+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:55:25.946161+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

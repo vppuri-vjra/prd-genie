@@ -20,4 +20,4 @@
 | Prohibited literal is absent: invented ETA | Pass | Absent |
 | Prohibited literal is absent: invented auth-service status | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T20:38:14.264662+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:55:25.950943+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

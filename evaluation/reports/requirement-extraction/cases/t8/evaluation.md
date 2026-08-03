@@ -19,4 +19,4 @@
 | Required missing-information coverage is present. | Pass | No mandatory gaps |
 | Prohibited literal is absent: merging all personas into a generic user | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T20:38:14.262238+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:55:25.948209+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.

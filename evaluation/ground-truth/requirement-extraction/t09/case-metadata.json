@@ -1,11 +1,11 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.1.1",
   "test_id": "T9",
   "capability": "requirement_extraction",
   "approval_status": "approved",
   "reviewer": "Vipin",
   "review_date": "2026-08-03",
-  "review_notes": "Human reviewer approved no_requirements status, empty items and contradictions, grounded source-content clarification, downstream stop behavior, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its empty missing_information array is not adopted because canonical no-requirements handling requires a grounded source-content request.",
+  "review_notes": "Human reviewer approved no_requirements status, empty items and contradictions, grounded source-content clarification, downstream stop behavior, allowed variations, and prohibited claims. On 2026-08-03, the reviewer adjudicated the actual wording 'Please provide a source that contains product requirements' and category 'source_requirements' as acceptable under the documented allowed variations.",
   "source": {
     "source_name": "eval_prdgenie_inputs.txt",
     "location": "T9",

@@ -59,7 +59,7 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["FR-001"]
+      "related_item_ids": []
     },
     {
       "id": "DDL-001",
@@ -78,7 +78,7 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["FR-001"]
+      "related_item_ids": []
     }
   ],
   "contradictions": [],

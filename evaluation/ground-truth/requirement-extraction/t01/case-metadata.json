@@ -1,11 +1,11 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.1.1",
   "test_id": "T1",
   "capability": "requirement_extraction",
   "approval_status": "approved",
   "reviewer": "Vipin",
   "review_date": "2026-08-03",
-  "review_notes": "Human reviewer approved the canonical interpretation, classifications, evidence grounding, missing-information handling, allowed variations, and prohibited claims. The passing model output was used only as comparison evidence, not as the authority for ground truth.",
+  "review_notes": "Human reviewer approved the canonical interpretation, classifications, evidence grounding, missing-information handling, allowed variations, and prohibited claims. On 2026-08-03, the reviewer clarified that only the performance NFR-to-filtering FR relationship is mandatory; Sarah and Q3 remain standalone because ownership of this specific requirement is not explicit.",
   "source": {
     "source_name": "eval_prdgenie_inputs.txt",
     "location": "T1",
@@ -33,8 +33,7 @@
       "deadline"
     ],
     "required_relationships": [
-      "The performance requirement relates to the report-filtering functional requirement.",
-      "Sarah and the Q3 deadline relate to the report-filtering requirement."
+      "The performance requirement relates to the report-filtering functional requirement."
     ],
     "required_evidence": [
       "The user should be able to filter reports by date range, category, and status.",

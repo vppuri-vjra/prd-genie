@@ -1,10 +1,10 @@
 # Requirement Extraction Scorecard
 
-- Dataset version: `0.1.0`
+- Dataset version: `0.1.1`
 - Tests: 10
-- Pass: 4
+- Pass: 5
 - Fail: 5
-- Needs review: 1
+- Needs review: 0
 - Release gate: **NOT PASSED**
 
 | Test | Result |
@@ -17,5 +17,5 @@
 | T6 | fail |
 | T7 | pass |
 | T8 | fail |
-| T9 | needs_review |
+| T9 | pass |
 | T10 | pass |

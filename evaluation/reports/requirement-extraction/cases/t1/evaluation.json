@@ -41,7 +41,7 @@
     {
       "description": "Canonical item relationships are preserved after ID mapping.",
       "passed": false,
-      "evidence": "NFR-001 does not link to FR-001; STK-001 does not link to FR-001; DDL-001 does not link to FR-001"
+      "evidence": "NFR-001 does not link to FR-001"
     },
     {
       "description": "Required contradiction handling is preserved.",
@@ -74,5 +74,5 @@
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.250747+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:55:25.935056+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

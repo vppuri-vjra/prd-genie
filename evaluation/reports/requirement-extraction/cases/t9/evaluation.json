@@ -6,7 +6,7 @@
   "prompt_versions": {
     "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
   },
-  "result": "needs_review",
+  "result": "pass",
   "expected_elements": [
     {
       "description": "Actual output conforms to the extraction schema.",
@@ -51,7 +51,7 @@
     {
       "description": "Required missing-information coverage is present.",
       "passed": true,
-      "evidence": "Semantic review required for: request a source containing product requirements"
+      "evidence": "Covered: request a source containing product requirements"
     },
     {
       "description": "Prohibited literal is absent: generated requirements",
@@ -79,5 +79,5 @@
     "output_tokens": 0,
     "estimated_cost_usd": 0
   },
-  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:38:14.263415+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T20:55:25.949536+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
 }

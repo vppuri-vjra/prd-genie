@@ -58,3 +58,7 @@ Authoritative source text:
 | Reviewer | Vipin |
 | Review date | 2026-08-03 |
 | Dataset version | `0.1.0` |
+
+## Dataset 0.1.1 adjudication
+
+On 2026-08-03, Vipin approved the actual clarification “Please provide a source that contains product requirements” as semantically satisfying the canonical request. The schema-valid category `source_requirements` is acceptable under the previously approved category-variation rule.

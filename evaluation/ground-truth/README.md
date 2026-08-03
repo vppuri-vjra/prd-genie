@@ -41,7 +41,7 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 
 | Test | Dataset version | Status | Source | Canonical output | Human review | Review metadata |
 |---|---|---|---|---|---|---|
-| T1 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T1 | `requirement-extraction/t01/expected-output.json` | `requirement-extraction/t01/HUMAN_REVIEW.md` | `requirement-extraction/t01/case-metadata.json` |
+| T1 | `0.1.1` | Approved by Vipin on 2026-08-03; relationship scope clarified | `Resources/eval_prdgenie_inputs.txt`, T1 | `requirement-extraction/t01/expected-output.json` | `requirement-extraction/t01/HUMAN_REVIEW.md` | `requirement-extraction/t01/case-metadata.json` |
 | T2 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T2 | `requirement-extraction/t02/expected-output.json` | `requirement-extraction/t02/HUMAN_REVIEW.md` | `requirement-extraction/t02/case-metadata.json` |
 | T3 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T3 | `requirement-extraction/t03/expected-output.json` | `requirement-extraction/t03/HUMAN_REVIEW.md` | `requirement-extraction/t03/case-metadata.json` |
 | T4 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T4 | `requirement-extraction/t04/expected-output.json` | `requirement-extraction/t04/HUMAN_REVIEW.md` | `requirement-extraction/t04/case-metadata.json` |
@@ -49,10 +49,10 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 | T6 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T6 | `requirement-extraction/t06/expected-output.json` | `requirement-extraction/t06/HUMAN_REVIEW.md` | `requirement-extraction/t06/case-metadata.json` |
 | T7 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T7 | `requirement-extraction/t07/expected-output.json` | `requirement-extraction/t07/HUMAN_REVIEW.md` | `requirement-extraction/t07/case-metadata.json` |
 | T8 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T8 | `requirement-extraction/t08/expected-output.json` | `requirement-extraction/t08/HUMAN_REVIEW.md` | `requirement-extraction/t08/case-metadata.json` |
-| T9 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T9 | `requirement-extraction/t09/expected-output.json` | `requirement-extraction/t09/HUMAN_REVIEW.md` | `requirement-extraction/t09/case-metadata.json` |
+| T9 | `0.1.1` | Approved by Vipin on 2026-08-03; actual wording adjudicated as acceptable | `Resources/eval_prdgenie_inputs.txt`, T9 | `requirement-extraction/t09/expected-output.json` | `requirement-extraction/t09/HUMAN_REVIEW.md` | `requirement-extraction/t09/case-metadata.json` |
 | T10 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T10 | `requirement-extraction/t10/expected-output.json` | `requirement-extraction/t10/HUMAN_REVIEW.md` | `requirement-extraction/t10/case-metadata.json` |
 
-T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.0`. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
+T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.1`. T1 and T9 contain approved adjudication updates; unchanged cases retain their original `0.1.0` case version. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
 
 ## Automated evaluation
 

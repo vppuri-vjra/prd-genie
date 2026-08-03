@@ -49,11 +49,20 @@ def load_json(path: Path) -> Any:
 
 
 def normalized_words(value: str) -> set[str]:
-    return {
+    words = {
         token
         for token in re.findall(r"[a-z0-9]+", value.lower().replace("_", " "))
         if token not in STOP_WORDS and len(token) > 1
     }
+    aliases = {
+        "contains": "contain",
+        "containing": "contain",
+        "contained": "contain",
+        "provide": "request",
+        "provided": "request",
+        "providing": "request",
+    }
+    return {aliases.get(word, word) for word in words}
 
 
 def json_text(value: Any) -> str:
@@ -456,7 +465,7 @@ def main() -> int:
 
     counts = {result: sum(report["result"] == result for report in reports) for result in ("pass", "fail", "needs_review")}
     summary = {
-        "dataset_version": "0.1.0",
+        "dataset_version": "0.1.1",
         "capability": "requirement_extraction",
         "tests": len(reports),
         "counts": counts,

@@ -46,3 +46,7 @@ Missing-information entries identify absent details; they do not assert answers.
 | Reviewer | Vipin |
 | Review date | 2026-08-03 |
 | Dataset version | `0.1.0` |
+
+## Dataset 0.1.1 adjudication
+
+On 2026-08-03, Vipin clarified that only the performance NFR must link to the report-filtering FR. Sarah and the Q3 deadline remain standalone grounded items because the source does not explicitly assign Sarah or Q3 to this specific requirement.

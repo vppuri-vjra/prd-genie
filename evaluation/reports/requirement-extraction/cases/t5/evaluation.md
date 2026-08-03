@@ -21,4 +21,4 @@
 | Prohibited literal is absent: invented budget | Pass | Absent |
 | Prohibited literal is absent: invented real-time requirement | Pass | Absent |
 
-Deterministic evaluation generated 2026-08-03T20:38:14.258063+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
+Deterministic evaluation generated 2026-08-03T20:55:25.942751+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator.
