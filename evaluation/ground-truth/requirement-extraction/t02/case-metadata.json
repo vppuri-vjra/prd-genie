@@ -1,0 +1,54 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T2",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the ambiguous functional interpretation, partial status, treatment of Competitor X, required missing information, allowed variations, and prohibited claims. The earlier model result was used only as comparison evidence and exposed a missing format clarification; it did not define the ground truth.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T2",
+    "input_text": "We need better reporting. Something like what Competitor X has."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t02/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "partial",
+    "required_exact_values": ["Competitor X"],
+    "required_item_types": ["functional_requirement"],
+    "required_relationships": [],
+    "required_missing_information": ["metrics", "format", "users"],
+    "required_evidence": [
+      "We need better reporting. Something like what Competitor X has."
+    ]
+  },
+  "allowed_variations": [
+    "Summary and functional-requirement wording may vary if better reporting, Competitor X, and the ambiguity are preserved.",
+    "The functional item may quote only 'We need better reporting.' if Competitor X is preserved elsewhere in grounded output.",
+    "Missing reporting scope and unidentified Competitor X capabilities may be one combined record or separate grounded records.",
+    "Additional grounded clarification may ask about reporting scope, timing, acceptance criteria, or priority.",
+    "Item identifiers and missing-information identifiers may differ if they remain schema-valid.",
+    "Confidence may vary as a schema-valid numeric value."
+  ],
+  "prohibited_claims": [
+    "Any specific report, dashboard, metric, chart, export, filter, format, audience, or workflow not stated in the source.",
+    "Any assertion about features or capabilities offered by Competitor X.",
+    "Any success target, deadline, priority, stakeholder, persona, technology, or implementation not stated in the source.",
+    "Treating the vague competitor comparison as a complete or testable requirement."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "The desire for better reporting is extractable only as an ambiguous functional requirement.",
+    "contradictions": "None.",
+    "missing_information": "Metrics, format, and users are mandatory gaps; reporting scope and the specific Competitor X reference are also appropriate grounded gaps.",
+    "refusal_or_tbd": "Do not refuse; return partial extraction and clarification questions."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t2-requirement-extractor.md",
+    "baseline_outcome": "contract pass; semantic partial pass",
+    "langfuse_trace_id": "a0857ea498c09dd4c36fdf2c18ad0244"
+  }
+}

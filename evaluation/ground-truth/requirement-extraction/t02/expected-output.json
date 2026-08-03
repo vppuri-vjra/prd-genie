@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-GROUND-TRUTH",
+  "extraction_status": "partial",
+  "summary": "The source requests better reporting by reference to Competitor X but does not define a testable reporting capability.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Better reporting similar to Competitor X is desired, but the required reporting capability is ambiguous.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": "Reporting",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "We need better reporting. Something like what Competitor X has.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T2",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "metrics",
+      "description": "Required reporting metrics are not specified.",
+      "clarification_question": "Which metrics should the reports contain?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "format",
+      "description": "The required report format or presentation is not specified.",
+      "clarification_question": "What report format or presentation is required?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "users",
+      "description": "The target users for better reporting are not identified.",
+      "clarification_question": "Which users need the improved reporting?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "scope",
+      "description": "The specific Competitor X reporting capabilities to use as a reference are not identified.",
+      "clarification_question": "Which specific Competitor X reporting capabilities should be used as the reference?"
+    }
+  ],
+  "extractor_notes": [
+    "Competitor X is preserved as a reference, but no Competitor X capability is treated as fact."
+  ]
+}

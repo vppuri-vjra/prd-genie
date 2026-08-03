@@ -42,3 +42,4 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 | Test | Dataset version | Status | Source | Canonical output | Human review | Review metadata |
 |---|---|---|---|---|---|---|
 | T1 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T1 | `requirement-extraction/t01/expected-output.json` | `requirement-extraction/t01/HUMAN_REVIEW.md` | `requirement-extraction/t01/case-metadata.json` |
+| T2 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T2 | `requirement-extraction/t02/expected-output.json` | `requirement-extraction/t02/HUMAN_REVIEW.md` | `requirement-extraction/t02/case-metadata.json` |
