@@ -1,0 +1,53 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T9",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved no_requirements status, empty items and contradictions, grounded source-content clarification, downstream stop behavior, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its empty missing_information array is not adopted because canonical no-requirements handling requires a grounded source-content request.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T9",
+    "input_text": "Meeting happened. Notes: none."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t09/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "no_requirements",
+    "required_exact_values": [],
+    "required_item_types": [],
+    "required_relationships": [],
+    "required_missing_information": ["request a source containing product requirements"],
+    "required_evidence": []
+  },
+  "allowed_variations": [
+    "Summary wording may vary if it clearly states that no product requirements are extractable.",
+    "The clarification may request a transcript, product brief, stakeholder notes, decisions, requirements, or another source with substantive product information.",
+    "The clarification may be phrased as a request or question and may use any schema-valid category.",
+    "Extractor notes may vary if they clearly prevent downstream PRD generation.",
+    "The missing-information identifier may differ if schema-valid."
+  ],
+  "prohibited_claims": [
+    "Any generated functional requirement, non-functional requirement, acceptance criterion, persona, stakeholder, deadline, dependency, constraint, assumption, or risk.",
+    "Any generated PRD content, feature, epic, user story, architecture, scope, goal, or recommendation.",
+    "Treating the occurrence of a meeting as a product requirement, stakeholder decision, milestone, or deadline.",
+    "Inventing what the missing meeting notes, transcript, decisions, or requirements would contain.",
+    "Returning partial or complete for this exact input.",
+    "Allowing PRD generation to proceed."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "There is no substantive product content to interpret.",
+    "contradictions": "None.",
+    "missing_information": "At least one grounded request for a source containing product requirements is required.",
+    "refusal_or_tbd": "Stop downstream PRD generation until suitable source material is provided."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t9-requirement-extractor.md",
+    "baseline_outcome": "contract and official fixture pass; prompt-policy partial",
+    "langfuse_trace_id": "326222fa59c41c3854d4e087a00fc1dd"
+  }
+}

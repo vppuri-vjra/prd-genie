@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-GROUND-TRUTH",
+  "extraction_status": "no_requirements",
+  "summary": "No product requirements are extractable from the supplied input.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "requirements_source",
+      "description": "The supplied input contains no substantive meeting notes or product requirements.",
+      "clarification_question": "Please provide the meeting transcript, decisions, product brief, stakeholder notes, or another source containing product requirements."
+    }
+  ],
+  "extractor_notes": [
+    "PRD generation must not proceed from this input."
+  ]
+}
