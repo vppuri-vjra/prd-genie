@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PROMPT = ROOT / "prompts" / "requirement-extractor-v0.1.md"
+PROMPT = ROOT / "prompts" / "requirement-extractor-v0.8.md"
 FIXTURES = ROOT / "evaluation" / "fixtures" / "t01-t10-extractor-cases.json"
 
 REQUIRED_PROMPT_PHRASES = [
@@ -34,6 +34,9 @@ REQUIRED_PROMPT_PHRASES = [
     "FR-001`, never `FR001`",
     "confidence` must be a JSON number from `0` through `1`",
     "MISS-001",
+    "extract the capability as a `functional_requirement`",
+    "missing information must not replace the risk",
+    "Do not return `partial` solely because",
 ]
 
 

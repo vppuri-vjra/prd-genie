@@ -58,3 +58,15 @@ T10 used one billable OpenAI call. The extractor correctly captured the dependen
 ## Recommended Correction
 
 Add a focused dependency/risk rule to the extractor prompt: when a sentence states that a user capability requires another service, emit both the capability as a `functional_requirement` and the service relationship as a `dependency`. When the same source explicitly says an ETA is unknown, emit a grounded `risk` item preserving that wording; a clarification may also be included, but it must not replace the risk. Do not rerun T10 without explicit approval because another run would make an additional billable model call.
+
+## Correction Applied
+
+Approved and applied on 2026-08-02 without a model call. Canonical prompt v0.8 and the live n8n Requirement Extractor now require:
+
+- Separate `functional_requirement` and linked `dependency` items when the source explicitly states both a capability and its prerequisite relationship.
+- A grounded `risk` when an explicitly unknown ETA or comparable uncertainty can affect delivery.
+- Preservation of the exact unknown wording.
+- A clarification may supplement, but never replace, the risk.
+- `complete` status when all stated requirements, dependencies, risks, and explicit uncertainties are captured and no separate material ambiguity or unresolved contradiction remains.
+
+Prompt metadata is advanced to `extractor-v0.8-dependency-risk-fix`. The original failed trace remains the before evidence. T10 has not been rerun; an explicit approval is required for the additional billable model call.

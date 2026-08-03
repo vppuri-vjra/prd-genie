@@ -106,7 +106,7 @@ Fifteen representative payloads cover T1, T2, T3, and T9 under [`examples/contra
 
 The initial extractor implementation package includes:
 
-- [`prompts/requirement-extractor-v0.1.md`](prompts/requirement-extractor-v0.1.md) - provider-neutral system prompt and runtime template
+- [`prompts/requirement-extractor-v0.8.md`](prompts/requirement-extractor-v0.8.md) - current provider-neutral system prompt with cumulative evaluation corrections
 - [`evaluation/fixtures/t01-t10-extractor-cases.json`](evaluation/fixtures/t01-t10-extractor-cases.json) - machine-readable T1-T10 expectations
 - [`workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`](workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md) - initial node sequence, data mapping, validation, and retry behavior
 - [`workflows/n8n/prd-genie-requirement-extractor-v0.2.json`](workflows/n8n/prd-genie-requirement-extractor-v0.2.json) - importable inactive ten-node T1 workflow with Langfuse OTLP tracing
