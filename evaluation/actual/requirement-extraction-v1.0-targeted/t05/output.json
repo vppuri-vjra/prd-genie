@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-1785794903638",
+  "extraction_status": "partial",
+  "summary": "The source mentions a dashboard and an unconfirmed reference to real-time, but does not provide a reliable product requirement. Budget is explicitly TBD.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "product_requirement",
+      "description": "The source says, \"Discussed dashboard...\" but does not state what dashboard capability is required.",
+      "clarification_question": "What dashboard behavior or capability is required?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "real_time_requirement",
+      "description": "The source says, \"John mentioned something about real-time...\"; this does not specify an approved requirement, scope, metric, or target.",
+      "clarification_question": "Is real-time behavior a requirement? If so, what capability, users, data, and latency or refresh target does it require?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "budget",
+      "description": "The source states, \"budget TBD...\"",
+      "clarification_question": "What is the budget?"
+    }
+  ],
+  "extractor_notes": [
+    "No requirement items were extracted because the source contains only vague discussion fragments and does not state a reliable product requirement."
+  ]
+}
