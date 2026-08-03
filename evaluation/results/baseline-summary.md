@@ -13,6 +13,6 @@
 | T7 | Technical NFRs | Partial | `3eeaca0fc62825d3442ca98276ba0dc9` | Exact values passed; integration returned as FR plus AC instead of NFR |
 | T8 | Persona separation | Pass | `0773d9e9cbed86f174fcf30be8c42b10` | Three personas and three matching functional requirements |
 | T9 | Empty-input refusal | Pass | `326222fa59c41c3854d4e087a00fc1dd` | Official fixture passed; canonical clarification request omitted |
-| T10 | Dependency and risk | Fail; correction applied, rerun pending | `1eacb1ba799432413f48e6887c261c97` | v0.8 adds linked capability/dependency, explicit unknown-ETA risk, exact wording, and status controls |
+| T10 | Dependency and risk | Pass after correction | `ca05ea0e1c143d6f1a9fe8e66fc8fe8a` | v0.8 returned complete with linked FR, dependency, risk, and exact ETA evidence |
 | T11 | PRD generation | Not run | - | - |
 | T12 | Story breakdown | Not run | - | - |

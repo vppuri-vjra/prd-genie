@@ -14,7 +14,7 @@ The formal plan models four one-week iterations. Actual execution is intentional
 
 | Iteration | Formal week | Focus | Planned items | Exit criteria | Current status |
 |---|---:|---|---|---|---|
-| Iteration 1 | Week 1 | Foundation, planning, and Requirement Extraction | Review sources; create BRD, Product PRD, Architecture Design, diagram, and initial ADRs; select tools; define contracts; organize GitHub and Obsidian; build Requirement Extractor; connect Langfuse; run T1-T10 | Foundation documents exist; schemas validate; Requirement Extractor works; T1-T10 are documented; T10 correction passes | In progress |
+| Iteration 1 | Week 1 | Foundation, planning, and Requirement Extraction | Review sources; create BRD, Product PRD, Architecture Design, diagram, and initial ADRs; select tools; define contracts; organize GitHub and Obsidian; build Requirement Extractor; connect Langfuse; run T1-T10 | Foundation documents exist; schemas validate; Requirement Extractor works; T1-T10 are documented; T10 correction passes | Complete |
 | Iteration 2 | Week 2 | Ground truth and evaluation controls | Complete T10 before/after comparison; build and human-review T1-T12 ground truth; reconcile prompt versions; strengthen deterministic evaluation and scorecards | Approved ground truth exists; T10 passes; evaluation can compare actual output with canonical expectations | Not started |
 | Iteration 3 | Week 3 | Complete multi-agent pipeline | Build Gap Analyzer, Generation Gate, Human Approval, PRD Generator, Story Breakdown, final validation, Markdown export, and per-agent tracing; run T11-T12 | Core and extended capabilities work end-to-end; T11-T12 are documented; human approval is demonstrated | Not started |
 | Iteration 4 | Week 4 | Final evaluation and submission | Run regression and three full-pipeline input types; calculate metrics and cost per user; finish Q1-Q4, screenshots, architecture write-up, slides, demo, links, exports, and security audit | Submission is complete, reproducible, public, and ready for grading | Not started |
@@ -40,7 +40,7 @@ The formal plan models four one-week iterations. Actual execution is intentional
 ## Current checkpoint
 
 - T1-T10 initial Requirement Extractor runs are documented.
-- T10 requires a prompt correction and approved rerun.
+- T10 passed its v0.8 corrected rerun with before-and-after Langfuse evidence.
 - Langfuse traces Requirement Extractor success and failure paths.
 - BRD, Product PRD, Architecture Design, diagram, and iteration plan are drafted as version 0.1.
-- Ground truth, later agents, assignments, visuals, and final submission package remain open.
+- Iteration 1 is complete. Ground truth, later agents, assignments, visuals, and final submission package remain open.
