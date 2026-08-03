@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-GROUND-TRUTH",
+  "extraction_status": "partial",
+  "summary": "The source contains product-relevant fragments about a dashboard, a real-time concept mentioned by John, and a budget marked TBD, but no sufficiently specific requirement can be extracted.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "dashboard_scope",
+      "description": "The dashboard capability or outcome discussed is not specified.",
+      "clarification_question": "What dashboard capability, user need, or outcome was discussed?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "real_time_behavior",
+      "description": "John's mention of real-time does not identify what should operate or update in real time.",
+      "clarification_question": "What did John mean by real-time, and which dashboard behavior or data should be real-time?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "budget",
+      "description": "The budget is explicitly TBD and no amount, range, currency, owner, or decision date is provided.",
+      "clarification_question": "What budget has been approved or proposed, in which currency, and when will it be decided?"
+    }
+  ],
+  "extractor_notes": [
+    "Preserved source fragments: John, real-time, and budget TBD.",
+    "No dashboard scope, real-time behavior, or budget value is promoted to a requirement."
+  ]
+}

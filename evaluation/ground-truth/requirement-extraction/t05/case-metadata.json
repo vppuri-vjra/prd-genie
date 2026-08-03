@@ -1,0 +1,55 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T5",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved empty items, partial status, preservation of vague fragments, mandatory gaps, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its no_requirements status is not adopted because actionable product-related gaps exist.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T5",
+    "input_text": "Discussed dashboard... John mentioned something about real-time... budget TBD..."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t05/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "partial",
+    "required_exact_values": ["John", "real-time", "budget TBD"],
+    "required_item_types": [],
+    "required_relationships": [],
+    "required_missing_information": ["dashboard scope", "real-time behavior", "budget"],
+    "required_evidence": [
+      "Discussed dashboard... John mentioned something about real-time... budget TBD..."
+    ]
+  },
+  "allowed_variations": [
+    "The dashboard-scope and real-time-behavior gaps may be combined if both missing dimensions are explicit.",
+    "The budget gap may ask only for the missing value or may also ask for currency, owner, range, or decision timing without presuming an answer.",
+    "John, real-time, and budget TBD may be preserved in the summary, missing-information records, or extractor notes.",
+    "Additional grounded clarification may ask who John is or what decision he owns; John must not be promoted to a stakeholder without confirmation.",
+    "Missing-information identifiers and wording may vary if the three required gaps remain explicit."
+  ],
+  "prohibited_claims": [
+    "Any dashboard feature, user, scope, metric, visualization, refresh behavior, or data source not stated in the input.",
+    "Any definition, frequency, latency, technology, or implementation for real-time.",
+    "Any budget amount, range, currency, approval status, owner, or date not stated in the input.",
+    "Classifying John as a stakeholder, owner, approver, user, or decision-maker based only on being mentioned.",
+    "Promoting the vague fragments to functional or non-functional requirement items.",
+    "Returning no_requirements when actionable product-related clarification records can be produced."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "All three source fragments are too vague for requirement items but support actionable clarification.",
+    "contradictions": "None.",
+    "missing_information": "Dashboard scope, real-time behavior, and budget are mandatory gaps.",
+    "refusal_or_tbd": "Budget TBD must remain unresolved; do not invent or resolve it."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t5-requirement-extractor.md",
+    "baseline_outcome": "contract pass; semantic partial pass",
+    "langfuse_trace_id": "4581cbb1e21b8aab1813f58ab91739e7"
+  }
+}
