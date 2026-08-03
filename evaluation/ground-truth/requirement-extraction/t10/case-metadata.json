@@ -1,0 +1,63 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T10",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the SSO functional requirement, linked dependency and risk, complete status, exact-value preservation, allowed variations, and prohibited claims. The corrected v0.8 passing output is comparison evidence only and did not automatically define the ground truth.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T10",
+    "input_text": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t10/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "complete",
+    "required_exact_values": ["SSO login", "new auth service", "Team Alpha", "ETA unknown"],
+    "required_item_types": ["functional_requirement", "dependency", "risk"],
+    "required_relationships": [
+      "The SSO login functional requirement links to the new-auth-service dependency.",
+      "The unknown-ETA risk links to the new-auth-service dependency."
+    ],
+    "required_evidence": [
+      "SSO login requires the new auth service which is being built by Team Alpha.",
+      "ETA unknown."
+    ]
+  },
+  "allowed_variations": [
+    "The SSO functional statement may use provide, support, enable, or require SSO login if the exact capability remains present.",
+    "The dependency statement may be semantically normalized if SSO login, new auth service, being built, and Team Alpha remain preserved.",
+    "The risk statement may be paraphrased if ETA unknown is preserved exactly in the item target or verbatim evidence.",
+    "A grounded clarification may additionally ask for the ETA, but it must not replace the risk or change complete status by itself.",
+    "Item identifiers may differ if schema-valid and the FR-dependency-risk links remain correct.",
+    "Confidence and category wording may vary within the schema."
+  ],
+  "prohibited_claims": [
+    "Inventing an ETA, date, delivery window, probability, severity, mitigation, owner, or escalation path.",
+    "Changing Team Alpha to another team or omitting the stated team from the dependency meaning.",
+    "Claiming that the auth service is complete, delayed, blocked, on track, approved, deployed, tested, or available.",
+    "Treating the new auth service only as a generic integration NFR when the source explicitly states a prerequisite relationship.",
+    "Returning only a dependency and omitting the SSO functional requirement or unknown-ETA risk.",
+    "Using missing information as a replacement for the explicit risk.",
+    "Returning partial solely because the source explicitly states ETA unknown."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "The ETA value is unknown, but that uncertainty is explicit and extractable rather than an unresolved interpretation ambiguity.",
+    "contradictions": "None.",
+    "missing_information": "An ETA clarification is optional and may supplement, but never replace, the risk.",
+    "refusal_or_tbd": "Preserve ETA unknown; do not fill or estimate it."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t10-requirement-extractor.md",
+    "initial_outcome": "semantic fail",
+    "initial_langfuse_trace_id": "1eacb1ba799432413f48e6887c261c97",
+    "corrected_outcome": "contract and semantic pass",
+    "corrected_langfuse_trace_id": "ca05ea0e1c143d6f1a9fe8e66fc8fe8a",
+    "corrected_prompt_version": "extractor-v0.8-dependency-risk-fix"
+  }
+}

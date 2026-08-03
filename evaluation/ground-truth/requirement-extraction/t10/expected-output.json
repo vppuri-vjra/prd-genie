@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "extraction_status": "complete",
+  "summary": "SSO login requires a new auth service being built by Team Alpha, and the service ETA is explicitly unknown.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Provide SSO login.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Authentication",
+      "target": "SSO login",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["DEP-001"]
+    },
+    {
+      "id": "DEP-001",
+      "type": "dependency",
+      "statement": "SSO login requires the new auth service which is being built by Team Alpha.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Authentication service",
+      "target": "new auth service",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001", "RSK-001"]
+    },
+    {
+      "id": "RSK-001",
+      "type": "risk",
+      "statement": "The ETA for the new auth service is unknown.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Delivery",
+      "target": "ETA unknown",
+      "evidence": [
+        {
+          "quote": "ETA unknown.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["DEP-001"]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": [
+    "The explicit unknown ETA is preserved as a grounded delivery risk and does not by itself make the extraction partial."
+  ]
+}
