@@ -1,0 +1,57 @@
+{
+  "dataset_version": "0.1.0",
+  "test_id": "T3",
+  "capability": "requirement_extraction",
+  "approval_status": "approved",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-03",
+  "review_notes": "Human reviewer approved the functional and non-functional classifications, partial status, unresolved relationship, clarification handling, allowed variations, and prohibited claims. The earlier model result was comparison evidence only; its complete status and NFR classification for auto-refresh are not adopted.",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T3",
+    "input_text": "The dashboard should auto-refresh every 5 seconds. [Later in same meeting] Performance is critical, minimize API calls."
+  },
+  "contract": {
+    "schema_path": "schemas/requirement-extraction.schema.json",
+    "schema_version": "1.0.0"
+  },
+  "canonical_output_path": "evaluation/ground-truth/requirement-extraction/t03/expected-output.json",
+  "required_expectations": {
+    "extraction_status": "partial",
+    "required_exact_values": ["every 5 seconds", "minimize API calls"],
+    "required_item_types": ["functional_requirement", "non_functional_requirement"],
+    "required_relationships": [
+      "The five-second auto-refresh functional requirement and API-call minimization NFR are linked by one unresolved contradiction or tension record."
+    ],
+    "required_evidence": [
+      "The dashboard should auto-refresh every 5 seconds.",
+      "Performance is critical, minimize API calls."
+    ]
+  },
+  "allowed_variations": [
+    "The relationship may be described as a contradiction, conflict, or unresolved tension if both requirements are preserved and linked.",
+    "Semantically equivalent summary and statement wording is allowed while preserving every 5 seconds and minimize API calls.",
+    "The item status may be contradictory or stated if the separate unresolved contradiction record clearly links both items.",
+    "A grounded missing-information record may ask about precedence, performance criteria, or acceptable API-call volume.",
+    "Item and contradiction identifiers may differ if schema-valid and internally consistent.",
+    "Confidence may vary as a schema-valid numeric value."
+  ],
+  "prohibited_claims": [
+    "Silently resolving the tension or claiming both requirements are compatible without stakeholder confirmation.",
+    "Selecting polling, push, WebSockets, caching, batching, throttling, or any other refresh implementation.",
+    "Changing the five-second frequency or replacing minimize API calls with a numeric limit.",
+    "Classifying dashboard auto-refresh only as a non-functional requirement.",
+    "Inventing a priority, stakeholder, deadline, API, platform, or performance target."
+  ],
+  "expected_special_handling": {
+    "ambiguity": "The meaning of minimize API calls is not quantified, but the statement remains extractable.",
+    "contradictions": "One unresolved relationship must connect the auto-refresh behavior and API-call minimization constraint.",
+    "missing_information": "Clarification about reconciliation or precedence is mandatory through the contradiction record; separate missing-information records are optional.",
+    "refusal_or_tbd": "Do not refuse and do not resolve the tension."
+  },
+  "comparison_evidence": {
+    "baseline_result_path": "evaluation/results/t3-requirement-extractor.md",
+    "baseline_outcome": "contract pass; semantic partial pass",
+    "langfuse_trace_id": "4d1d08ec201a3faa552101b307f0a27c"
+  }
+}
