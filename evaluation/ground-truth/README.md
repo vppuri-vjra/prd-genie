@@ -53,3 +53,7 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 | T10 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T10 | `requirement-extraction/t10/expected-output.json` | `requirement-extraction/t10/HUMAN_REVIEW.md` | `requirement-extraction/t10/case-metadata.json` |
 
 T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.0`. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
+
+## Automated evaluation
+
+The deterministic evaluator is `scripts/evaluate_extraction.py`. It compares an actual extractor output with the approved source, canonical output, and case metadata. It checks schema validity, status, exact values, item types, verbatim evidence, canonical item coverage, relationships, contradictions, missing-information coverage, and machine-detectable prohibited literals. Differences that require semantic judgment are marked `needs_review` rather than guessed.
