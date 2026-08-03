@@ -5,7 +5,8 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | Prompt | Status | Output contract |
 |---|---|---|
 | `requirement-extractor-v0.1.md` | Superseded working file; retained for repository continuity | `schemas/requirement-extraction.schema.json` |
-| `requirement-extractor-v0.8.md` | Current canonical prompt; dependency/risk correction verified by passing T10 rerun | `schemas/requirement-extraction.schema.json` |
+| `requirement-extractor-v0.9.md` | Current candidate prompt; adds grounded relationships, ambiguity dimensions, unresolved tensions, and explicit persona links | `schemas/requirement-extraction.schema.json` |
+| `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -21,6 +22,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `extractor-v0.6-integration-nfr-fix` | 2026-08-01 | T7 duplicated the Salesforce integration as a functional requirement and acceptance criterion rather than one integration NFR | Represent a named external system, API, protocol, or exact API version as one integration NFR; preserve exact identifiers; prohibit duplicate classifications | Applied after T7; T8 passed under v0.6. T7 itself was not rerun and remains in final regression scope | `8ac8ddd` |
 | `extractor-v0.7-no-requirements-clarification-fix` | 2026-08-01 | T9 correctly returned `no_requirements` but omitted the required grounded clarification | For `no_requirements`, require at least one missing-information record requesting a source containing product requirements, without inventing source contents | Applied after T9; not rerun. Must be covered by the final regression set | `0ce9c6c` |
 | `extractor-v0.8-dependency-risk-fix` | 2026-08-02 | T10 v0.7 returned only a dependency with `partial` status and omitted the SSO functional requirement and explicit unknown-ETA risk | When a capability requires another service, emit the capability, dependency, and grounded risk separately; preserve explicit unknown-ETA wording; do not let clarification replace risk | Verified by passing T10 rerun. Langfuse trace `ca05ea0e1c143d6f1a9fe8e66fc8fe8a` | `ef22072` |
+| `extractor-v0.9-relationships-conflicts-personas` | 2026-08-03 | Actual-output scorecard `0.1.1` exposed missing NFR links, ambiguous needs, unresolved tensions, constraint links, and persona items in T1/T2/T3/T6/T8 | Add evidence-bounded relationship, ambiguity, conflict, competing-constraint, persona, exact constraint-prefix, and stakeholder-preservation rules without weakening grounding | Targeted T1/T2/T3/T6/T8 live regression completed; T1, T2, T3, and T6 matched the intended corrections, while T8 produced the required three persona/requirement pairs plus grounded clarification for “simplified view.” Full T1–T10 regression remains required before promotion to canonical | Pending |
 
 ## Version-Control Rules
 
@@ -34,8 +36,9 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 
 ## Current Baseline
 
-- Canonical version: `extractor-v0.8-dependency-risk-fix`
-- Canonical prompt: `prompts/requirement-extractor-v0.8.md`
+- Candidate version: `extractor-v0.9-relationships-conflicts-personas`
+- Candidate prompt: `prompts/requirement-extractor-v0.9.md`
+- Last verified baseline: `extractor-v0.8-dependency-risk-fix`
 - Output contract: `schemas/requirement-extraction.schema.json`
 - Workflow export: `workflows/n8n/prd-genie-requirement-extractor-v0.2.json`
 - Final regression obligation: rerun T1-T10 against approved ground truth using one fixed prompt/model/workflow baseline.

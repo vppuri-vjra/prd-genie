@@ -76,7 +76,8 @@ Human approval remains required before extracted information progresses to PRD g
 ## Related artifacts
 
 - Schema: `schemas/requirement-extraction.schema.json`
-- Canonical prompt: `prompts/requirement-extractor-v0.8.md`
+- Candidate prompt: `prompts/requirement-extractor-v0.9.md`
+- Last verified baseline: `prompts/requirement-extractor-v0.8.md`
 - Prompt version history: `prompts/README.md`
 - Workflow mapping: `workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`
 - Ground-truth cases: `evaluation/ground-truth/requirement-extraction/`

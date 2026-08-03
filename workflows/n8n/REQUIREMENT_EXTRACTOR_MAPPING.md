@@ -33,7 +33,7 @@ Manual Trigger / Form / Webhook
 | Trigger | Receive source content or baseline fixture | Raw input |
 | Normalize Input | Create stable run metadata and normalized source envelope | `workflow-input.schema.json` |
 | Validate Workflow Input | Reject missing or malformed input before an LLM call | `workflow-input.schema.json` |
-| Requirement Extractor LLM | Apply current prompt v0.8 and produce JSON only | `requirement-extraction.schema.json` |
+| Requirement Extractor LLM | Apply candidate prompt v0.9 and produce JSON only | `requirement-extraction.schema.json` |
 | Parse JSON | Convert the model response into an n8n object | JSON syntax |
 | Validate Requirement Extraction | Enforce the schema and grounding invariants | `requirement-extraction.schema.json` |
 | Structured Error | Preserve run ID, stage, error type, and validation details | Workflow error record |
