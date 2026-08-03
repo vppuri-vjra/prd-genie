@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-1785798676817",
+  "extraction_status": "complete",
+  "summary": "The source states that SSO login requires a new authentication service being built by Team Alpha, with an unknown ETA that creates delivery risk.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "SSO login requires the new auth service.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "authentication",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "DEP-001"
+      ]
+    },
+    {
+      "id": "DEP-001",
+      "type": "dependency",
+      "statement": "SSO login requires the new auth service, which is being built by Team Alpha. ETA unknown.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "prerequisite_service",
+      "target": "new auth service",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "FR-001",
+        "RSK-001"
+      ]
+    },
+    {
+      "id": "RSK-001",
+      "type": "risk",
+      "statement": "The dependency on the new auth service has an unknown ETA, which may affect delivery of SSO login.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "dependency_schedule",
+      "target": "new auth service",
+      "evidence": [
+        {
+          "quote": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T10",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.94,
+      "related_item_ids": [
+        "DEP-001"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [],
+  "extractor_notes": []
+}

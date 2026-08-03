@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-1785798538713",
+  "extraction_status": "partial",
+  "summary": "The source states competing implementation preferences from Engineering and Design, plus a requested delivery timeframe from PM. The implementation preferences require reconciliation.",
+  "items": [
+    {
+      "id": "CON-001",
+      "type": "constraint",
+      "statement": "Engineering wants microservices.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "microservices",
+      "evidence": [
+        {
+          "quote": "Engineering wants microservices.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Engineering"
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "CON-002"
+      ]
+    },
+    {
+      "id": "CON-002",
+      "type": "constraint",
+      "statement": "Design wants single-page app.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "single-page app",
+      "evidence": [
+        {
+          "quote": "Design wants single-page app.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "Design"
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "CON-001"
+      ]
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "PM wants it shipped by March.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "delivery",
+      "target": "by March",
+      "evidence": [
+        {
+          "quote": "PM wants it shipped by March.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T6",
+          "speaker": "PM"
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Engineering expresses a preference for microservices, while Design expresses a preference for a single-page app. The source does not state how these implementation preferences should be reconciled.",
+      "item_ids": [
+        "CON-001",
+        "CON-002"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the microservices and single-page app implementation preferences be reconciled?"
+    }
+  ],
+  "missing_information": [],
+  "extractor_notes": []
+}

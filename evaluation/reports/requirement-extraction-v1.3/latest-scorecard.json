@@ -1,0 +1,53 @@
+{
+  "dataset_version": "0.1.1",
+  "capability": "requirement_extraction",
+  "tests": 10,
+  "counts": {
+    "pass": 8,
+    "fail": 2,
+    "needs_review": 0
+  },
+  "release_gate_passed": false,
+  "results": [
+    {
+      "test_id": "T1",
+      "result": "fail"
+    },
+    {
+      "test_id": "T2",
+      "result": "pass"
+    },
+    {
+      "test_id": "T3",
+      "result": "pass"
+    },
+    {
+      "test_id": "T4",
+      "result": "pass"
+    },
+    {
+      "test_id": "T5",
+      "result": "fail"
+    },
+    {
+      "test_id": "T6",
+      "result": "pass"
+    },
+    {
+      "test_id": "T7",
+      "result": "pass"
+    },
+    {
+      "test_id": "T8",
+      "result": "pass"
+    },
+    {
+      "test_id": "T9",
+      "result": "pass"
+    },
+    {
+      "test_id": "T10",
+      "result": "pass"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-1785798501446",
+  "extraction_status": "no_requirements",
+  "summary": "The source contains product-related fragments but no stated, extractable product requirements.",
+  "items": [],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "requirements",
+      "description": "The source references a dashboard but does not state any dashboard behavior, users, outputs, or constraints.",
+      "clarification_question": "What product requirements apply to the dashboard?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "real-time",
+      "description": "The source says John \"mentioned something about real-time\" but does not specify a capability, metric, scope, or target.",
+      "clarification_question": "What specific real-time capability, scope, and measurable target did John mention?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "budget",
+      "description": "The budget is explicitly stated as \"TBD.\"",
+      "clarification_question": "What is the budget?"
+    }
+  ],
+  "extractor_notes": [
+    "No requirement item was created because \"Discussed dashboard... John mentioned something about real-time... budget TBD...\" does not state a specific product requirement."
+  ]
+}

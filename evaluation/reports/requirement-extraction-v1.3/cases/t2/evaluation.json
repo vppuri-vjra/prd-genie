@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785798405636",
+  "test_id": "T2",
+  "workflow_version": "v0.2.0",
+  "prompt_versions": {
+    "requirement_extractor": "extractor-v1.3-complete-optional-clarification"
+  },
+  "result": "pass",
+  "expected_elements": [
+    {
+      "description": "Actual output conforms to the extraction schema.",
+      "passed": true,
+      "evidence": "Schema valid"
+    },
+    {
+      "description": "Extraction status equals partial.",
+      "passed": true,
+      "evidence": "Actual: 'partial'"
+    },
+    {
+      "description": "All required exact values are preserved.",
+      "passed": true,
+      "evidence": "All exact values found"
+    },
+    {
+      "description": "All required item types are present.",
+      "passed": true,
+      "evidence": "Required: ['functional_requirement']; actual: ['functional_requirement']"
+    },
+    {
+      "description": "Every extracted item has verbatim evidence in the source.",
+      "passed": true,
+      "evidence": "All evidence quotes found in source"
+    },
+    {
+      "description": "Every canonical item has a deterministic actual-item match.",
+      "passed": true,
+      "evidence": "Mapping: {'FR-001': 'FR-001'}"
+    },
+    {
+      "description": "Canonical item relationships are preserved after ID mapping.",
+      "passed": true,
+      "evidence": "Verified 0 directed links"
+    },
+    {
+      "description": "Required contradiction handling is preserved.",
+      "passed": true,
+      "evidence": "Contradiction expectations satisfied"
+    },
+    {
+      "description": "Required missing-information coverage is present.",
+      "passed": true,
+      "evidence": "Covered: metrics, format, users"
+    },
+    {
+      "description": "Prohibited literal is absent: invented reporting requirements",
+      "passed": true,
+      "evidence": "Absent"
+    },
+    {
+      "description": "Prohibited literal is absent: invented competitor capabilities",
+      "passed": true,
+      "evidence": "Absent"
+    }
+  ],
+  "prohibited_behaviors": [],
+  "unsupported_claims": [],
+  "validation": {
+    "schema_valid": true,
+    "exact_values_preserved": true,
+    "traceability_complete": true
+  },
+  "observability": {
+    "langfuse_trace_id": "1748a86fe73f9add26bf475626dd0b3f",
+    "model": "gpt-5.6-terra",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_cost_usd": 0
+  },
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T23:12:25.036271+00:00. Token, cost, or latency values remain zero when they were not supplied to this local evaluator."
+}

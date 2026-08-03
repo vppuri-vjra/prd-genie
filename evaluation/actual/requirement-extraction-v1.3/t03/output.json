@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-1785798435351",
+  "extraction_status": "partial",
+  "summary": "The source states a dashboard auto-refresh behavior and a performance goal to minimize API calls. These requirements create an unresolved tension.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "The dashboard should auto-refresh every 5 seconds.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "dashboard",
+      "target": "dashboard",
+      "evidence": [
+        {
+          "quote": "The dashboard should auto-refresh every 5 seconds.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.99,
+      "related_item_ids": [
+        "NFR-001"
+      ]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Performance is critical, minimize API calls.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "API calls",
+      "evidence": [
+        {
+          "quote": "Performance is critical, minimize API calls.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T3",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.96,
+      "related_item_ids": [
+        "FR-001"
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "The stated dashboard auto-refresh frequency may conflict with the stated goal to minimize API calls.",
+      "item_ids": [
+        "FR-001",
+        "NFR-001"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the dashboard refresh every 5 seconds while minimizing API calls?"
+    }
+  ],
+  "missing_information": [],
+  "extractor_notes": []
+}

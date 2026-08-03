@@ -1,0 +1,11 @@
+{
+  "test_id": "T8",
+  "run_id": "RUN-T8-1785798604244",
+  "prompt_version": "extractor-v1.3-complete-optional-clarification",
+  "workflow_version": "v0.2.0",
+  "model": "gpt-5.6-terra",
+  "trace_id": "84a8b1cb0c65a5e4ec6459bfa2028eac",
+  "langfuse_region": "US",
+  "ingestion_accepted": true,
+  "executed_at": "2026-08-03"
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785798405636",
+  "extraction_status": "partial",
+  "summary": "The source expresses a vague need for improved reporting and references Competitor X, but does not specify users, measures or metrics, or output/report format.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "We need better reporting.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": "reporting",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "We need better reporting.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T2",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.9,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "users",
+      "description": "The source does not identify which users need better reporting.",
+      "clarification_question": "Which users or user groups need better reporting?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "metrics",
+      "description": "The source does not specify the measures, metrics, or reporting content needed.",
+      "clarification_question": "What measures, metrics, or reporting content are needed?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "output_format",
+      "description": "The source does not specify the required report format or delivery method.",
+      "clarification_question": "What report format or delivery method is required?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "competitor_reference",
+      "description": "The source references Competitor X without specifying which reporting capabilities should be used as a reference.",
+      "clarification_question": "Which specific reporting capabilities of Competitor X are relevant?"
+    }
+  ],
+  "extractor_notes": []
+}
