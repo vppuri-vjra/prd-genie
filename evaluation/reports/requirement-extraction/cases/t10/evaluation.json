@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "test_id": "T10",
+  "workflow_version": "v0.2.0",
+  "prompt_versions": {
+    "requirement_extractor": "extractor-v0.8-dependency-risk-fix"
+  },
+  "result": "pass",
+  "expected_elements": [
+    {
+      "description": "Actual output conforms to the extraction schema.",
+      "passed": true,
+      "evidence": "Schema valid"
+    },
+    {
+      "description": "Extraction status equals complete.",
+      "passed": true,
+      "evidence": "Actual: 'complete'"
+    },
+    {
+      "description": "All required exact values are preserved.",
+      "passed": true,
+      "evidence": "All exact values found"
+    },
+    {
+      "description": "All required item types are present.",
+      "passed": true,
+      "evidence": "Required: ['dependency', 'functional_requirement', 'risk']; actual: ['dependency', 'functional_requirement', 'risk']"
+    },
+    {
+      "description": "Every extracted item has verbatim evidence in the source.",
+      "passed": true,
+      "evidence": "All evidence quotes found in source"
+    },
+    {
+      "description": "Every canonical item has a deterministic actual-item match.",
+      "passed": true,
+      "evidence": "Mapping: {'FR-001': 'FR-001', 'DEP-001': 'DEP-001', 'RSK-001': 'RSK-001'}"
+    },
+    {
+      "description": "Canonical item relationships are preserved after ID mapping.",
+      "passed": true,
+      "evidence": "Verified 4 directed links"
+    },
+    {
+      "description": "Required contradiction handling is preserved.",
+      "passed": true,
+      "evidence": "Contradiction expectations satisfied"
+    },
+    {
+      "description": "Required missing-information coverage is present.",
+      "passed": true,
+      "evidence": "No mandatory gaps"
+    },
+    {
+      "description": "Prohibited literal is absent: invented ETA",
+      "passed": true,
+      "evidence": "Absent"
+    },
+    {
+      "description": "Prohibited literal is absent: invented auth-service status",
+      "passed": true,
+      "evidence": "Absent"
+    }
+  ],
+  "prohibited_behaviors": [],
+  "unsupported_claims": [],
+  "validation": {
+    "schema_valid": true,
+    "exact_values_preserved": true,
+    "traceability_complete": true
+  },
+  "observability": {
+    "langfuse_trace_id": null,
+    "model": "not-supplied",
+    "latency_ms": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_cost_usd": 0
+  },
+  "reviewer_notes": "Deterministic evaluation generated 2026-08-03T19:35:31.213134+00:00. Zero observability values mean they were not supplied to this local evaluator."
+}
