@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-1785795647708",
+  "extraction_status": "partial",
+  "summary": "The source expresses an ambiguous need for improved reporting, with a reference to Competitor X but no defined users, measures, or report outputs.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "We need better reporting.",
+      "status": "ambiguous",
+      "priority": "Unspecified",
+      "category": "reporting",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "We need better reporting. Something like what Competitor X has.",
+          "source_name": "eval_prdgenie_inputs.txt",
+          "location": "T2",
+          "speaker": null
+        }
+      ],
+      "confidence": 0.89,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "users",
+      "description": "The source does not identify who needs the reporting.",
+      "clarification_question": "Which users or user groups need better reporting?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "metrics",
+      "description": "The source does not define what “better reporting” means or how it will be measured.",
+      "clarification_question": "What reporting measures, metrics, or capabilities should be improved?"
+    },
+    {
+      "id": "MISS-003",
+      "category": "output_format",
+      "description": "The source does not specify the required report outputs, formats, or content.",
+      "clarification_question": "What report outputs, formats, and content are needed?"
+    },
+    {
+      "id": "MISS-004",
+      "category": "competitive_reference",
+      "description": "The source references Competitor X without identifying the relevant reporting capabilities.",
+      "clarification_question": "Which specific reporting capabilities of Competitor X should be used as a reference?"
+    }
+  ],
+  "extractor_notes": []
+}

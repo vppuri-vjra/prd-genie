@@ -1,0 +1,11 @@
+{
+  "test_id": "T7",
+  "run_id": "RUN-T7-1785795812645",
+  "prompt_version": "extractor-v1.0-fragments-speakers-risk-links",
+  "workflow_version": "v0.2.0",
+  "model": "gpt-5.6-terra",
+  "trace_id": "64aebf1b11b65d4c11a012af1f5fc2a8",
+  "langfuse_region": "US",
+  "ingestion_accepted": true,
+  "executed_at": "2026-08-03"
+}
