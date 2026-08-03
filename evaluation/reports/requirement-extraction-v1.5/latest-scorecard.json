@@ -1,0 +1,17 @@
+{
+  "dataset_version": "0.1.1",
+  "capability": "requirement_extraction",
+  "tests": 1,
+  "counts": {
+    "pass": 1,
+    "fail": 0,
+    "needs_review": 0
+  },
+  "release_gate_passed": true,
+  "results": [
+    {
+      "test_id": "T5",
+      "result": "pass"
+    }
+  ]
+}
