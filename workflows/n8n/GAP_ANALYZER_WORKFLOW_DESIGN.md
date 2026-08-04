@@ -4,7 +4,7 @@
 
 Approved design for workflow version `v0.1.0`; the promoted prompt baseline is `gap-analyzer-v1.0-missing-information-coverage`.
 
-Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
+Implementation status: **Complete for the T1-T10 release baseline** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer + Generation Gate v1.0**.
 
 ## Purpose
 
