@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The reporting need is ambiguous and does not define users, success measures, report output, or the referenced Competitor X capabilities.",
+  "gaps": [
+    { "id": "GAP-001", "category": "users", "description": "The users who need better reporting are unspecified.", "severity": "high", "clarification_question": "Which user groups need better reporting?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-001"] },
+    { "id": "GAP-002", "category": "metrics", "description": "The measures or outcomes that define better reporting are unspecified.", "severity": "high", "clarification_question": "Which measures or outcomes define better reporting?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-002"] },
+    { "id": "GAP-003", "category": "output_format", "description": "The required report outputs, contents, formats, or delivery methods are unspecified.", "severity": "high", "clarification_question": "Which reports, contents, formats, and delivery methods are required?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-003"] },
+    { "id": "GAP-004", "category": "reference_scope", "description": "The reporting capabilities referenced from Competitor X are unspecified.", "severity": "high", "clarification_question": "Which specific Competitor X reporting capabilities are relevant?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-004"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "information_sufficiency": "partially_sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed_with_tbd",
+  "decision_reason": "The SSO requirement and authentication-service dependency are grounded and can be documented, while the explicitly unknown ETA must remain TBD.",
+  "gaps": [
+    { "id": "GAP-001", "category": "dependency_eta", "description": "The ETA for the authentication service is explicitly unknown.", "severity": "medium", "clarification_question": "What is the ETA for the authentication service being built by Team Alpha?", "related_item_ids": ["DEP-001", "RSK-001"], "source_missing_information_ids": [] }
+  ],
+  "contradictions": [],
+  "risks": [
+    { "id": "RSK-001", "description": "The authentication service required for SSO login has an unknown ETA.", "severity": "medium", "related_item_ids": ["DEP-001"], "source_risk_ids": ["RSK-001"] }
+  ]
+}

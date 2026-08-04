@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The unresolved contradiction between the five-second refresh behavior and minimizing API calls must be resolved before grounded PRD generation.",
+  "gaps": [],
+  "contradictions": [
+    { "id": "CTR-001", "description": "The requirement to refresh the dashboard every five seconds conflicts with the requirement to minimize API calls.", "severity": "blocking", "related_item_ids": ["FR-001", "NFR-001"] }
+  ],
+  "risks": []
+}

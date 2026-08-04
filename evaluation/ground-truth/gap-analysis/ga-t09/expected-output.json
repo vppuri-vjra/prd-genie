@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "block_generation",
+  "decision_reason": "No meaningful product requirements are available, so generating a PRD would require unsupported content.",
+  "gaps": [
+    { "id": "GAP-001", "category": "requirements", "description": "No meaningful product requirements or substantive product notes were provided.", "severity": "blocking", "clarification_question": "Please provide a transcript, decisions, or product requirements to document.", "related_item_ids": [], "source_missing_information_ids": ["MISS-001"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}

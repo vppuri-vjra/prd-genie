@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The source contains product-relevant fragments, but no reliable requirement item exists and the dashboard scope, real-time behavior, and budget require clarification.",
+  "gaps": [
+    { "id": "GAP-001", "category": "dashboard_scope", "description": "The dashboard capability, user need, or intended outcome is unspecified.", "severity": "blocking", "clarification_question": "What dashboard capability, user need, or outcome was discussed?", "related_item_ids": [], "source_missing_information_ids": ["MISS-001"] },
+    { "id": "GAP-002", "category": "real_time_behavior", "description": "The intended real-time behavior and affected dashboard data or capability are unspecified.", "severity": "blocking", "clarification_question": "What did John mean by real-time, and which dashboard behavior or data should be real-time?", "related_item_ids": [], "source_missing_information_ids": ["MISS-002"] },
+    { "id": "GAP-003", "category": "budget", "description": "The budget remains explicitly stated as budget TBD.", "severity": "high", "clarification_question": "What budget has been approved or proposed, in which currency, and when will it be decided?", "related_item_ids": [], "source_missing_information_ids": ["MISS-003"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}
