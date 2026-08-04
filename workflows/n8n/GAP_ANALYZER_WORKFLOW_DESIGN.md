@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0` using prompt `gap-analyzer-v0.1`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.2-materiality-boundary`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -33,7 +33,7 @@ Manual Trigger
 | 2 | Load Gap Analyzer Test Input | Load one approved Requirement Extractor output without adding a wrapper. |
 | 3 | Validate Requirement Extraction Input | Reject input that does not conform to `schemas/requirement-extraction.schema.json`. |
 | 4 | Create Gap Trace Context | Preserve `run_id` and attach test, workflow, prompt, environment, and trace metadata. |
-| 5 | Gap Analyzer Agent | Apply `prompts/gap-analyzer-v0.1.md` and return only the requested Gap Analysis object. |
+| 5 | Gap Analyzer Agent | Apply the versioned Gap Analyzer prompt and return only the requested Gap Analysis object. |
 | 6 | Parse and Validate Gap Analysis | Parse model output and validate it against `schemas/gap-analysis.schema.json`. |
 | 7 | Deterministic Generation Gate | Verify the decision combination and convert it into a controlled routing outcome without another LLM call. |
 | 8 | Build Langfuse Trace | Create the parent run and `gap-analyzer` generation observation payload, including input, output, model, latency, usage when available, and success or failure status. |
@@ -114,6 +114,25 @@ The run completed successfully in 5.222 seconds using approximately 1,519 tokens
 - Automated evaluator: **Pass (100.0%)**.
 
 Prompt v0.2 is verified for targeted `GA-T1` but remains a candidate until the remaining approved Gap Analyzer cases pass an unchanged regression batch.
+
+## Parse and Validate Gap Analysis checkpoint — 2026-08-03
+
+`Parse and Validate Gap Analysis` is implemented and connected immediately after `Gap Analyzer Agent`. It deterministically parses the model response and rejects output that violates the approved contract. The validation covers:
+
+- the exact top-level and nested fields in `schemas/gap-analysis.schema.json`;
+- schema version, allowed decision values, and approved decision combinations;
+- preservation of the same `run_id` across extraction, trace context, and Gap Analysis;
+- ID formats, uniqueness, severity values, and array types;
+- trace links from gaps, contradictions, and risks to known extraction IDs; and
+- the rule that high or critical gaps or contradictions cannot permit generation.
+
+The connected `GA-T1` execution passed and returned one validated item. The parser preserved the approved v0.2 result and recorded:
+
+- `structurally_valid: true`;
+- `decision_consistent: true`; and
+- `traceability_valid: true`.
+
+Validation groundedness: **100%**. Every check is derived from the approved Gap Analysis schema, approved decision table, extraction identifiers, and preserved run identity; the node does not add or reinterpret product requirements.
 
 ## Groundedness
 
