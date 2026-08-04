@@ -86,6 +86,23 @@ Input groundedness: **100%**. The loader content exactly represents the approved
 
 Trace-context groundedness: **100% (9/9 metadata fields)**. Every field is inherited from the approved extraction or defined by the approved workflow design; no product requirement content is introduced.
 
+## Gap Analyzer Agent checkpoint — 2026-08-03
+
+`Gap Analyzer Agent` and `OpenAI - Gap Analyzer Model` are implemented and connected. The model configuration mirrors the proven Requirement Extractor setup: OpenAI account 25, `gpt-5.6-terra`, and medium reasoning effort. The approved `gap-analyzer-v0.1` rules are configured as the system message, and the user message passes the canonical extraction plus approved trace identifiers.
+
+The first connected `GA-T1` model run completed successfully in 14.497 seconds using approximately 1,429 tokens. The raw result was fully source-grounded but did not agree with approved ground truth:
+
+| Field | Actual | Approved ground truth |
+|---|---|---|
+| `information_sufficiency` | `partially_sufficient` | `sufficient` |
+| `generation_allowed` | `false` | `true` |
+| `recommended_action` | `request_clarification` | `proceed` |
+| `gaps` | Persona and Q3-date gaps | Empty |
+
+Actual-output groundedness: **100% (2/2 gap claims)** because both actual gaps trace to `MISS-001` or `MISS-002` and no new fact was invented. Canonical decision agreement: **0% (0/3 decision fields)**.
+
+Required prompt correction before formal parsing: an extractor `missing_information` record must become a Gap Analyzer gap only when it materially affects faithful, grounded PRD generation. The agent must not automatically promote every extractor clarification into a blocking or reportable gap when the stated requirement and deadline can be preserved exactly without invention.
+
 ## Groundedness
 
 Design groundedness: **100% (8/8 decisions)**. Each approved decision is traceable to the Gap Analyzer contract, approved prompt, architecture/ADR, evaluation requirements, or the established Requirement Extractor observability pattern. This percentage assesses design traceability; actual workflow quality will be measured separately through execution and regression evaluation.
