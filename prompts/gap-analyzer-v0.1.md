@@ -1,6 +1,6 @@
 # Gap Analyzer Prompt v0.1
 
-Status: Design baseline through severity rules. Clarification-question rules and final prompt validation remain pending.
+Status: Approved design baseline through clarification-question rules. Implementation and evaluation remain pending.
 
 ## System message
 
@@ -86,6 +86,27 @@ Severity guardrails:
 
 Return exactly one JSON object conforming to `schemas/gap-analysis.schema.json`. Preserve the input `run_id` and include all mandatory decision, issue, item-link, and source-record fields required by the schema.
 
-## Pending design section
+## Clarification-question rules
 
-Detailed clarification-question construction, consolidation, ordering, and evaluation rules will be added only after human review and approval.
+1. Every gap must contain one primary clarification question.
+2. Ask only for information represented as missing or ambiguous in the Requirement Extraction.
+3. Use neutral wording without a proposed answer, preference, architecture choice, or default.
+4. Preserve the subject and terminology used in the extraction.
+5. Ask the stakeholder who can provide the information, but do not invent a stakeholder assignment.
+6. Ask one decision topic per question whenever practical.
+7. Multiple closely related attributes may be requested together when they form one decision, such as budget amount and currency.
+8. Do not ask for information already present in an extracted item.
+9. Do not ask speculative questions about optional capabilities that the source never raised.
+10. Do not turn a contradiction question into a recommendation or select a side.
+11. Make every question specific enough for a human answer to update the extraction.
+12. Consolidate overlapping `MISS-###` records only when no distinct information is lost, and preserve every contributing source ID.
+13. Order questions by severity: blocking, high, medium, then low.
+14. Within the same severity, preserve the order of affected items or source missing-information records.
+
+Example of prohibited wording: `Should the dashboard refresh every 30 seconds to reduce API usage?`
+
+Grounded alternative: `What refresh interval is required, and how should it be reconciled with the requirement to minimize API calls?`
+
+Avoid broad questions such as `Can you provide more details?` Prefer a bounded question such as `Which users need the reporting capability?`
+
+Do not emit duplicate questions such as `Which metrics are needed?` and `What measurements should reports contain?` Consolidate them as `Which metrics or measures should the reports contain?`

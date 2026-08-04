@@ -13,7 +13,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `requirement-extractor-v1.4.md` | Targeted candidate; audits bidirectional NFR-to-FR relationships | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v1.5.md` | Promoted baseline; distinguishes product fragments from content with no requirements and includes the v1.4 relationship audit | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
-| `gap-analyzer-v0.1.md` | Design baseline through approved role, grounding, generation-decision, and severity rules; clarification-question rules pending | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.1.md` | Approved design baseline through role, grounding, generation decisions, severity, and clarification-question rules; implementation and evaluation pending | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 

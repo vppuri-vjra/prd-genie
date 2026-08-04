@@ -51,4 +51,4 @@ The updated schema and all repository contract examples passed `scripts/validate
 
 ## Approved prompt-design decisions
 
-The role, authoritative input, grounding rules, generation-decision matrix, and documentation-readiness severity definitions are approved and recorded in `prompts/gap-analyzer-v0.1.md`. Detailed clarification-question rules remain pending human review.
+The role, authoritative input, grounding rules, generation-decision matrix, documentation-readiness severity definitions, and clarification-question rules are approved and recorded in `prompts/gap-analyzer-v0.1.md`. Implementation and evaluation remain pending.
