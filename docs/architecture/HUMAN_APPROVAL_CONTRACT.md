@@ -1,5 +1,19 @@
 # Human Approval Contract
 
+## Approval record
+
+| Field | Value |
+|---|---|
+| Contract version | `1.0.0` |
+| Status | **Approved** |
+| Approved by | Vipin Puri, Project Owner / Human Reviewer |
+| Approval date | 2026-08-04 |
+| Approval statement | “Approve Human Approval contract” |
+| Scope of approval | Contract semantics, decisions, validations, routing and grounding controls |
+| Implementation status | n8n implementation pending |
+
+This approved version is the implementation baseline. Any material change to its decision meanings, validation rules or downstream routes requires a new version and approval record.
+
 ## Purpose
 
 Human Approval is a deterministic, auditable checkpoint between the Gap Analyzer generation gate and the PRD Generator. It is not an AI agent. A human reviewer decides which grounded upstream items may enter PRD generation and whether controlled TBD conditions must be preserved.

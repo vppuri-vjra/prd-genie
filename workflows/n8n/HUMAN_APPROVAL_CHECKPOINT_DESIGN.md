@@ -1,5 +1,9 @@
 # Human Approval Checkpoint — n8n Design
 
+## Design status
+
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. This document is the approved implementation design; the n8n workflow itself remains pending.
+
 ## Scope
 
 Implement the mandatory human-in-the-loop boundary between the Gap Analyzer and PRD Generator. This workflow performs no model call.
