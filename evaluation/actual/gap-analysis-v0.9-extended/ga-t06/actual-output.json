@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The extracted items preserve two unapproved architecture preferences and a March delivery reference, but no product or deliverable is identified. The undefined deliverable prevents a grounded PRD requirement from being written without invention. The architecture preferences also remain unresolved and cannot be treated as approved requirements or constraints. The March deadline can be preserved as stated without requiring an exact date.",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "category": "scope",
+      "description": "The product or deliverable referred to as it is not identified, so the requested outcome cannot be represented as a grounded PRD requirement.",
+      "severity": "blocking",
+      "clarification_question": "What product or deliverable must be shipped by March?",
+      "related_item_ids": ["DDL-001"],
+      "source_missing_information_ids": ["MISS-003"]
+    },
+    {
+      "id": "GAP-002",
+      "category": "decision_status",
+      "description": "The source does not state whether either architecture preference is approved.",
+      "severity": "high",
+      "clarification_question": "Have microservices or the single-page app been approved, or are both still proposals?",
+      "related_item_ids": ["CON-001", "CON-002"],
+      "source_missing_information_ids": ["MISS-001"]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Engineering and Design expressed separate architecture or technology preferences that require reconciliation; the source does not approve, prioritize, or establish incompatibility between them.",
+      "severity": "high",
+      "related_item_ids": ["CON-001", "CON-002"]
+    }
+  ],
+  "risks": []
+}

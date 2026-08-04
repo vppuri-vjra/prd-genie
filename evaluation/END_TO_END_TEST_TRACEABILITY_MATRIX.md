@@ -26,7 +26,7 @@ It distinguishes:
 | Requirement Extractor ground truth | 10/10 | Approved |
 | Requirement Extractor unchanged release regression | 10/10 | Passed at 100% |
 | Gap Analyzer ground truth | 6/10 | T1, T2, T3, T5, T9 and T10 approved |
-| Gap Analyzer end-to-end execution | 6/10 | Six executed cases passed at 100%; four newly approved cases await execution |
+| Gap Analyzer end-to-end execution | 10/10 | Nine pass at 100%; GA-T6 fails semantic evaluation at 84.62% and requires correction |
 | Gap Analyzer unchanged release regression | 6/6 approved cases | Passed at 100%; prompt v0.9 promoted |
 | Deterministic generation-gate execution | 6/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
 | Human approval for PRD generation | 0/10 | Not yet executed as a workflow stage |
@@ -53,11 +53,11 @@ It distinguishes:
 | T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Not executed; eligible only after approval |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
-| T4 | 🟢 `complete` | Actual pass, 100% | Approved GA ground truth; execution pending | 🟢 Expected `sufficient / proceed`, 100% | Expected `eligible_for_human_approval`; `human_review` | Pending | Eligible only after GA execution and human approval |
+| T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
-| T6 | 🟡 `partial` | Actual pass, 100% | Approved GA ground truth; execution pending | 🔴 Expected `insufficient / request_clarification`, 100% | Expected `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending scope, decision, and deadline clarification |
-| T7 | 🟢 `complete` | Actual pass, 100% | Approved GA ground truth; execution pending | 🟢 Expected `sufficient / proceed`, 100% | Expected `eligible_for_human_approval`; `human_review` | Pending | Eligible only after GA execution and human approval |
-| T8 | 🟢 `complete` | Actual pass, 100% | Approved GA ground truth; execution pending | 🟢 Expected `sufficient / proceed`, 100% | Expected `eligible_for_human_approval`; `human_review` | Pending | Eligible only after GA execution and human approval |
+| T6 | 🟡 `partial` | Actual pass, 100% | Actual GA execution; correction required | 🔴 `insufficient / request_clarification`, evaluator fail at 84.62% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked; missing approved deadline gap and severity correction required |
+| T7 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
+| T8 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T9 | ⚫ `no_requirements` | Actual pass, 100% | Actual GA execution | ⛔ `insufficient / block_generation`, 100% | `generation_blocked`; `blocked` | Not applicable | Must not be invoked |
 | T10 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟡 `partially_sufficient / proceed_with_tbd`, 100% | `eligible_with_tbd`; `human_review_with_tbd` | Pending required human approval | Eligible only after human approval; ETA remains TBD |
 
@@ -118,4 +118,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the six completed targeted Gap Analyzer executions, and the unchanged six-case v0.9 release regression**. T4, T6, T7, and T8 are explicitly marked as approved expected decisions with execution pending. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results and all ten human-approved GA ground-truth decisions**. Nine current GA executions pass at 100%; GA-T6 is explicitly recorded as an 84.62% evaluator failure pending correction. PRD and Story stages are marked unexecuted rather than projected as completed.

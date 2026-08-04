@@ -83,4 +83,4 @@ Coverage-strategy groundedness: **100% for all ten approved cases and their docu
 
 `scripts/evaluate_gap_analysis.py` validates schema compliance, decision fields, gap coverage and precision, severity, clarification questions, item and source traceability, contradictions, risks, and groundedness percentage.
 
-The recorded evaluator self-check compared the original six canonical outputs with themselves and passed all six at 100% groundedness. GA-T4, GA-T6, GA-T7, and GA-T8 were subsequently human-approved; their evaluator self-check and actual n8n execution are the next validation step. Existing reports are stored under `evaluation/reports/gap-analysis-self-check/`.
+The recorded evaluator self-check compared the original six canonical outputs with themselves and passed all six at 100% groundedness. GA-T4, GA-T6, GA-T7, and GA-T8 were subsequently human-approved and executed against v0.9: T4, T7, and T8 passed at 100%; T6 failed semantic evaluation at 84.62% and requires correction before the full release regression. Reports are stored under `evaluation/reports/`.

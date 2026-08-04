@@ -17,12 +17,16 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "schemas" / "gap-analysis.schema.json"
 GROUND_ROOT = ROOT / "evaluation" / "ground-truth" / "gap-analysis"
 DEFAULT_REPORT_ROOT = ROOT / "evaluation" / "reports" / "gap-analysis"
-CASES = ("GA-T1", "GA-T2", "GA-T3", "GA-T5", "GA-T9", "GA-T10")
+CASES = tuple(f"GA-T{number}" for number in range(1, 11))
 CASE_DIR = {
     "GA-T1": "ga-t01",
     "GA-T2": "ga-t02",
     "GA-T3": "ga-t03",
+    "GA-T4": "ga-t04",
     "GA-T5": "ga-t05",
+    "GA-T6": "ga-t06",
+    "GA-T7": "ga-t07",
+    "GA-T8": "ga-t08",
     "GA-T9": "ga-t09",
     "GA-T10": "ga-t10",
 }
