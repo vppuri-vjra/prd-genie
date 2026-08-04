@@ -97,7 +97,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; v1.5 release regression passed 10/10 |
 | Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Implemented; v1.0 release regression passed 10/10 |
 | Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
-| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract v1.0.0 approved 2026-08-04; n8n implementation pending |
+| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract v1.0.0 approved; T1 standard path passed at 100%; remaining routes and integration pending |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Planned |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Planned |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |

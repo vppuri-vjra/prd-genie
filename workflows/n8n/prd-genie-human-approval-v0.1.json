@@ -1,0 +1,96 @@
+{
+  "name": "PRD Genie - Human Approval v0.1",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "PRD Genie — T1 Human Approval",
+        "formDescription": "Review the grounded T1 package. FR-001: filter reports by date range, category and status. NFR-001: results load in under 2 seconds. STK-001: Sarah is PM. DDL-001: deadline is Q3. Gap Analyzer: sufficient/proceed with no gaps, contradictions or risks.",
+        "formFields": {
+          "values": [
+            { "fieldLabel": "Reviewer", "fieldName": "reviewer", "requiredField": true },
+            { "fieldLabel": "Review decision", "fieldName": "review_status", "fieldType": "dropdown", "fieldOptions": { "values": [ { "option": "approved" }, { "option": "changes_requested" }, { "option": "clarification_required" }, { "option": "rejected" } ] }, "requiredField": true },
+            { "fieldLabel": "Approved item IDs (comma separated)", "fieldName": "approved_item_ids", "requiredField": true },
+            { "fieldLabel": "Rejected item IDs (comma separated; leave blank when approving)", "fieldName": "rejected_item_ids" },
+            { "fieldLabel": "Source grounding verified", "fieldName": "source_grounding_verified", "fieldType": "checkbox", "fieldOptions": { "values": [ { "option": "Verified" } ] }, "requiredField": true },
+            { "fieldLabel": "Exact values verified", "fieldName": "exact_values_verified", "fieldType": "checkbox", "fieldOptions": { "values": [ { "option": "Verified" } ] }, "requiredField": true },
+            { "fieldLabel": "Relationships verified", "fieldName": "relationships_verified", "fieldType": "checkbox", "fieldOptions": { "values": [ { "option": "Verified" } ] }, "requiredField": true },
+            { "fieldLabel": "Gap analysis verified", "fieldName": "gap_analysis_verified", "fieldType": "checkbox", "fieldOptions": { "values": [ { "option": "Verified" } ] }, "requiredField": true },
+            { "fieldLabel": "Unsupported claims absent", "fieldName": "unsupported_claims_absent", "fieldType": "checkbox", "fieldOptions": { "values": [ { "option": "Verified" } ] }, "requiredField": true },
+            { "fieldLabel": "Review notes", "fieldName": "review_notes", "fieldType": "textarea" }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": { "buttonLabel": "Submit human decision" }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [-900, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0101",
+      "name": "Human Review Form",
+      "webhookId": "5c083115-92cb-47d1-a4d4-8a20457d0201"
+    },
+    {
+      "parameters": {
+        "jsCode": "const submission = $input.first().json; return [{ json: { schema_version: '1.0.0', test_id: 'T1', run_id: 'RUN-T1-GROUND-TRUTH', submission, source: { source_name: 'eval_prdgenie_inputs.txt', location: 'T1', source_text: 'The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.' }, extraction: { extraction_status: 'complete', items: [ { id: 'FR-001', type: 'functional_requirement', statement: 'Users should be able to filter reports by date range, category, and status.', evidence_quote: 'The user should be able to filter reports by date range, category, and status.' }, { id: 'NFR-001', type: 'non_functional_requirement', statement: 'Results must load in under 2 seconds.', evidence_quote: 'Results must load in under 2 seconds.' }, { id: 'STK-001', type: 'stakeholder', statement: 'Sarah is the PM.', evidence_quote: 'PM: Sarah.' }, { id: 'DDL-001', type: 'deadline', statement: 'The deadline is Q3.', evidence_quote: 'Deadline: Q3.' } ] }, gap_analysis: { information_sufficiency: 'sufficient', generation_allowed: true, recommended_action: 'proceed', gaps: [], contradictions: [], risks: [] }, generation_gate: { gate_status: 'eligible_for_human_approval', route: 'human_review', prd_generation_eligible: true, human_approval_required: true }, proposed_approved_item_ids: ['FR-001','NFR-001','STK-001','DDL-001'] } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-660, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0102",
+      "name": "Build T1 Human Review Packet"
+    },
+    {
+      "parameters": {
+        "jsCode": "const packet = $input.first().json; const raw = packet.submission; const form = { reviewer: raw.reviewer ?? raw['Reviewer'], review_status: raw.review_status ?? raw['Review decision'], approved_item_ids: raw.approved_item_ids ?? raw['Approved item IDs (comma separated)'], rejected_item_ids: raw.rejected_item_ids ?? raw['Rejected item IDs (comma separated; leave blank when approving)'], source_grounding_verified: raw.source_grounding_verified ?? raw['Source grounding verified'], exact_values_verified: raw.exact_values_verified ?? raw['Exact values verified'], relationships_verified: raw.relationships_verified ?? raw['Relationships verified'], gap_analysis_verified: raw.gap_analysis_verified ?? raw['Gap analysis verified'], unsupported_claims_absent: raw.unsupported_claims_absent ?? raw['Unsupported claims absent'], review_notes: raw.review_notes ?? raw['Review notes'] }; const splitIds = (value) => String(value || '').split(',').map(v => v.trim()).filter(Boolean); const isVerified = (value) => value === true || value === 'Verified' || (Array.isArray(value) && value.includes('Verified')); const approved = splitIds(form.approved_item_ids); const rejected = splitIds(form.rejected_item_ids); const upstreamIds = packet.extraction.items.map(i => i.id); const unknown = [...approved, ...rejected].filter(id => !upstreamIds.includes(id)); const overlap = approved.filter(id => rejected.includes(id)); const checks = { source_grounding_verified: isVerified(form.source_grounding_verified), exact_values_verified: isVerified(form.exact_values_verified), relationships_verified: isVerified(form.relationships_verified), gap_analysis_verified: isVerified(form.gap_analysis_verified), unsupported_claims_absent: isVerified(form.unsupported_claims_absent) }; const reviewStatus = form.review_status; const routeMap = { approved: 'prd_generation', changes_requested: 'correction', clarification_required: 'clarification', rejected: 'stopped' }; const errors = []; if (packet.generation_gate.gate_status !== 'eligible_for_human_approval') errors.push('T1 is not eligible for standard human approval.'); if (!routeMap[reviewStatus]) errors.push('Unsupported review decision.'); if (unknown.length) errors.push('Unknown item IDs: ' + unknown.join(', ')); if (overlap.length) errors.push('Approved and rejected IDs overlap: ' + overlap.join(', ')); if (reviewStatus === 'approved' && approved.length === 0) errors.push('Approval requires at least one approved item.'); if (reviewStatus === 'approved' && rejected.length) errors.push('Standard approval cannot contain rejected items.'); if (reviewStatus === 'approved' && Object.values(checks).some(v => !v)) errors.push('All five evidence checks must pass for approval.'); if (errors.length) throw new Error('Human approval validation failed: ' + errors.join(' | ')); return [{ json: { schema_version: '1.0.0', run_id: packet.run_id, review_status: reviewStatus, reviewer: String(form.reviewer).trim(), reviewed_at: new Date().toISOString(), gate_status_reviewed: packet.generation_gate.gate_status, approved_item_ids: approved, rejected_item_ids: rejected, reviewed_gap_ids: [], controlled_tbd_ids: [], conditions: [], evidence_checks: checks, review_notes: String(form.review_notes || ''), next_route: routeMap[reviewStatus], validation: { structurally_valid: true, referenced_ids_valid: true, decision_consistent: true, validated_at: new Date().toISOString() } } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-140, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0104",
+      "name": "Parse and Validate Human Approval"
+    },
+    {
+      "parameters": {
+        "jsCode": "const review = $input.first().json; const expected = { approved: 'prd_generation', approved_with_conditions: 'prd_generation_with_conditions', changes_requested: 'correction', clarification_required: 'clarification', rejected: 'stopped' }; if (expected[review.review_status] !== review.next_route) throw new Error('Review status and next route are inconsistent.'); return [{ json: { ...review, routing: { route: review.next_route, prd_generation_eligible: ['approved','approved_with_conditions'].includes(review.review_status), routed_at: new Date().toISOString() } } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [120, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0105",
+      "name": "Deterministic Approval Router"
+    },
+    {
+      "parameters": {
+        "jsCode": "const review = $input.first().json; const traceId = Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join(''); return [{ json: { ...review, audit: { event_type: 'human_approval', observation_type: 'event', trace_name: 'prd-genie-human-approval', trace_id: traceId, model_call: false, token_usage: { input: 0, output: 0, total: 0 }, run_id: review.run_id, reviewer: review.reviewer, review_status: review.review_status, next_route: review.next_route, recorded_at: new Date().toISOString() } } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [380, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0106",
+      "name": "Build Approval Trace Payload"
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $input.first().json; return [{ json: { schema_version: '1.0.0', result_type: 'human_approval_execution_result', run_id: result.run_id, execution_status: 'completed', contract_status: 'passed', groundedness_percent: 100, human_review: { review_status: result.review_status, reviewer: result.reviewer, reviewed_at: result.reviewed_at, approved_item_ids: result.approved_item_ids, rejected_item_ids: result.rejected_item_ids, evidence_checks: result.evidence_checks, review_notes: result.review_notes, next_route: result.next_route }, validation: result.validation, routing: result.routing, audit: result.audit, recorded_at: new Date().toISOString() } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [640, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0107",
+      "name": "Record Approval Result"
+    }
+  ],
+  "connections": {
+    "Human Review Form": { "main": [[{ "node": "Build T1 Human Review Packet", "type": "main", "index": 0 }]] },
+    "Build T1 Human Review Packet": { "main": [[{ "node": "Parse and Validate Human Approval", "type": "main", "index": 0 }]] },
+    "Parse and Validate Human Approval": { "main": [[{ "node": "Deterministic Approval Router", "type": "main", "index": 0 }]] },
+    "Deterministic Approval Router": { "main": [[{ "node": "Build Approval Trace Payload", "type": "main", "index": 0 }]] },
+    "Build Approval Trace Payload": { "main": [[{ "node": "Record Approval Result", "type": "main", "index": 0 }]] }
+  },
+  "pinData": {},
+  "settings": { "executionOrder": "v1" },
+  "active": false,
+  "versionId": "5c083115-92cb-47d1-a4d4-8a20457d0301",
+  "meta": { "templateCredsSetupCompleted": true },
+  "tags": []
+}

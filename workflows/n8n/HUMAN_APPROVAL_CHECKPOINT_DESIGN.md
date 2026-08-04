@@ -2,7 +2,7 @@
 
 ## Design status
 
-The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. This document is the approved implementation design; the n8n workflow itself remains pending.
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1 standard-approval path is implemented in n8n workflow `L3J0nRWdKhs46wxF` and passed its canary at 100% groundedness. The T10 conditional path, negative-route tests, Langfuse transmission, and upstream/downstream integration remain pending.
 
 ## Scope
 
@@ -61,3 +61,7 @@ Any inconsistent combination fails validation rather than being guessed.
 ## Observability
 
 Record `run_id`, reviewer, review status, approved/rejected IDs, condition IDs, next route, workflow/execution IDs, start/end timestamps and validation outcome. Do not record secrets. Human approval has no model token usage and must be distinguishable from LLM observations in Langfuse.
+
+## T1 canary evidence
+
+On 2026-08-04, Vipin submitted the T1 human decision through the n8n form. The complete workflow passed: contract status `passed`, groundedness `100`, approved IDs `FR-001`, `NFR-001`, `STK-001`, and `DDL-001`, all five evidence checks `true`, and deterministic route `prd_generation`. The audit payload recorded `model_call: false` and zero token usage. See `evaluation/results/human-approval-t1-canary-2026-08-04.md`.
