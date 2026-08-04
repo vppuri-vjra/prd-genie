@@ -134,6 +134,32 @@ The connected `GA-T1` execution passed and returned one validated item. The pars
 
 Validation groundedness: **100%**. Every check is derived from the approved Gap Analysis schema, approved decision table, extraction identifiers, and preserved run identity; the node does not add or reinterpret product requirements.
 
+## Deterministic Generation Gate checkpoint — 2026-08-03
+
+`Deterministic Generation Gate` is implemented and connected after `Parse and Validate Gap Analysis`. It performs no model call and routes only from the validated combination of `information_sufficiency`, `generation_allowed`, and `recommended_action`.
+
+The gate supports these controlled outcomes:
+
+| Validated decision | Gate status | Route | PRD eligible |
+|---|---|---|---:|
+| `sufficient` + `true` + `proceed` | `eligible_for_human_approval` | `human_review` | Yes |
+| `partially_sufficient` + `true` + `proceed_with_tbd` | `eligible_with_tbd` | `human_review_with_tbd` | Yes |
+| `partially_sufficient` + `false` + `request_clarification` | `clarification_required` | `clarification` | No |
+| `insufficient` + `false` + `request_clarification` | `clarification_required` | `clarification` | No |
+| `insufficient` + `false` + `block_generation` | `generation_blocked` | `blocked` | No |
+
+Unsupported combinations fail rather than being guessed. An eligible result explicitly requires later human approval; the gate does not initiate PRD generation by itself.
+
+The connected `GA-T1` rerun completed successfully as n8n execution `7246` and preserved `RUN-T1-GROUND-TRUTH`. Its deterministic result was:
+
+- `gate_status: eligible_for_human_approval`;
+- `route: human_review`;
+- `prd_generation_eligible: true`;
+- `requires_tbd: false`; and
+- `human_approval_required: true`.
+
+Gate groundedness: **100%**. The gate copies the validated decision fields, applies only the approved routing table, preserves run identity, and introduces no product claim or LLM interpretation.
+
 ## Groundedness
 
 Design groundedness: **100% (8/8 decisions)**. Each approved decision is traceable to the Gap Analyzer contract, approved prompt, architecture/ADR, evaluation requirements, or the established Requirement Extractor observability pattern. This percentage assesses design traceability; actual workflow quality will be measured separately through execution and regression evaluation.
