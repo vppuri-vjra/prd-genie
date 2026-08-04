@@ -4,6 +4,8 @@
 
 Approved design for workflow version `v0.1.0` using prompt `gap-analyzer-v0.1`.
 
+Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
+
 ## Purpose
 
 Run the Gap Analyzer as a separately testable n8n workflow before connecting it to the full PRD Genie pipeline. The workflow consumes validated Requirement Extractor JSON, produces schema-valid Gap Analysis JSON, applies a deterministic generation gate, and records an observable Langfuse trace.
@@ -69,7 +71,18 @@ Manual Trigger
 4. Confirm parent trace, `gap-analyzer` generation, token/usage capture when exposed, and failure-path visibility in Langfuse.
 5. Run the remaining approved Gap Analyzer regression cases before connecting the workflow to PRD generation.
 
+## Implementation checkpoint — 2026-08-03
+
+The first three nodes are implemented and connected:
+
+1. `When clicking ‘Execute workflow’` (Manual Trigger).
+2. `Load Gap Analyzer Test Input`, containing the human-approved T1 canonical extraction.
+3. `Validate Requirement Extraction Input`, performing deterministic contract checks before any model call.
+
+The connected three-node path completed successfully with one item, preserved `RUN-T1-GROUND-TRUTH`, and added a successful input-validation result. An initial unconnected validator run correctly exercised the failure path by rejecting missing required fields; the node was then connected and the workflow rerun successfully.
+
+Input groundedness: **100%**. The loader content exactly represents the approved T1 canonical extraction stored in `evaluation/ground-truth/requirement-extraction/t01/expected-output.json`.
+
 ## Groundedness
 
 Design groundedness: **100% (8/8 decisions)**. Each approved decision is traceable to the Gap Analyzer contract, approved prompt, architecture/ADR, evaluation requirements, or the established Requirement Extractor observability pattern. This percentage assesses design traceability; actual workflow quality will be measured separately through execution and regression evaluation.
-
