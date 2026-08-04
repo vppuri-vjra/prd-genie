@@ -40,3 +40,11 @@ After the parser and deterministic generation gate were added, GA-T1 was rerun t
 The instrumented run reported 523 input tokens, 96 output tokens, 619 total tokens, approximately 3.54 seconds of generation latency and approximately $0.002198 model cost. These are the direct Langfuse measurements for the later instrumented execution and supersede any token estimate when evaluating that execution.
 
 Observability groundedness: **100%**. All observed content is copied from validated workflow state or approved execution metadata.
+
+## Complete workflow verification
+
+The final `Record Gap Analysis Result` checkpoint passed in n8n execution `7282`. It emitted one `gap_analysis_execution_result` with `contract_status: passed`, `groundedness_percent: 100`, and the approved `sufficient / proceed` outcome routed to human review.
+
+Langfuse accepted trace `76d44c23ccd385be8973435d7886aef2` through ingestion job `3b2b605e-e187-436e-a4ec-2414fff515af`. The result therefore preserves both evaluation evidence and an explicit observability receipt.
+
+End-to-end groundedness: **100%**.
