@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "review_status": "approved_with_conditions",
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-04T20:05:00Z",
+  "gate_status_reviewed": "eligible_with_tbd",
+  "approved_item_ids": ["FR-001", "DEP-001", "RSK-001"],
+  "rejected_item_ids": [],
+  "reviewed_gap_ids": ["GAP-001"],
+  "controlled_tbd_ids": ["GAP-001", "DEP-001", "RSK-001"],
+  "conditions": [
+    {
+      "id": "COND-001",
+      "description": "Keep the new auth service ETA as TBD; do not estimate a date or change the dependency status.",
+      "related_ids": ["GAP-001", "DEP-001", "RSK-001"]
+    }
+  ],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": true,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Approved with the explicit dependency ETA remaining TBD.",
+  "next_route": "prd_generation_with_conditions"
+}

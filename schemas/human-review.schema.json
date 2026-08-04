@@ -1,43 +1,161 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/human-review.schema.json",
-  "title": "PRD Genie Human Review",
-  "description": "Human approval record for extracted requirements.",
+  "title": "PRD Genie Human Approval",
+  "description": "Auditable human decision controlling entry into grounded PRD generation.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "run_id", "review_status", "reviewer", "approved_requirement_ids", "rejected_requirement_ids", "modifications", "review_notes", "reviewed_at"],
+  "required": [
+    "schema_version",
+    "run_id",
+    "review_status",
+    "reviewer",
+    "reviewed_at",
+    "gate_status_reviewed",
+    "approved_item_ids",
+    "rejected_item_ids",
+    "reviewed_gap_ids",
+    "controlled_tbd_ids",
+    "conditions",
+    "evidence_checks",
+    "review_notes",
+    "next_route"
+  ],
   "properties": {
     "schema_version": { "const": "1.0.0" },
     "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
-    "review_status": { "enum": ["approved", "changes_requested", "rejected"] },
+    "review_status": {
+      "enum": ["approved", "approved_with_conditions", "changes_requested", "clarification_required", "rejected"]
+    },
     "reviewer": { "type": "string", "minLength": 1 },
-    "approved_requirement_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
-    "rejected_requirement_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
-    "modifications": {
+    "reviewed_at": { "type": "string", "format": "date-time" },
+    "gate_status_reviewed": {
+      "enum": ["eligible_for_human_approval", "eligible_with_tbd"]
+    },
+    "approved_item_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/upstreamId" }
+    },
+    "rejected_item_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/upstreamId" }
+    },
+    "reviewed_gap_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^GAP-[0-9]{3}$" }
+    },
+    "controlled_tbd_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^(GAP|DEP|RSK)-[0-9]{3}$" }
+    },
+    "conditions": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["requirement_id", "original_statement", "revised_statement", "reason"],
+        "required": ["id", "description", "related_ids"],
         "properties": {
-          "requirement_id": { "type": "string" },
-          "original_statement": { "type": "string" },
-          "revised_statement": { "type": "string", "minLength": 1 },
-          "reason": { "type": "string", "minLength": 1 }
+          "id": { "type": "string", "pattern": "^COND-[0-9]{3}$" },
+          "description": { "type": "string", "minLength": 1 },
+          "related_ids": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK|GAP|CTR)-[0-9]{3}$" }
+          }
         }
       }
     },
+    "evidence_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_grounding_verified",
+        "exact_values_verified",
+        "relationships_verified",
+        "gap_analysis_verified",
+        "unsupported_claims_absent"
+      ],
+      "properties": {
+        "source_grounding_verified": { "type": "boolean" },
+        "exact_values_verified": { "type": "boolean" },
+        "relationships_verified": { "type": "boolean" },
+        "gap_analysis_verified": { "type": "boolean" },
+        "unsupported_claims_absent": { "type": "boolean" }
+      }
+    },
     "review_notes": { "type": "string" },
-    "reviewed_at": { "type": "string", "format": "date-time" }
+    "next_route": {
+      "enum": ["prd_generation", "prd_generation_with_conditions", "correction", "clarification", "stopped"]
+    }
   },
   "allOf": [
     {
       "if": { "properties": { "review_status": { "const": "approved" } }, "required": ["review_status"] },
-      "then": { "properties": { "approved_requirement_ids": { "minItems": 1 } } }
+      "then": {
+        "properties": {
+          "approved_item_ids": { "minItems": 1 },
+          "rejected_item_ids": { "maxItems": 0 },
+          "controlled_tbd_ids": { "maxItems": 0 },
+          "conditions": { "maxItems": 0 },
+          "next_route": { "const": "prd_generation" },
+          "evidence_checks": { "$ref": "#/$defs/passingChecks" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "review_status": { "const": "approved_with_conditions" } }, "required": ["review_status"] },
+      "then": {
+        "properties": {
+          "approved_item_ids": { "minItems": 1 },
+          "controlled_tbd_ids": { "minItems": 1 },
+          "conditions": { "minItems": 1 },
+          "next_route": { "const": "prd_generation_with_conditions" },
+          "evidence_checks": { "$ref": "#/$defs/passingChecks" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "review_status": { "const": "changes_requested" } }, "required": ["review_status"] },
+      "then": { "properties": { "next_route": { "const": "correction" } } }
+    },
+    {
+      "if": { "properties": { "review_status": { "const": "clarification_required" } }, "required": ["review_status"] },
+      "then": {
+        "properties": {
+          "approved_item_ids": { "maxItems": 0 },
+          "next_route": { "const": "clarification" }
+        }
+      }
     },
     {
       "if": { "properties": { "review_status": { "const": "rejected" } }, "required": ["review_status"] },
-      "then": { "properties": { "approved_requirement_ids": { "maxItems": 0 } } }
+      "then": {
+        "properties": {
+          "approved_item_ids": { "maxItems": 0 },
+          "next_route": { "const": "stopped" }
+        }
+      }
     }
-  ]
+  ],
+  "$defs": {
+    "upstreamId": {
+      "type": "string",
+      "pattern": "^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$"
+    },
+    "passingChecks": {
+      "type": "object",
+      "properties": {
+        "source_grounding_verified": { "const": true },
+        "exact_values_verified": { "const": true },
+        "relationships_verified": { "const": true },
+        "gap_analysis_verified": { "const": true },
+        "unsupported_claims_absent": { "const": true }
+      }
+    }
+  }
 }

@@ -10,7 +10,7 @@ owner: Vipin Puri
 
 ## 1. Purpose and status
 
-This document defines the baseline architecture for PRD Genie. Requirement Extraction and Langfuse tracing are implemented. Gap Analysis, Human Approval, PRD Generation, Story Breakdown, final validation, and Markdown export are planned. The design will be updated through controlled versions as implementation and evaluation reveal necessary changes.
+This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, and Langfuse tracing are implemented and have passed their complete T1-T10 release regressions. The Human Approval contract and n8n design are defined; its implementation, PRD Generation, Story Breakdown, final validation, and Markdown export remain planned. The design will be updated through controlled versions as implementation and evaluation reveal necessary changes.
 
 ## 2. Architecture principles
 
@@ -94,10 +94,10 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 |---|---|---|---|---|
 | Input Normalizer | Create a consistent run envelope | Raw source | Workflow Input | Implemented |
 | Input Validator | Reject invalid envelopes | Workflow Input | Validated Workflow Input | Implemented |
-| Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; prompt iteration active |
-| Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Planned |
-| Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Planned |
-| Human Approval | Approve, reject, or revise extracted items | Extraction and gaps | Human Review | Planned |
+| Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; v1.5 release regression passed 10/10 |
+| Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Implemented; v1.0 release regression passed 10/10 |
+| Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
+| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract and n8n design complete; implementation pending |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Planned |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Planned |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
@@ -122,7 +122,7 @@ Missing mandatory PRD content is written as `TBD - stakeholder input required` a
 
 ## 9. Human approval design
 
-The approval stage receives the extraction, gaps, and generation recommendation. It records the reviewer, timestamp, decision, approved IDs, rejected IDs, revisions, and rationale. Only approved content is passed to the PRD Generator. Rejected or unreviewed items cannot appear downstream.
+The approval stage receives the extraction, Gap Analysis, and deterministic gate result. It records the reviewer, timestamp, decision, approved/rejected IDs, reviewed gaps, controlled TBDs, conditions, evidence checks, notes, and deterministic next route. Material content revisions are not silently authored in the checkpoint; they return to correction for re-extraction and evaluation. Only approved content and explicitly approved conditions/TBDs are passed to the PRD Generator. Rejected or unreviewed items cannot appear downstream. The complete contract is defined in `docs/architecture/HUMAN_APPROVAL_CONTRACT.md`.
 
 ## 10. Observability
 

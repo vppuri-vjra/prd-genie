@@ -1,11 +1,22 @@
 {
   "schema_version": "1.0.0",
-  "run_id": "RUN-T1-001",
+  "run_id": "RUN-T1-GROUND-TRUTH",
   "review_status": "approved",
-  "reviewer": "PM reviewer",
-  "approved_requirement_ids": ["FR-001", "NFR-001", "STK-001", "DDL-001"],
-  "rejected_requirement_ids": [],
-  "modifications": [],
-  "review_notes": "Approved for baseline T11 generation. Missing template fields must remain TBD.",
-  "reviewed_at": "2026-07-31T17:05:00Z"
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-04T20:00:00Z",
+  "gate_status_reviewed": "eligible_for_human_approval",
+  "approved_item_ids": ["FR-001", "NFR-001", "STK-001", "DDL-001"],
+  "rejected_item_ids": [],
+  "reviewed_gap_ids": [],
+  "controlled_tbd_ids": [],
+  "conditions": [],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": true,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Approved for grounded PRD generation.",
+  "next_route": "prd_generation"
 }
