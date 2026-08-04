@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "GA-T10",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "result": "fail",
+  "groundedness_percentage": 61.54,
+  "supported_claims": 8,
+  "total_evaluated_claims": 13,
+  "langfuse_trace_id": null,
+  "evaluated_at": "2026-08-04T18:43:25.277463+00:00",
+  "checks": [
+    {
+      "name": "Actual output conforms to the Gap Analysis schema.",
+      "result": "fail",
+      "evidence": "risks/0: 'source_risk_ids' is a required property",
+      "mandatory": true
+    },
+    {
+      "name": "information_sufficiency matches the approved decision.",
+      "result": "fail",
+      "evidence": "Expected 'partially_sufficient'; actual 'sufficient'",
+      "mandatory": true
+    },
+    {
+      "name": "generation_allowed matches the approved decision.",
+      "result": "pass",
+      "evidence": "Actual: True",
+      "mandatory": true
+    },
+    {
+      "name": "recommended_action matches the approved decision.",
+      "result": "fail",
+      "evidence": "Expected 'proceed_with_tbd'; actual 'proceed'",
+      "mandatory": true
+    },
+    {
+      "name": "A grounded decision reason is present.",
+      "result": "pass",
+      "evidence": "Decision reason present",
+      "mandatory": true
+    },
+    {
+      "name": "All approved gaps are present.",
+      "result": "fail",
+      "evidence": "Missing gap keys: [((), 'dependency_eta')]",
+      "mandatory": true
+    },
+    {
+      "name": "No unsupported or duplicate gap is introduced.",
+      "result": "pass",
+      "evidence": "No extra gaps",
+      "mandatory": true
+    },
+    {
+      "name": "Gap item and source-record traceability is preserved.",
+      "result": "pass",
+      "evidence": "Gap links match approved sources",
+      "mandatory": true
+    },
+    {
+      "name": "Gap severity matches documentation-readiness impact.",
+      "result": "pass",
+      "evidence": "Severity matches",
+      "mandatory": false
+    },
+    {
+      "name": "Clarification questions are specific and actionable.",
+      "result": "pass",
+      "evidence": "Questions are bounded and non-empty",
+      "mandatory": false
+    },
+    {
+      "name": "Approved contradictions are preserved without invention.",
+      "result": "pass",
+      "evidence": "Matched 0 contradictions",
+      "mandatory": true
+    },
+    {
+      "name": "Approved risks are preserved without invention.",
+      "result": "pass",
+      "evidence": "Matched 1 risks",
+      "mandatory": true
+    },
+    {
+      "name": "Risk source traceability is preserved.",
+      "result": "fail",
+      "evidence": "Risk source IDs differ",
+      "mandatory": true
+    }
+  ]
+}

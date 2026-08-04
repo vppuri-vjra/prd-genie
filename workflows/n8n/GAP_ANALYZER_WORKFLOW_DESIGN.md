@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.8-no-requirements-category`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.9-dependency-uncertainty`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -242,6 +242,18 @@ The v0.7 semantic run returned the approved blocked decision and preserved `MISS
 Final execution `7608` returned `insufficient / false / block_generation`, one blocking `requirements` gap linked to `MISS-001`, no contradictions or risks, and gate result `generation_blocked / blocked`. PRD generation remained ineligible.
 
 Langfuse accepted trace `25629f451f919250ca70c259f8712e3d`. Independent evaluation passed 13/13 at **100% groundedness**. Prompt v0.8 remains a candidate pending GA-T10 and the unchanged six-case regression.
+
+## GA-T10 proceed-with-TBD checkpoint — 2026-08-04
+
+GA-T10 exercised the `partially_sufficient / true / proceed_with_tbd` path using a grounded SSO requirement, linked authentication-service dependency, and explicit unknown-ETA risk.
+
+The initial v0.8 output returned fully sufficient, omitted the ETA gap, and produced a risk without `source_risk_ids`. Strict parser validation stopped the workflow before gating and tracing. The preserved raw output scored 61.54% in independent evaluation.
+
+Prompt v0.9 added the bounded dependency-uncertainty rule. Final execution `7611` returned one medium `dependency_eta` gap linked to `DEP-001` and `RSK-001`, preserved risk `RSK-001` with exact source-risk traceability, and introduced no ETA, mitigation, status, or delivery conclusion.
+
+The deterministic gate returned `eligible_with_tbd / human_review_with_tbd`, marked PRD generation eligible, required the TBD, and retained mandatory human approval. Langfuse accepted trace `1afc44d756a9c866627facc805b95a7a`. Independent evaluation passed 13/13 at **100% groundedness**.
+
+All six approved targeted Gap Analyzer cases have passed. Prompt v0.9 remains a candidate pending the unchanged six-case regression.
 
 ## Groundedness
 

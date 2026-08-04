@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "A grounded functional requirement for SSO login and its dependency on the new auth service can be represented faithfully. The explicitly unknown ETA is preserved as an extracted delivery risk and does not require invention or clarification to document the requirement.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": [
+    {
+      "id": "RSK-001",
+      "description": "The ETA for the new auth service is unknown.",
+      "severity": "medium",
+      "related_item_ids": [
+        "DEP-001"
+      ]
+    }
+  ]
+}
