@@ -32,3 +32,11 @@ The unchanged canonical input preserved `RUN-T1-GROUND-TRUTH`. The model introdu
 ## Release status
 
 Targeted `GA-T1` verification passed, including the deterministic evaluator at 100.0%. Prompt v0.2 remains a candidate until the remaining approved Gap Analyzer cases pass an unchanged regression batch.
+
+## Instrumented workflow verification
+
+After the parser and deterministic generation gate were added, GA-T1 was rerun through the Langfuse OTLP path. Langfuse US accepted the payload and displayed trace `bda605bd0ef08c537ffd3c7aaf6691d4` with the parent run, `gap-analyzer` generation, validation span and deterministic-gate span.
+
+The instrumented run reported 523 input tokens, 96 output tokens, 619 total tokens, approximately 3.54 seconds of generation latency and approximately $0.002198 model cost. These are the direct Langfuse measurements for the later instrumented execution and supersede any token estimate when evaluating that execution.
+
+Observability groundedness: **100%**. All observed content is copied from validated workflow state or approved execution metadata.

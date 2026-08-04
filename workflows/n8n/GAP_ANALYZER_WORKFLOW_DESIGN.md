@@ -160,6 +160,32 @@ The connected `GA-T1` rerun completed successfully as n8n execution `7246` and p
 
 Gate groundedness: **100%**. The gate copies the validated decision fields, applies only the approved routing table, preserves run identity, and introduces no product claim or LLM interpretation.
 
+## Langfuse observability checkpoint — 2026-08-03
+
+`Build Langfuse OTLP Payload` and `Send Trace to Langfuse` are implemented and connected after the deterministic gate. The payload uses nanosecond timestamps represented as `BigInt` strings to avoid the timestamp precision defect previously found in the Requirement Extractor workflow.
+
+The OTLP trace contains four observations under one parent trace:
+
+| Observation | Langfuse type | Purpose |
+|---|---|---|
+| `prd-genie-gap-analysis-run` | Span | Parent run containing extraction input and final analyzed/gated output |
+| `gap-analyzer` | Generation | The only model call, including prompt version, model, input and output |
+| `validate-gap-analysis` | Span | Deterministic schema, decision and traceability validation |
+| `deterministic-generation-gate` | Span | Deterministic routing result and source decision fields |
+
+The sender uses the existing `Langfuse US - PRD Genie` Basic Auth credential, the US OTLP endpoint, and ingestion version `4`. The connected GA-T1 execution was accepted with `validKey: true` and produced Langfuse trace `bda605bd0ef08c537ffd3c7aaf6691d4`.
+
+Langfuse verification showed:
+
+- parent trace `prd-genie-gap-analysis-run`;
+- generation observation `gap-analyzer`;
+- validation and gate child spans;
+- latency of approximately 3.54 seconds;
+- 523 input tokens and 96 output tokens, 619 total; and
+- recorded model cost of approximately $0.002198.
+
+Observability groundedness: **100%**. Trace content is copied from the validated extraction, Gap Analysis, gate result and approved execution metadata. No product requirement is generated or modified during trace construction.
+
 ## Groundedness
 
 Design groundedness: **100% (8/8 decisions)**. Each approved decision is traceable to the Gap Analyzer contract, approved prompt, architecture/ADR, evaluation requirements, or the established Requirement Extractor observability pattern. This percentage assesses design traceability; actual workflow quality will be measured separately through execution and regression evaluation.
