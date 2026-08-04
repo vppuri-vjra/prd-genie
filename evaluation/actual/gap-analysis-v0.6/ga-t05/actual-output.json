@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "No meaningful requirement item was extracted because the dashboard capability or intended outcome is undefined. The unspecified real-time behavior also materially prevents a grounded, testable representation of the discussed concept.",
+  "gaps": [
+    { "id": "GAP-001", "category": "scope", "description": "The dashboard capability or outcome discussed is not specified, so no grounded requirement can be documented.", "severity": "blocking", "clarification_question": "What dashboard capability, user need, or outcome was discussed?", "related_item_ids": [], "source_missing_information_ids": ["MISS-001"] },
+    { "id": "GAP-002", "category": "real_time_behavior", "description": "John's mention of real-time does not identify what should operate or update in real time.", "severity": "high", "clarification_question": "What did John mean by real-time, and which dashboard behavior or data should be real-time?", "related_item_ids": [], "source_missing_information_ids": ["MISS-002"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}

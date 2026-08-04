@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.6-contradiction-contract`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.7-fragment-gap-coverage`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -222,6 +222,14 @@ GA-T3 exercised an unresolved contradiction between five-second dashboard refres
 Prompt v0.6 enforced the exact four-field contradiction contract and the approved insufficiency boundary for a core blocking contradiction. Final execution `7600` returned `insufficient / false / request_clarification`, preserved `CTR-001` with `FR-001` and `NFR-001`, emitted no gap or risk, and routed to clarification with PRD generation ineligible.
 
 Langfuse accepted trace `e277c0f2afa297cd37d33f243e5dc714`. Independent evaluation passed 13/13 checks at **100% groundedness**. Prompt v0.6 remains a candidate pending GA-T5, GA-T9, GA-T10, and the unchanged six-case regression.
+
+## GA-T5 product-fragment checkpoint — 2026-08-04
+
+GA-T5 exercised a partial extraction with no reliable items and three product-relevant missing-information records. The unchanged v0.6 run passed structural validation but omitted the explicit budget-TBD gap, generalized `dashboard_scope`, and understated the no-item real-time behavior gap. Independent evaluation failed at 76.92%.
+
+Prompt v0.7 preserved all three distinct gaps and their exact source links. Final execution `7602` returned `blocking` dashboard scope, `blocking` real-time behavior, and `high` budget, routed to clarification, and kept PRD generation ineligible. No item, requirement, contradiction, risk, or budget value was invented.
+
+Langfuse accepted trace `444278460f3941a14b0e58b9246b9f9e`. Independent evaluation passed 13/13 at **100% groundedness**. Prompt v0.7 remains a candidate pending GA-T9, GA-T10, and the unchanged six-case regression.
 
 ## Groundedness
 

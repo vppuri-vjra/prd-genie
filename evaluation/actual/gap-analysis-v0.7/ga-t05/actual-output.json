@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T5-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "No reliable requirement item exists. The requested dashboard capability and the meaning of real-time behavior are undefined, so a grounded PRD cannot represent the requested behavior without invention. The explicitly TBD budget is also a material unresolved product decision.",
+  "gaps": [
+    { "id": "GAP-001", "category": "dashboard_scope", "description": "The dashboard capability, user need, or outcome discussed is not specified, leaving no grounded requirement to document.", "severity": "blocking", "clarification_question": "What dashboard capability, user need, or outcome was discussed?", "related_item_ids": [], "source_missing_information_ids": ["MISS-001"] },
+    { "id": "GAP-002", "category": "real_time_behavior", "description": "John's mention of real-time does not identify which dashboard behavior or data should operate or update in real time.", "severity": "blocking", "clarification_question": "What did John mean by real-time, and which dashboard behavior or data should be real-time?", "related_item_ids": [], "source_missing_information_ids": ["MISS-002"] },
+    { "id": "GAP-003", "category": "budget", "description": "The budget is explicitly TBD and no amount, range, currency, owner, or decision date is provided.", "severity": "high", "clarification_question": "What budget has been approved or proposed, in which currency, and when will it be decided?", "related_item_ids": [], "source_missing_information_ids": ["MISS-003"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}
