@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T7-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "The extraction contains grounded and exact scalability, performance, and Salesforce integration requirements, with no unresolved gaps, contradictions, or risks that prevent PRD generation.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}
