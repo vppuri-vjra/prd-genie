@@ -34,6 +34,36 @@ Groundedness is calculated as `grounded evaluated claims / total evaluated claim
 - No meaningful requirements: GA-T9.
 - Grounded dependency risk with explicit TBD: GA-T10.
 
+### T1-T10 coverage strategy
+
+The initial Gap Analyzer dataset is a representative behavioral-coverage subset of the ten approved Requirement Extractor cases. Selection was based on distinct sufficiency, contradiction, clarification, blocking, and controlled-`TBD` paths rather than on test-number continuity. Deferred cases remain candidates for the complete Gap Analyzer regression; they were not rejected or declared irrelevant.
+
+| Test | GA Early Identified (Y/N) | GA Early Identification Rationale | Candidate for Later GA Processing (Y/N) |
+|---|---:|---|---:|
+| T1 | Y | Represents the positive path: usable extraction with only non-material unknowns; expected to proceed to human approval. | N |
+| T2 | Y | Covers an ambiguous requirement and missing material dimensions requiring clarification. | N |
+| T3 | Y | Covers an explicit unresolved contradiction without inventing a resolution or unsupported risk. | N |
+| T4 | N | Complete extraction with no recorded missing information or contradictions; the initial positive path is represented by T1. | Y |
+| T5 | Y | Covers product fragments for which no reliable requirement items could be extracted. | N |
+| T6 | N | Contains both missing information and a contradiction; the initial set covers these behaviors independently through T2 and T3. | Y |
+| T7 | N | Complete extraction with no recorded missing information or contradictions; it adds no new initial routing outcome beyond T1. | Y |
+| T8 | N | A larger complete extraction, but it remains in the same initial positive-path category represented by T1. | Y |
+| T9 | Y | Covers no meaningful requirements and the generation-blocking path. | N |
+| T10 | Y | Covers partially sufficient input, a grounded dependency risk, and controlled `TBD` processing. | N |
+
+`GA Early Identified: Y` means that a human-approved canonical Gap Analysis already exists in this dataset. `Candidate for Later GA Processing: Y` means that canonical Gap Analysis must still be created, human-reviewed, and approved before the case can enter the full unchanged regression batch. A `N` in the later-processing column means that the case is already included in the early dataset, not that it will be excluded from future regression runs.
+
+### Relationship to PRD generation
+
+All T1-T10 inputs remain in the intended end-to-end evaluation scope. The PRD Generator must not receive a case merely because its Requirement Extraction exists. It may receive only a case whose approved Gap Analysis and deterministic gate make it eligible, followed by the required human approval.
+
+- Existing early cases use their approved canonical GA decisions.
+- T4, T6, T7, and T8 have no approved canonical GA decision yet; any current outcome description is provisional.
+- After those four canonical outputs are approved, the full GA-T1-T10 regression should run unchanged.
+- Eligible cases test PRD generation quality; clarification and blocked cases test that the PRD Generator is not invoked.
+
+Coverage-strategy groundedness: **100% for the six approved cases and their documented paths**. The deferral rationale for T4, T6, T7, and T8 is derived from their approved Requirement Extraction structures and is explicitly marked as test-planning rationale rather than approved Gap Analysis ground truth.
+
 ## Approval guardrails
 
 - No canonical output invents a requirement, answer, stakeholder, date, budget, metric, dependency, contradiction, or risk.
