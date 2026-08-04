@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "Grounded functional and performance requirements, an owner, and a Q3 deadline are stated. The generic user reference and Q3 deadline can be preserved exactly as provided without invention.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}

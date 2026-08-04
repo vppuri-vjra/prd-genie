@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T9-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "block_generation",
+  "decision_reason": "No meaningful product requirements are available from which to create a grounded PRD.",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "category": "requirements",
+      "description": "The supplied input contains no substantive meeting notes or product requirements.",
+      "severity": "blocking",
+      "clarification_question": "Please provide the meeting transcript, decisions, product brief, stakeholder notes, or another source containing product requirements.",
+      "related_item_ids": [],
+      "source_missing_information_ids": [
+        "MISS-001"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "risks": []
+}

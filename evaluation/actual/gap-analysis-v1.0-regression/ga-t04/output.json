@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T4-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "A grounded functional requirement and linked acceptance criteria define report export behavior for PDF and CSV, including the required company logo in PDF and formula preservation in CSV. No material missing information, contradictions, or risks were extracted.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}

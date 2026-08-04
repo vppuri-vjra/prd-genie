@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T7-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "Grounded non-functional requirements specify scalability, performance, and the Salesforce REST API v52 integration without material missing information, contradictions, or extracted risks.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}

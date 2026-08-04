@@ -1,0 +1,60 @@
+{
+  "generated_at": "2026-08-04T19:43:43.535440+00:00",
+  "total": 10,
+  "pass": 10,
+  "needs_review": 0,
+  "fail": 0,
+  "average_groundedness_percentage": 100.0,
+  "cases": [
+    {
+      "case_id": "GA-T1",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T2",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T3",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T4",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T5",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T6",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T7",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T8",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T9",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    },
+    {
+      "case_id": "GA-T10",
+      "result": "pass",
+      "groundedness_percentage": 100.0
+    }
+  ]
+}

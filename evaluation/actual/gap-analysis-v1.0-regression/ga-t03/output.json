@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The two grounded requirements contain an unresolved material contradiction that must be reconciled before their approved behavior can be represented together safely in a PRD.",
+  "gaps": [],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Refreshing the dashboard every 5 seconds may increase API calls while API calls are required to be minimized.",
+      "severity": "high",
+      "related_item_ids": [
+        "FR-001",
+        "NFR-001"
+      ]
+    }
+  ],
+  "risks": []
+}

@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The request identifies a desire for better reporting but does not define a testable reporting capability. Required metrics, report format, target users, and the specific Competitor X capabilities being referenced must be clarified before a grounded PRD can be written without invention.",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "category": "metrics",
+      "description": "Required reporting metrics are not specified.",
+      "severity": "high",
+      "clarification_question": "Which metrics should the reports contain?",
+      "related_item_ids": [
+        "FR-001"
+      ],
+      "source_missing_information_ids": [
+        "MISS-001"
+      ]
+    },
+    {
+      "id": "GAP-002",
+      "category": "output_format",
+      "description": "The required report format or presentation is not specified.",
+      "severity": "high",
+      "clarification_question": "What report format or presentation is required?",
+      "related_item_ids": [
+        "FR-001"
+      ],
+      "source_missing_information_ids": [
+        "MISS-002"
+      ]
+    },
+    {
+      "id": "GAP-003",
+      "category": "users",
+      "description": "The target users for better reporting are not identified.",
+      "severity": "high",
+      "clarification_question": "Which users need the improved reporting?",
+      "related_item_ids": [
+        "FR-001"
+      ],
+      "source_missing_information_ids": [
+        "MISS-003"
+      ]
+    },
+    {
+      "id": "GAP-004",
+      "category": "reference_scope",
+      "description": "The specific Competitor X reporting capabilities to use as a reference are not identified.",
+      "severity": "high",
+      "clarification_question": "Which specific Competitor X reporting capabilities should be used as the reference?",
+      "related_item_ids": [
+        "FR-001"
+      ],
+      "source_missing_information_ids": [
+        "MISS-004"
+      ]
+    }
+  ],
+  "contradictions": [],
+  "risks": []
+}

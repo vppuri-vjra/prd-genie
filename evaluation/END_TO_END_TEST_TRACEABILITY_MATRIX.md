@@ -25,10 +25,10 @@ It distinguishes:
 |---|---:|---|
 | Requirement Extractor ground truth | 10/10 | Approved |
 | Requirement Extractor unchanged release regression | 10/10 | Passed at 100% |
-| Gap Analyzer ground truth | 6/10 | T1, T2, T3, T5, T9 and T10 approved |
-| Gap Analyzer end-to-end execution | 10/10 | Nine pass at 100%; GA-T6 fails semantic evaluation at 84.62% and requires correction |
-| Gap Analyzer unchanged release regression | 6/6 approved cases | Passed at 100%; prompt v0.9 promoted |
-| Deterministic generation-gate execution | 6/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
+| Gap Analyzer ground truth | 10/10 | Human-approved at 100% groundedness |
+| Gap Analyzer end-to-end execution | 10/10 | Passed at 100% under prompt v1.0 |
+| Gap Analyzer unchanged release regression | 10/10 | Passed at 100%; prompt v1.0 promoted |
+| Deterministic generation-gate execution | 10/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
 | Human approval for PRD generation | 0/10 | Not yet executed as a workflow stage |
 | PRD Generator evaluation | 0/10 | Not yet implemented or executed |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
@@ -55,7 +55,7 @@ It distinguishes:
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
 | T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
-| T6 | 🟡 `partial` | Actual pass, 100% | Actual GA execution; correction required | 🔴 `insufficient / request_clarification`, evaluator fail at 84.62% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked; missing approved deadline gap and severity correction required |
+| T6 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending scope, decision, and deadline clarification |
 | T7 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T8 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T9 | ⚫ `no_requirements` | Actual pass, 100% | Actual GA execution | ⛔ `insufficient / block_generation`, 100% | `generation_blocked`; `blocked` | Not applicable | Must not be invoked |
@@ -100,6 +100,21 @@ It distinguishes:
 | GA-T9 | `7620` | Pass, 100% | `6f3121dc8e7a6391160465fb8d832a7d` |
 | GA-T10 | `7621` | Pass, 100% | `3ba5da4fb2b9ac3e9a6a00c1beb7bb6d` |
 
+### Gap Analyzer v1.0 unchanged T1-T10 release regression
+
+| Test | n8n execution | Decision | Gate/route | Evaluator | Langfuse trace |
+|---|---:|---|---|---|---|
+| GA-T1 | `7630` | `sufficient / proceed` | `eligible_for_human_approval / human_review` | Pass, 100% | `f0b80250cb7c13efb2e025e03c39de1e` |
+| GA-T2 | `7631` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `812557d70b66f3edae7d4b8703964150` |
+| GA-T3 | `7632` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `a901c5b3a01a2d1330ff30821d91cd43` |
+| GA-T4 | `7633` | `sufficient / proceed` | `eligible_for_human_approval / human_review` | Pass, 100% | `692aab1bda05acad2118f9a83fd51e06` |
+| GA-T5 | `7634` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `22f26c6eb05af43e2e5c8f7143d323c1` |
+| GA-T6 | `7635` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `107c7e1b1c45e57ba3823ba90706a787` |
+| GA-T7 | `7636` | `sufficient / proceed` | `eligible_for_human_approval / human_review` | Pass, 100% | `c1bb59f5ed2feab4c9a6a38dcfadf660` |
+| GA-T8 | `7637` | `sufficient / proceed` | `eligible_for_human_approval / human_review` | Pass, 100% | `33831f84b07b18fc3cb1bc6c96d56901` |
+| GA-T9 | `7638` | `insufficient / block_generation` | `generation_blocked / blocked` | Pass, 100% | `52466facd1650beec8cd0f0f42658f3d` |
+| GA-T10 | `7639` | `partially_sufficient / proceed_with_tbd` | `eligible_with_tbd / human_review_with_tbd` | Pass, 100% | `d975a5fc176633dcc1e6dd4bb336804f` |
+
 ## Stage-entry rule
 
 Passing Requirement Extraction does not authorize PRD generation. A case may enter the PRD Generator only when:
@@ -118,4 +133,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results and all ten human-approved GA ground-truth decisions**. Nine current GA executions pass at 100%; GA-T6 is explicitly recorded as an 84.62% evaluator failure pending correction. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, and the unchanged GA-T1-T10 v1.0 release regression**. PRD and Story stages are marked unexecuted rather than projected as completed.

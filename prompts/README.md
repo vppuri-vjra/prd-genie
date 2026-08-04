@@ -22,6 +22,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `gap-analyzer-v0.7.md` | Current candidate; preserves product-fragment gaps, explicit TBDs, specific categories, and no-item severity boundaries | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.8.md` | Current candidate; normalizes the no-requirements source category while preserving blocking source traceability | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.9.md` | Promoted Gap Analyzer baseline; preserves all approved materiality, contradiction, fragment, no-requirements, and dependency-TBD behaviors | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v1.0.md` | Promoted Gap Analyzer baseline; requires traceable coverage of every material upstream missing-information record and preserves all v0.9 behavior | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -58,6 +59,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `gap-analyzer-v0.7-fragment-gap-coverage` | 2026-08-04 | GA-T5 v0.6 omitted budget TBD, generalized a specific category, and understated a no-item behavior gap | Preserve all material product fragments, explicit TBDs, specific categories, and blocking severity for undefined capability/behavior when no reliable item exists | GA-T5 passed 13/13 at 100%; Langfuse trace `444278460f3941a14b0e58b9246b9f9e`; GA-T9, GA-T10 and full regression pending | Pending |
 | `gap-analyzer-v0.8-no-requirements-category` | 2026-08-04 | GA-T9 v0.7 returned the approved blocked decision and `MISS-001` linkage but copied category `requirements_source`; evaluator scored 84.62% | Normalize `requirements_source` to Gap Analysis category `requirements` only for the no-requirements path; retain blocking severity, source linkage, and block decision | GA-T9 passed 13/13 at 100%; n8n execution `7608`; Langfuse trace `25629f451f919250ca70c259f8712e3d`; GA-T10 and full regression pending | Pending |
 | `gap-analyzer-v0.9-dependency-uncertainty` | 2026-08-04 | GA-T10 v0.8 returned fully sufficient, omitted the ETA TBD gap, and emitted a risk without `source_risk_ids`; evaluator scored 61.54% | Preserve explicit dependency ETA uncertainty as a medium TBD gap and exact source-linked risk; use `partially_sufficient / true / proceed_with_tbd` without estimating the ETA | Targeted GA-T10 passed 13/13; unchanged six-case regression passed 6/6 at 100% average groundedness. See `evaluation/results/gap-analysis-v0.9-release-gate-2026-08-04.md` | Promoted |
+| `gap-analyzer-v1.0-missing-information-coverage` | 2026-08-04 | Extended GA-T6 execution omitted `MISS-002`, downgraded the architecture-decision gap, and contradicted the approved deadline clarification; evaluator scored 84.62% | Cover every material upstream `MISS-###`; retain approved scope, decision-status, and deadline severities; permit omission only under an explicit approved materiality/TBD rule | Targeted GA-T6 passed 13/13; unchanged T1-T10 release regression passed 10/10 at 100% average groundedness. See `evaluation/results/gap-analysis-v1.0-release-gate-2026-08-04.md` | Promoted |
 
 ## Version-Control Rules
 
@@ -80,9 +82,9 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 
 ### Gap Analyzer baseline
 
-- Promoted version: `gap-analyzer-v0.9-dependency-uncertainty`
-- Promoted prompt: `prompts/gap-analyzer-v0.9.md`
+- Promoted version: `gap-analyzer-v1.0-missing-information-coverage`
+- Promoted prompt: `prompts/gap-analyzer-v1.0.md`
 - Output contract: `schemas/gap-analysis.schema.json`
-- Release evidence: `evaluation/results/gap-analysis-v0.9-release-gate-2026-08-04.md`
-- Approved regression scope: GA-T1, GA-T2, GA-T3, GA-T5, GA-T9, and GA-T10
-- Release result: 6/6 pass, 100% average groundedness
+- Release evidence: `evaluation/results/gap-analysis-v1.0-release-gate-2026-08-04.md`
+- Approved regression scope: GA-T1 through GA-T10
+- Release result: 10/10 pass, 100% average groundedness

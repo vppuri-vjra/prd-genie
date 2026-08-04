@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T6-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The product or deliverable to be shipped is not identified, and the architecture preferences remain unapproved and require reconciliation before they can be represented as PRD constraints. The March deadline also lacks its year and exact date.",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "category": "decision_status",
+      "description": "The source does not state whether either architecture preference is approved.",
+      "severity": "blocking",
+      "clarification_question": "Have microservices or the single-page app been approved, or are both still proposals?",
+      "related_item_ids": ["CON-001", "CON-002"],
+      "source_missing_information_ids": ["MISS-001"]
+    },
+    {
+      "id": "GAP-003",
+      "category": "scope",
+      "description": "The product or deliverable referred to as it is not identified.",
+      "severity": "blocking",
+      "clarification_question": "What product or deliverable must be shipped by March?",
+      "related_item_ids": ["DDL-001"],
+      "source_missing_information_ids": ["MISS-003"]
+    },
+    {
+      "id": "GAP-002",
+      "category": "deadline",
+      "description": "The year and exact date represented by March are not specified.",
+      "severity": "high",
+      "clarification_question": "Which year and exact date define the March deadline?",
+      "related_item_ids": ["DDL-001"],
+      "source_missing_information_ids": ["MISS-002"]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Engineering and Design expressed separate architecture or technology preferences that require reconciliation; the source does not approve, prioritize, or establish incompatibility between them.",
+      "severity": "high",
+      "related_item_ids": ["CON-001", "CON-002"]
+    }
+  ],
+  "risks": []
+}
