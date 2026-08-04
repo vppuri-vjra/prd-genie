@@ -40,3 +40,9 @@ Groundedness is calculated as `grounded evaluated claims / total evaluated claim
 - Every gap links to extracted item IDs, extractor missing-information IDs, or the explicit absence of requirements.
 - GA-T3 contains no downstream risk because the approved extraction does not explicitly contain one.
 - `generation_allowed: true` means eligible for human review and never bypasses human approval.
+
+## Automated evaluator
+
+`scripts/evaluate_gap_analysis.py` validates schema compliance, decision fields, gap coverage and precision, severity, clarification questions, item and source traceability, contradictions, risks, and groundedness percentage.
+
+The evaluator self-check compared every canonical output with itself and passed all six cases at 100% groundedness. Reports are stored under `evaluation/reports/gap-analysis-self-check/`.
