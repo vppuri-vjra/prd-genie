@@ -10,6 +10,6 @@
     { "id": "CTR-001", "description": "Every-5-seconds refresh conflicts with minimizing API calls.", "severity": "blocking", "related_item_ids": ["FR-001", "NFR-001"] }
   ],
   "risks": [
-    { "id": "RSK-001", "description": "Implementing unresolved refresh behavior may create performance or infrastructure risk.", "severity": "high", "related_item_ids": ["FR-001", "NFR-001"] }
+    { "id": "RSK-001", "description": "Implementing unresolved refresh behavior may create performance or infrastructure risk.", "severity": "high", "related_item_ids": ["FR-001", "NFR-001"], "source_risk_ids": [] }
   ]
 }

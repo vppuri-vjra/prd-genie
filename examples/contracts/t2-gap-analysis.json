@@ -6,9 +6,9 @@
   "recommended_action": "request_clarification",
   "decision_reason": "The request lacks defined metrics, format, and users, so generating a PRD would require invention.",
   "gaps": [
-    { "id": "GAP-001", "category": "metrics", "description": "Reporting metrics are missing.", "severity": "blocking", "clarification_question": "Which metrics should the reports contain?", "related_item_ids": ["FR-001"] },
-    { "id": "GAP-002", "category": "format", "description": "Report format is missing.", "severity": "high", "clarification_question": "What report format or presentation is required?", "related_item_ids": ["FR-001"] },
-    { "id": "GAP-003", "category": "users", "description": "Target users are missing.", "severity": "high", "clarification_question": "Which users need the improved reporting?", "related_item_ids": ["FR-001"] }
+    { "id": "GAP-001", "category": "metrics", "description": "Reporting metrics are missing.", "severity": "blocking", "clarification_question": "Which metrics should the reports contain?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-002"] },
+    { "id": "GAP-002", "category": "format", "description": "Report format is missing.", "severity": "high", "clarification_question": "What report format or presentation is required?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-003"] },
+    { "id": "GAP-003", "category": "users", "description": "Target users are missing.", "severity": "high", "clarification_question": "Which users need the improved reporting?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-001"] }
   ],
   "contradictions": [],
   "risks": []

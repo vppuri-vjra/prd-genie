@@ -5,7 +5,7 @@
   "description": "Generation gate and clarification output from the Gap Analyzer.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "run_id", "information_sufficiency", "generation_allowed", "recommended_action", "gaps", "contradictions", "risks"],
+  "required": ["schema_version", "run_id", "information_sufficiency", "generation_allowed", "recommended_action", "decision_reason", "gaps", "contradictions", "risks"],
   "properties": {
     "schema_version": { "const": "1.0.0" },
     "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
@@ -15,7 +15,7 @@
     "decision_reason": { "type": "string", "minLength": 1 },
     "gaps": { "type": "array", "items": { "$ref": "#/$defs/gap" } },
     "contradictions": { "type": "array", "items": { "$ref": "#/$defs/issue" } },
-    "risks": { "type": "array", "items": { "$ref": "#/$defs/issue" } }
+    "risks": { "type": "array", "items": { "$ref": "#/$defs/risk" } }
   },
   "allOf": [
     {
@@ -25,20 +25,55 @@
     {
       "if": { "properties": { "recommended_action": { "enum": ["proceed", "proceed_with_tbd"] } }, "required": ["recommended_action"] },
       "then": { "properties": { "generation_allowed": { "const": true } } }
+    },
+    {
+      "if": { "properties": { "information_sufficiency": { "const": "sufficient" } }, "required": ["information_sufficiency"] },
+      "then": {
+        "properties": {
+          "generation_allowed": { "const": true },
+          "recommended_action": { "const": "proceed" }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "information_sufficiency": { "const": "partially_sufficient" } }, "required": ["information_sufficiency"] },
+      "then": {
+        "properties": {
+          "recommended_action": { "enum": ["proceed_with_tbd", "request_clarification"] }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "information_sufficiency": { "const": "insufficient" } }, "required": ["information_sufficiency"] },
+      "then": {
+        "properties": {
+          "generation_allowed": { "const": false },
+          "recommended_action": { "enum": ["request_clarification", "block_generation"] }
+        }
+      }
     }
   ],
   "$defs": {
     "gap": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["id", "category", "description", "severity", "clarification_question"],
+      "required": ["id", "category", "description", "severity", "clarification_question", "related_item_ids", "source_missing_information_ids"],
       "properties": {
         "id": { "type": "string", "pattern": "^GAP-[0-9]{3}$" },
         "category": { "type": "string", "minLength": 1 },
         "description": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["low", "medium", "high", "blocking"] },
         "clarification_question": { "type": "string", "minLength": 1 },
-        "related_item_ids": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+        "related_item_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$" }
+        },
+        "source_missing_information_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^MISS-[0-9]{3}$" }
+        }
       }
     },
     "issue": {
@@ -49,7 +84,33 @@
         "id": { "type": "string", "pattern": "^(CTR|RSK)-[0-9]{3}$" },
         "description": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["low", "medium", "high", "blocking"] },
-        "related_item_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } }
+        "related_item_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$" }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "severity", "related_item_ids", "source_risk_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^RSK-[0-9]{3}$" },
+        "description": { "type": "string", "minLength": 1 },
+        "severity": { "enum": ["low", "medium", "high", "blocking"] },
+        "related_item_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^(FR|NFR|AC|PER|STK|DDL|DEP|CON|ASM|RSK)-[0-9]{3}$" }
+        },
+        "source_risk_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^RSK-[0-9]{3}$" }
+        }
       }
     }
   }
