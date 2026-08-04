@@ -51,4 +51,6 @@ The updated schema and all repository contract examples passed `scripts/validate
 
 ## Approved prompt-design decisions
 
-The role, authoritative input, grounding rules, generation-decision matrix, documentation-readiness severity definitions, and clarification-question rules are approved and recorded in `prompts/gap-analyzer-v0.1.md`. Implementation and evaluation remain pending.
+The role, authoritative input, grounding rules, generation-decision matrix, documentation-readiness severity definitions, and clarification-question rules are approved and recorded in `prompts/gap-analyzer-v0.1.md`.
+
+The n8n workflow design is approved and recorded in `workflows/n8n/GAP_ANALYZER_WORKFLOW_DESIGN.md`. Ground-truth self-check and automated evaluator implementation are complete; actual n8n implementation and execution remain pending.
