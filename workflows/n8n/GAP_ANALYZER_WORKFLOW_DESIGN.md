@@ -73,15 +73,18 @@ Manual Trigger
 
 ## Implementation checkpoint — 2026-08-03
 
-The first three nodes are implemented and connected:
+The first four nodes are implemented and connected:
 
 1. `When clicking ‘Execute workflow’` (Manual Trigger).
 2. `Load Gap Analyzer Test Input`, containing the human-approved T1 canonical extraction.
 3. `Validate Requirement Extraction Input`, performing deterministic contract checks before any model call.
+4. `Create Gap Trace Context`, separating the unchanged extraction from approved execution and Langfuse metadata.
 
-The connected three-node path completed successfully with one item, preserved `RUN-T1-GROUND-TRUTH`, and added a successful input-validation result. An initial unconnected validator run correctly exercised the failure path by rejecting missing required fields; the node was then connected and the workflow rerun successfully.
+The connected four-node path completed successfully with one item and preserved `RUN-T1-GROUND-TRUTH`. The trace context records `GA-T1`, workflow version `0.1.0`, prompt version `gap-analyzer-v0.1`, the development environment, n8n execution/workflow identifiers, start time, and the `gap-analyzer` Langfuse observation name. An initial unconnected validator run correctly exercised the failure path by rejecting missing required fields; the node was then connected and the workflow rerun successfully.
 
 Input groundedness: **100%**. The loader content exactly represents the approved T1 canonical extraction stored in `evaluation/ground-truth/requirement-extraction/t01/expected-output.json`.
+
+Trace-context groundedness: **100% (9/9 metadata fields)**. Every field is inherited from the approved extraction or defined by the approved workflow design; no product requirement content is introduced.
 
 ## Groundedness
 
