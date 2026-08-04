@@ -103,6 +103,18 @@ Actual-output groundedness: **100% (2/2 gap claims)** because both actual gaps t
 
 Required prompt correction before formal parsing: an extractor `missing_information` record must become a Gap Analyzer gap only when it materially affects faithful, grounded PRD generation. The agent must not automatically promote every extractor clarification into a blocking or reportable gap when the stated requirement and deadline can be preserved exactly without invention.
 
+## Gap Analyzer v0.2 targeted rerun — 2026-08-03
+
+The approved materiality-boundary correction was versioned as `gap-analyzer-v0.2-materiality-boundary`, applied to both the n8n system prompt and trace metadata, and rerun against unchanged `GA-T1` input.
+
+The run completed successfully in 5.222 seconds using approximately 1,519 tokens. It returned `sufficient`, `generation_allowed: true`, `proceed`, and empty gap, contradiction, and risk arrays while preserving `RUN-T1-GROUND-TRUTH`.
+
+- Groundedness: **100%**.
+- Canonical decision agreement: **100% (3/3)**.
+- Automated evaluator: **Pass (100.0%)**.
+
+Prompt v0.2 is verified for targeted `GA-T1` but remains a candidate until the remaining approved Gap Analyzer cases pass an unchanged regression batch.
+
 ## Groundedness
 
 Design groundedness: **100% (8/8 decisions)**. Each approved decision is traceable to the Gap Analyzer contract, approved prompt, architecture/ADR, evaluation requirements, or the established Requirement Extractor observability pattern. This percentage assesses design traceability; actual workflow quality will be measured separately through execution and regression evaluation.

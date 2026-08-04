@@ -14,6 +14,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `requirement-extractor-v1.5.md` | Promoted baseline; distinguishes product fragments from content with no requirements and includes the v1.4 relationship audit | `schemas/requirement-extraction.schema.json` |
 | `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
 | `gap-analyzer-v0.1.md` | Approved design baseline through role, grounding, generation decisions, severity, and clarification-question rules; implementation and evaluation pending | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.2.md` | Targeted candidate; applies a materiality boundary before promoting extractor missing-information records into Gap Analyzer gaps | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -36,6 +37,13 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `extractor-v1.3-complete-optional-clarification` | 2026-08-03 | v1.0 T8 captured all canonical items and links but returned `partial` because `simplified view` could be refined | Return `complete` when all stated information is faithfully captured and optional clarification does not block extraction | Targeted T8 passed. Full release gate: 8 pass; T1 failed relationship and T5 failed status boundary. Not promoted. See `evaluation/results/t01-t10-v1.3-release-gate-2026-08-03.md` | Pending |
 | `extractor-v1.4-bidirectional-relationship-audit` | 2026-08-03 | v1.3 T1 extracted the correct FR and NFR but omitted their required relationship | Audit `related_item_ids`; link a qualifying NFR and FR in both directions, including across adjacent sentences; prohibit proximity-only stakeholder/deadline links | Targeted T1 passed deterministic evaluation; Langfuse trace `2fd30f89209d1e35befda538496b5600`. Full release gate pending after T5 correction | Pending |
 | `extractor-v1.5-product-fragment-status-boundary` | 2026-08-03 | v1.3 T5 correctly kept fragments out of `items` but returned `no_requirements` instead of approved `partial` | Return `partial` for product-relevant fragments with actionable gaps; reserve `no_requirements` for empty, non-product, or clearly non-requirement content; preserve exact fragment values such as `budget TBD` | Full unchanged T1–T10 release gate passed 10/10. See `evaluation/results/t01-t10-v1.5-release-gate-2026-08-03.md` | Promoted |
+
+## Gap Analyzer Version Register
+
+| Version | Date | Trigger / evidence | Change introduced | Verification status | Commit |
+|---|---|---|---|---|---|
+| `gap-analyzer-v0.1` | 2026-08-03 | Approved contract, grounding, decision, severity, and clarification design | Initial complete Gap Analyzer baseline | First `GA-T1` n8n run was fully grounded but failed all three canonical decision fields by promoting optional clarification records into material gaps | Pending |
+| `gap-analyzer-v0.2-materiality-boundary` | 2026-08-03 | `GA-T1` actual returned `partially_sufficient/false/request_clarification`; approved result is `sufficient/true/proceed` | Require a materiality test before promoting `MISS-###` records; explicitly preserve generic users and `Q3` as stated when exact documentation requires no invention | Targeted `GA-T1` rerun passed with 100% groundedness and 3/3 canonical decision agreement; remaining Gap Analyzer regression cases pending | Pending |
 
 ## Version-Control Rules
 
