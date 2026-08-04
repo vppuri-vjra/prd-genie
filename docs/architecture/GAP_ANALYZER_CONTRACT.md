@@ -48,3 +48,7 @@ Risks must be grounded in the extraction or in explicitly supported uncertainty.
 ## Validation checkpoint
 
 The updated schema and all repository contract examples passed `scripts/validate_contracts.py` on 2026-08-03: 7 schemas and 15 examples validated.
+
+## Approved prompt-design decisions
+
+The role, authoritative input, grounding rules, generation-decision matrix, and documentation-readiness severity definitions are approved and recorded in `prompts/gap-analyzer-v0.1.md`. Detailed clarification-question rules remain pending human review.
