@@ -1,6 +1,6 @@
 # Gap Analyzer Prompt v0.9
 
-Status: All six targeted Gap Analyzer cases passed; unchanged six-case regression pending.
+Status: **Promoted baseline.** All six targeted cases and the unchanged six-case regression passed at 100% groundedness.
 
 ## Dependency-uncertainty correction
 
@@ -18,3 +18,4 @@ The initial v0.8 GA-T10 attempt returned `sufficient / true / proceed`, omitted 
 
 GA-T10 passed the unchanged deterministic evaluator at 13/13 checks and 100% groundedness after the v0.9 correction. Final n8n execution `7611`; Langfuse trace `1afc44d756a9c866627facc805b95a7a`.
 
+The unchanged six-case release regression subsequently passed 6/6 with 100% average groundedness. See `evaluation/results/gap-analysis-v0.9-release-gate-2026-08-04.md`.

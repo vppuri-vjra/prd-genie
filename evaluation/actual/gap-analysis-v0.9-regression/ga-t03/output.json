@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The core dashboard refresh and API-call minimization requirements have an unresolved blocking contradiction that must be reconciled before their approved behavior can be represented safely in a grounded PRD.",
+  "gaps": [],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Refreshing the dashboard every 5 seconds may increase API calls while API calls are required to be minimized.",
+      "severity": "blocking",
+      "related_item_ids": ["FR-001", "NFR-001"]
+    }
+  ],
+  "risks": []
+}

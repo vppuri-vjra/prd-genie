@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.9-dependency-uncertainty`.
+Approved design for workflow version `v0.1.0`; the promoted prompt baseline is `gap-analyzer-v0.9-dependency-uncertainty`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -253,7 +253,15 @@ Prompt v0.9 added the bounded dependency-uncertainty rule. Final execution `7611
 
 The deterministic gate returned `eligible_with_tbd / human_review_with_tbd`, marked PRD generation eligible, required the TBD, and retained mandatory human approval. Langfuse accepted trace `1afc44d756a9c866627facc805b95a7a`. Independent evaluation passed 13/13 at **100% groundedness**.
 
-All six approved targeted Gap Analyzer cases have passed. Prompt v0.9 remains a candidate pending the unchanged six-case regression.
+All six approved targeted Gap Analyzer cases passed, qualifying prompt v0.9 for the unchanged six-case release regression documented below.
+
+## Gap Analyzer v0.9 release regression — 2026-08-04
+
+The six human-approved cases GA-T1, GA-T2, GA-T3, GA-T5, GA-T9, and GA-T10 were rerun as one unchanged release batch under prompt `gap-analyzer-v0.9-dependency-uncertainty`, `gpt-5.6-terra`, medium reasoning, workflow `xrtf52GK57IRI1NI`, and the unchanged Gap Analysis schema and evaluator.
+
+All six cases passed at **100% groundedness**. The batch verified sufficient/human-review, clarification, blocking, contradiction, no-item fragments, no-requirements, source-linked risk, and proceed-with-TBD routes. Every case passed strict contract and traceability validation and produced authenticated Langfuse US evidence.
+
+Prompt v0.9 is therefore promoted as the Gap Analyzer baseline. Full evidence is recorded in `evaluation/results/gap-analysis-v0.9-release-gate-2026-08-04.md` and `evaluation/reports/gap-analysis-v0.9-regression/`.
 
 ## Groundedness
 

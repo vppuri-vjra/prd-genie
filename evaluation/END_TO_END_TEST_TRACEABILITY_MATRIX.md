@@ -1,6 +1,6 @@
 ---
 title: PRD Genie End-to-End Test Traceability Matrix
-version: 0.5
+version: 0.6
 status: Living Evidence Dashboard
 last_updated: 2026-08-04
 owner: Vipin Puri
@@ -27,6 +27,7 @@ It distinguishes:
 | Requirement Extractor unchanged release regression | 10/10 | Passed at 100% |
 | Gap Analyzer ground truth | 6/10 | T1, T2, T3, T5, T9 and T10 approved |
 | Gap Analyzer end-to-end execution | 6/10 | All six approved targeted cases passed at 100% |
+| Gap Analyzer unchanged release regression | 6/6 approved cases | Passed at 100%; prompt v0.9 promoted |
 | Deterministic generation-gate execution | 6/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
 | Human approval for PRD generation | 0/10 | Not yet executed as a workflow stage |
 | PRD Generator evaluation | 0/10 | Not yet implemented or executed |
@@ -88,6 +89,17 @@ It distinguishes:
 | GA-T9 | `gap-analyzer-v0.8-no-requirements-category` | `7608` | `insufficient / block_generation` | `generation_blocked / blocked` | Pass, 100% | `25629f451f919250ca70c259f8712e3d` |
 | GA-T10 | `gap-analyzer-v0.9-dependency-uncertainty` | `7611` | `partially_sufficient / proceed_with_tbd` | `eligible_with_tbd / human_review_with_tbd` | Pass, 100% | `1afc44d756a9c866627facc805b95a7a` |
 
+### Gap Analyzer v0.9 unchanged release regression
+
+| Test | n8n execution | Evaluator | Langfuse trace |
+|---|---:|---|---|
+| GA-T1 | `7614` | Pass, 100% | `d79e95c9fcd703319496abfd757d3311` |
+| GA-T2 | `7617` | Pass, 100% | `1e6357e7ec3e60155a48a537c1240388` |
+| GA-T3 | `7618` | Pass, 100% | `454ba7971bc86f6cf72bb1044a76be22` |
+| GA-T5 | `7619` | Pass, 100% | `eb4d94ec687f49f70cd7297a7d3edd9d` |
+| GA-T9 | `7620` | Pass, 100% | `6f3121dc8e7a6391160465fb8d832a7d` |
+| GA-T10 | `7621` | Pass, 100% | `3ba5da4fb2b9ac3e9a6a00c1beb7bb6d` |
+
 ## Stage-entry rule
 
 Passing Requirement Extraction does not authorize PRD generation. A case may enter the PRD Generator only when:
@@ -106,4 +118,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, approved GA ground truth, and all six approved targeted Gap Analyzer executions**. T4, T6, T7, and T8 are intentionally marked pending rather than assigned inferred GA decisions. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, approved GA ground truth, all six approved targeted Gap Analyzer executions, and the unchanged six-case v0.9 release regression**. T4, T6, T7, and T8 are intentionally marked pending rather than assigned inferred GA decisions. PRD and Story stages are marked unexecuted rather than projected as completed.
