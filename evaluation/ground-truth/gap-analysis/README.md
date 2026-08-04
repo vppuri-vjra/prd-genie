@@ -23,6 +23,7 @@ Each case consumes the corresponding human-approved Requirement Extraction canon
 | GA-T5 | `t05/expected-output.json` | `insufficient / request_clarification` | 10/10 | 100% | Approved |
 | GA-T6 | `t06/expected-output.json` | `insufficient / request_clarification` | 13/13 | 100% | Approved |
 | GA-T7 | `t07/expected-output.json` | `sufficient / proceed` | 8/8 | 100% | Approved |
+| GA-T8 | `t08/expected-output.json` | `sufficient / proceed` | 8/8 | 100% | Approved |
 | GA-T9 | `t09/expected-output.json` | `insufficient / block_generation` | 9/9 | 100% | Approved |
 | GA-T10 | `t10/expected-output.json` | `partially_sufficient / proceed_with_tbd` | 10/10 | 100% | Approved |
 
@@ -33,7 +34,11 @@ Groundedness is calculated as `grounded evaluated claims / total evaluated claim
 - Eligible grounded extraction: GA-T1.
 - Ambiguous requirement and missing dimensions: GA-T2.
 - Unresolved contradiction without invented resolution or risk: GA-T3.
+- Grounded report-export behavior and acceptance criteria: GA-T4.
 - Product fragments without reliable items: GA-T5.
+- Combined material gaps and neutral stakeholder-viewpoint reconciliation: GA-T6.
+- Exact scalability, performance, and integration requirements: GA-T7.
+- Separate persona-to-capability relationships: GA-T8.
 - No meaningful requirements: GA-T9.
 - Grounded dependency risk with explicit TBD: GA-T10.
 
@@ -50,7 +55,7 @@ The initial Gap Analyzer dataset is a representative behavioral-coverage subset 
 | T5 | Y | Covers product fragments for which no reliable requirement items could be extracted. | N |
 | T6 | Y | Contains approved architecture-decision, deadline, and scope gaps plus a neutral unresolved reconciliation issue; expected to request clarification. | N |
 | T7 | Y | Complete extraction with exact scalability, performance, and integration requirements; approved for the positive `sufficient / proceed` path. | N |
-| T8 | N | A larger complete extraction, but it remains in the same initial positive-path category represented by T1. | Y |
+| T8 | Y | Complete extraction with three grounded persona-to-capability relationships; approved for the positive `sufficient / proceed` path. | N |
 | T9 | Y | Covers no meaningful requirements and the generation-blocking path. | N |
 | T10 | Y | Covers partially sufficient input, a grounded dependency risk, and controlled `TBD` processing. | N |
 
@@ -61,11 +66,11 @@ The initial Gap Analyzer dataset is a representative behavioral-coverage subset 
 All T1-T10 inputs remain in the intended end-to-end evaluation scope. The PRD Generator must not receive a case merely because its Requirement Extraction exists. It may receive only a case whose approved Gap Analysis and deterministic gate make it eligible, followed by the required human approval.
 
 - Existing early cases use their approved canonical GA decisions.
-- T8 has no approved canonical GA decision yet; any current outcome description is provisional.
-- After its canonical output is approved, the full GA-T1-T10 regression should run unchanged.
+- All T1-T10 cases now have human-approved canonical GA decisions.
+- The full GA-T1-T10 regression should run unchanged before promoting this complete baseline.
 - Eligible cases test PRD generation quality; clarification and blocked cases test that the PRD Generator is not invoked.
 
-Coverage-strategy groundedness: **100% for the nine approved cases and their documented paths**. The deferral rationale for T8 is derived from its approved Requirement Extraction structure and is explicitly marked as test-planning rationale rather than approved Gap Analysis ground truth.
+Coverage-strategy groundedness: **100% for all ten approved cases and their documented paths**.
 
 ## Approval guardrails
 
@@ -78,4 +83,4 @@ Coverage-strategy groundedness: **100% for the nine approved cases and their doc
 
 `scripts/evaluate_gap_analysis.py` validates schema compliance, decision fields, gap coverage and precision, severity, clarification questions, item and source traceability, contradictions, risks, and groundedness percentage.
 
-The evaluator self-check compared every canonical output with itself and passed all six cases at 100% groundedness. Reports are stored under `evaluation/reports/gap-analysis-self-check/`.
+The recorded evaluator self-check compared the original six canonical outputs with themselves and passed all six at 100% groundedness. GA-T4, GA-T6, GA-T7, and GA-T8 were subsequently human-approved; their evaluator self-check and actual n8n execution are the next validation step. Existing reports are stored under `evaluation/reports/gap-analysis-self-check/`.

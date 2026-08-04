@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T8-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "The extraction contains three grounded personas with three explicitly linked functional capabilities, with no unresolved gaps, contradictions, or risks that prevent PRD generation.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}
