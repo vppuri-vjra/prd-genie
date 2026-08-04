@@ -53,7 +53,7 @@ It distinguishes:
 | T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Not executed; eligible only after approval |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
-| T4 | 🟢 `complete` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
+| T4 | 🟢 `complete` | Actual pass, 100% | Approved GA ground truth; execution pending | 🟢 Expected `sufficient / proceed`, 100% | Expected `eligible_for_human_approval`; `human_review` | Pending | Eligible only after GA execution and human approval |
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
 | T6 | 🟡 `partial` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
 | T7 | 🟢 `complete` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |

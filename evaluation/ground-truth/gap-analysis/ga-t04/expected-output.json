@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T4-GROUND-TRUTH",
+  "information_sufficiency": "sufficient",
+  "generation_allowed": true,
+  "recommended_action": "proceed",
+  "decision_reason": "The extraction contains a grounded report-export functional requirement and explicit acceptance criteria for PDF and CSV exports, with no unresolved gaps, contradictions, or risks that prevent PRD generation.",
+  "gaps": [],
+  "contradictions": [],
+  "risks": []
+}
