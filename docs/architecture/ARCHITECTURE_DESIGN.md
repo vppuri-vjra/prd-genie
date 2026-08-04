@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Architecture Design
-version: 0.1
+version: 0.2
 status: Draft Baseline
-last_updated: 2026-08-02
+last_updated: 2026-08-04
 owner: Vipin Puri
 ---
 
@@ -60,6 +60,33 @@ The editable diagram source is also stored in `assets/diagrams/prd-genie-archite
 PRD Genie uses a sequential pipeline because each downstream artifact depends on an approved upstream artifact. Extraction must precede PRD generation, and the approved PRD must precede story generation. Conditional branches handle clarification, refusal, validation failure, and human revision without changing the main dependency chain.
 
 A router is unnecessary for the MVP because normalized inputs share the same semantic stages. Hierarchical orchestration would add coordination complexity without improving the supplied single-source baseline cases.
+
+### 5.1 Why Gap Analysis precedes PRD generation
+
+The Gap Analyzer is intentionally placed between validated Requirement Extraction and the PRD Generator. Architecturally, it is a pre-generation readiness and safety boundary: the Requirement Extractor establishes what the evidence says, the Gap Analyzer determines whether that evidence is sufficiently complete and internally consistent for controlled generation, and the PRD Generator formats only information that has passed the gate and human review.
+
+This placement provides the following architectural benefits:
+
+| Concern | Architectural rationale |
+|---|---|
+| Separation of concerns | Extraction, readiness assessment, and document generation remain distinct responsibilities with separate contracts. |
+| Fail-fast behavior | Material gaps and contradictions stop or redirect the pipeline before downstream model calls create a PRD or stories. |
+| Hallucination prevention | Unknown information is clarified, blocked, or explicitly marked for `TBD` treatment instead of being silently completed by a generator. |
+| Stable downstream contract | The PRD Generator receives an approved extraction plus an explicit eligibility decision rather than interpreting readiness itself. |
+| Lower coupling | The Gap Analyzer needs the Requirement Extraction contract only; it does not need to understand both PRD and Story output structures. |
+| Reduced cost and rework | The pipeline avoids generating and later discarding a PRD and story set when the source is not ready. |
+| Traceability and observability | The sequence `extract -> analyze -> gate -> approve -> generate` records why generation was allowed, clarified, or blocked. |
+| Human control | The deterministic gate routes eligible cases to approval before any generative document-creation stage begins. |
+
+Placing a checker only after PRD and Story generation would detect some defects, but only after unsupported assumptions or contradictions may have propagated across multiple artifacts. Downstream checking therefore remains valuable but has a different responsibility:
+
+- the pre-generation **Gap Analyzer** evaluates source sufficiency, ambiguity, contradictions, risks, and generation readiness;
+- the post-generation **PRD Validator** evaluates PRD grounding, completeness, template compliance, and approved-source use; and
+- the post-generation **Story/Consistency Validator** evaluates story coverage, acceptance criteria, and cross-stage traceability.
+
+The approved architectural decision is therefore to retain the Gap Analyzer before the PRD Generator and use specialized downstream validators as additional controls rather than moving the Gap Analyzer to the end of the pipeline.
+
+Decision-rationale groundedness: **100%**. The placement follows the approved sequential orchestration, strict stage contracts, deterministic generation gate, human-approval requirement, traceability model, and zero-unsupported-claim target.
 
 ## 6. Components and responsibilities
 
