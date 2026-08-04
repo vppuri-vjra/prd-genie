@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.7-fragment-gap-coverage`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.8-no-requirements-category`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -230,6 +230,18 @@ GA-T5 exercised a partial extraction with no reliable items and three product-re
 Prompt v0.7 preserved all three distinct gaps and their exact source links. Final execution `7602` returned `blocking` dashboard scope, `blocking` real-time behavior, and `high` budget, routed to clarification, and kept PRD generation ineligible. No item, requirement, contradiction, risk, or budget value was invented.
 
 Langfuse accepted trace `444278460f3941a14b0e58b9246b9f9e`. Independent evaluation passed 13/13 at **100% groundedness**. Prompt v0.7 remains a candidate pending GA-T9, GA-T10, and the unchanged six-case regression.
+
+## GA-T9 no-requirements checkpoint — 2026-08-04
+
+GA-T9 exercised the explicit no-meaningful-requirements path using the approved `no_requirements` extraction with an empty item array and `MISS-001` requesting substantive product material.
+
+The test found two deterministic workflow-contract defects before final semantic verification. `Validate Requirement Extraction Input` used outdated statuses and rejected `no_requirements`; it now accepts exactly `complete`, `partial`, and `no_requirements`. `Create Gap Trace Context` contained stale hard-coded test ID `GA-T5`; it now derives `GA-T#` from the preserved `RUN-T#-...` identifier. These corrections change no product content and improve contract consistency and trace identity.
+
+The v0.7 semantic run returned the approved blocked decision and preserved `MISS-001`, but copied extractor category `requirements_source` instead of the approved Gap Analysis category `requirements`. Independent evaluation failed at 84.62% (11/13). Prompt v0.8 added the bounded no-requirements category normalization.
+
+Final execution `7608` returned `insufficient / false / block_generation`, one blocking `requirements` gap linked to `MISS-001`, no contradictions or risks, and gate result `generation_blocked / blocked`. PRD generation remained ineligible.
+
+Langfuse accepted trace `25629f451f919250ca70c259f8712e3d`. Independent evaluation passed 13/13 at **100% groundedness**. Prompt v0.8 remains a candidate pending GA-T10 and the unchanged six-case regression.
 
 ## Groundedness
 

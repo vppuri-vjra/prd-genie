@@ -20,6 +20,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `gap-analyzer-v0.5.md` | Current candidate; adds the approved high-versus-blocking severity boundary | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.6.md` | Current candidate; enforces the exact contradiction contract and blocking-contradiction sufficiency boundary | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.7.md` | Current candidate; preserves product-fragment gaps, explicit TBDs, specific categories, and no-item severity boundaries | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.8.md` | Current candidate; normalizes the no-requirements source category while preserving blocking source traceability | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -54,6 +55,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `gap-analyzer-v0.5-severity-boundary` | 2026-08-04 | v0.4 overstated missing dimensions as `blocking` | Use `high` for missing dimensions attached to an existing grounded item; reserve `blocking` for no reliable requirement, no meaningful requirements, or unresolved material contradiction | GA-T2 passed 13/13 at 100%; Langfuse trace `7c39feb2c77de8b7467cccbd37737208`; remaining GA regression pending | Pending |
 | `gap-analyzer-v0.6-contradiction-contract` | 2026-08-04 | GA-T3 v0.5 copied an extraction-only clarification field and returned `partially_sufficient` for a core blocking contradiction | Enforce exact contradiction fields, map item links, prohibit invented risks/resolution, and classify core blocking contradictions as insufficient | GA-T3 passed 13/13 at 100%; Langfuse trace `e277c0f2afa297cd37d33f243e5dc714`; remaining GA regression pending | Pending |
 | `gap-analyzer-v0.7-fragment-gap-coverage` | 2026-08-04 | GA-T5 v0.6 omitted budget TBD, generalized a specific category, and understated a no-item behavior gap | Preserve all material product fragments, explicit TBDs, specific categories, and blocking severity for undefined capability/behavior when no reliable item exists | GA-T5 passed 13/13 at 100%; Langfuse trace `444278460f3941a14b0e58b9246b9f9e`; GA-T9, GA-T10 and full regression pending | Pending |
+| `gap-analyzer-v0.8-no-requirements-category` | 2026-08-04 | GA-T9 v0.7 returned the approved blocked decision and `MISS-001` linkage but copied category `requirements_source`; evaluator scored 84.62% | Normalize `requirements_source` to Gap Analysis category `requirements` only for the no-requirements path; retain blocking severity, source linkage, and block decision | GA-T9 passed 13/13 at 100%; n8n execution `7608`; Langfuse trace `25629f451f919250ca70c259f8712e3d`; GA-T10 and full regression pending | Pending |
 
 ## Version-Control Rules
 
