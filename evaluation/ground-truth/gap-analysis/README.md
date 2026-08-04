@@ -21,6 +21,7 @@ Each case consumes the corresponding human-approved Requirement Extraction canon
 | GA-T3 | `t03/expected-output.json` | `insufficient / request_clarification` | 9/9 | 100% | Approved |
 | GA-T4 | `t04/expected-output.json` | `sufficient / proceed` | 8/8 | 100% | Approved |
 | GA-T5 | `t05/expected-output.json` | `insufficient / request_clarification` | 10/10 | 100% | Approved |
+| GA-T6 | `t06/expected-output.json` | `insufficient / request_clarification` | 13/13 | 100% | Approved |
 | GA-T9 | `t09/expected-output.json` | `insufficient / block_generation` | 9/9 | 100% | Approved |
 | GA-T10 | `t10/expected-output.json` | `partially_sufficient / proceed_with_tbd` | 10/10 | 100% | Approved |
 
@@ -46,7 +47,7 @@ The initial Gap Analyzer dataset is a representative behavioral-coverage subset 
 | T3 | Y | Covers an explicit unresolved contradiction without inventing a resolution or unsupported risk. | N |
 | T4 | Y | Complete extraction with grounded export behavior and acceptance criteria; approved for the positive `sufficient / proceed` path. | N |
 | T5 | Y | Covers product fragments for which no reliable requirement items could be extracted. | N |
-| T6 | N | Contains both missing information and a contradiction; the initial set covers these behaviors independently through T2 and T3. | Y |
+| T6 | Y | Contains approved architecture-decision, deadline, and scope gaps plus a neutral unresolved reconciliation issue; expected to request clarification. | N |
 | T7 | N | Complete extraction with no recorded missing information or contradictions; it adds no new initial routing outcome beyond T1. | Y |
 | T8 | N | A larger complete extraction, but it remains in the same initial positive-path category represented by T1. | Y |
 | T9 | Y | Covers no meaningful requirements and the generation-blocking path. | N |
@@ -59,11 +60,11 @@ The initial Gap Analyzer dataset is a representative behavioral-coverage subset 
 All T1-T10 inputs remain in the intended end-to-end evaluation scope. The PRD Generator must not receive a case merely because its Requirement Extraction exists. It may receive only a case whose approved Gap Analysis and deterministic gate make it eligible, followed by the required human approval.
 
 - Existing early cases use their approved canonical GA decisions.
-- T6, T7, and T8 have no approved canonical GA decision yet; any current outcome description is provisional.
-- After those three canonical outputs are approved, the full GA-T1-T10 regression should run unchanged.
+- T7 and T8 have no approved canonical GA decision yet; any current outcome description is provisional.
+- After those two canonical outputs are approved, the full GA-T1-T10 regression should run unchanged.
 - Eligible cases test PRD generation quality; clarification and blocked cases test that the PRD Generator is not invoked.
 
-Coverage-strategy groundedness: **100% for the seven approved cases and their documented paths**. The deferral rationale for T6, T7, and T8 is derived from their approved Requirement Extraction structures and is explicitly marked as test-planning rationale rather than approved Gap Analysis ground truth.
+Coverage-strategy groundedness: **100% for the eight approved cases and their documented paths**. The deferral rationale for T7 and T8 is derived from their approved Requirement Extraction structures and is explicitly marked as test-planning rationale rather than approved Gap Analysis ground truth.
 
 ## Approval guardrails
 

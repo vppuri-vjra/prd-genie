@@ -55,7 +55,7 @@ It distinguishes:
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
 | T4 | 🟢 `complete` | Actual pass, 100% | Approved GA ground truth; execution pending | 🟢 Expected `sufficient / proceed`, 100% | Expected `eligible_for_human_approval`; `human_review` | Pending | Eligible only after GA execution and human approval |
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
-| T6 | 🟡 `partial` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
+| T6 | 🟡 `partial` | Actual pass, 100% | Approved GA ground truth; execution pending | 🔴 Expected `insufficient / request_clarification`, 100% | Expected `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending scope, decision, and deadline clarification |
 | T7 | 🟢 `complete` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
 | T8 | 🟢 `complete` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
 | T9 | ⚫ `no_requirements` | Actual pass, 100% | Actual GA execution | ⛔ `insufficient / block_generation`, 100% | `generation_blocked`; `blocked` | Not applicable | Must not be invoked |
