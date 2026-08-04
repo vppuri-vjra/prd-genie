@@ -13,7 +13,10 @@
 | Groundedness | **100%** |
 | Next route | `prd_generation` |
 | PRD-generation eligible | `true` |
-| Completed at | `2026-08-04T22:18:25.921Z` |
+| Completed at | `2026-08-04T22:46:15.657Z` |
+| Langfuse region | US |
+| Langfuse trace ID | `04c6b3386a8197b7c553429a57b75bc8` |
+| Langfuse ingestion | **Accepted — HTTP 200** |
 
 ## Approved scope
 
@@ -37,7 +40,9 @@
 - Route: `prd_generation`.
 - Model call: none.
 - Token usage: 0 input, 0 output, 0 total.
-- Audit trace ID prepared: `6acf2c6fb5835c6b8b3f61aebc7230ad`.
+- Audit trace ID: `04c6b3386a8197b7c553429a57b75bc8`.
+- Langfuse observation: `human-approval` span.
+- Langfuse ingestion: accepted (`HTTP 200`).
 
 ## Node evidence
 
@@ -48,6 +53,7 @@ All nodes completed successfully:
 3. `Parse and Validate Human Approval`
 4. `Deterministic Approval Router`
 5. `Build Approval Trace Payload`
-6. `Record Approval Result`
+6. `Send Approval Trace to Langfuse`
+7. `Record Approval Result`
 
-The audit payload was built but was not transmitted to Langfuse in this canary. Langfuse delivery and ingestion verification remain the next observability increment.
+The audit payload was transmitted to Langfuse US and verified on the trace detail page. It is a deterministic, non-LLM approval span: `model_call=false` and token usage is 0 input, 0 output, 0 total.

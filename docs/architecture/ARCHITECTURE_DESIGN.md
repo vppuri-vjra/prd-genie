@@ -97,12 +97,12 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; v1.5 release regression passed 10/10 |
 | Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Implemented; v1.0 release regression passed 10/10 |
 | Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
-| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract v1.0.0 approved; T1 standard path passed at 100%; remaining routes and integration pending |
+| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract v1.0.0 approved; T1 standard path passed at 100%; Langfuse audit trace verified; remaining routes and connected-pipeline integration pending |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Planned |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Planned |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
-| Langfuse Adapter | Emit trace, generation, validation, usage, and cost data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor |
+| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, and Human Approval T1 path |
 
 ## 7. Data contracts
 
@@ -128,7 +128,7 @@ The approval stage receives the extraction, Gap Analysis, and deterministic gate
 
 Each LLM stage should create a Langfuse generation nested under one pipeline trace. Required metadata includes run ID, test ID, agent name, prompt version, model, input, output, validation, latency, input/output tokens, estimated cost, environment, and error details. Validation and failure observations remain visible even when the pipeline stops.
 
-The current Requirement Extractor has root, generation, and validation observations plus failure-path tracing. The pattern will be extended to all later agents.
+The Requirement Extractor and Gap Analyzer use root, generation, and validation observations plus deterministic stage observations. Human Approval emits a non-LLM `human-approval` span with the decision, route, evidence checks, 100% groundedness, `model_call=false`, and zero token usage. The verified T1 approval trace is `04c6b3386a8197b7c553429a57b75bc8` in Langfuse US.
 
 ## 11. Failure handling
 

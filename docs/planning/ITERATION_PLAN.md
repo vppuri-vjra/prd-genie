@@ -44,5 +44,5 @@ The formal plan models four one-week iterations. Actual execution is intentional
 - Langfuse traces Requirement Extractor success and failure paths.
 - BRD, Product PRD, Architecture Design, diagram, and iteration plan are drafted as version 0.1.
 - Iteration 1 is complete. Ground truth, later agents, assignments, visuals, and final submission package remain open.
-- Human Approval contract v1.0.0 was approved by Vipin Puri on 2026-08-04; implementation and demonstration remain Iteration 3 work.
-- Human Approval T1 standard-approval canary passed at 100% groundedness on 2026-08-04; Langfuse delivery, additional decision routes, and connected-pipeline testing remain open.
+- Human Approval contract v1.0.0 was approved by Vipin Puri on 2026-08-04; its T1 standard path is implemented and demonstrated.
+- Human Approval T1 standard-approval canary passed at 100% groundedness on 2026-08-04. Langfuse US accepted and displayed the non-LLM approval trace `04c6b3386a8197b7c553429a57b75bc8`; additional decision routes and connected-pipeline testing remain open.

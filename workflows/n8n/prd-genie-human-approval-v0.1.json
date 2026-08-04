@@ -24,7 +24,7 @@
       },
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
-      "position": [-900, 0],
+      "position": [-600, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0101",
       "name": "Human Review Form",
       "webhookId": "5c083115-92cb-47d1-a4d4-8a20457d0201"
@@ -35,7 +35,7 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-660, 0],
+      "position": [-400, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0102",
       "name": "Build T1 Human Review Packet"
     },
@@ -45,7 +45,7 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-140, 0],
+      "position": [-200, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0104",
       "name": "Parse and Validate Human Approval"
     },
@@ -55,27 +55,47 @@
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [120, 0],
+      "position": [0, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0105",
       "name": "Deterministic Approval Router"
     },
     {
       "parameters": {
-        "jsCode": "const review = $input.first().json; const traceId = Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join(''); return [{ json: { ...review, audit: { event_type: 'human_approval', observation_type: 'event', trace_name: 'prd-genie-human-approval', trace_id: traceId, model_call: false, token_usage: { input: 0, output: 0, total: 0 }, run_id: review.run_id, reviewer: review.reviewer, review_status: review.review_status, next_route: review.next_route, recorded_at: new Date().toISOString() } } }];"
+        "jsCode": "const review = $input.first().json; const randomHex = (length) => Array.from({length}, () => Math.floor(Math.random()*16).toString(16)).join(''); const traceId = randomHex(32); const spanId = randomHex(16); const started = BigInt(Date.now()) * 1000000n; const ended = started + 1000000n; const attr = (key, value) => ({ key, value: { stringValue: typeof value === 'string' ? value : JSON.stringify(value) } }); const audit = { event_type: 'human_approval', observation_type: 'event', trace_name: 'prd-genie-human-approval', trace_id: traceId, model_call: false, token_usage: { input: 0, output: 0, total: 0 }, run_id: review.run_id, reviewer: review.reviewer, review_status: review.review_status, next_route: review.next_route, recorded_at: new Date().toISOString() }; const safeInput = { run_id: review.run_id, gate_status_reviewed: review.gate_status_reviewed, approved_item_ids: review.approved_item_ids, rejected_item_ids: review.rejected_item_ids }; const safeOutput = { review_status: review.review_status, next_route: review.next_route, evidence_checks: review.evidence_checks, validation: review.validation, routing: review.routing }; const attributes = [ attr('langfuse.trace.name', 'prd-genie-human-approval'), attr('langfuse.environment', 'evaluation'), attr('langfuse.version', 'human-approval-v0.1.0'), attr('langfuse.trace.tags', ['capstone','human-approval','T1']), attr('langfuse.trace.metadata.run_id', review.run_id), attr('langfuse.trace.metadata.reviewer', review.reviewer), attr('langfuse.trace.metadata.model_call', false), attr('langfuse.observation.type', 'SPAN'), attr('langfuse.observation.input', safeInput), attr('langfuse.observation.output', safeOutput), attr('langfuse.observation.metadata.token_usage', audit.token_usage), attr('langfuse.observation.metadata.groundedness_percent', 100) ]; const span = { traceId, spanId, name: 'human-approval', kind: 1, startTimeUnixNano: started.toString(), endTimeUnixNano: ended.toString(), attributes, status: { code: 1 } }; return [{ json: { ...review, audit, otlp_payload: { resourceSpans: [{ resource: { attributes: [attr('service.name','prd-genie-n8n'), attr('deployment.environment.name','evaluation')] }, scopeSpans: [{ scope: { name: 'prd-genie-human-approval', version: 'v0.1.0' }, spans: [span] }] }] } } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [380, 0],
+      "position": [200, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0106",
       "name": "Build Approval Trace Payload"
     },
     {
       "parameters": {
-        "jsCode": "const result = $input.first().json; return [{ json: { schema_version: '1.0.0', result_type: 'human_approval_execution_result', run_id: result.run_id, execution_status: 'completed', contract_status: 'passed', groundedness_percent: 100, human_review: { review_status: result.review_status, reviewer: result.reviewer, reviewed_at: result.reviewed_at, approved_item_ids: result.approved_item_ids, rejected_item_ids: result.rejected_item_ids, evidence_checks: result.evidence_checks, review_notes: result.review_notes, next_route: result.next_route }, validation: result.validation, routing: result.routing, audit: result.audit, recorded_at: new Date().toISOString() } }];"
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "x-langfuse-ingestion-version", "value": "4" }] },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.otlp_payload) }}",
+        "options": { "response": { "response": { "fullResponse": true, "neverError": false, "responseFormat": "text" } } }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [400, 0],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0108",
+      "name": "Send Approval Trace to Langfuse"
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $('Build Approval Trace Payload').first().json; const response = $input.first().json; const statusCode = response.statusCode ?? 200; return [{ json: { schema_version: '1.0.0', result_type: 'human_approval_execution_result', run_id: result.run_id, execution_status: 'completed', contract_status: 'passed', groundedness_percent: 100, human_review: { review_status: result.review_status, reviewer: result.reviewer, reviewed_at: result.reviewed_at, approved_item_ids: result.approved_item_ids, rejected_item_ids: result.rejected_item_ids, evidence_checks: result.evidence_checks, review_notes: result.review_notes, next_route: result.next_route }, validation: result.validation, routing: result.routing, audit: result.audit, langfuse: { region: 'US', trace_id: result.audit.trace_id, ingestion_status_code: statusCode, ingestion_accepted: statusCode >= 200 && statusCode < 300 }, recorded_at: new Date().toISOString() } }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [640, 0],
+      "position": [600, 0],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0107",
       "name": "Record Approval Result"
     }
@@ -85,7 +105,8 @@
     "Build T1 Human Review Packet": { "main": [[{ "node": "Parse and Validate Human Approval", "type": "main", "index": 0 }]] },
     "Parse and Validate Human Approval": { "main": [[{ "node": "Deterministic Approval Router", "type": "main", "index": 0 }]] },
     "Deterministic Approval Router": { "main": [[{ "node": "Build Approval Trace Payload", "type": "main", "index": 0 }]] },
-    "Build Approval Trace Payload": { "main": [[{ "node": "Record Approval Result", "type": "main", "index": 0 }]] }
+    "Build Approval Trace Payload": { "main": [[{ "node": "Send Approval Trace to Langfuse", "type": "main", "index": 0 }]] },
+    "Send Approval Trace to Langfuse": { "main": [[{ "node": "Record Approval Result", "type": "main", "index": 0 }]] }
   },
   "pinData": {},
   "settings": { "executionOrder": "v1" },
