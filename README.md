@@ -118,6 +118,14 @@ The initial extractor implementation package includes:
 
 The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md).
 
+## Additional n8n recovery exports
+
+- [`workflows/n8n/prd-genie-gap-analyzer-generation-gate-v1.0.json`](workflows/n8n/prd-genie-gap-analyzer-generation-gate-v1.0.json) - validated inactive export of the promoted 11-node Gap Analyzer and deterministic Generation Gate workflow
+- [`workflows/n8n/prd-genie-human-approval-v0.1.json`](workflows/n8n/prd-genie-human-approval-v0.1.json) - inactive seven-node Human Approval workflow with Langfuse audit delivery
+- [`workflows/n8n/prd-genie-failure-observer-v0.1.json`](workflows/n8n/prd-genie-failure-observer-v0.1.json) - inactive failure-observability workflow
+
+Exports contain credential references by ID and name, not API-key values. Credentials must be reconnected after recovery import.
+
 ## Baseline evaluation
 
 The current cross-stage status and evidence chain are maintained in the [`PRD Genie End-to-End Test Traceability Matrix`](evaluation/END_TO_END_TEST_TRACEABILITY_MATRIX.md).

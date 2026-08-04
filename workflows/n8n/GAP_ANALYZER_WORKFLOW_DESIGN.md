@@ -6,6 +6,8 @@ Approved design for workflow version `v0.1.0`; the promoted prompt baseline is `
 
 Implementation status: **Complete for the T1-T10 release baseline** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer + Generation Gate v1.0**.
 
+Validated recovery export: `workflows/n8n/prd-genie-gap-analyzer-generation-gate-v1.0.json` (11 nodes, 10 connections, inactive by default, credential references only; no embedded secrets).
+
 ## Purpose
 
 Run the Gap Analyzer as a separately testable n8n workflow before connecting it to the full PRD Genie pipeline. The workflow consumes validated Requirement Extractor JSON, produces schema-valid Gap Analysis JSON, applies a deterministic generation gate, and records an observable Langfuse trace.
