@@ -7,7 +7,7 @@
   "supported_claims": 13,
   "total_evaluated_claims": 13,
   "langfuse_trace_id": null,
-  "evaluated_at": "2026-08-04T01:44:25.907336+00:00",
+  "evaluated_at": "2026-08-04T17:26:31.058758+00:00",
   "checks": [
     {
       "name": "Actual output conforms to the Gap Analysis schema.",

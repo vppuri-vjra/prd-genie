@@ -17,7 +17,7 @@ Each case consumes the corresponding human-approved Requirement Extraction canon
 | Case | Extraction source | Expected decision | Grounded claims | Groundedness | Status |
 |---|---|---|---:|---:|---|
 | GA-T1 | `t01/expected-output.json` | `sufficient / proceed` | 8/8 | 100% | Approved |
-| GA-T2 | `t02/expected-output.json` | `insufficient / request_clarification` | 10/10 | 100% | Approved |
+| GA-T2 | `t02/expected-output.json` | `insufficient / request_clarification` | 13/13 | 100% | Approved |
 | GA-T3 | `t03/expected-output.json` | `insufficient / request_clarification` | 9/9 | 100% | Approved |
 | GA-T5 | `t05/expected-output.json` | `insufficient / request_clarification` | 10/10 | 100% | Approved |
 | GA-T9 | `t09/expected-output.json` | `insufficient / block_generation` | 9/9 | 100% | Approved |
