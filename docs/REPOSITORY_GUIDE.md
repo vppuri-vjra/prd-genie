@@ -21,6 +21,7 @@ This repository is organized for straightforward grading, reproducibility, and t
 | `evaluation/ground-truth/` | Versioned, human-reviewed canonical expected outputs, allowed variations, and prohibited claims |
 | `evaluation/results/` | Baseline summary and per-run outputs |
 | `evaluation/scorecards/` | Evaluation rubric, automated checks, and reviewer scorecards |
+| `evaluation/END_TO_END_TEST_TRACEABILITY_MATRIX.md` | Central T1-T10 progression, eligibility, evaluator, and observability evidence dashboard |
 | `examples/inputs/` | Demonstration-safe example inputs |
 | `examples/outputs/` | Corresponding extraction, PRD, and story outputs |
 | `assets/diagrams/` | Source and exported architecture diagrams |

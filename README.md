@@ -120,6 +120,8 @@ The model decision and comparison plan are documented in [`ADR-003`](docs/decisi
 
 ## Baseline evaluation
 
+The current cross-stage status and evidence chain are maintained in the [`PRD Genie End-to-End Test Traceability Matrix`](evaluation/END_TO_END_TEST_TRACEABILITY_MATRIX.md).
+
 The project includes 12 required baseline cases:
 
 - T1-T10 evaluate extraction, ambiguity handling, contradictions, exact-value preservation, personas, empty input, and dependencies.
