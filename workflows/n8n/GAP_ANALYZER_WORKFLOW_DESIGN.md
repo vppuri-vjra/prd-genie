@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.2-materiality-boundary`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.5-severity-boundary`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -204,6 +204,16 @@ The final end-to-end `GA-T1` run completed successfully as n8n execution `7282` 
 - Langfuse ingestion accepted and authenticated, job `3b2b605e-e187-436e-a4ec-2414fff515af`.
 
 Result-recording groundedness: **100%**. The node copies approved workflow state and confirmed ingestion metadata; it adds no product fact and performs no model interpretation.
+
+## GA-T2 clarification-path checkpoint — 2026-08-04
+
+GA-T2 exercised the `insufficient / false / request_clarification` path using the corrected canonical T2 extraction. The test exposed and corrected an outdated parser lookup that still expected separate extraction arrays instead of canonical `items[]`. Parser severity validation was also reconciled with the authoritative schema values `low`, `medium`, `high`, and `blocking`.
+
+Prompt iterations v0.3 and v0.4 corrected gap decomposition, exact nested fields, source traceability, material missing-information coverage, and the insufficient-versus-partially-sufficient decision boundary. v0.5 added the approved severity boundary between high missing dimensions and genuinely blocking absence or contradiction.
+
+The final execution `7595` returned all four approved high-severity gaps, preserved `FR-001` plus `MISS-001` through `MISS-004`, and routed to clarification with PRD generation ineligible. Langfuse accepted trace `7c39feb2c77de8b7467cccbd37737208`. The independent evaluator passed 13/13 checks at **100% groundedness**.
+
+Prompt v0.5 remains a candidate until the remaining approved Gap Analyzer cases pass unchanged.
 
 ## Groundedness
 

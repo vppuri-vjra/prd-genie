@@ -15,6 +15,9 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `requirement-extractor-v0.8.md` | Previous verified baseline; dependency/risk correction passed T10 | `schemas/requirement-extraction.schema.json` |
 | `gap-analyzer-v0.1.md` | Approved design baseline through role, grounding, generation decisions, severity, and clarification-question rules; implementation and evaluation pending | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.2.md` | Targeted candidate; applies a materiality boundary before promoting extractor missing-information records into Gap Analyzer gaps | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.3.md` | Superseded diagnostic candidate; exposed exact nested-field and severity-configuration defects | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.4.md` | Superseded targeted candidate; corrected schema fields, coverage and sufficiency but overstated GA-T2 severity | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.5.md` | Current candidate; adds the approved high-versus-blocking severity boundary | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -44,6 +47,9 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 |---|---|---|---|---|---|
 | `gap-analyzer-v0.1` | 2026-08-03 | Approved contract, grounding, decision, severity, and clarification design | Initial complete Gap Analyzer baseline | First `GA-T1` n8n run was fully grounded but failed all three canonical decision fields by promoting optional clarification records into material gaps | Pending |
 | `gap-analyzer-v0.2-materiality-boundary` | 2026-08-03 | `GA-T1` actual returned `partially_sufficient/false/request_clarification`; approved result is `sufficient/true/proceed` | Require a materiality test before promoting `MISS-###` records; explicitly preserve generic users and `Q3` as stated when exact documentation requires no invention | Targeted `GA-T1` rerun passed with 100% groundedness and 3/3 canonical decision agreement; remaining Gap Analyzer regression cases pending | Pending |
+| `gap-analyzer-v0.3-contract-precision` | 2026-08-04 | Initial GA-T2 run merged material topics and exposed an outdated parser lookup | Require distinct material gaps and precise trace links; diagnostic severity rule was later reversed after schema reconciliation | Superseded; failed exact nested-field and sufficiency validation | Pending |
+| `gap-analyzer-v0.4-schema-decision` | 2026-08-04 | v0.3 used `affected_item_ids`, omitted users, and returned `partially_sufficient` | Enforce exact gap fields, material MISS coverage, normalized categories and the undefined-capability decision boundary | Structurally passed; final independent GA-T2 result needs review at 92.31% because all four severities were `blocking` instead of `high` | Pending |
+| `gap-analyzer-v0.5-severity-boundary` | 2026-08-04 | v0.4 overstated missing dimensions as `blocking` | Use `high` for missing dimensions attached to an existing grounded item; reserve `blocking` for no reliable requirement, no meaningful requirements, or unresolved material contradiction | GA-T2 passed 13/13 at 100%; Langfuse trace `7c39feb2c77de8b7467cccbd37737208`; remaining GA regression pending | Pending |
 
 ## Version-Control Rules
 

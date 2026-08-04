@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T2-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The requested reporting capability is ambiguous. The source provides no specific Competitor X capability, reporting metrics, report format or presentation, or target users from which to define a grounded and testable PRD requirement without invention.",
+  "gaps": [
+    { "id": "GAP-001", "category": "metrics", "description": "Required reporting metrics are not specified, so the desired reporting content cannot be defined or tested.", "severity": "blocking", "clarification_question": "Which metrics should the reports contain?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-001"] },
+    { "id": "GAP-002", "category": "output_format", "description": "The required report format or presentation is not specified, so the requested reporting output cannot be defined.", "severity": "blocking", "clarification_question": "What report format or presentation is required?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-002"] },
+    { "id": "GAP-003", "category": "users", "description": "The target users for better reporting are not identified, and no usable user scope can be preserved for the ambiguous reporting capability.", "severity": "blocking", "clarification_question": "Which users need the improved reporting?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-003"] },
+    { "id": "GAP-004", "category": "reference_scope", "description": "The specific Competitor X reporting capabilities to use as a reference are not identified, so the referenced capability cannot be translated into a grounded requirement.", "severity": "blocking", "clarification_question": "Which specific Competitor X reporting capabilities should be used as the reference?", "related_item_ids": ["FR-001"], "source_missing_information_ids": ["MISS-004"] }
+  ],
+  "contradictions": [],
+  "risks": []
+}
