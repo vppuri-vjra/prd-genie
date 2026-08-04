@@ -1,6 +1,6 @@
 ---
 title: PRD Genie End-to-End Test Traceability Matrix
-version: 0.1
+version: 0.2
 status: Living Evidence Dashboard
 last_updated: 2026-08-04
 owner: Vipin Puri
@@ -26,8 +26,8 @@ It distinguishes:
 | Requirement Extractor ground truth | 10/10 | Approved |
 | Requirement Extractor unchanged release regression | 10/10 | Passed at 100% |
 | Gap Analyzer ground truth | 6/10 | T1, T2, T3, T5, T9 and T10 approved |
-| Gap Analyzer end-to-end execution | 2/10 | GA-T1 and GA-T2 passed at 100% |
-| Deterministic generation-gate execution | 2/10 | Positive/human-review and clarification routes verified |
+| Gap Analyzer end-to-end execution | 3/10 | GA-T1, GA-T2 and GA-T3 passed at 100% |
+| Deterministic generation-gate execution | 3/10 | Positive/human-review and two clarification conditions verified |
 | Human approval for PRD generation | 0/10 | Not yet executed as a workflow stage |
 | PRD Generator evaluation | 0/10 | Not yet implemented or executed |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
@@ -51,7 +51,7 @@ It distinguishes:
 |---|---|---|---|---|---|---|---|
 | T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Not executed; eligible only after approval |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
-| T3 | 🟡 `partial` | Actual pass, 100% | Approved GA ground truth | 🔴 Expected `insufficient / request_clarification` | Expected clarification route | Not applicable until clarified | Blocked pending GA execution and clarification |
+| T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
 | T4 | 🟢 `complete` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
 | T5 | 🟡 `partial` | Actual pass, 100% | Approved GA ground truth | 🔴 Expected `insufficient / request_clarification` | Expected clarification route | Not applicable until clarified | Blocked pending GA execution and clarification |
 | T6 | 🟡 `partial` | Actual pass, 100% | Deferred GA candidate | ⚪ No approved GA decision | Pending GA ground truth | Pending | Pending GA decision |
@@ -83,6 +83,7 @@ It distinguishes:
 |---|---|---:|---|---|---|---|
 | GA-T1 | `gap-analyzer-v0.2-materiality-boundary` | `7282` | `sufficient / proceed` | `eligible_for_human_approval / human_review` | Pass, 100% | `76d44c23ccd385be8973435d7886aef2` |
 | GA-T2 | `gap-analyzer-v0.5-severity-boundary` | `7595` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `7c39feb2c77de8b7467cccbd37737208` |
+| GA-T3 | `gap-analyzer-v0.6-contradiction-contract` | `7600` | `insufficient / request_clarification` | `clarification_required / clarification` | Pass, 100% | `e277c0f2afa297cd37d33f243e5dc714` |
 
 ## Stage-entry rule
 
@@ -102,5 +103,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, approved GA ground truth, and actual GA-T1/GA-T2 executions**. T4, T6, T7, and T8 are intentionally marked pending rather than assigned inferred GA decisions. PRD and Story stages are marked unexecuted rather than projected as completed.
-
+Matrix groundedness: **100% for the recorded Requirement Extractor results, approved GA ground truth, and actual GA-T1/GA-T2/GA-T3 executions**. T4, T6, T7, and T8 are intentionally marked pending rather than assigned inferred GA decisions. PRD and Story stages are marked unexecuted rather than projected as completed.

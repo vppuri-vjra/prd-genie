@@ -2,7 +2,7 @@
 
 ## Status
 
-Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.5-severity-boundary`.
+Approved design for workflow version `v0.1.0`; the implemented candidate prompt is `gap-analyzer-v0.6-contradiction-contract`.
 
 Implementation status: **In progress** in n8n workflow `xrtf52GK57IRI1NI`, named **PRD Genie - Gap Analyzer v0.1**.
 
@@ -214,6 +214,14 @@ Prompt iterations v0.3 and v0.4 corrected gap decomposition, exact nested fields
 The final execution `7595` returned all four approved high-severity gaps, preserved `FR-001` plus `MISS-001` through `MISS-004`, and routed to clarification with PRD generation ineligible. Langfuse accepted trace `7c39feb2c77de8b7467cccbd37737208`. The independent evaluator passed 13/13 checks at **100% groundedness**.
 
 Prompt v0.5 remains a candidate until the remaining approved Gap Analyzer cases pass unchanged.
+
+## GA-T3 contradiction-path checkpoint — 2026-08-04
+
+GA-T3 exercised an unresolved contradiction between five-second dashboard refresh and minimizing API calls. The unchanged v0.5 prompt preserved the contradiction but copied the extraction-only clarification field into the Gap Analysis object and returned `partially_sufficient`; strict validation stopped the workflow.
+
+Prompt v0.6 enforced the exact four-field contradiction contract and the approved insufficiency boundary for a core blocking contradiction. Final execution `7600` returned `insufficient / false / request_clarification`, preserved `CTR-001` with `FR-001` and `NFR-001`, emitted no gap or risk, and routed to clarification with PRD generation ineligible.
+
+Langfuse accepted trace `e277c0f2afa297cd37d33f243e5dc714`. Independent evaluation passed 13/13 checks at **100% groundedness**. Prompt v0.6 remains a candidate pending GA-T5, GA-T9, GA-T10, and the unchanged six-case regression.
 
 ## Groundedness
 

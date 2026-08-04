@@ -18,6 +18,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `gap-analyzer-v0.3.md` | Superseded diagnostic candidate; exposed exact nested-field and severity-configuration defects | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.4.md` | Superseded targeted candidate; corrected schema fields, coverage and sufficiency but overstated GA-T2 severity | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.5.md` | Current candidate; adds the approved high-versus-blocking severity boundary | `schemas/gap-analysis.schema.json` |
+| `gap-analyzer-v0.6.md` | Current candidate; enforces the exact contradiction contract and blocking-contradiction sufficiency boundary | `schemas/gap-analysis.schema.json` |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -50,6 +51,7 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 | `gap-analyzer-v0.3-contract-precision` | 2026-08-04 | Initial GA-T2 run merged material topics and exposed an outdated parser lookup | Require distinct material gaps and precise trace links; diagnostic severity rule was later reversed after schema reconciliation | Superseded; failed exact nested-field and sufficiency validation | Pending |
 | `gap-analyzer-v0.4-schema-decision` | 2026-08-04 | v0.3 used `affected_item_ids`, omitted users, and returned `partially_sufficient` | Enforce exact gap fields, material MISS coverage, normalized categories and the undefined-capability decision boundary | Structurally passed; final independent GA-T2 result needs review at 92.31% because all four severities were `blocking` instead of `high` | Pending |
 | `gap-analyzer-v0.5-severity-boundary` | 2026-08-04 | v0.4 overstated missing dimensions as `blocking` | Use `high` for missing dimensions attached to an existing grounded item; reserve `blocking` for no reliable requirement, no meaningful requirements, or unresolved material contradiction | GA-T2 passed 13/13 at 100%; Langfuse trace `7c39feb2c77de8b7467cccbd37737208`; remaining GA regression pending | Pending |
+| `gap-analyzer-v0.6-contradiction-contract` | 2026-08-04 | GA-T3 v0.5 copied an extraction-only clarification field and returned `partially_sufficient` for a core blocking contradiction | Enforce exact contradiction fields, map item links, prohibit invented risks/resolution, and classify core blocking contradictions as insufficient | GA-T3 passed 13/13 at 100%; Langfuse trace `e277c0f2afa297cd37d33f243e5dc714`; remaining GA regression pending | Pending |
 
 ## Version-Control Rules
 

@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-GROUND-TRUTH",
+  "information_sufficiency": "insufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "The extracted functional and non-functional requirements contain an unresolved material contradiction: a five-second dashboard auto-refresh may conflict with the requirement to minimize API calls. The approved behavior cannot be represented safely without stakeholder clarification.",
+  "gaps": [],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Refreshing the dashboard every 5 seconds may increase API calls while API calls are required to be minimized.",
+      "severity": "blocking",
+      "related_item_ids": ["FR-001", "NFR-001"]
+    }
+  ],
+  "risks": []
+}

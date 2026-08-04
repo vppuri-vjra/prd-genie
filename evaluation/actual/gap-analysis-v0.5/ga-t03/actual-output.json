@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T3-GROUND-TRUTH",
+  "information_sufficiency": "partially_sufficient",
+  "generation_allowed": false,
+  "recommended_action": "request_clarification",
+  "decision_reason": "Useful requirements exist, but the unresolved contradiction between five-second dashboard auto-refresh and minimizing API calls requires stakeholder resolution before a grounded PRD can represent both requirements safely.",
+  "gaps": [],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "Refreshing the dashboard every 5 seconds may increase API calls while API calls are required to be minimized.",
+      "severity": "blocking",
+      "clarification_question": "How should the five-second auto-refresh requirement and API-call minimization requirement be reconciled, and which takes precedence if both cannot be satisfied?",
+      "related_item_ids": ["FR-001", "NFR-001"]
+    }
+  ],
+  "risks": []
+}
