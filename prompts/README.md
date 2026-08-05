@@ -23,6 +23,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `gap-analyzer-v0.8.md` | Current candidate; normalizes the no-requirements source category while preserving blocking source traceability | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v0.9.md` | Promoted Gap Analyzer baseline; preserves all approved materiality, contradiction, fragment, no-requirements, and dependency-TBD behaviors | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v1.0.md` | Promoted Gap Analyzer baseline; requires traceable coverage of every material upstream missing-information record and preserves all v0.9 behavior | `schemas/gap-analysis.schema.json` |
+| `story-breakdown-v0.1.md` | T12 implementation candidate; enforces the approved minimal epic-feature-story hierarchy, controlled TBD benefit, and PRD ID traceability | `schemas/story-breakdown.schema.json` v1.1.0 |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -88,3 +89,12 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 - Release evidence: `evaluation/results/gap-analysis-v1.0-release-gate-2026-08-04.md`
 - Approved regression scope: GA-T1 through GA-T10
 - Release result: 10/10 pass, 100% average groundedness
+
+### Story Breakdown candidate
+
+- Candidate version: `story-breakdown-v0.1-t12-canonical`
+- Prompt: `prompts/story-breakdown-v0.1.md`
+- Output contract: `schemas/story-breakdown.schema.json` v1.1.0
+- Approved ground truth: `evaluation/ground-truth/story-breakdown/t12/expected-output.json`
+- Verification status: not yet executed
+- Groundedness target: 100%
