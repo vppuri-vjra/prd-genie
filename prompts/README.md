@@ -93,9 +93,9 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 
 ### Story Breakdown candidate
 
-- Candidate version: `story-breakdown-v0.2-exact-nested-shape`
+- Promoted version: `story-breakdown-v0.2-exact-nested-shape`
 - Prompt: `prompts/story-breakdown-v0.2.md`
 - Output contract: `schemas/story-breakdown.schema.json` v1.1.0
 - Approved ground truth: `evaluation/ground-truth/story-breakdown/t12/expected-output.json`
-- Verification status: v0.1 execution `8734` was safely rejected for nested-shape defects; v0.2 rerun pending
+- Verification status: v0.1 execution `8734` was safely rejected; v0.2 execution `8788` passed at 100% with Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b`
 - Groundedness target: 100%

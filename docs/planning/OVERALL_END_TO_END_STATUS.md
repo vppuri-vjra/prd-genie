@@ -18,15 +18,15 @@ owner: Vipin Puri
 | Deterministic Generation Gate | Complete | Human review, clarification, block, and review-with-TBD routes | Passed | 100% |
 | Human Approval | Complete | All 5 eligible cases executed | Passed | 100% |
 | PRD Generator | Complete for T11/T1 | Ten-section actual PRD, strict validation and Langfuse trace | Passed | 100% |
-| Story Breakdown Agent | Not implemented | T12 pending | Not started | — |
+| Story Breakdown Agent | Complete for T12/T1 | Canonical JSON, Markdown, strict validation and Langfuse trace | Passed | 100% |
 | Connected orchestration | Separate workflows exist | Full chained execution pending | Not started | — |
 | Submission package | In progress | Rubric and final evidence audit pending | In progress | — |
 
 ## Proven end-to-end path
 
-`T1 input → Requirement Extractor → Gap Analyzer → Generation Gate → Human Approval → PRD Generator → Langfuse → actual PRD artifact`
+`T1 input → Requirement Extractor → Gap Analyzer → Generation Gate → Human Approval → PRD Generator → Story Breakdown → Langfuse → actual PRD and story artifacts`
 
-This path is proven through PRD generation at **100% groundedness**.
+This path is proven through Story Breakdown at **100% groundedness**.
 
 ## T1-T10 downstream disposition
 
@@ -50,7 +50,7 @@ This path is proven through PRD generation at **100% groundedness**.
 
 ## Next implementation milestone
 
-Build and evaluate the Story Breakdown Agent using T12, then connect the separately validated workflows into the final orchestration and run full-pipeline regression.
+Connect the separately validated workflows into the final orchestration, add shared-source ingestion, and run full-pipeline regression.
 
 ## Required multi-source expansion
 

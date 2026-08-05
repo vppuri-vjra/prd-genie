@@ -33,7 +33,7 @@ It distinguishes:
 | Human Approval route execution | 5/5 eligible tests | T1, T7 and T8 approved; T4 changes requested; T10 approved with conditions; all passed at 100% groundedness |
 | Eligible for PRD after Human Approval | 4/5 eligible tests | T1, T7 and T8 approved; T10 conditionally approved; T4 returned to correction |
 | PRD Generator evaluation | T11 observable release passed | Prompt v0.4 passed at 100% with ten sections and Langfuse trace `05e9aa534e4286e17ec65512a72e48ff` |
-| Story Generator evaluation | 0/10 | Not yet implemented or executed |
+| Story Breakdown evaluation | T12 observable release passed | Prompt v0.2 passed at 100%; 1 epic, 1 feature, 1 story, 2 criteria, 2 unresolved questions; Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b` |
 
 ## Status legend
 
@@ -169,4 +169,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, all five eligible Human Approval executions, and the T11/T1 observable PRD release**. PRD generation for T7, T8 and T10 and the Story Generator remain explicitly unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, all five eligible Human Approval executions, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.

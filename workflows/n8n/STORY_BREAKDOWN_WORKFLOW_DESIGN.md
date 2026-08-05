@@ -60,3 +60,7 @@ Prompt version: `story-breakdown-v0.1-t12-canonical`.
 ## Release condition
 
 T12 may be promoted only when the actual n8n output passes the schema and canonical evaluator at **100% groundedness**, Langfuse accepts the trace, and the actual JSON and Markdown are preserved in `evaluation/actual/story-breakdown/t12/`.
+
+## Observable release checkpoint
+
+Workflow v0.2 was imported as n8n workflow `sYjmLbuEQNhrm6xK`. Execution `8788` completed all 11 nodes, passed the exact T12 contract at **100% groundedness**, recorded zero unsupported claims, rendered Markdown, and sent accepted Langfuse US trace `8e2078937f42afa208b3b2dc8d0f159b`.

@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "result_type": "story_breakdown_release_result",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "test_id": "T12",
+  "execution_status": "completed",
+  "contract_status": "passed",
+  "groundedness_percent": 100,
+  "story_breakdown": {
+    "schema_version": "1.1.0",
+    "run_id": "RUN-T1-GROUND-TRUTH",
+    "test_id": "T12",
+    "source_prd_run_id": "RUN-T1-GROUND-TRUTH",
+    "epics": [{
+      "id": "EPIC-001",
+      "title": "Report Filtering",
+      "description": "Users should be able to filter reports by date range, category, and status. Results must load in under 2 seconds.",
+      "status": "grounded",
+      "source_requirement_ids": ["FR-001", "NFR-001"],
+      "features": [{
+        "id": "FEAT-001",
+        "title": "Filter Reports",
+        "description": "Users should be able to filter reports by date range, category, and status.",
+        "status": "grounded",
+        "source_requirement_ids": ["FR-001", "NFR-001"],
+        "stories": [{
+          "id": "US-001",
+          "persona": "user",
+          "capability": "filter reports by date range, category, and status",
+          "benefit": "TBD - stakeholder input required",
+          "story": "As a user, I want to filter reports by date range, category, and status so that TBD - stakeholder input is required.",
+          "priority": "Unspecified",
+          "status": "partially_grounded",
+          "acceptance_criteria": [
+            {"id": "AC-001", "criterion": "Reports can be filtered by date range, category, and status.", "source_requirement_ids": ["FR-001"]},
+            {"id": "AC-002", "criterion": "Results load in under 2 seconds.", "source_requirement_ids": ["NFR-001"]}
+          ],
+          "dependencies": [],
+          "source_requirement_ids": ["FR-001", "NFR-001"],
+          "source_acceptance_criteria_ids": ["AC-001", "AC-002"]
+        }]
+      }]
+    }],
+    "unresolved_questions": [
+      {"id": "OQ-001", "question": "Which specific user persona needs report filtering?", "missing_field": "persona specificity", "source_requirement_ids": ["FR-001"]},
+      {"id": "OQ-002", "question": "What user benefit should report filtering deliver?", "missing_field": "user-story benefit", "source_requirement_ids": ["FR-001"]}
+    ]
+  },
+  "story_markdown_file": "generated-stories.md",
+  "validation": {
+    "structurally_valid": true,
+    "run_id_preserved": true,
+    "approved_ids_only": true,
+    "canonical_t12_coverage": true,
+    "epics": 1,
+    "features": 1,
+    "user_stories": 1,
+    "acceptance_criteria": 2,
+    "unresolved_questions": 2,
+    "unsupported_claims": 0,
+    "validated_at": "2026-08-05T21:52:09.459Z"
+  },
+  "audit": {
+    "n8n_workflow_id": "sYjmLbuEQNhrm6xK",
+    "n8n_execution_id": "8788",
+    "trace_id": "8e2078937f42afa208b3b2dc8d0f159b",
+    "prompt_version": "story-breakdown-v0.2-exact-nested-shape",
+    "model_call": true,
+    "token_usage_status": "not_exposed_by_chain_output"
+  },
+  "langfuse": {
+    "region": "US",
+    "trace_id": "8e2078937f42afa208b3b2dc8d0f159b",
+    "ingestion_status_code": 200,
+    "ingestion_accepted": true
+  },
+  "recorded_at": "2026-08-05T21:52:10.103Z"
+}
