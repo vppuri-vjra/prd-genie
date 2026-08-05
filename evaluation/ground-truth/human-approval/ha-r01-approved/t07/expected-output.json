@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T7-GROUND-TRUTH",
+  "review_status": "approved",
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-05T00:00:00.000Z",
+  "gate_status_reviewed": "eligible_for_human_approval",
+  "approved_item_ids": [
+    "NFR-001",
+    "NFR-002",
+    "NFR-003"
+  ],
+  "rejected_item_ids": [],
+  "reviewed_gap_ids": [],
+  "controlled_tbd_ids": [],
+  "conditions": [],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": true,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Approve the three separate grounded NFRs. Preserve 10,000 concurrent users, < 200ms at p95, and Salesforce REST API v52 exactly; do not duplicate or supplement them with unsupported requirements.",
+  "next_route": "prd_generation"
+}
