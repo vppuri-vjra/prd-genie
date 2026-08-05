@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "HA-R05",
+  "test_id": "T10",
+  "run_id": "RUN-T10-GROUND-TRUTH",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T10",
+    "source_text": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown."
+  },
+  "extraction": {
+    "extraction_status": "complete",
+    "items": [
+      { "id": "FR-001", "type": "functional_requirement", "statement": "Provide SSO login.", "evidence_quote": "SSO login requires the new auth service which is being built by Team Alpha.", "related_item_ids": ["DEP-001"] },
+      { "id": "DEP-001", "type": "dependency", "statement": "SSO login requires the new auth service which is being built by Team Alpha.", "evidence_quote": "SSO login requires the new auth service which is being built by Team Alpha.", "related_item_ids": ["FR-001", "RSK-001"] },
+      { "id": "RSK-001", "type": "risk", "statement": "The ETA for the new auth service is unknown.", "evidence_quote": "ETA unknown.", "related_item_ids": ["DEP-001"] }
+    ]
+  },
+  "gap_analysis": {
+    "information_sufficiency": "partially_sufficient",
+    "generation_allowed": true,
+    "recommended_action": "proceed_with_tbd",
+    "decision_reason": "The SSO requirement and authentication-service dependency are grounded and can be documented, while the explicitly unknown ETA must remain TBD.",
+    "gaps": [
+      { "id": "GAP-001", "category": "dependency_eta", "description": "The ETA for the authentication service is explicitly unknown.", "severity": "medium", "clarification_question": "What is the ETA for the authentication service being built by Team Alpha?", "related_item_ids": ["DEP-001", "RSK-001"] }
+    ],
+    "contradictions": [],
+    "risks": [
+      { "id": "RSK-001", "description": "The authentication service required for SSO login has an unknown ETA.", "severity": "medium", "related_item_ids": ["DEP-001"] }
+    ]
+  },
+  "generation_gate": {
+    "gate_status": "eligible_with_tbd",
+    "route": "human_review_with_tbd",
+    "prd_generation_eligible": true,
+    "human_approval_required": true
+  },
+  "proposed_approved_item_ids": ["FR-001", "DEP-001", "RSK-001"]
+}

@@ -2,7 +2,7 @@
 
 ## Design status
 
-The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1, T7 and T8 standard-approval paths (`HA-R01`) and T4 changes-requested path (`HA-R02`) are implemented in n8n workflow `L3J0nRWdKhs46wxF`; all passed at 100% groundedness with accepted Langfuse traces. The T10 conditional path, remaining negative-route tests, and upstream/downstream integration remain pending.
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. All five eligible T-tests are implemented in n8n workflow `L3J0nRWdKhs46wxF`: T1, T7 and T8 use `HA-R01`; T4 uses `HA-R02`; and T10 uses `HA-R05`. All passed at 100% groundedness with accepted Langfuse traces. Remaining negative-route tests and upstream/downstream integration remain pending.
 
 ## Scope
 
@@ -87,3 +87,7 @@ On 2026-08-04, Vipin submitted the T4-derived `HA-R02` decision. The workflow pa
 ## HA-R01 T7 and T8 evidence
 
 On 2026-08-05, Vipin approved the T7 and T8 packages through `HA-R01`. Both executions passed at 100% groundedness and routed to `prd_generation`. T7 preserved three exact NFRs. T8 preserved three distinct personas, their three exact capabilities, and all reciprocal persona-to-capability relationships. Langfuse US accepted both non-LLM traces with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r01-t7-approved-2026-08-05.md` and `evaluation/results/human-approval-ha-r01-t8-approved-2026-08-05.md`.
+
+## HA-R05 conditional-route evidence
+
+On 2026-08-05, Vipin approved the T10 package with conditions through `HA-R05`. The execution passed at 100% groundedness, approved `FR-001`, `DEP-001` and `RSK-001`, reviewed `GAP-001`, preserved `GAP-001`, `DEP-001` and `RSK-001` as controlled TBD context, and routed to `prd_generation_with_conditions`. The condition explicitly prohibits inventing an ETA. Langfuse US accepted the non-LLM trace with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r05-t10-approved-with-conditions-2026-08-05.md`.
