@@ -1,7 +1,7 @@
 ---
 title: PRD Genie Connected Orchestration Design
-version: 0.2
-status: Child wrappers built; import testing pending
+version: 0.3
+status: Two-child T1 parent canary built; n8n testing pending
 last_updated: 2026-08-05
 owner: Vipin Puri
 ---
@@ -116,8 +116,10 @@ Groundedness target for every generated artifact: **100%**.
 |---|---|---|---:|
 | Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json` | Built and locally validated; n8n import/canary pending | 100% |
 | Gap Analyzer child | `workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json` | Built and locally validated; n8n import/canary pending | 100% |
-| Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Not yet built | 100% |
+| Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Built through Gap Analyzer route validation; n8n canary pending | 100% |
 
 The child exports do not contain fixed T-test loaders. They start with an Execute Sub-workflow Trigger, validate the parent payload, preserve `run_id` and `parent_trace_id`, execute the validated agent and deterministic controls, send the stage trace to Langfuse, and return the standard orchestration stage envelope.
 
 The Requirement Extractor child identifies the promoted prompt as `extractor-v1.5-product-fragment-status-boundary` and contains the inherited v1.3 prompt plus the documented v1.4 relationship audit and v1.5 product-fragment boundary. The standalone release-evidence workflow remains unchanged.
+
+The v0.1 parent canary loads approved T1 source evidence, creates one `run_id` and parent trace ID, invokes both child workflows, validates both stage envelopes, rejects ID or trace mismatches, requires 100% groundedness and accepted Langfuse ingestion, and passes only when the deterministic Gap Analyzer route is `human_review` / `human_approval`. Human Approval is intentionally the next integration increment rather than being bypassed.

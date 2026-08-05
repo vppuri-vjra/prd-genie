@@ -11,6 +11,13 @@ After import, confirm the OpenAI and `Langfuse US - PRD Genie` credentials on ea
 
 The first canary will pass T1 through Requirement Extractor Child and Gap Analyzer Child. Both results must preserve the same `run_id` and `parent_trace_id`, report 100% groundedness, and the Gap Analyzer must route T1 to `human_approval`.
 
+Import `prd-genie-connected-orchestrator-v0.1.json` after both child workflows are saved. Open its two Execute Sub-workflow nodes and select:
+
+- `PRD Genie - Requirement Extractor Child v1.0`
+- `PRD Genie - Gap Analyzer Child v1.0`
+
+Save the parent and run it manually. The final node must return `execution_status: passed`, `next_route: human_approval`, `groundedness_percent: 100`, preserved run/trace checks, and accepted Langfuse ingestion for both child stages.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`

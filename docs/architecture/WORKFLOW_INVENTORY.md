@@ -17,7 +17,7 @@ owner: Vipin Puri
 | 3 | `PRD Genie - Human Approval v0.1` | Record approve, approve-with-conditions, changes-requested, clarification, or rejection decisions | Active; all five eligible T-test routes passed | 100% |
 | 4 | `PRD Genie - PRD Generator + Langfuse v0.1` | Generate and validate the ten-section PRD | Active; T11/T1 observable release passed | 100% |
 | 5 | `PRD Genie - Story Breakdown + Langfuse v0.2` | Generate and validate epics, features, user stories, criteria, and unresolved questions | Active; T12/T1 observable release passed | 100% |
-| 6 | `PRD Genie - Connected Orchestrator` | Pass one run envelope through the separate workflows and enforce route stops | Design v0.1 complete; integration-ready child wrappers and parent canvas pending | — |
+| 6 | `PRD Genie - Connected Orchestrator v0.1` | Pass one run envelope through the separate workflows and enforce route stops | Built through Requirement Extractor and Gap Analyzer route validation; T1 n8n canary pending | 100% target |
 
 ## Integration-ready child exports
 
