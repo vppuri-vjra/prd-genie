@@ -51,3 +51,19 @@ This path is proven through PRD generation at **100% groundedness**.
 ## Next implementation milestone
 
 Build and evaluate the Story Breakdown Agent using T12, then connect the separately validated workflows into the final orchestration and run full-pipeline regression.
+
+## Required multi-source expansion
+
+The T11/T1 PRD is the first controlled baseline, not the final information set. Before final regression, PRD Genie must ingest and evaluate the remaining supplied source types:
+
+| Source | Intended use |
+|---|---|
+| `eval_prdgenie_inputs.txt` | Controlled T1-T10 evaluation cases |
+| `sample_product_brief.txt` | Product context, goals, scope and requirements |
+| `sample_meeting_transcripts.txt` | Stakeholder statements, decisions, questions and contradictions |
+| `stakeholder_notes.txt` | Informal requirements, constraints, priorities and gaps |
+| `prd_template.md` | Required PRD output structure; not a Requirement Extractor source |
+
+New evidence from these files must pass Requirement Extraction, Gap Analysis, deterministic routing and Human Approval before it can enrich or revise a PRD. Sources must remain individually traceable, and contradictory facts must not be merged silently.
+
+The final connected regression must therefore include at least one product brief, one meeting transcript, and one stakeholder-notes case in addition to the T1-T10 evaluation suite.
