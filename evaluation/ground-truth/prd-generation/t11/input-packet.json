@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "test_id": "T11",
+  "source_test_id": "T1",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T1",
+    "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3."
+  },
+  "approved_items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter reports by date range, category, and status.",
+      "priority": "Unspecified",
+      "evidence_quote": "The user should be able to filter reports by date range, category, and status."
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "category": "Performance",
+      "target": "under 2 seconds",
+      "evidence_quote": "Results must load in under 2 seconds."
+    },
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM.",
+      "evidence_quote": "PM: Sarah."
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "The deadline is Q3.",
+      "target": "Q3",
+      "evidence_quote": "Deadline: Q3."
+    }
+  ],
+  "gap_analysis": {
+    "information_sufficiency": "sufficient",
+    "generation_allowed": true,
+    "recommended_action": "proceed",
+    "gaps": [],
+    "contradictions": [],
+    "risks": []
+  },
+  "generation_gate": {
+    "gate_status": "eligible_for_human_approval",
+    "route": "human_review",
+    "prd_generation_eligible": true,
+    "human_approval_required": true,
+    "requires_tbd": false
+  },
+  "human_approval": {
+    "review_status": "approved",
+    "reviewer": "Vipin",
+    "approved_item_ids": ["FR-001", "NFR-001", "STK-001", "DDL-001"],
+    "rejected_item_ids": [],
+    "controlled_tbd_ids": [],
+    "conditions": [],
+    "next_route": "prd_generation",
+    "langfuse_trace_id": "04c6b3386a8197b7c553429a57b75bc8"
+  },
+  "template": {
+    "name": "prd_template.md",
+    "sections": 10,
+    "output_schema": "schemas/prd-output.schema.json"
+  }
+}

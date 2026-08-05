@@ -1,9 +1,11 @@
 ---
 title: PRD Generator Contract
 version: 0.1
-status: Draft for Human Approval
+status: Approved
 last_updated: 2026-08-05
 owner: Vipin Puri
+approved_by: Vipin Puri
+approved_on: 2026-08-05
 ---
 
 # PRD Generator Contract

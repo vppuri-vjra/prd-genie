@@ -32,7 +32,7 @@ It distinguishes:
 | T-tests eligible to reach Human Approval | 5/10 | T1, T4, T7, T8 and T10 |
 | Human Approval route execution | 5/5 eligible tests | T1, T7 and T8 approved; T4 changes requested; T10 approved with conditions; all passed at 100% groundedness |
 | Eligible for PRD after Human Approval | 4/5 eligible tests | T1, T7 and T8 approved; T10 conditionally approved; T4 returned to correction |
-| PRD Generator evaluation | 0/10 | Not yet implemented or executed |
+| PRD Generator evaluation | T11 ground truth drafted | Schema-valid ten-section expected PRD awaiting human approval; workflow not yet implemented or executed |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
 
 ## Status legend
@@ -52,7 +52,7 @@ It distinguishes:
 
 | Test | Requirement Extractor status | RE evaluation | Gap Analyzer coverage | GA status and decision | Generation-gate outcome | Human-review status | PRD Generator status |
 |---|---|---|---|---|---|---|---|
-| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | Eligible; PRD Generator not yet executed |
+| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | T11 ground truth drafted and schema-valid; awaiting human approval; workflow not yet executed |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
 | T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🔴 Actual `HA-R02 / changes_requested`, 100% | Not eligible; routed to correction |
@@ -69,7 +69,7 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 
 | Test | Reaches Human Approval? | Gate basis | Human Approval case/status | Reaches PRD Generator? | Reason/current action | Groundedness |
 |---|---|---|---|---|---|---:|
-| T1 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | Approved package is ready; PRD Generator not yet implemented | 100% |
+| T1 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | T11 expected JSON and Markdown drafted and schema-valid; awaiting human approval | 100% |
 | T2 | No | `clarification_required / clarification` | Not applicable | No | Clarify metrics, format, target users and intended reporting capability | 100% |
 | T3 | No | `clarification_required / clarification` | Not applicable | No | Resolve the explicit refresh contradiction | 100% |
 | T4 | Yes | `eligible_for_human_approval / human_review` | `HA-R02 / changes_requested` — passed | No | Correct classification and relationships for `FR-002` and `FR-003`, then re-review | 100% |

@@ -54,6 +54,12 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 
 T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.1`. T1 and T9 contain approved adjudication updates; unchanged cases retain their original `0.1.0` case version. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
 
+## PRD Generation Review Register
+
+| Test | Dataset version | Status | Source package | Canonical output | Review guide |
+|---|---|---|---|---|---|
+| T11 | `0.1.0-draft` | Awaiting human approval | Approved T1 package (`HA-R01 / approved`) | `prd-generation/t11/expected-output.json` and `.md` | `prd-generation/t11/REVIEW_GUIDE.md` |
+
 ## Automated evaluation
 
 The deterministic evaluator is `scripts/evaluate_extraction.py`. It compares an actual extractor output with the approved source, canonical output, and case metadata. It checks schema validity, status, exact values, item types, verbatim evidence, canonical item coverage, relationships, contradictions, missing-information coverage, and machine-detectable prohibited literals. Differences that require semantic judgment are marked `needs_review` rather than guessed.
