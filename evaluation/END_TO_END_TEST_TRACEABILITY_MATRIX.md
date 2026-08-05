@@ -1,6 +1,6 @@
 ---
 title: PRD Genie End-to-End Test Traceability Matrix
-version: 0.6
+version: 0.7
 status: Living Evidence Dashboard
 last_updated: 2026-08-04
 owner: Vipin Puri
@@ -29,7 +29,9 @@ It distinguishes:
 | Gap Analyzer end-to-end execution | 10/10 | Passed at 100% under prompt v1.0 |
 | Gap Analyzer unchanged release regression | 10/10 | Passed at 100%; prompt v1.0 promoted |
 | Deterministic generation-gate execution | 10/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
-| Human approval for PRD generation | 0/10 | Not yet executed as a workflow stage |
+| T-tests eligible to reach Human Approval | 5/10 | T1, T4, T7, T8 and T10 |
+| Human Approval route execution | 2/5 eligible tests | T1 approved; T4 changes requested; both passed at 100% groundedness |
+| Eligible for PRD after Human Approval | 1/5 eligible tests | T1 approved; T4 returned to correction; T7, T8 and T10 pending |
 | PRD Generator evaluation | 0/10 | Not yet implemented or executed |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
 
@@ -50,16 +52,40 @@ It distinguishes:
 
 | Test | Requirement Extractor status | RE evaluation | Gap Analyzer coverage | GA status and decision | Generation-gate outcome | Human-review status | PRD Generator status |
 |---|---|---|---|---|---|---|---|
-| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Not executed; eligible only after approval |
+| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | Eligible; PRD Generator not yet executed |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
-| T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
+| T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🔴 Actual `HA-R02 / changes_requested`, 100% | Not eligible; routed to correction |
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
 | T6 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending scope, decision, and deadline clarification |
 | T7 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T8 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
 | T9 | ⚫ `no_requirements` | Actual pass, 100% | Actual GA execution | ⛔ `insufficient / block_generation`, 100% | `generation_blocked`; `blocked` | Not applicable | Must not be invoked |
 | T10 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟡 `partially_sufficient / proceed_with_tbd`, 100% | `eligible_with_tbd`; `human_review_with_tbd` | Pending required human approval | Eligible only after human approval; ETA remains TBD |
+
+## Human Approval to PRD progression view
+
+This view makes the stage boundary explicit. A Human Approval route test must be based on a T-test that actually reaches the Human Approval checkpoint under its approved Gap Analysis and deterministic gate. Tests stopped by clarification or blocking remain valuable end-to-end tests, but they are not Human Approval inputs.
+
+| Test | Reaches Human Approval? | Gate basis | Human Approval case/status | Reaches PRD Generator? | Reason/current action | Groundedness |
+|---|---|---|---|---|---|---:|
+| T1 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | Approved package is ready; PRD Generator not yet implemented | 100% |
+| T2 | No | `clarification_required / clarification` | Not applicable | No | Clarify metrics, format, target users and intended reporting capability | 100% |
+| T3 | No | `clarification_required / clarification` | Not applicable | No | Resolve the explicit refresh contradiction | 100% |
+| T4 | Yes | `eligible_for_human_approval / human_review` | `HA-R02 / changes_requested` — passed | No | Correct classification and relationships for `FR-002` and `FR-003`, then re-review | 100% |
+| T5 | No | `clarification_required / clarification` | Not applicable | No | Source contains fragments but lacks a reliable requirement | 100% |
+| T6 | No | `clarification_required / clarification` | Not applicable | No | Clarify scope, architecture decision and deadline | 100% |
+| T7 | Yes | `eligible_for_human_approval / human_review` | Pending | No, pending approval | Candidate for an untested Human Approval route | 100% |
+| T8 | Yes | `eligible_for_human_approval / human_review` | Pending | No, pending approval | Candidate for an untested Human Approval route | 100% |
+| T9 | No | `generation_blocked / blocked` | Not applicable | No | No meaningful requirements; generation must remain blocked | 100% |
+| T10 | Yes, with TBD | `eligible_with_tbd / human_review_with_tbd` | `HA-R05 / approved_with_conditions` — planned | No, pending approval | Human must approve the controlled dependency TBD and conditions | 100% |
+
+### Human Approval route-test allocation rule
+
+- `HA-R01`, `HA-R02` and future positive/conditional Human Approval cases must use only T1, T4, T7, T8 or T10 because these are the five tests that reach Human Approval.
+- T2, T3, T5 and T6 test the earlier clarification route and must not be shown as reaching Human Approval.
+- T9 tests the explicit generation-blocked route and must not be shown as reaching Human Approval.
+- A controlled validation-failure case may corrupt a package derived from an eligible test, but its source T-test and the deliberate mutation must both be recorded.
 
 ## Execution and observability evidence
 
@@ -133,4 +159,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, and the unchanged GA-T1-T10 v1.0 release regression**. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, and the executed HA-R01 and HA-R02 decisions**. PRD and Story stages are marked unexecuted rather than projected as completed.
