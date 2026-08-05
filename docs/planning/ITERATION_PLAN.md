@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Iteration Plan
-version: 0.1
+version: 0.2
 status: Active
-last_updated: 2026-08-02
+last_updated: 2026-08-05
 owner: Vipin Puri
 ---
 
@@ -15,8 +15,8 @@ The formal plan models four one-week iterations. Actual execution is intentional
 | Iteration | Formal week | Focus | Planned items | Exit criteria | Current status |
 |---|---:|---|---|---|---|
 | Iteration 1 | Week 1 | Foundation, planning, and Requirement Extraction | Review sources; create BRD, Product PRD, Architecture Design, diagram, and initial ADRs; select tools; define contracts; organize GitHub and Obsidian; build Requirement Extractor; connect Langfuse; run T1-T10 | Foundation documents exist; schemas validate; Requirement Extractor works; T1-T10 are documented; T10 correction passes | Complete |
-| Iteration 2 | Week 2 | Ground truth and evaluation controls | Complete T10 before/after comparison; build and human-review the in-scope T1–T10 ground truth; reconcile prompt versions; strengthen deterministic evaluation and scorecards | Approved ground truth exists; automated evaluator runs against actual n8n outputs; v1.5 passes the unchanged T1–T10 release gate 10/10 with accepted Langfuse traces | Complete for current T1–T10 scope; T11–T12 remain deferred |
-| Iteration 3 | Week 3 | Complete multi-agent pipeline | Build Gap Analyzer, Generation Gate, Human Approval, PRD Generator, Story Breakdown, final validation, Markdown export, and per-agent tracing; run T11-T12 | Core and extended capabilities work end-to-end; T11-T12 are documented; human approval is demonstrated | In progress: Gap Analyzer and gate complete; Human Approval T1 path implemented and passed; T10/negative routes and integration pending |
+| Iteration 2 | Week 2 | Ground truth and evaluation controls | Complete T10 before/after comparison; build and human-review the in-scope T1–T10 ground truth; reconcile prompt versions; strengthen deterministic evaluation and scorecards | Approved ground truth exists; automated evaluator runs against actual n8n outputs; v1.5 passes the unchanged T1–T10 release gate 10/10 with accepted Langfuse traces | Complete |
+| Iteration 3 | Week 3 | Complete multi-agent pipeline | Build Gap Analyzer, Generation Gate, Human Approval, PRD Generator, Story Breakdown, final validation, Markdown export, and per-agent tracing; run T11-T12 | Core and extended capabilities work end-to-end; T11-T12 are documented; human approval is demonstrated | In progress: Requirement Extraction, Gap Analyzer, gate, all five eligible Human Approval routes, and T11/T1 observable PRD release complete at 100%; Story Breakdown, T12, and connected orchestration pending |
 | Iteration 4 | Week 4 | Final evaluation and submission | Run regression and three full-pipeline input types; calculate metrics and cost per user; finish Q1-Q4, screenshots, architecture write-up, slides, demo, links, exports, and security audit | Submission is complete, reproducible, public, and ready for grading | Not started |
 
 ## Compressed execution target
@@ -43,6 +43,8 @@ The formal plan models four one-week iterations. Actual execution is intentional
 - T10 passed its v0.8 corrected rerun with before-and-after Langfuse evidence.
 - Langfuse traces Requirement Extractor success and failure paths.
 - BRD, Product PRD, Architecture Design, diagram, and iteration plan are drafted as version 0.1.
-- Iteration 1 is complete. Ground truth, later agents, assignments, visuals, and final submission package remain open.
-- Human Approval contract v1.0.0 was approved by Vipin Puri on 2026-08-04; its T1 standard path is implemented and demonstrated.
-- Human Approval T1 standard-approval canary passed at 100% groundedness on 2026-08-04. Langfuse US accepted and displayed the non-LLM approval trace `04c6b3386a8197b7c553429a57b75bc8`; additional decision routes and connected-pipeline testing remain open.
+- Iterations 1 and 2 are complete.
+- Gap Analyzer v1.0 passed its unchanged T1-T10 regression at 100% groundedness.
+- All five eligible Human Approval routes are executed: T1/T7/T8 approved, T4 changes requested, and T10 approved with conditions; all passed at 100% groundedness.
+- T11 generated and validated the actual ten-section T1 PRD at 100% groundedness. Langfuse US accepted trace `05e9aa534e4286e17ec65512a72e48ff`, and the actual JSON and Markdown are preserved.
+- Story Breakdown, T12, connected orchestration, final regression, assignments, visuals, cost evidence, and the submission package remain open.

@@ -97,12 +97,12 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; v1.5 release regression passed 10/10 |
 | Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Implemented; v1.0 release regression passed 10/10 |
 | Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
-| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Contract v1.0.0 approved; T1 standard path passed at 100%; Langfuse audit trace verified; remaining routes and connected-pipeline integration pending |
-| PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Planned |
+| Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Implemented; all five eligible T-test routes passed at 100% with Langfuse evidence |
+| PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Implemented for T11/T1; observable release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Planned |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
-| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, and Human Approval T1 path |
+| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, all Human Approval executions, and T11 PRD generation; model token counts remain unavailable in the PRD chain output |
 
 ## 7. Data contracts
 
