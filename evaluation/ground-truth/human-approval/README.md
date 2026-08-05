@@ -4,7 +4,7 @@ This dataset validates deterministic Human Approval decisions and routes. Human 
 
 | Route case | Source T-test | Human decision/path | Expected route | Groundedness target | Status |
 |---|---|---|---|---:|---|
-| `HA-R01` | T1, T7, T8 | `approved` | `prd_generation` | 100% | T1 passed; T7 approved; T8 planned |
+| `HA-R01` | T1, T7, T8 | `approved` | `prd_generation` | 100% | T1 and T7 passed; T8 planned |
 | `HA-R02` | T4 | `changes_requested` | `correction` | 100% | **Passed — 2026-08-04** |
 | `HA-R03` | T7 or T8 — selection pending | `clarification_required` | `clarification` | 100% | Pending |
 | `HA-R04` | T7 or T8 — selection pending | `rejected` | `stopped` | 100% | Pending |

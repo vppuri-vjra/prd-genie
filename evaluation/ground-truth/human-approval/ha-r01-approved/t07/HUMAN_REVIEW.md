@@ -18,6 +18,23 @@ Verify that T7's complete, sufficient and exact NFR package receives the determi
 |---|---|
 | Human Approval route case | `HA-R01` |
 | Source test | T7 |
+
+## Execution evidence
+
+| Field | Result |
+|---|---|
+| Execution status | **Passed** |
+| Contract status | **Passed** |
+| Groundedness | **100%** |
+| Review status | `approved` |
+| Route | `prd_generation` |
+| PRD-generation eligible | `true` |
+| Langfuse ingestion | **Accepted — HTTP 200** |
+| Langfuse trace ID | `ef61a737842a797efd6f1818ac6854af` |
+| Model call | None |
+| Token usage | 0 input, 0 output, 0 total |
+
+The first submission reached all deterministic review nodes but stopped at Langfuse because the imported workflow's displayed credential reference was not yet rebound to the live n8n credential. No trace or passing result was recorded for that attempt. The existing `Langfuse US - PRD Genie` credential was explicitly rebound and the unchanged approved T7 decision was rerun successfully.
 | Gate reviewed | `eligible_for_human_approval` |
 | Review status | `approved` |
 | Approved IDs | `NFR-001`, `NFR-002`, `NFR-003` |
