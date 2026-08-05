@@ -2,7 +2,11 @@
 
 ## Design status
 
-The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. All five eligible T-tests are implemented in n8n workflow `L3J0nRWdKhs46wxF`: T1, T7 and T8 use `HA-R01`; T4 uses `HA-R02`; and T10 uses `HA-R05`. All passed at 100% groundedness with accepted Langfuse traces. Remaining negative-route tests and upstream/downstream integration remain pending.
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. All five eligible T-tests are implemented in n8n workflow `L3J0nRWdKhs46wxF`: T1, T7 and T8 use `HA-R01`; T4 uses `HA-R02`; and T10 uses `HA-R05`. All passed at 100% groundedness with accepted Langfuse traces. An integration-ready checkpoint child now implements dynamic upstream input and a persistent Wait-form resume; its connected T1 canary remains pending.
+
+## Integration-ready checkpoint
+
+`workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` receives the actual connected extraction, Gap Analysis, Generation Gate and orchestration context. It validates eligibility before displaying a form, pauses indefinitely for a real human response, validates all submitted IDs and evidence checks, records the non-LLM Langfuse event, and returns the standard orchestration stage envelope. The validated standalone five-case form remains unchanged as release evidence.
 
 ## Scope
 

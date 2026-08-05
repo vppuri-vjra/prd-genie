@@ -18,6 +18,13 @@ Import `prd-genie-connected-orchestrator-v0.1.json` after both child workflows a
 
 Save the parent and run it manually. The final node must return `execution_status: passed`, `next_route: human_approval`, `groundedness_percent: 100`, preserved run/trace checks, and accepted Langfuse ingestion for both child stages.
 
+For the Human Approval increment, import these as new workflows:
+
+1. `prd-genie-human-approval-checkpoint-child-v1.0.json`
+2. `prd-genie-connected-orchestrator-v0.2.json`
+
+In parent v0.2, select all three child workflows in their Execute Sub-workflow nodes. Run the parent. It must enter a waiting state at `Wait for Human Decision`; open the waiting form and submit the approved T1 decision with approved IDs `FR-001,NFR-001,STK-001,DDL-001` and all five verification boxes checked. After submission, the same execution must resume and end with `next_route: prd_generation`, 100% groundedness and accepted Human Approval Langfuse ingestion.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`

@@ -25,6 +25,7 @@ owner: Vipin Puri
 |---:|---|---|---|---|
 | 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Imported; connected T1 canary passed |
 | 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Imported; connected T1 canary passed |
+| 3 | `PRD Genie - Human Approval Checkpoint Child v1.0` | Eligible extraction, Gap Analysis, gate and orchestration context | Validated Human Approval stage envelope after form submission | Built; pause/resume n8n canary pending |
 
 These child exports are integration interfaces, not additional AI agents. The standalone workflows remain the regression and release-evidence canvases.
 

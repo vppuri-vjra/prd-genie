@@ -182,6 +182,80 @@ function buildConnectedOrchestrator() {
   return workflow;
 }
 
+function buildHumanApprovalChild() {
+  const base = readJson('workflows/n8n/prd-genie-human-approval-v0.1.json');
+  const byName = (name) => node(base, name);
+  const trigger = byName('Human Review Form');
+  trigger.name = 'When Executed by Parent Workflow';
+  trigger.type = 'n8n-nodes-base.executeWorkflowTrigger';
+  trigger.typeVersion = 1.1;
+  trigger.parameters = { inputSource: 'passthrough' };
+
+  const build = byName('Build Human Review Packet');
+  build.name = 'Validate Eligibility and Build Review Packet';
+  build.parameters.jsCode = `const parent=$input.first().json;\nconst extraction=parent.extraction; const gap=parent.gap_analysis; const gate=parent.generation_gate; const errors=[];\nif(parent.schema_version!=='1.0.0') errors.push('schema_version must be 1.0.0');\nif(!parent.run_id||parent.run_id!==extraction?.run_id||parent.run_id!==gap?.run_id||parent.run_id!==gate?.run_id) errors.push('all run_id values must match');\nif(!(parent.orchestration_context?.parent_trace_id||'').trim()) errors.push('parent_trace_id is required');\nif(!['eligible_for_human_approval','eligible_with_tbd'].includes(gate?.gate_status)) errors.push('gate status is not eligible for review');\nif(!['human_review','human_review_with_tbd'].includes(gate?.route)) errors.push('gate route is not a human-review route');\nif(gate?.prd_generation_eligible!==true||gate?.human_approval_required!==true) errors.push('gate eligibility fields are inconsistent');\nif(!['sufficient','partially_sufficient'].includes(gap?.information_sufficiency)||gap?.generation_allowed!==true||!['proceed','proceed_with_tbd'].includes(gap?.recommended_action)) errors.push('Gap Analysis is not eligible for review');\nif(!Array.isArray(extraction?.items)||!Array.isArray(gap?.gaps)||!Array.isArray(gap?.risks)) errors.push('upstream arrays are invalid');\nif(errors.length) throw new Error('Human Approval eligibility failed: '+errors.join('; '));\nreturn [{json:{...parent,proposed_approved_item_ids:extraction.items.map(item=>item.id),eligible_tbd_ids:[...new Set([...gap.gaps.map(x=>x.id),...gap.risks.map(x=>x.id),...extraction.items.filter(x=>['dependency','risk'].includes(x.type)).map(x=>x.id)])],review_packet_created_at:new Date().toISOString()}}];`;
+
+  const wait = {
+    parameters: {
+      resume: 'form',
+      formTitle: 'PRD Genie — Connected Human Approval',
+      formDescription: '=Review run {{ $json.run_id }}. Gate: {{ $json.generation_gate.gate_status }} / {{ $json.generation_gate.route }}. Proposed grounded IDs: {{ $json.proposed_approved_item_ids.join(", ") }}. Submit only after reviewing the upstream evidence and gaps.',
+      formFields: { values: [
+        { fieldLabel: 'Reviewer', fieldName: 'reviewer', requiredField: true },
+        { fieldLabel: 'Review decision', fieldName: 'review_status', fieldType: 'dropdown', fieldOptions: { values: [{option:'approved'},{option:'approved_with_conditions'},{option:'changes_requested'},{option:'clarification_required'},{option:'rejected'}] }, requiredField: true },
+        { fieldLabel: 'Approved item IDs (comma separated)', fieldName: 'approved_item_ids', requiredField: true },
+        { fieldLabel: 'Rejected item IDs (comma separated)', fieldName: 'rejected_item_ids' },
+        { fieldLabel: 'Reviewed gap IDs (comma separated)', fieldName: 'reviewed_gap_ids' },
+        { fieldLabel: 'Controlled TBD IDs (comma separated)', fieldName: 'controlled_tbd_ids' },
+        { fieldLabel: 'Approval condition', fieldName: 'condition_description', fieldType: 'textarea' },
+        { fieldLabel: 'Source grounding verified', fieldName: 'source_grounding_verified', fieldType: 'checkbox', fieldOptions:{values:[{option:'Verified'}]} },
+        { fieldLabel: 'Exact values verified', fieldName: 'exact_values_verified', fieldType: 'checkbox', fieldOptions:{values:[{option:'Verified'}]} },
+        { fieldLabel: 'Relationships verified', fieldName: 'relationships_verified', fieldType: 'checkbox', fieldOptions:{values:[{option:'Verified'}]} },
+        { fieldLabel: 'Gap analysis verified', fieldName: 'gap_analysis_verified', fieldType: 'checkbox', fieldOptions:{values:[{option:'Verified'}]} },
+        { fieldLabel: 'Unsupported claims absent', fieldName: 'unsupported_claims_absent', fieldType: 'checkbox', fieldOptions:{values:[{option:'Verified'}]} },
+        { fieldLabel: 'Review notes', fieldName: 'review_notes', fieldType: 'textarea' }
+      ]},
+      options: { limitWaitTime: false }
+    },
+    id: 'ha100000-0000-4000-8000-000000000002', name: 'Wait for Human Decision',
+    type: 'n8n-nodes-base.wait', typeVersion: 1.1, position: [-240,0], webhookId: 'prd-genie-connected-human-approval-v1'
+  };
+  base.nodes.splice(base.nodes.indexOf(build)+1,0,wait);
+
+  const parse = byName('Parse and Validate Human Approval');
+  parse.parameters.jsCode = `const packet=$('Validate Eligibility and Build Review Packet').first().json; const raw=$input.first().json;\nconst value=(key,label)=>raw[key]??raw[label]; const split=v=>String(v||'').split(',').map(x=>x.trim()).filter(Boolean); const verified=v=>v===true||v==='Verified'||(Array.isArray(v)&&v.includes('Verified'));\nconst reviewStatus=value('review_status','Review decision'); const reviewer=String(value('reviewer','Reviewer')||'').trim(); const approved=split(value('approved_item_ids','Approved item IDs (comma separated)')); const rejected=split(value('rejected_item_ids','Rejected item IDs (comma separated)')); const reviewedGaps=split(value('reviewed_gap_ids','Reviewed gap IDs (comma separated)')); const controlledTbds=split(value('controlled_tbd_ids','Controlled TBD IDs (comma separated)')); const conditionText=String(value('condition_description','Approval condition')||'').trim();\nconst checks={source_grounding_verified:verified(value('source_grounding_verified','Source grounding verified')),exact_values_verified:verified(value('exact_values_verified','Exact values verified')),relationships_verified:verified(value('relationships_verified','Relationships verified')),gap_analysis_verified:verified(value('gap_analysis_verified','Gap analysis verified')),unsupported_claims_absent:verified(value('unsupported_claims_absent','Unsupported claims absent'))};\nconst itemIds=packet.extraction.items.map(x=>x.id); const gapIds=packet.gap_analysis.gaps.map(x=>x.id); const allowedTbdIds=packet.eligible_tbd_ids; const routeMap={approved:'prd_generation',approved_with_conditions:'prd_generation_with_conditions',changes_requested:'correction',clarification_required:'clarification',rejected:'stopped'}; const errors=[];\nif(!reviewer) errors.push('reviewer is required'); if(!routeMap[reviewStatus]) errors.push('unsupported review decision'); if([...approved,...rejected].some(id=>!itemIds.includes(id))) errors.push('approved/rejected IDs must exist upstream'); if(reviewedGaps.some(id=>!gapIds.includes(id))) errors.push('reviewed gap IDs must exist upstream'); if(controlledTbds.some(id=>!allowedTbdIds.includes(id))) errors.push('controlled TBD IDs must exist upstream'); if(approved.some(id=>rejected.includes(id))) errors.push('approved and rejected IDs overlap');\nif(['approved','approved_with_conditions'].includes(reviewStatus)&&approved.length===0) errors.push('approval requires approved IDs'); if(reviewStatus==='approved'&&(rejected.length||controlledTbds.length||conditionText)) errors.push('standard approval cannot include rejection, TBD or condition'); if(reviewStatus==='approved_with_conditions'&&packet.generation_gate.gate_status!=='eligible_with_tbd') errors.push('conditional approval requires eligible_with_tbd'); if(reviewStatus==='approved_with_conditions'&&(!controlledTbds.length||!reviewedGaps.length||!conditionText)) errors.push('conditional approval requires gaps, TBDs and condition'); if(['approved','approved_with_conditions'].includes(reviewStatus)&&Object.values(checks).some(v=>!v)) errors.push('all five evidence checks must pass');\nif(errors.length) throw new Error('Human approval validation failed: '+errors.join('; ')); const conditions=conditionText?[{id:'COND-001',description:conditionText,related_ids:[...new Set([...approved,...controlledTbds])]}]:[];\nreturn [{json:{schema_version:'1.0.0',run_id:packet.run_id,review_status:reviewStatus,reviewer,reviewed_at:new Date().toISOString(),gate_status_reviewed:packet.generation_gate.gate_status,approved_item_ids:approved,rejected_item_ids:rejected,reviewed_gap_ids:reviewedGaps,controlled_tbd_ids:controlledTbds,conditions,evidence_checks:checks,review_notes:String(value('review_notes','Review notes')||''),next_route:routeMap[reviewStatus],validation:{structurally_valid:true,referenced_ids_valid:true,decision_consistent:true,validated_at:new Date().toISOString()}}}];`;
+
+  const trace = byName('Build Approval Trace Payload');
+  trace.parameters.jsCode = trace.parameters.jsCode.replaceAll("$('Build Human Review Packet')", "$('Validate Eligibility and Build Review Packet')").replace("attr('langfuse.trace.metadata.run_id', review.run_id),", "attr('langfuse.trace.metadata.run_id', review.run_id), attr('langfuse.trace.metadata.parent_trace_id', packet.orchestration_context.parent_trace_id),");
+  const record = byName('Record Approval Result');
+  record.name = 'Return Human Approval Stage Result';
+  record.parameters.jsCode = `const result=$('Build Approval Trace Payload').first().json; const packet=$('Validate Eligibility and Build Review Packet').first().json; const response=$input.first().json; const statusCode=response.statusCode??200; const accepted=statusCode>=200&&statusCode<300; if(!accepted) throw new Error('Human Approval Langfuse ingestion failed'); const approved=['approved','approved_with_conditions'].includes(result.review_status);\nreturn [{json:{schema_version:'1.0.0',run_id:result.run_id,stage:'human_approval',execution_status:'passed',decision:approved?'continue':result.review_status==='changes_requested'?'correction':result.review_status==='clarification_required'?'clarification':'rejected',next_route:result.next_route,groundedness_percent:100,output:{human_review:{review_status:result.review_status,reviewer:result.reviewer,reviewed_at:result.reviewed_at,approved_item_ids:result.approved_item_ids,rejected_item_ids:result.rejected_item_ids,reviewed_gap_ids:result.reviewed_gap_ids,controlled_tbd_ids:result.controlled_tbd_ids,conditions:result.conditions,evidence_checks:result.evidence_checks,review_notes:result.review_notes,next_route:result.next_route},routing:result.routing,validation:result.validation,approved_package:{extraction:packet.extraction,gap_analysis:packet.gap_analysis,generation_gate:packet.generation_gate}},observability:{parent_trace_id:packet.orchestration_context.parent_trace_id,stage_trace_id:result.audit.trace_id,prompt_version:null,ingestion_accepted:true}}}];`;
+  base.name='PRD Genie - Human Approval Checkpoint Child v1.0'; base.active=false; base.pinData={}; delete base.id;
+  base.connections={
+    'When Executed by Parent Workflow':mainConnection('Validate Eligibility and Build Review Packet'),
+    'Validate Eligibility and Build Review Packet':mainConnection('Wait for Human Decision'),
+    'Wait for Human Decision':mainConnection('Parse and Validate Human Approval'),
+    'Parse and Validate Human Approval':mainConnection('Deterministic Approval Router'),
+    'Deterministic Approval Router':mainConnection('Build Approval Trace Payload'),
+    'Build Approval Trace Payload':mainConnection('Send Approval Trace to Langfuse'),
+    'Send Approval Trace to Langfuse':mainConnection('Return Human Approval Stage Result')
+  };
+  const order=['When Executed by Parent Workflow','Validate Eligibility and Build Review Packet','Wait for Human Decision','Parse and Validate Human Approval','Deterministic Approval Router','Build Approval Trace Payload','Send Approval Trace to Langfuse','Return Human Approval Stage Result'];
+  base.nodes.forEach(n=>n.position=[order.indexOf(n.name)*250-800,0]);
+  return base;
+}
+
+function buildConnectedOrchestratorV02() {
+  const workflow=buildConnectedOrchestrator(); workflow.name='PRD Genie - Connected Orchestrator v0.2';
+  const map={parameters:{jsCode:`const result=$input.first().json; const stages=result.stage_results; if(result.next_route!=='human_approval'||result.groundedness_percent!==100) throw new Error('Run is not eligible for Human Approval'); return [{json:{schema_version:'1.0.0',run_id:result.run_id,extraction:stages.requirement_extraction.output,gap_analysis:stages.gap_analysis.output.gap_analysis,generation_gate:stages.gap_analysis.output.generation_gate,orchestration_context:{parent_trace_id:result.parent_trace_id,test_id:'T1',environment:'connected-canary'}}}];`},id:'c2000000-0000-4000-8000-000000000001',name:'Map Human Approval Input',type:'n8n-nodes-base.code',typeVersion:2,position:[820,0]};
+  const execute={parameters:{source:'database',workflowId:{__rl:true,value:'',mode:'list',cachedResultName:''},workflowInputs:{mappingMode:'defineBelow',value:{},matchingColumns:[],schema:[],attemptToConvertTypes:false,convertFieldsToString:true},mode:'once',options:{waitForSubWorkflow:true}},id:'c2000000-0000-4000-8000-000000000002',name:'Execute Human Approval Child',type:'n8n-nodes-base.executeWorkflow',typeVersion:1.3,position:[1080,0]};
+  const final={parameters:{jsCode:`const stage=$input.first().json; const mapped=$('Map Human Approval Input').first().json; const errors=[]; if(stage.run_id!==mapped.run_id) errors.push('run_id mismatch'); if(stage.stage!=='human_approval'||stage.execution_status!=='passed') errors.push('stage invalid'); if(stage.decision!=='continue'||stage.next_route!=='prd_generation') errors.push('T1 approval must route to prd_generation'); if(stage.groundedness_percent!==100) errors.push('groundedness must be 100'); if(stage.observability?.parent_trace_id!==mapped.orchestration_context.parent_trace_id) errors.push('parent trace mismatch'); if(!stage.observability?.ingestion_accepted) errors.push('Langfuse ingestion not accepted'); if(errors.length) throw new Error('Connected Human Approval canary failed: '+errors.join('; ')); return [{json:{schema_version:'1.0.0',result_type:'connected_human_approval_canary_result',run_id:mapped.run_id,test_id:'T1',execution_status:'passed',current_stage:'human_approval',next_route:'prd_generation',groundedness_percent:100,parent_trace_id:mapped.orchestration_context.parent_trace_id,human_approval_stage:stage,checks:{run_id_preserved:true,parent_trace_id_preserved:true,human_approval_passed:true,expected_route_reached:true,langfuse_ingestion_accepted:true},recorded_at:new Date().toISOString()}}];`},id:'c2000000-0000-4000-8000-000000000003',name:'Validate PRD Generation Route',type:'n8n-nodes-base.code',typeVersion:2,position:[1360,0]};
+  workflow.nodes.push(map,execute,final); workflow.connections['Validate Human Approval Route']=mainConnection('Map Human Approval Input'); workflow.connections['Map Human Approval Input']=mainConnection('Execute Human Approval Child'); workflow.connections['Execute Human Approval Child']=mainConnection('Validate PRD Generation Route');
+  return workflow;
+}
+
 writeJson('workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json', buildRequirementExtractorChild());
 writeJson('workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json', buildGapAnalyzerChild());
 writeJson('workflows/n8n/prd-genie-connected-orchestrator-v0.1.json', buildConnectedOrchestrator());
+writeJson('workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json', buildHumanApprovalChild());
+writeJson('workflows/n8n/prd-genie-connected-orchestrator-v0.2.json', buildConnectedOrchestratorV02());

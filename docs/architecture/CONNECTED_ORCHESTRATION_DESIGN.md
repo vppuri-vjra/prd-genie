@@ -1,7 +1,7 @@
 ---
 title: PRD Genie Connected Orchestration Design
-version: 0.4
-status: Two-child T1 parent canary passed at 100%
+version: 0.5
+status: Human Approval pause/resume increment built; n8n canary pending
 last_updated: 2026-08-05
 owner: Vipin Puri
 ---
@@ -117,6 +117,8 @@ Groundedness target for every generated artifact: **100%**.
 | Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
 | Gap Analyzer child | `workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
 | Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Passed through Gap Analyzer and Human Approval route validation | 100% |
+| Human Approval checkpoint child | `workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` | Built with persistent Wait-form resume; n8n canary pending | 100% |
+| Connected parent with approval | `workflows/n8n/prd-genie-connected-orchestrator-v0.2.json` | Built through validated Human Approval and PRD route validation; n8n canary pending | 100% |
 
 The child exports do not contain fixed T-test loaders. They start with an Execute Sub-workflow Trigger, validate the parent payload, preserve `run_id` and `parent_trace_id`, execute the validated agent and deterministic controls, send the stage trace to Langfuse, and return the standard orchestration stage envelope.
 
@@ -125,3 +127,5 @@ The Requirement Extractor child identifies the promoted prompt as `extractor-v1.
 The v0.1 parent canary loads approved T1 source evidence, creates one `run_id` and parent trace ID, invokes both child workflows, validates both stage envelopes, rejects ID or trace mismatches, requires 100% groundedness and accepted Langfuse ingestion, and passes only when the deterministic Gap Analyzer route is `human_review` / `human_approval`. Human Approval is intentionally the next integration increment rather than being bypassed.
 
 Actual connected-canary evidence is recorded in `evaluation/results/connected-orchestrator-t1-two-child-canary-2026-08-05.md`.
+
+The v0.2 parent invokes a dedicated Human Approval checkpoint child. Its Wait node keeps both child and parent executions waiting until an actual form submission arrives. The submitted decision is validated against upstream item and gap IDs, the five evidence checks and the approved decision matrix. No response, timeout or malformed decision can produce an approval route.

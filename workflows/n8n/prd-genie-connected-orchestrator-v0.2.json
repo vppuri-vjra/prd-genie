@@ -1,0 +1,275 @@
+{
+  "name": "PRD Genie - Connected Orchestrator v0.2",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c1000000-0000-4000-8000-000000000001",
+      "name": "Manual T1 Canary Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -840,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const randomHex=length=>Array.from({length},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst run_id='RUN-T1-CONNECTED-'+Date.now();\nreturn [{json:{schema_version:'1.0.0',run_id,test_id:'T1',input_type:'evaluation_test',source_name:'eval_prdgenie_inputs.txt',source_text:'The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.',submitted_by:'Connected orchestrator canary',submitted_at:new Date().toISOString(),metadata:{document_version:'connected-canary-v1',language:'en'},orchestration_context:{active_run_id:run_id,parent_trace_id:randomHex(32),environment:'connected-canary'}}}];"
+      },
+      "id": "c1000000-0000-4000-8000-000000000002",
+      "name": "Create T1 Parent Run",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "c1000000-0000-4000-8000-000000000003",
+      "name": "Execute Requirement Extractor Child",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stage=$input.first().json;\nconst parent=$('Create T1 Parent Run').first().json;\nconst errors=[];\nif(stage.schema_version!=='1.0.0') errors.push('stage schema_version');\nif(stage.run_id!==parent.run_id) errors.push('Requirement Extractor run_id mismatch');\nif(stage.stage!=='requirement_extraction'||stage.execution_status!=='passed'||stage.decision!=='continue'||stage.next_route!=='gap_analysis') errors.push('Requirement Extractor route invalid');\nif(stage.groundedness_percent!==100) errors.push('Requirement Extractor groundedness must be 100');\nif(stage.observability?.parent_trace_id!==parent.orchestration_context.parent_trace_id) errors.push('Requirement Extractor parent_trace_id mismatch');\nif(!stage.observability?.ingestion_accepted) errors.push('Requirement Extractor Langfuse ingestion not accepted');\nif(stage.output?.run_id!==parent.run_id) errors.push('Extraction output run_id mismatch');\nif(errors.length) throw new Error('Requirement Extraction stage validation failed: '+errors.join('; '));\nreturn [{json:{schema_version:'1.0.0',run_id:parent.run_id,extraction:stage.output,orchestration_context:{parent_trace_id:parent.orchestration_context.parent_trace_id,test_id:'T1',environment:'connected-canary'},requirement_extraction_stage:stage}}];"
+      },
+      "id": "c1000000-0000-4000-8000-000000000004",
+      "name": "Validate Extraction Stage and Map GA Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "c1000000-0000-4000-8000-000000000005",
+      "name": "Execute Gap Analyzer Child",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        280,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stage=$input.first().json;\nconst mapped=$('Validate Extraction Stage and Map GA Input').first().json;\nconst extractionStage=mapped.requirement_extraction_stage;\nconst errors=[];\nif(stage.schema_version!=='1.0.0') errors.push('stage schema_version');\nif(stage.run_id!==mapped.run_id) errors.push('Gap Analyzer run_id mismatch');\nif(stage.stage!=='gap_analysis'||stage.execution_status!=='passed') errors.push('Gap Analyzer stage status invalid');\nif(stage.decision!=='human_review'||stage.next_route!=='human_approval') errors.push('T1 must route to human_approval');\nif(stage.groundedness_percent!==100) errors.push('Gap Analyzer groundedness must be 100');\nif(stage.observability?.parent_trace_id!==mapped.orchestration_context.parent_trace_id) errors.push('Gap Analyzer parent_trace_id mismatch');\nif(!stage.observability?.ingestion_accepted) errors.push('Gap Analyzer Langfuse ingestion not accepted');\nif(stage.output?.generation_gate?.route!=='human_review') errors.push('Generation Gate route must be human_review');\nif(errors.length) throw new Error('Connected T1 canary failed: '+errors.join('; '));\nreturn [{json:{schema_version:'1.0.0',result_type:'connected_orchestration_canary_result',run_id:mapped.run_id,test_id:'T1',execution_status:'passed',current_stage:'gap_analysis',next_route:'human_approval',groundedness_percent:100,parent_trace_id:mapped.orchestration_context.parent_trace_id,stage_results:{requirement_extraction:extractionStage,gap_analysis:stage},checks:{run_id_preserved:true,parent_trace_id_preserved:true,requirement_extraction_passed:true,gap_analysis_passed:true,expected_route_reached:true,langfuse_ingestion_accepted:true},recorded_at:new Date().toISOString()}}];"
+      },
+      "id": "c1000000-0000-4000-8000-000000000006",
+      "name": "Validate Human Approval Route",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const result=$input.first().json; const stages=result.stage_results; if(result.next_route!=='human_approval'||result.groundedness_percent!==100) throw new Error('Run is not eligible for Human Approval'); return [{json:{schema_version:'1.0.0',run_id:result.run_id,extraction:stages.requirement_extraction.output,gap_analysis:stages.gap_analysis.output.gap_analysis,generation_gate:stages.gap_analysis.output.generation_gate,orchestration_context:{parent_trace_id:result.parent_trace_id,test_id:'T1',environment:'connected-canary'}}}];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000001",
+      "name": "Map Human Approval Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        820,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": ""
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "c2000000-0000-4000-8000-000000000002",
+      "name": "Execute Human Approval Child",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1080,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const stage=$input.first().json; const mapped=$('Map Human Approval Input').first().json; const errors=[]; if(stage.run_id!==mapped.run_id) errors.push('run_id mismatch'); if(stage.stage!=='human_approval'||stage.execution_status!=='passed') errors.push('stage invalid'); if(stage.decision!=='continue'||stage.next_route!=='prd_generation') errors.push('T1 approval must route to prd_generation'); if(stage.groundedness_percent!==100) errors.push('groundedness must be 100'); if(stage.observability?.parent_trace_id!==mapped.orchestration_context.parent_trace_id) errors.push('parent trace mismatch'); if(!stage.observability?.ingestion_accepted) errors.push('Langfuse ingestion not accepted'); if(errors.length) throw new Error('Connected Human Approval canary failed: '+errors.join('; ')); return [{json:{schema_version:'1.0.0',result_type:'connected_human_approval_canary_result',run_id:mapped.run_id,test_id:'T1',execution_status:'passed',current_stage:'human_approval',next_route:'prd_generation',groundedness_percent:100,parent_trace_id:mapped.orchestration_context.parent_trace_id,human_approval_stage:stage,checks:{run_id_preserved:true,parent_trace_id_preserved:true,human_approval_passed:true,expected_route_reached:true,langfuse_ingestion_accepted:true},recorded_at:new Date().toISOString()}}];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000003",
+      "name": "Validate PRD Generation Route",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual T1 Canary Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create T1 Parent Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create T1 Parent Run": {
+      "main": [
+        [
+          {
+            "node": "Execute Requirement Extractor Child",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Requirement Extractor Child": {
+      "main": [
+        [
+          {
+            "node": "Validate Extraction Stage and Map GA Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Extraction Stage and Map GA Input": {
+      "main": [
+        [
+          {
+            "node": "Execute Gap Analyzer Child",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Gap Analyzer Child": {
+      "main": [
+        [
+          {
+            "node": "Validate Human Approval Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Human Approval Route": {
+      "main": [
+        [
+          {
+            "node": "Map Human Approval Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map Human Approval Input": {
+      "main": [
+        [
+          {
+            "node": "Execute Human Approval Child",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Human Approval Child": {
+      "main": [
+        [
+          {
+            "node": "Validate PRD Generation Route",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c1000000-0000-4000-8000-000000000010",
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "instanceCompatibility": "n8n Cloud 2.31.5"
+  },
+  "tags": []
+}
