@@ -58,7 +58,7 @@ T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.1
 
 | Test | Dataset version | Status | Source package | Canonical output | Review guide |
 |---|---|---|---|---|---|
-| T11 | `0.1.0-draft` | Awaiting human approval | Approved T1 package (`HA-R01 / approved`) | `prd-generation/t11/expected-output.json` and `.md` | `prd-generation/t11/REVIEW_GUIDE.md` |
+| T11 | `0.1.0` | Approved by Vipin on 2026-08-05 | Approved T1 package (`HA-R01 / approved`) | `prd-generation/t11/expected-output.json` and `.md` | `prd-generation/t11/HUMAN_REVIEW.md` |
 
 ## Automated evaluation
 

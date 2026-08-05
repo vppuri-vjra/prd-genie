@@ -1,21 +1,29 @@
-# T11 PRD Ground-Truth Review Guide
+# T11 PRD Ground-Truth Human Review
 
-## Review status
+## Approval record
 
-**Awaiting human approval.**
+| Field | Value |
+|---|---|
+| Status | **Approved** |
+| Reviewer | Vipin Puri |
+| Approval date | 2026-08-05 |
+| Approval statement | “Approve T11 ground truth” |
+| Dataset version | `0.1.0` |
+| Source package | T1 after `HA-R01 / approved` |
+| Groundedness | **100%** |
 
 ## Canonical evidence
 
-| PRD content | Upstream ID | Exact source evidence | Expected treatment |
+| PRD content | Upstream ID | Exact source evidence | Approved treatment |
 |---|---|---|---|
 | Report filtering | `FR-001` | “The user should be able to filter reports by date range, category, and status.” | Functional requirement, user goal and directly restated acceptance criterion |
 | Performance | `NFR-001` | “Results must load in under 2 seconds.” | NFR, success metric and directly restated acceptance criterion |
 | PM | `STK-001` | “PM: Sarah.” | Product Overview because the official template has no stakeholder section |
 | Deadline | `DDL-001` | “Deadline: Q3.” | Timeline milestone; preserve Q3 exactly |
 
-## Expected empty or TBD treatment
+## Approved empty or TBD treatment
 
-| Area | Expected result | Rationale |
+| Area | Approved result | Rationale |
 |---|---|---|
 | Product name | Explicit TBD | No name supplied |
 | Business goal | Explicit TBD | No business outcome supplied |
@@ -33,8 +41,6 @@
 - Do not add filtering dimensions or report behaviors.
 - Do not introduce open questions that were not approved by Gap Analysis or Human Approval.
 
-## Review decision requested
+## Approval conclusion
 
-Approve only if the JSON and Markdown represent the same ten-section PRD, preserve all four approved facts, and contain zero unsupported product claims.
-
-Groundedness target: **100%**.
+The canonical JSON and Markdown represent the same ten-section PRD, preserve all four approved facts, and contain zero unsupported product claims. They are approved as the T11 evaluation ground truth.
