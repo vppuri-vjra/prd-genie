@@ -72,7 +72,11 @@ function buildRequirementExtractorChild() {
     'Build Langfuse OTLP Payload': mainConnection('Send Trace to Langfuse'),
     'Send Trace to Langfuse': mainConnection('Return Requirement Extraction Stage Result')
   };
-  workflow.nodes.forEach((item, index) => { item.position = [index * 240 - 720, item.name === 'OpenAI - Extractor Model' ? 220 : 0]; });
+  const visualOrder = ['When Executed by Parent Workflow','Validate Parent Source Input','Create Trace Context','Requirement Extractor','Parse and Validate Extraction','Build Langfuse OTLP Payload','Send Trace to Langfuse','Return Requirement Extraction Stage Result'];
+  workflow.nodes.forEach((item) => {
+    const index = item.name === 'OpenAI - Extractor Model' ? visualOrder.indexOf('Requirement Extractor') : visualOrder.indexOf(item.name);
+    item.position = [index * 240 - 720, item.name === 'OpenAI - Extractor Model' ? 220 : 0];
+  });
   delete workflow.id;
   return workflow;
 }
@@ -118,7 +122,11 @@ function buildGapAnalyzerChild() {
     'Build Langfuse OTLP Payload': mainConnection('Send Trace to Langfuse'),
     'Send Trace to Langfuse': mainConnection('Return Gap Analysis Stage Result')
   };
-  workflow.nodes.forEach((item, index) => { item.position = [index * 240 - 720, item.name === 'OpenAI - Gap Analyzer Model' ? 220 : 0]; });
+  const visualOrder = ['When Executed by Parent Workflow','Validate Parent Extraction Input','Create Gap Trace Context','Gap Analyzer Agent','Parse and Validate Gap Analysis','Deterministic Generation Gate','Build Langfuse OTLP Payload','Send Trace to Langfuse','Return Gap Analysis Stage Result'];
+  workflow.nodes.forEach((item) => {
+    const index = item.name === 'OpenAI - Gap Analyzer Model' ? visualOrder.indexOf('Gap Analyzer Agent') : visualOrder.indexOf(item.name);
+    item.position = [index * 240 - 720, item.name === 'OpenAI - Gap Analyzer Model' ? 220 : 0];
+  });
   delete workflow.id;
   return workflow;
 }
