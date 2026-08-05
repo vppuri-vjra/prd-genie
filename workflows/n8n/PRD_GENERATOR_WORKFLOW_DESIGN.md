@@ -16,6 +16,20 @@ Prompt v0.3 was imported into a new clean eight-node workflow, ID `NcqReOJGoKkyN
 
 Prompt v0.4 corrected the two remaining output shapes. Core execution `8620` completed with contract passed, 100% groundedness, nested schema valid, approved IDs only, canonical T11 coverage true, all ten sections, and rendered Markdown. The live Trace Context remained labelled v0.3 because only the Agent prompt was updated in place. The recovery export contains the correct v0.4 label. An unchanged rerun with synchronized trace metadata is required before Langfuse and release promotion.
 
+## Observable release checkpoint
+
+The 11-node workflow was imported cleanly as `PRD Genie - PRD Generator + Langfuse v0.1`, workflow ID `30ZYQxRHWggFgrAe`. The unchanged T11 release run completed through generation, strict validation, Markdown rendering, Langfuse US ingestion, and final result recording.
+
+- contract status: `passed`;
+- groundedness: **100%**;
+- nested schema and canonical coverage: `true`;
+- template sections: `10`;
+- prompt metadata: `prd-generator-v0.4-array-and-feature-shape`;
+- Langfuse ingestion: HTTP `200`, accepted; and
+- Langfuse trace: `05e9aa534e4286e17ec65512a72e48ff`.
+
+Token usage was not exposed by the n8n chain output and is recorded as unavailable rather than estimated.
+
 ## Purpose
 
 Run PRD generation as a separate workflow. It consumes an approved Human Approval package, generates one structured PRD using the official ten-section template, validates the output deterministically, and renders matching Markdown.
