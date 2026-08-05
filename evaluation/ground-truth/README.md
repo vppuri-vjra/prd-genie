@@ -10,7 +10,7 @@ This directory will contain the versioned, human-reviewed canonical expectations
 |---|---|---|
 | T1-T10 | Requirement Extraction | Schema-valid expected JSON plus allowed variations and prohibited claims |
 | T11 | PRD Generation | Approved ten-section Markdown/structured PRD grounded only in the approved T1 extraction |
-| T12 | Story Breakdown | Approved epics, features, and stories linked to T11 and source requirement IDs |
+| T12 | Story Breakdown | Approved by Vipin Puri on 2026-08-05 at 100% groundedness; one epic, one feature, one story, two acceptance criteria, and two unresolved questions linked to T11 and source requirement IDs |
 
 ## Required metadata
 

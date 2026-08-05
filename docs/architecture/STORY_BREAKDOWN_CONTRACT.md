@@ -1,7 +1,7 @@
 ---
 title: PRD Genie Story Breakdown Contract
 version: 1.1.0
-status: Proposed for T12 Human Review
+status: Approved for T12 Implementation
 last_updated: 2026-08-05
 owner: Vipin Puri
 ---
@@ -57,3 +57,7 @@ For the approved T11/T1 PRD, the canonical structure is one epic, one feature, o
 - Unsupported-claim count is zero.
 
 Groundedness target: **100%**, treating explicit controlled TBDs as safe missing-information handling rather than factual claims.
+
+## Approval
+
+Contract v1.1.0 and the T12 canonical ground truth were approved by Vipin Puri on 2026-08-05 at **100% groundedness**.

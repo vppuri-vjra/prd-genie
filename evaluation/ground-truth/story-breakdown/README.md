@@ -6,6 +6,6 @@ The approved-source boundary is the actual T11 release from n8n execution `8621`
 
 | Test | Status | Input | Expected output | Human review |
 |---|---|---|---|---|
-| T12 | Proposed for approval | `t12/input-packet.json` | `t12/expected-output.json` | `t12/HUMAN_REVIEW.md` |
+| T12 | Approved by Vipin Puri on 2026-08-05 at 100% groundedness | `t12/input-packet.json` | `t12/expected-output.json` | `t12/HUMAN_REVIEW.md` |
 
 Target groundedness: **100%**.

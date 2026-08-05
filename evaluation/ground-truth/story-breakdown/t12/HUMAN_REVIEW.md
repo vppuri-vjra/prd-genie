@@ -1,6 +1,6 @@
 # T12 Story Breakdown Human Review
 
-Status: **Proposed — awaiting Vipin Puri approval**
+Status: **Approved by Vipin Puri on 2026-08-05**
 
 ## Authoritative input
 
@@ -43,10 +43,12 @@ The source is the actual T11/T1 PRD release from n8n execution `8621`, which pas
 
 ## Human decision
 
-- [ ] Approve T12 ground truth
+- [x] Approve T12 ground truth
 - [ ] Request changes
 - [ ] Reject
 
-Reviewer: Vipin Puri  
-Decision date: pending  
-Notes: pending
+Reviewer: Vipin Puri
+
+Decision date: 2026-08-05
+
+Notes: Approved at 100% groundedness. The controlled TBD and two unresolved questions must be preserved in actual Story Breakdown output unless later approved evidence resolves them.
