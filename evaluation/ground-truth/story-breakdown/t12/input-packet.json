@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "test_id": "T12",
+  "input_type": "approved_prd",
+  "source_prd": {
+    "test_id": "T11",
+    "n8n_execution_id": "8621",
+    "contract_status": "passed",
+    "groundedness_percent": 100,
+    "document": {
+      "product_name": "TBD - stakeholder input required",
+      "document_version": "0.1",
+      "author": "PRD Genie",
+      "date": "2026-08-05",
+      "status": "Draft"
+    },
+    "functional_requirements": [
+      {
+        "id": "FR-001",
+        "requirement": "Users should be able to filter reports by date range, category, and status.",
+        "priority": "Unspecified",
+        "source_requirement_ids": ["FR-001"]
+      }
+    ],
+    "non_functional_requirements": [
+      {
+        "id": "NFR-001",
+        "requirement": "Results must load in under 2 seconds.",
+        "category": "Performance",
+        "target": "under 2 seconds",
+        "source_requirement_ids": ["NFR-001"]
+      }
+    ],
+    "acceptance_criteria": [
+      {
+        "id": "AC-001",
+        "feature": "Report filtering",
+        "criterion": "Reports can be filtered by date range, category, and status.",
+        "source_requirement_ids": ["FR-001"]
+      },
+      {
+        "id": "AC-002",
+        "feature": "Report results",
+        "criterion": "Results load in under 2 seconds.",
+        "source_requirement_ids": ["NFR-001"]
+      }
+    ],
+    "user_personas": [],
+    "dependencies": [],
+    "open_questions": []
+  },
+  "authorization": {
+    "story_breakdown_allowed": true,
+    "basis": "T11 contract passed at 100% groundedness",
+    "approved_requirement_ids": ["FR-001", "NFR-001"],
+    "approved_acceptance_criteria_ids": ["AC-001", "AC-002"]
+  }
+}
