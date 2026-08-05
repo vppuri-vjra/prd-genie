@@ -1,6 +1,6 @@
 ---
 title: PRD Genie End-to-End Test Traceability Matrix
-version: 0.9
+version: 1.0
 status: Living Evidence Dashboard
 last_updated: 2026-08-05
 owner: Vipin Puri
@@ -69,7 +69,7 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 
 | Test | Reaches Human Approval? | Gate basis | Human Approval case/status | Reaches PRD Generator? | Reason/current action | Groundedness |
 |---|---|---|---|---|---|---:|
-| T1 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | T11 expected JSON and Markdown approved and schema-valid; ready for workflow implementation | 100% |
+| T1 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes—executed | T11 observable release passed; actual JSON and Markdown preserved; Langfuse ingestion accepted | 100% |
 | T2 | No | `clarification_required / clarification` | Not applicable | No | Clarify metrics, format, target users and intended reporting capability | 100% |
 | T3 | No | `clarification_required / clarification` | Not applicable | No | Resolve the explicit refresh contradiction | 100% |
 | T4 | Yes | `eligible_for_human_approval / human_review` | `HA-R02 / changes_requested` — passed | No | Correct classification and relationships for `FR-002` and `FR-003`, then re-review | 100% |
@@ -169,4 +169,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, and all five eligible Human Approval executions: T1/T7/T8 HA-R01, T4 HA-R02 and T10 HA-R05**. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, all five eligible Human Approval executions, and the T11/T1 observable PRD release**. PRD generation for T7, T8 and T10 and the Story Generator remain explicitly unexecuted rather than projected as completed.
