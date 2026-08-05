@@ -35,3 +35,19 @@ The exact top-level correction allowed all workflow nodes to complete, but indep
 | Langfuse | Not yet enabled for this workflow |
 
 The next correction must strengthen both the prompt and deterministic nested-schema validator. Ground truth remains unchanged.
+
+## Execution 3 — prompt v0.3 on clean workflow
+
+| Field | Value |
+|---|---|
+| Clean n8n workflow ID | `NcqReOJGoKkyNh4S` |
+| Canvas | 8 nodes; no duplicate suffixes |
+| Prompt verified live | `prd-generator-v0.3-nested-schema-and-t11-mapping` |
+| Outcome | Controlled failure at `Parse and Validate PRD` |
+
+The model correctly produced document metadata, grounded Product Overview, business-goal TBD, user goal, FR-001, NFR-001, two acceptance-criterion concepts, empty unsupported sections, and the Q3 milestone. Two shape defects remained:
+
+1. `success_metrics` was a sourced-text object rather than an array containing that object.
+2. `AC-001` and `AC-002` omitted the required `feature` field.
+
+The validator also exposed a robustness defect: after recording the wrong array type, it attempted iteration and raised a technical `TypeError` instead of the intended consolidated contract error. No PRD was accepted. Prompt v0.4 must correct only the two remaining shapes, and the validator must guard iteration behind `Array.isArray`.

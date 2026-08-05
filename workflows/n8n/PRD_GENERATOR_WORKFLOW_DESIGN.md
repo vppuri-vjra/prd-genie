@@ -12,6 +12,8 @@ The deterministic validator rejected the result. No invalid PRD was accepted. Pr
 
 The v0.2 rerun completed all nodes but did not pass independent T11 review. It exposed incomplete nested validation: invalid document metadata and sourced-text status values, omitted approved goal/metric/acceptance-criterion content, and an invalid milestone shape were not rejected. This execution is recorded as a failed candidate. The approved T11 ground truth remains unchanged, and Langfuse will not be added until both the prompt and nested validator pass.
 
+Prompt v0.3 was imported into a new clean eight-node workflow, ID `NcqReOJGoKkyNh4S`. It corrected all earlier content and metadata defects. The remaining output differences are limited to an object-versus-array error for `success_metrics` and missing `feature` fields on both acceptance criteria. The strict validator stopped the workflow, although its wrong-type path must be hardened to avoid an iterator `TypeError`. Prompt v0.4 and the validator hardening are the next targeted correction.
+
 ## Purpose
 
 Run PRD generation as a separate workflow. It consumes an approved Human Approval package, generates one structured PRD using the official ten-section template, validates the output deterministically, and renders matching Markdown.
