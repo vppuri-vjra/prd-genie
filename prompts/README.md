@@ -24,6 +24,7 @@ Prompts are versioned implementation artifacts. Each prompt file contains the sy
 | `gap-analyzer-v0.9.md` | Promoted Gap Analyzer baseline; preserves all approved materiality, contradiction, fragment, no-requirements, and dependency-TBD behaviors | `schemas/gap-analysis.schema.json` |
 | `gap-analyzer-v1.0.md` | Promoted Gap Analyzer baseline; requires traceable coverage of every material upstream missing-information record and preserves all v0.9 behavior | `schemas/gap-analysis.schema.json` |
 | `story-breakdown-v0.1.md` | T12 implementation candidate; enforces the approved minimal epic-feature-story hierarchy, controlled TBD benefit, and PRD ID traceability | `schemas/story-breakdown.schema.json` v1.1.0 |
+| `story-breakdown-v0.2.md` | Targeted T12 correction; enforces exact nested fields, `stories` array, epic/feature status, and complete unresolved-question objects | `schemas/story-breakdown.schema.json` v1.1.0 |
 
 Prompt versions should also be recorded in Langfuse and attached to every evaluation result.
 
@@ -92,9 +93,9 @@ Prompt versions should also be recorded in Langfuse and attached to every evalua
 
 ### Story Breakdown candidate
 
-- Candidate version: `story-breakdown-v0.1-t12-canonical`
-- Prompt: `prompts/story-breakdown-v0.1.md`
+- Candidate version: `story-breakdown-v0.2-exact-nested-shape`
+- Prompt: `prompts/story-breakdown-v0.2.md`
 - Output contract: `schemas/story-breakdown.schema.json` v1.1.0
 - Approved ground truth: `evaluation/ground-truth/story-breakdown/t12/expected-output.json`
-- Verification status: not yet executed
+- Verification status: v0.1 execution `8734` was safely rejected for nested-shape defects; v0.2 rerun pending
 - Groundedness target: 100%

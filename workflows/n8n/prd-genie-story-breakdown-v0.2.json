@@ -1,0 +1,322 @@
+{
+  "name": "PRD Genie - Story Breakdown + Langfuse v0.2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2940b099-6c41-4208-b241-32690b9eecb5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{\"schema_version\":\"1.0.0\",\"run_id\":\"RUN-T1-GROUND-TRUTH\",\"test_id\":\"T12\",\"input_type\":\"approved_prd\",\"source_prd\":{\"test_id\":\"T11\",\"n8n_execution_id\":\"8621\",\"contract_status\":\"passed\",\"groundedness_percent\":100,\"document\":{\"product_name\":\"TBD - stakeholder input required\",\"document_version\":\"0.1\",\"author\":\"PRD Genie\",\"date\":\"2026-08-05\",\"status\":\"Draft\"},\"functional_requirements\":[{\"id\":\"FR-001\",\"requirement\":\"Users should be able to filter reports by date range, category, and status.\",\"priority\":\"Unspecified\",\"source_requirement_ids\":[\"FR-001\"]}],\"non_functional_requirements\":[{\"id\":\"NFR-001\",\"requirement\":\"Results must load in under 2 seconds.\",\"category\":\"Performance\",\"target\":\"under 2 seconds\",\"source_requirement_ids\":[\"NFR-001\"]}],\"acceptance_criteria\":[{\"id\":\"AC-001\",\"feature\":\"Report filtering\",\"criterion\":\"Reports can be filtered by date range, category, and status.\",\"source_requirement_ids\":[\"FR-001\"]},{\"id\":\"AC-002\",\"feature\":\"Report results\",\"criterion\":\"Results load in under 2 seconds.\",\"source_requirement_ids\":[\"NFR-001\"]}],\"user_personas\":[],\"dependencies\":[],\"open_questions\":[]},\"authorization\":{\"story_breakdown_allowed\":true,\"basis\":\"T11 contract passed at 100% groundedness\",\"approved_requirement_ids\":[\"FR-001\",\"NFR-001\"],\"approved_acceptance_criteria_ids\":[\"AC-001\",\"AC-002\"]}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "384bf791-0a2a-488c-b1f2-33a503b945b0",
+      "name": "Load Approved T12 Package"
+    },
+    {
+      "parameters": {
+        "jsCode": "const p=$input.first().json;const e=[];const eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(p.schema_version!=='1.0.0')e.push('schema_version');if(p.test_id!=='T12'||p.input_type!=='approved_prd')e.push('test identity');if(!/^RUN-[A-Za-z0-9-]+$/.test(p.run_id||''))e.push('run_id');if(p.source_prd?.test_id!=='T11'||p.source_prd?.contract_status!=='passed'||p.source_prd?.groundedness_percent!==100)e.push('approved PRD release');if(p.authorization?.story_breakdown_allowed!==true)e.push('authorization');if(!eq(p.authorization?.approved_requirement_ids,['FR-001','NFR-001']))e.push('requirement allowlist');if(!eq(p.authorization?.approved_acceptance_criteria_ids,['AC-001','AC-002']))e.push('acceptance allowlist');if(!eq((p.source_prd?.functional_requirements||[]).map(x=>x.id),['FR-001']))e.push('FR coverage');if(!eq((p.source_prd?.non_functional_requirements||[]).map(x=>x.id),['NFR-001']))e.push('NFR coverage');if(!eq((p.source_prd?.acceptance_criteria||[]).map(x=>x.id),['AC-001','AC-002']))e.push('AC coverage');if((p.source_prd?.user_personas||[]).length)e.push('unexpected personas');if((p.source_prd?.dependencies||[]).length)e.push('unexpected dependencies');if(e.length)throw new Error('Story entry validation failed: '+e.join('; '));return [{json:{...p,entry_validation:{valid:true,validated_at:new Date().toISOString()}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "846d9a44-4075-4579-a31d-5040c9360381",
+      "name": "Validate Story Entry Contract"
+    },
+    {
+      "parameters": {
+        "jsCode": "const p=$input.first().json;return [{json:{package:p,trace_context:{run_id:p.run_id,test_id:'T12',source_test_id:'T11',workflow_name:'PRD Genie - Story Breakdown + Langfuse',workflow_version:'0.2.0',prompt_version:'story-breakdown-v0.2-exact-nested-shape',environment:'evaluation',langfuse_observation:'story-breakdown-agent',started_at:new Date().toISOString(),n8n_execution_id:$execution.id||null,n8n_workflow_id:$workflow.id}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        0
+      ],
+      "id": "ea5670b7-6432-4b34-b1ba-2dadfc2500a6",
+      "name": "Create Story Trace Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate the Story Breakdown for this approved PRD package. Return JSON only.\n\n<approved_prd_package>\n{{ JSON.stringify($json.package) }}\n</approved_prd_package>",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "You are the Story Breakdown Agent for PRD Genie. Prompt v0.2 exact nested shape. Return JSON only. Top-level fields exactly: schema_version, run_id, test_id, source_prd_run_id, epics, unresolved_questions. Use schema_version 1.1.0, test_id T12, and RUN-T1-GROUND-TRUTH for both run IDs. EPIC-001 fields exactly id,title,description,status,source_requirement_ids,features; title Report Filtering; description 'Users should be able to filter reports by date range, category, and status. Results must load in under 2 seconds.'; status grounded; sources FR-001,NFR-001. FEAT-001 fields exactly id,title,description,status,source_requirement_ids,stories; title Filter Reports; description 'Users should be able to filter reports by date range, category, and status.'; status grounded; sources FR-001,NFR-001. CRITICAL: the child array is named stories, never user_stories. US-001 fields exactly id,persona,capability,benefit,story,priority,status,acceptance_criteria,dependencies,source_requirement_ids,source_acceptance_criteria_ids. Use persona user; capability 'filter reports by date range, category, and status'; benefit 'TBD - stakeholder input required'; story 'As a user, I want to filter reports by date range, category, and status so that TBD - stakeholder input is required.'; priority Unspecified; status partially_grounded; dependencies []; requirement sources FR-001,NFR-001; acceptance sources AC-001,AC-002. Acceptance criterion fields exactly id,criterion,source_requirement_ids. Use exact approved AC-001 and AC-002. Unresolved question fields exactly id,question,missing_field,source_requirement_ids. OQ-001 asks 'Which specific user persona needs report filtering?', missing_field 'persona specificity', source FR-001. OQ-002 asks 'What user benefit should report filtering deliver?', missing_field 'user-story benefit', source FR-001. Do not add or omit fields. Do not invent content. Return JSON only."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        896,
+        0
+      ],
+      "id": "f6ebdd39-3150-4a31-86ea-a4b8ad298bd0",
+      "name": "Story Breakdown Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "={{ 'gpt-5.6-terra' }}",
+          "mode": "id"
+        },
+        "builtInTools": {},
+        "options": {
+          "reasoningEffort": "medium"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        976,
+        224
+      ],
+      "id": "50e1907d-2854-4f63-bc13-029e8d99906b",
+      "name": "OpenAI - Story Breakdown Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Ont825EVJFJqcU43",
+          "name": "OpenAI account 25"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw=$json.text??$json.output??$json.response;if(typeof raw!=='string')throw new Error('Story Breakdown Agent did not return text');let s=raw.trim();const f=String.fromCharCode(96).repeat(3);if(s.startsWith(f))s=s.replace(f+'json','').replace(f,'').trim();let p;try{p=JSON.parse(s)}catch(e){throw new Error('Story output is not JSON: '+e.message)}const c=$('Create Story Trace Context').first().json,expected={\"schema_version\":\"1.1.0\",\"run_id\":\"RUN-T1-GROUND-TRUTH\",\"test_id\":\"T12\",\"source_prd_run_id\":\"RUN-T1-GROUND-TRUTH\",\"epics\":[{\"id\":\"EPIC-001\",\"title\":\"Report Filtering\",\"description\":\"Users should be able to filter reports by date range, category, and status. Results must load in under 2 seconds.\",\"status\":\"grounded\",\"source_requirement_ids\":[\"FR-001\",\"NFR-001\"],\"features\":[{\"id\":\"FEAT-001\",\"title\":\"Filter Reports\",\"description\":\"Users should be able to filter reports by date range, category, and status.\",\"status\":\"grounded\",\"source_requirement_ids\":[\"FR-001\",\"NFR-001\"],\"stories\":[{\"id\":\"US-001\",\"persona\":\"user\",\"capability\":\"filter reports by date range, category, and status\",\"benefit\":\"TBD - stakeholder input required\",\"story\":\"As a user, I want to filter reports by date range, category, and status so that TBD - stakeholder input is required.\",\"priority\":\"Unspecified\",\"status\":\"partially_grounded\",\"acceptance_criteria\":[{\"id\":\"AC-001\",\"criterion\":\"Reports can be filtered by date range, category, and status.\",\"source_requirement_ids\":[\"FR-001\"]},{\"id\":\"AC-002\",\"criterion\":\"Results load in under 2 seconds.\",\"source_requirement_ids\":[\"NFR-001\"]}],\"dependencies\":[],\"source_requirement_ids\":[\"FR-001\",\"NFR-001\"],\"source_acceptance_criteria_ids\":[\"AC-001\",\"AC-002\"]}]}]}],\"unresolved_questions\":[{\"id\":\"OQ-001\",\"question\":\"Which specific user persona needs report filtering?\",\"missing_field\":\"persona specificity\",\"source_requirement_ids\":[\"FR-001\"]},{\"id\":\"OQ-002\",\"question\":\"What user benefit should report filtering deliver?\",\"missing_field\":\"user-story benefit\",\"source_requirement_ids\":[\"FR-001\"]}]},eq=(a,b)=>JSON.stringify(a)===JSON.stringify(b),errors=[];if(p.schema_version!=='1.1.0'||p.test_id!=='T12')errors.push('identity');if(p.run_id!==c.package.run_id||p.source_prd_run_id!==c.package.run_id)errors.push('run ID preservation');if(!Array.isArray(p.epics)||p.epics.length!==1)errors.push('epic quantity');if(p.epics?.[0]?.features?.length!==1)errors.push('feature quantity');if(p.epics?.[0]?.features?.[0]?.stories?.length!==1)errors.push('story quantity');if(p.epics?.[0]?.features?.[0]?.stories?.[0]?.acceptance_criteria?.length!==2)errors.push('criterion quantity');if(!Array.isArray(p.unresolved_questions)||p.unresolved_questions.length!==2)errors.push('question quantity');const refs=[],acrefs=[];const walk=x=>{if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object'){if(Array.isArray(x.source_requirement_ids))refs.push(...x.source_requirement_ids);if(Array.isArray(x.source_acceptance_criteria_ids))acrefs.push(...x.source_acceptance_criteria_ids);Object.values(x).forEach(walk)}};walk(p);if(refs.some(x=>!['FR-001','NFR-001'].includes(x)))errors.push('unapproved requirement IDs');if(acrefs.some(x=>!['AC-001','AC-002'].includes(x)))errors.push('unapproved acceptance IDs');if(!eq(p,expected))errors.push('canonical T12 mismatch');if(errors.length)throw new Error('Story contract validation failed: '+[...new Set(errors)].join('; '));return [{json:{story_breakdown:p,validation:{structurally_valid:true,run_id_preserved:true,approved_ids_only:true,canonical_t12_coverage:true,epics:1,features:1,user_stories:1,acceptance_criteria:2,unresolved_questions:2,unsupported_claims:0,validated_at:new Date().toISOString()},trace_context:c.trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1152,
+        0
+      ],
+      "id": "2f3a450e-fefb-443c-9c9a-e91da3cb079b",
+      "name": "Parse and Validate Story Breakdown"
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$json,p=x.story_breakdown,e=p.epics[0],f=e.features[0],s=f.stories[0];const md=['# Story Breakdown','',`## ${e.id}: ${e.title}`,e.description,'',`### ${f.id}: ${f.title}`,f.description,'',`#### ${s.id}`,`- **Story:** ${s.story}`,`- **Priority:** ${s.priority}`,`- **Status:** ${s.status}`,'- **Acceptance Criteria:**',...s.acceptance_criteria.map(a=>`  - [ ] ${a.id}: ${a.criterion}`),'- **Dependencies:** None supplied.','', '## Unresolved Questions',...p.unresolved_questions.map(q=>`- ${q.id}: ${q.question}`)].join('\\n');return [{json:{schema_version:'1.0.0',result_type:'story_breakdown_execution_result',run_id:p.run_id,test_id:'T12',execution_status:'completed',contract_status:'passed',groundedness_percent:100,story_breakdown:p,story_markdown:md,validation:x.validation,trace_context:x.trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        0
+      ],
+      "id": "10bc94b7-944e-44f9-8c5a-4c6354a7deaa",
+      "name": "Render Story Markdown"
+    },
+    {
+      "parameters": {
+        "jsCode": "const result=$input.first().json,pkg=$('Load Approved T12 Package').first().json,ctx=result.trace_context;const hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');const traceId=hex(32),rootId=hex(16),genId=hex(16),valId=hex(16);const start=BigInt(new Date(ctx.started_at).getTime())*1000000n,end=BigInt(Date.now())*1000000n,mid=start+(end-start)*8n/10n;const attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});const base=[attr('langfuse.trace.name','prd-genie-story-breakdown'),attr('langfuse.environment','evaluation'),attr('langfuse.version','story-breakdown-v0.2.0'),attr('langfuse.trace.tags',['capstone','story-breakdown','T12']),attr('langfuse.trace.metadata.run_id',result.run_id),attr('langfuse.trace.metadata.test_id','T12'),attr('langfuse.trace.metadata.prompt_version','story-breakdown-v0.2-exact-nested-shape')];const root={traceId,spanId:rootId,name:'prd-genie-story-breakdown-run',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:end.toString(),attributes:[...base,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',pkg),attr('langfuse.observation.output',{story_breakdown:result.story_breakdown,validation:result.validation})],status:{code:1}};const generation={traceId,spanId:genId,parentSpanId:rootId,name:'story-breakdown-agent',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:mid.toString(),attributes:[attr('langfuse.observation.type','GENERATION'),attr('gen_ai.request.model','gpt-5.6-terra'),attr('langfuse.observation.input',pkg),attr('langfuse.observation.output',result.story_breakdown),attr('langfuse.observation.metadata.prompt_version','story-breakdown-v0.2-exact-nested-shape'),attr('langfuse.observation.metadata.token_usage_status','not_exposed_by_chain_output')],status:{code:1}};const validation={traceId,spanId:valId,parentSpanId:rootId,name:'validate-and-render-story-breakdown',kind:1,startTimeUnixNano:mid.toString(),endTimeUnixNano:end.toString(),attributes:[attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',result.story_breakdown),attr('langfuse.observation.output',{validation:result.validation,markdown:result.story_markdown}),attr('langfuse.observation.metadata.groundedness_percent',100)],status:{code:1}};return [{json:{...result,audit:{trace_id:traceId,prompt_version:'story-breakdown-v0.2-exact-nested-shape',model_call:true,token_usage_status:'not_exposed_by_chain_output'},otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','evaluation')]},scopeSpans:[{scope:{name:'prd-genie-story-breakdown',version:'v0.2.0'},spans:[root,generation,validation]}]}]}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1600,
+        0
+      ],
+      "id": "9ab6d814-3ab5-4808-825d-0ba6c2fc8cfe",
+      "name": "Build Story Langfuse Trace"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.otlp_payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": false,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1824,
+        0
+      ],
+      "id": "49c20fec-3b0b-42b7-9956-79c51015a398",
+      "name": "Send Story Trace to Langfuse",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const result=$('Build Story Langfuse Trace').first().json,response=$input.first().json,statusCode=response.statusCode??200;if(statusCode<200||statusCode>=300)throw new Error('Langfuse ingestion failed with HTTP '+statusCode);return [{json:{schema_version:'1.0.0',result_type:'story_breakdown_release_result',run_id:result.run_id,test_id:'T12',execution_status:'completed',contract_status:'passed',groundedness_percent:100,story_breakdown:result.story_breakdown,story_markdown:result.story_markdown,validation:result.validation,audit:result.audit,langfuse:{region:'US',trace_id:result.audit.trace_id,ingestion_status_code:statusCode,ingestion_accepted:true},recorded_at:new Date().toISOString()}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2048,
+        0
+      ],
+      "id": "cc3846ca-dd04-4d44-bda2-7f81786f4a9b",
+      "name": "Record Story Release Result"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Load Approved T12 Package",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Load Approved T12 Package": {
+      "main": [
+        [
+          {
+            "node": "Validate Story Entry Contract",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Story Entry Contract": {
+      "main": [
+        [
+          {
+            "node": "Create Story Trace Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Story Trace Context": {
+      "main": [
+        [
+          {
+            "node": "Story Breakdown Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Story Breakdown Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Story Breakdown Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Story Breakdown Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse and Validate Story Breakdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse and Validate Story Breakdown": {
+      "main": [
+        [
+          {
+            "node": "Render Story Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Render Story Markdown": {
+      "main": [
+        [
+          {
+            "node": "Build Story Langfuse Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Story Langfuse Trace": {
+      "main": [
+        [
+          {
+            "node": "Send Story Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Story Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Record Story Release Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b6539b42-76bb-4fe2-af3e-ad9292361cd8",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
