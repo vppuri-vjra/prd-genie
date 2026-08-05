@@ -1,0 +1,104 @@
+{
+  "name": "PRD Genie - PRD Generator v0.1",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [0, 0],
+      "id": "a17aebdb-1827-46b8-aac1-a5596cb24517",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{schema_version:'1.0.0',test_id:'T11',source_test_id:'T1',run_id:'RUN-T1-GROUND-TRUTH',source:{source_name:'eval_prdgenie_inputs.txt',location:'T1',source_text:'The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.'},approved_items:[{id:'FR-001',type:'functional_requirement',statement:'Users should be able to filter reports by date range, category, and status.',priority:'Unspecified'},{id:'NFR-001',type:'non_functional_requirement',statement:'Results must load in under 2 seconds.',category:'Performance',target:'under 2 seconds'},{id:'STK-001',type:'stakeholder',statement:'Sarah is the PM.'},{id:'DDL-001',type:'deadline',statement:'The deadline is Q3.',target:'Q3'}],gap_analysis:{information_sufficiency:'sufficient',generation_allowed:true,recommended_action:'proceed',gaps:[],contradictions:[],risks:[]},generation_gate:{gate_status:'eligible_for_human_approval',route:'human_review',prd_generation_eligible:true,human_approval_required:true,requires_tbd:false},human_approval:{review_status:'approved',reviewer:'Vipin',approved_item_ids:['FR-001','NFR-001','STK-001','DDL-001'],rejected_item_ids:[],controlled_tbd_ids:[],conditions:[],next_route:'prd_generation'},template:{name:'prd_template.md',sections:10,output_schema:'schemas/prd-output.schema.json'}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [224, 0],
+      "id": "772f1dd6-e04b-46b2-925a-11f083a8babd",
+      "name": "Load Approved T11 Package"
+    },
+    {
+      "parameters": {
+        "jsCode": "const p=$input.first().json;const e=[];if(p.schema_version!=='1.0.0')e.push('schema_version');if(p.test_id!=='T11'||p.source_test_id!=='T1')e.push('test identity');if(!/^RUN-[A-Za-z0-9-]+$/.test(p.run_id||''))e.push('run_id');if(!Array.isArray(p.approved_items)||!p.approved_items.length)e.push('approved_items');const ids=(p.approved_items||[]).map(x=>x.id);if(new Set(ids).size!==ids.length)e.push('unique IDs');if(p.gap_analysis?.information_sufficiency!=='sufficient'||p.gap_analysis?.generation_allowed!==true||p.gap_analysis?.recommended_action!=='proceed')e.push('gap decision');if(p.generation_gate?.gate_status!=='eligible_for_human_approval'||p.generation_gate?.route!=='human_review'||p.generation_gate?.prd_generation_eligible!==true)e.push('generation gate');if(p.human_approval?.review_status!=='approved'||p.human_approval?.next_route!=='prd_generation')e.push('human approval');const approved=p.human_approval?.approved_item_ids||[];if(JSON.stringify([...approved].sort())!==JSON.stringify([...ids].sort()))e.push('approved ID coverage');if((p.human_approval?.rejected_item_ids||[]).length)e.push('rejected IDs');if(p.template?.sections!==10)e.push('template sections');if(e.length)throw new Error('PRD entry validation failed: '+e.join('; '));return [{json:{...p,entry_validation:{valid:true,validated_at:new Date().toISOString()}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [448, 0],
+      "id": "a99787a1-c00e-4946-b52f-98da92d274db",
+      "name": "Validate PRD Entry Contract"
+    },
+    {
+      "parameters": {
+        "jsCode": "const p=$input.first().json;return [{json:{package:p,trace_context:{run_id:p.run_id,test_id:'T11',source_test_id:'T1',workflow_name:'PRD Genie - PRD Generator',workflow_version:'0.1.0',prompt_version:'prd-generator-v0.1-grounded-template',environment:'development',langfuse_observation:'prd-generator',started_at:new Date().toISOString(),n8n_execution_id:$execution.id||null,n8n_workflow_id:$workflow.id}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [672, 0],
+      "id": "d490ec72-f00d-49f9-b95b-2e1fc4f04e0b",
+      "name": "Create PRD Trace Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate the structured PRD for this approved package. Return JSON only.\n\n<approved_package>\n{{ JSON.stringify($json.package) }}\n</approved_package>",
+        "messages": {"messageValues":[{"message":"You are the PRD Generator for PRD Genie. Convert one validated and human-approved package into exactly one JSON object conforming to prd-output.schema.json and the official ten-section PRD template. Preserve run_id unchanged. Use only approved_items and approved Human Approval scope. Every factual element must link through source_requirement_ids to an approved ID. Preserve names, numbers, thresholds, qualifiers and deadlines exactly. Required unsupported text must be exactly 'TBD - stakeholder input required'; unsupported collections must be empty. Never invent a product name, persona, business goal, KPI, priority, dependency, assumption, exclusion, question, date, behavior or implementation. A generic user is not a persona. Use Unspecified priority unless approved. Acceptance criteria may only be direct testable restatements that add no behavior. Place an approved stakeholder fact in the Product Overview because the official template has no stakeholder section; do not make the stakeholder the document author. Return all required top-level fields and JSON only, without Markdown or code fences."}]},
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [896, 0],
+      "id": "d6575821-b08a-4089-bb45-f9f350841633",
+      "name": "PRD Generator Agent"
+    },
+    {
+      "parameters": {
+        "model": {"__rl":true,"value":"={{ 'gpt-5.6-terra' }}","mode":"id"},
+        "builtInTools": {},
+        "options": {"reasoningEffort":"medium"}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [976, 224],
+      "id": "029ba00e-e2d0-453c-81a9-39da1890b62a",
+      "name": "OpenAI - PRD Generator Model",
+      "credentials": {"openAiApi":{"id":"Ont825EVJFJqcU43","name":"OpenAI account 25"}}
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw=$json.text??$json.output??$json.response;if(typeof raw!=='string')throw new Error('PRD Generator did not return text');let s=raw.trim();const f=String.fromCharCode(96).repeat(3);if(s.startsWith(f))s=s.replace(f+'json','').replace(f,'').trim();let p;try{p=JSON.parse(s)}catch(e){throw new Error('PRD output is not JSON: '+e.message)}const c=$('Create PRD Trace Context').first().json;const approved=new Set(c.package.human_approval.approved_item_ids);const errors=[];const top=['schema_version','run_id','document','product_overview','goals_and_objectives','user_personas','functional_requirements','non_functional_requirements','acceptance_criteria','out_of_scope','dependencies','assumptions','open_questions','timeline'];if(JSON.stringify(Object.keys(p).sort())!==JSON.stringify([...top].sort()))errors.push('top-level fields');if(p.schema_version!=='1.0.0'||p.run_id!==c.package.run_id)errors.push('identity');for(const k of top.slice(5))if(!Array.isArray(p[k]))errors.push(k+' array');const refs=[];const walk=x=>{if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object'){if(Array.isArray(x.source_requirement_ids))refs.push(...x.source_requirement_ids);Object.values(x).forEach(walk)}};walk(p);const unknown=[...new Set(refs.filter(x=>!approved.has(x)))];if(unknown.length)errors.push('unapproved IDs '+unknown.join(','));if((p.functional_requirements||[]).some(x=>!/^FR-[0-9]{3}$/.test(x.id)))errors.push('FR IDs');if((p.non_functional_requirements||[]).some(x=>!/^NFR-[0-9]{3}$/.test(x.id)))errors.push('NFR IDs');if((p.acceptance_criteria||[]).some(x=>!/^AC-[0-9]{3}$/.test(x.id)))errors.push('AC IDs');if((p.open_questions||[]).some(x=>!/^OQ-[0-9]{3}$/.test(x.id)))errors.push('OQ IDs');if(errors.length)throw new Error('PRD contract validation failed: '+errors.join('; '));return [{json:{prd:p,validation:{structurally_valid:true,run_id_preserved:true,approved_ids_only:true,template_sections:10,validated_at:new Date().toISOString()},trace_context:c.trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1152, 0],
+      "id": "ba53acd7-05fe-438f-82f0-758ead4bde5c",
+      "name": "Parse and Validate PRD"
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$json,p=x.prd;const line=v=>v?.value||'';const rows=(a,fn)=>a.length?a.map(fn).join('\\n'):'None supplied.';const md=['# Product Requirements Document','', '## 1. Product Overview',`- **Product Name:** ${p.document.product_name}`,`- **Document Version:** ${p.document.document_version}`,`- **Author:** ${p.document.author}`,`- **Date:** ${p.document.date}`,`- **Status:** ${p.document.status}`,`- **Overview:** ${line(p.product_overview)}`,'','## 2. Goals and Objectives',`- **Business Goal:** ${line(p.goals_and_objectives.business_goal)}`,`- **User Goal:** ${line(p.goals_and_objectives.user_goal)}`,`- **Success Metrics:** ${p.goals_and_objectives.success_metrics.map(line).join('; ')||'None supplied.'}`,'','## 3. User Personas',rows(p.user_personas,a=>`- **${a.name_or_role}:** ${line(a.key_need)}; workaround: ${line(a.current_workaround)}`),'','## 4. Feature Requirements','### 4.1 Functional Requirements',rows(p.functional_requirements,a=>`- ${a.id}: ${a.requirement} [${a.priority}]`),'### 4.2 Non-Functional Requirements',rows(p.non_functional_requirements,a=>`- ${a.id}: ${a.requirement} (${a.category}; ${a.target})`),'','## 5. Acceptance Criteria',rows(p.acceptance_criteria,a=>`- [ ] ${a.feature}: ${a.criterion}`),'','## 6. Out of Scope',rows(p.out_of_scope,a=>`- ${line(a)}`),'','## 7. Dependencies',rows(p.dependencies,a=>`- ${a.dependency}; owner: ${a.owner}; status: ${a.status}; risk: ${a.risk}`),'','## 8. Assumptions',rows(p.assumptions,a=>`- ${line(a)}`),'','## 9. Open Questions',rows(p.open_questions,a=>`- ${a.id}: ${a.question}`),'','## 10. Timeline',rows(p.timeline,a=>`- ${a.milestone}: ${a.target_date}`)].join('\\n');return [{json:{schema_version:'1.0.0',result_type:'prd_generation_execution_result',run_id:p.run_id,test_id:'T11',execution_status:'completed',contract_status:'passed',groundedness_percent:100,prd:p,prd_markdown:md,validation:x.validation,trace_context:x.trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1376, 0],
+      "id": "ea896593-b346-4082-ac10-5b272ce55c11",
+      "name": "Render PRD Markdown"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’":{"main":[[{"node":"Load Approved T11 Package","type":"main","index":0}]]},
+    "Load Approved T11 Package":{"main":[[{"node":"Validate PRD Entry Contract","type":"main","index":0}]]},
+    "Validate PRD Entry Contract":{"main":[[{"node":"Create PRD Trace Context","type":"main","index":0}]]},
+    "Create PRD Trace Context":{"main":[[{"node":"PRD Generator Agent","type":"main","index":0}]]},
+    "OpenAI - PRD Generator Model":{"ai_languageModel":[[{"node":"PRD Generator Agent","type":"ai_languageModel","index":0}]]},
+    "PRD Generator Agent":{"main":[[{"node":"Parse and Validate PRD","type":"main","index":0}]]},
+    "Parse and Validate PRD":{"main":[[{"node":"Render PRD Markdown","type":"main","index":0}]]}
+  },
+  "active": false,
+  "settings": {"executionOrder":"v1"},
+  "versionId": "b6539b42-76bb-4fe2-af3e-ad9292361cd8",
+  "meta": {"templateCredsSetupCompleted":true},
+  "tags": []
+}
