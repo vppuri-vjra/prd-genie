@@ -51,3 +51,23 @@ The model correctly produced document metadata, grounded Product Overview, busin
 2. `AC-001` and `AC-002` omitted the required `feature` field.
 
 The validator also exposed a robustness defect: after recording the wrong array type, it attempted iteration and raised a technical `TypeError` instead of the intended consolidated contract error. No PRD was accepted. Prompt v0.4 must correct only the two remaining shapes, and the validator must guard iteration behind `Array.isArray`.
+
+## Execution 4 — prompt v0.4 core pass
+
+| Field | Result |
+|---|---|
+| n8n execution | `8620` |
+| Workflow | `NcqReOJGoKkyNh4S` |
+| Execution status | `completed` |
+| Contract status | `passed` |
+| Groundedness | **100%** |
+| Nested schema valid | `true` |
+| Approved IDs only | `true` |
+| Canonical T11 coverage | `true` |
+| Template sections | `10` |
+| Markdown rendered | Yes |
+| Langfuse | Not yet enabled |
+
+Prompt v0.4 corrected `success_metrics` to a one-element array and added `feature` to both acceptance criteria. The generated JSON is schema-compatible and matches the approved T11 facts and empty/TBD treatment.
+
+The live Agent used prompt v0.4, but the separately loaded Trace Context still reported `prd-generator-v0.3-nested-schema-and-t11-mapping`. This does not alter the generated PRD, but it is a reproducibility metadata defect. Correct the Trace Context to `prd-generator-v0.4-array-and-feature-shape` and perform an unchanged release rerun before enabling Langfuse or promoting the workflow baseline.

@@ -14,6 +14,8 @@ The v0.2 rerun completed all nodes but did not pass independent T11 review. It e
 
 Prompt v0.3 was imported into a new clean eight-node workflow, ID `NcqReOJGoKkyNh4S`. It corrected all earlier content and metadata defects. The remaining output differences are limited to an object-versus-array error for `success_metrics` and missing `feature` fields on both acceptance criteria. The strict validator stopped the workflow, although its wrong-type path must be hardened to avoid an iterator `TypeError`. Prompt v0.4 and the validator hardening are the next targeted correction.
 
+Prompt v0.4 corrected the two remaining output shapes. Core execution `8620` completed with contract passed, 100% groundedness, nested schema valid, approved IDs only, canonical T11 coverage true, all ten sections, and rendered Markdown. The live Trace Context remained labelled v0.3 because only the Agent prompt was updated in place. The recovery export contains the correct v0.4 label. An unchanged rerun with synchronized trace metadata is required before Langfuse and release promotion.
+
 ## Purpose
 
 Run PRD generation as a separate workflow. It consumes an approved Human Approval package, generates one structured PRD using the official ten-section template, validates the output deterministically, and renders matching Markdown.
