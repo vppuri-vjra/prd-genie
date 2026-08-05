@@ -2,11 +2,25 @@
 
 ## Design status
 
-The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1 standard-approval path is implemented in n8n workflow `L3J0nRWdKhs46wxF` and passed its canary at 100% groundedness. The T10 conditional path, negative-route tests, Langfuse transmission, and upstream/downstream integration remain pending.
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1 standard-approval path (`HA-R01`) and T4 changes-requested path (`HA-R02`) are implemented in n8n workflow `L3J0nRWdKhs46wxF`; both passed at 100% groundedness with accepted Langfuse traces. The T10 conditional path, remaining negative-route tests, and upstream/downstream integration remain pending.
 
 ## Scope
 
 Implement the mandatory human-in-the-loop boundary between the Gap Analyzer and PRD Generator. This workflow performs no model call.
+
+## Entry-rule implementation
+
+The canonical entry criteria are defined in `docs/architecture/HUMAN_APPROVAL_CONTRACT.md`. This workflow must enforce them deterministically before presenting a review form.
+
+The `Validate Review Eligibility` step must:
+
+1. validate the Requirement Extraction, Gap Analysis and gate structures;
+2. verify aligned `run_id` values and valid upstream references;
+3. accept only `eligible_for_human_approval / human_review` or `eligible_with_tbd / human_review_with_tbd`;
+4. reject clarification and blocked routes without invoking Human Approval; and
+5. distinguish checkpoint eligibility from downstream PRD eligibility.
+
+PRD eligibility is set only after a valid Human Approval decision: `approved` or `approved_with_conditions`. All other review decisions remain ineligible for PRD generation.
 
 ## Proposed node sequence
 
@@ -65,3 +79,7 @@ Record `run_id`, reviewer, review status, approved/rejected IDs, condition IDs, 
 ## T1 canary evidence
 
 On 2026-08-04, Vipin submitted the T1 human decision through the n8n form. The complete workflow passed: contract status `passed`, groundedness `100`, approved IDs `FR-001`, `NFR-001`, `STK-001`, and `DDL-001`, all five evidence checks `true`, and deterministic route `prd_generation`. The audit payload recorded `model_call: false` and zero token usage. See `evaluation/results/human-approval-t1-canary-2026-08-04.md`.
+
+## HA-R02 correction-route evidence
+
+On 2026-08-04, Vipin submitted the T4-derived `HA-R02` decision. The workflow passed at 100% groundedness, approved `FR-001`, rejected `FR-002` and `FR-003` for relationship/classification correction, set `relationships_verified: false`, routed to `correction`, and kept PRD generation ineligible. Langfuse US accepted the non-LLM trace with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r02-changes-requested-2026-08-04.md`.

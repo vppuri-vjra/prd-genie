@@ -10,7 +10,7 @@
 | Approval date | 2026-08-04 |
 | Approval statement | “Approve Human Approval contract” |
 | Scope of approval | Contract semantics, decisions, validations, routing and grounding controls |
-| Implementation status | n8n implementation pending |
+| Implementation status | n8n checkpoint implemented; HA-R01 and HA-R02 executed |
 
 This approved version is the implementation baseline. Any material change to its decision meanings, validation rules or downstream routes requires a new version and approval record.
 
@@ -36,6 +36,35 @@ Only these upstream gate results may enter review:
 | `eligible_with_tbd` | Approval with explicit conditions/TBDs |
 
 Clarification and blocked routes do not enter this checkpoint.
+
+## Human Approval entry criteria
+
+A package reaches Human Approval only when every mandatory entry criterion passes. Reaching Human Approval means the package is eligible for human governance review; it does not mean the package is approved for PRD generation.
+
+| Criterion | Required condition |
+|---|---|
+| Requirement Extraction | Execution completed and the output is contract-valid |
+| Source grounding | Proposed factual items carry valid source/evidence traceability |
+| Gap Analysis contract | Gap Analysis output is structurally valid |
+| Gap Analysis sufficiency | `sufficient` or `partially_sufficient` |
+| Gap Analysis action | `proceed` or `proceed_with_tbd` |
+| Generation allowed | `true` |
+| Generation gate | `eligible_for_human_approval` or `eligible_with_tbd` |
+| Gate route | `human_review` or `human_review_with_tbd` |
+| Material blockers | No unresolved material issue requiring the upstream `clarification` or `blocked` route |
+| Run alignment | Outer package, extraction and Gap Analysis `run_id` values match |
+| Reference integrity | Required schemas pass and all referenced IDs exist upstream |
+
+The deterministic entry decision is:
+
+| Approved Gap Analysis outcome | Gate result | Enters Human Approval? |
+|---|---|---:|
+| `sufficient / proceed` | `eligible_for_human_approval / human_review` | Yes |
+| `partially_sufficient / proceed_with_tbd` | `eligible_with_tbd / human_review_with_tbd` | Yes, conditionally |
+| `insufficient / request_clarification` | `clarification_required / clarification` | No |
+| `insufficient / block_generation` | `generation_blocked / blocked` | No |
+
+Under the approved T1–T10 baseline, T1, T4, T7, T8 and T10 reach Human Approval. T2, T3, T5 and T6 route to clarification before Human Approval; T9 is explicitly blocked before Human Approval.
 
 ## Human review responsibilities
 
