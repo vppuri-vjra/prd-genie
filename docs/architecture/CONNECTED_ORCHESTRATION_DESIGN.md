@@ -1,7 +1,7 @@
 ---
 title: PRD Genie Connected Orchestration Design
-version: 0.1
-status: Approved-stage integration design
+version: 0.2
+status: Child wrappers built; import testing pending
 last_updated: 2026-08-05
 owner: Vipin Puri
 ---
@@ -109,3 +109,15 @@ The canary passes only when all child `run_id` values match, all stage groundedn
 9. Add shared-source ingestion and realistic multi-source regression.
 
 Groundedness target for every generated artifact: **100%**.
+
+## Implementation status
+
+| Component | Export | Status | Groundedness target |
+|---|---|---|---:|
+| Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json` | Built and locally validated; n8n import/canary pending | 100% |
+| Gap Analyzer child | `workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json` | Built and locally validated; n8n import/canary pending | 100% |
+| Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Not yet built | 100% |
+
+The child exports do not contain fixed T-test loaders. They start with an Execute Sub-workflow Trigger, validate the parent payload, preserve `run_id` and `parent_trace_id`, execute the validated agent and deterministic controls, send the stage trace to Langfuse, and return the standard orchestration stage envelope.
+
+The Requirement Extractor child identifies the promoted prompt as `extractor-v1.5-product-fragment-status-boundary` and contains the inherited v1.3 prompt plus the documented v1.4 relationship audit and v1.5 product-fragment boundary. The standalone release-evidence workflow remains unchanged.

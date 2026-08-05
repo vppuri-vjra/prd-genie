@@ -19,6 +19,15 @@ owner: Vipin Puri
 | 5 | `PRD Genie - Story Breakdown + Langfuse v0.2` | Generate and validate epics, features, user stories, criteria, and unresolved questions | Active; T12/T1 observable release passed | 100% |
 | 6 | `PRD Genie - Connected Orchestrator` | Pass one run envelope through the separate workflows and enforce route stops | Design v0.1 complete; integration-ready child wrappers and parent canvas pending | — |
 
+## Integration-ready child exports
+
+| Sequence | Child workflow | Parent supplies | Child returns | Status |
+|---:|---|---|---|---|
+| 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Built; import test pending |
+| 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Built; import test pending |
+
+These child exports are integration interfaces, not additional AI agents. The standalone workflows remain the regression and release-evidence canvases.
+
 ## Cross-cutting workflow
 
 | Workflow | Role | Status |

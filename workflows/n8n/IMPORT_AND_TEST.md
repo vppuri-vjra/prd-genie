@@ -1,5 +1,16 @@
 # Import and Test: Requirement Extractor v0.1
 
+## Connected child wrappers
+
+Import these files as new workflows; do not overwrite the validated standalone canvases:
+
+1. `prd-genie-requirement-extractor-child-v1.0.json`
+2. `prd-genie-gap-analyzer-child-v1.0.json`
+
+After import, confirm the OpenAI and `Langfuse US - PRD Genie` credentials on each applicable node. The first node must read **When Executed by Parent Workflow**. These child workflows are invoked by the connected parent and do not use a Manual Trigger or fixed T-test loader.
+
+The first canary will pass T1 through Requirement Extractor Child and Gap Analyzer Child. Both results must preserve the same `run_id` and `parent_trace_id`, report 100% groundedness, and the Gap Analyzer must route T1 to `human_approval`.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`

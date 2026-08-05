@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-CONNECTED-CANARY",
+  "test_id": "T1",
+  "input_type": "evaluation_test",
+  "source_name": "eval_prdgenie_inputs.txt",
+  "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+  "submitted_by": "Connected orchestrator",
+  "submitted_at": "2026-08-05T00:00:00.000Z",
+  "metadata": {
+    "document_version": "connected-canary-v1",
+    "language": "en"
+  },
+  "orchestration_context": {
+    "active_run_id": "RUN-T1-CONNECTED-CANARY",
+    "parent_trace_id": "PARENT-TRACE-T1-CONNECTED-CANARY",
+    "environment": "connected-canary"
+  }
+}
