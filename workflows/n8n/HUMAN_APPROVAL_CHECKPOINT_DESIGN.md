@@ -2,7 +2,7 @@
 
 ## Design status
 
-The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1 standard-approval path (`HA-R01`) and T4 changes-requested path (`HA-R02`) are implemented in n8n workflow `L3J0nRWdKhs46wxF`; both passed at 100% groundedness with accepted Langfuse traces. The T10 conditional path, remaining negative-route tests, and upstream/downstream integration remain pending.
+The Human Approval contract version `1.0.0` was approved by Vipin Puri on 2026-08-04. The T1, T7 and T8 standard-approval paths (`HA-R01`) and T4 changes-requested path (`HA-R02`) are implemented in n8n workflow `L3J0nRWdKhs46wxF`; all passed at 100% groundedness with accepted Langfuse traces. The T10 conditional path, remaining negative-route tests, and upstream/downstream integration remain pending.
 
 ## Scope
 
@@ -83,3 +83,7 @@ On 2026-08-04, Vipin submitted the T1 human decision through the n8n form. The c
 ## HA-R02 correction-route evidence
 
 On 2026-08-04, Vipin submitted the T4-derived `HA-R02` decision. The workflow passed at 100% groundedness, approved `FR-001`, rejected `FR-002` and `FR-003` for relationship/classification correction, set `relationships_verified: false`, routed to `correction`, and kept PRD generation ineligible. Langfuse US accepted the non-LLM trace with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r02-changes-requested-2026-08-04.md`.
+
+## HA-R01 T7 and T8 evidence
+
+On 2026-08-05, Vipin approved the T7 and T8 packages through `HA-R01`. Both executions passed at 100% groundedness and routed to `prd_generation`. T7 preserved three exact NFRs. T8 preserved three distinct personas, their three exact capabilities, and all reciprocal persona-to-capability relationships. Langfuse US accepted both non-LLM traces with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r01-t7-approved-2026-08-05.md` and `evaluation/results/human-approval-ha-r01-t8-approved-2026-08-05.md`.

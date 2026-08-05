@@ -1,8 +1,8 @@
 ---
 title: PRD Genie End-to-End Test Traceability Matrix
-version: 0.7
+version: 0.8
 status: Living Evidence Dashboard
-last_updated: 2026-08-04
+last_updated: 2026-08-05
 owner: Vipin Puri
 ---
 
@@ -30,8 +30,8 @@ It distinguishes:
 | Gap Analyzer unchanged release regression | 10/10 | Passed at 100%; prompt v1.0 promoted |
 | Deterministic generation-gate execution | 10/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
 | T-tests eligible to reach Human Approval | 5/10 | T1, T4, T7, T8 and T10 |
-| Human Approval route execution | 3/5 eligible tests | T1 and T7 approved; T4 changes requested; all passed at 100% groundedness |
-| Eligible for PRD after Human Approval | 2/5 eligible tests | T1 and T7 approved; T4 returned to correction; T8 and T10 pending |
+| Human Approval route execution | 4/5 eligible tests | T1, T7 and T8 approved; T4 changes requested; all passed at 100% groundedness |
+| Eligible for PRD after Human Approval | 3/5 eligible tests | T1, T7 and T8 approved; T4 returned to correction; T10 pending |
 | PRD Generator evaluation | 0/10 | Not yet implemented or executed |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
 
@@ -59,7 +59,7 @@ It distinguishes:
 | T5 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending substantive source clarification |
 | T6 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending scope, decision, and deadline clarification |
 | T7 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | Eligible; PRD Generator not yet executed |
-| T8 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | Pending | Eligible only after human approval |
+| T8 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | Eligible; PRD Generator not yet executed |
 | T9 | ⚫ `no_requirements` | Actual pass, 100% | Actual GA execution | ⛔ `insufficient / block_generation`, 100% | `generation_blocked`; `blocked` | Not applicable | Must not be invoked |
 | T10 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟡 `partially_sufficient / proceed_with_tbd`, 100% | `eligible_with_tbd`; `human_review_with_tbd` | Pending required human approval | Eligible only after human approval; ETA remains TBD |
 
@@ -76,7 +76,7 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 | T5 | No | `clarification_required / clarification` | Not applicable | No | Source contains fragments but lacks a reliable requirement | 100% |
 | T6 | No | `clarification_required / clarification` | Not applicable | No | Clarify scope, architecture decision and deadline | 100% |
 | T7 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | Approved package is ready; PRD Generator not yet implemented | 100% |
-| T8 | Yes | `eligible_for_human_approval / human_review` | Pending | No, pending approval | Candidate for an untested Human Approval route | 100% |
+| T8 | Yes | `eligible_for_human_approval / human_review` | `HA-R01 / approved` — passed | Yes, eligible | Approved persona-to-capability package is ready; PRD Generator not yet implemented | 100% |
 | T9 | No | `generation_blocked / blocked` | Not applicable | No | No meaningful requirements; generation must remain blocked | 100% |
 | T10 | Yes, with TBD | `eligible_with_tbd / human_review_with_tbd` | `HA-R05 / approved_with_conditions` — planned | No, pending approval | Human must approve the controlled dependency TBD and conditions | 100% |
 
@@ -86,6 +86,15 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 - T2, T3, T5 and T6 test the earlier clarification route and must not be shown as reaching Human Approval.
 - T9 tests the explicit generation-blocked route and must not be shown as reaching Human Approval.
 - A controlled validation-failure case may corrupt a package derived from an eligible test, but its source T-test and the deliberate mutation must both be recorded.
+
+### Human Approval actual executions
+
+| Test | Case / decision | Contract | PRD route | Evaluator | Langfuse trace |
+|---|---|---|---|---|---|
+| T1 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `04c6b3386a8197b7c553429a57b75bc8` |
+| T4 | `HA-R02 / changes_requested` | Passed | `correction` | Pass, 100% | `d7b8a4a6fe2f356d5f6b9101994074b3` |
+| T7 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `ef61a737842a797efd6f1818ac6854af` |
+| T8 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `2f6530b30b1180af0acf3e234aa19ac6` |
 
 ## Execution and observability evidence
 
@@ -159,4 +168,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, and the executed T1/T7 HA-R01 and T4 HA-R02 decisions**. PRD and Story stages are marked unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, and the executed T1/T7/T8 HA-R01 and T4 HA-R02 decisions**. PRD and Story stages are marked unexecuted rather than projected as completed.

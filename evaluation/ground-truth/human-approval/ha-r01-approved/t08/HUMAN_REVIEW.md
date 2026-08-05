@@ -29,6 +29,24 @@ Verify that T8's complete and sufficient persona-to-capability package receives 
 | Model call | None |
 | Groundedness target | **100%** |
 
+## Execution evidence
+
+| Field | Actual result |
+|---|---|
+| Execution status | `completed` |
+| Contract status | `passed` |
+| Review status | `approved` |
+| Approved IDs | `PER-001`, `FR-001`, `PER-002`, `FR-002`, `PER-003`, `FR-003` |
+| Evidence checks | All five `true` |
+| Validation | Structure, references and decision consistency all `true` |
+| Next route | `prd_generation` |
+| PRD-generation eligible | `true` |
+| Model call / token usage | `false` / `0` |
+| Langfuse ingestion | HTTP `200`, accepted |
+| Langfuse trace | `2f6530b30b1180af0acf3e234aa19ac6` |
+| Executed | 2026-08-05 |
+| Groundedness | **100%** |
+
 ## Relationship guardrails
 
 - Keep Admins, End users and Auditors as distinct personas.
