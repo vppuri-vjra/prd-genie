@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T4-HUMAN-REVIEW-CORRECTION",
+  "review_status": "changes_requested",
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-04T23:59:00.000Z",
+  "gate_status_reviewed": "eligible_for_human_approval",
+  "approved_item_ids": [
+    "FR-001"
+  ],
+  "rejected_item_ids": [
+    "FR-002",
+    "FR-003"
+  ],
+  "reviewed_gap_ids": [],
+  "controlled_tbd_ids": [],
+  "conditions": [],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": false,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Return for correction: FR-002 and FR-003 are qualifying acceptance criteria, not standalone functional requirements, and both must be linked to FR-001 without changing the source wording.",
+  "next_route": "correction"
+}

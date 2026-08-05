@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "HA-R02",
+  "test_id": "T4",
+  "run_id": "RUN-T4-HUMAN-REVIEW-CORRECTION",
+  "source": {
+    "source_name": "eval_prdgenie_inputs.txt",
+    "location": "T4",
+    "source_text": "Users need to export reports as PDF and CSV. PDF must include company logo. CSV must preserve formulas."
+  },
+  "extraction": {
+    "schema_version": "1.0.0",
+    "run_id": "RUN-T4-HUMAN-REVIEW-CORRECTION",
+    "extraction_status": "complete",
+    "summary": "Users need PDF and CSV report exports with a company logo in PDF and preserved formulas in CSV.",
+    "items": [
+      {
+        "id": "FR-001",
+        "type": "functional_requirement",
+        "statement": "Users need to export reports as PDF and CSV.",
+        "status": "stated",
+        "priority": "Unspecified",
+        "category": "Report export",
+        "target": null,
+        "evidence": [
+          {
+            "quote": "Users need to export reports as PDF and CSV.",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T4",
+            "speaker": null
+          }
+        ],
+        "confidence": 1.0,
+        "related_item_ids": []
+      },
+      {
+        "id": "FR-002",
+        "type": "functional_requirement",
+        "statement": "PDF must include company logo.",
+        "status": "stated",
+        "priority": "Unspecified",
+        "category": "PDF export",
+        "target": "include company logo",
+        "evidence": [
+          {
+            "quote": "PDF must include company logo.",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T4",
+            "speaker": null
+          }
+        ],
+        "confidence": 1.0,
+        "related_item_ids": []
+      },
+      {
+        "id": "FR-003",
+        "type": "functional_requirement",
+        "statement": "CSV must preserve formulas.",
+        "status": "stated",
+        "priority": "Unspecified",
+        "category": "CSV export",
+        "target": "preserve formulas",
+        "evidence": [
+          {
+            "quote": "CSV must preserve formulas.",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T4",
+            "speaker": null
+          }
+        ],
+        "confidence": 1.0,
+        "related_item_ids": []
+      }
+    ],
+    "contradictions": [],
+    "missing_information": [],
+    "extractor_notes": [
+      "Controlled historical defect: the two qualifying conditions are incorrectly represented as functional requirements and are not linked to the report-export behavior."
+    ]
+  },
+  "gap_analysis": {
+    "schema_version": "1.0.0",
+    "run_id": "RUN-T4-HUMAN-REVIEW-CORRECTION",
+    "information_sufficiency": "sufficient",
+    "generation_allowed": true,
+    "recommended_action": "proceed",
+    "decision_reason": "All explicit export behavior and conditions are present and no information gap blocks review; Human Approval must still verify semantic classification and relationships.",
+    "gaps": [],
+    "contradictions": [],
+    "risks": []
+  },
+  "generation_gate": {
+    "schema_version": "1.0.0",
+    "run_id": "RUN-T4-HUMAN-REVIEW-CORRECTION",
+    "gate_status": "eligible_for_human_approval",
+    "route": "human_review",
+    "prd_generation_eligible": true,
+    "human_approval_required": true,
+    "requires_tbd": false
+  }
+}
