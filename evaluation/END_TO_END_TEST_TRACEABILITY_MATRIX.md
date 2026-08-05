@@ -32,7 +32,7 @@ It distinguishes:
 | T-tests eligible to reach Human Approval | 5/10 | T1, T4, T7, T8 and T10 |
 | Human Approval route execution | 5/5 eligible tests | T1, T7 and T8 approved; T4 changes requested; T10 approved with conditions; all passed at 100% groundedness |
 | Eligible for PRD after Human Approval | 4/5 eligible tests | T1, T7 and T8 approved; T10 conditionally approved; T4 returned to correction |
-| PRD Generator evaluation | T11 ground truth approved | Schema-valid ten-section expected PRD approved at 100% groundedness; workflow not yet implemented or executed |
+| PRD Generator evaluation | T11 ground truth approved; initial execution failed | Separate workflow imported; v0.1 rejected at top level and v0.2 failed nested-contract/canonical review; correction required |
 | Story Generator evaluation | 0/10 | Not yet implemented or executed |
 
 ## Status legend
@@ -52,7 +52,7 @@ It distinguishes:
 
 | Test | Requirement Extractor status | RE evaluation | Gap Analyzer coverage | GA status and decision | Generation-gate outcome | Human-review status | PRD Generator status |
 |---|---|---|---|---|---|---|---|
-| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | T11 ground truth approved and schema-valid at 100%; workflow not yet executed |
+| T1 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🟢 Actual `HA-R01 / approved`, 100% | T11 ground truth approved; initial v0.1/v0.2 workflow candidates failed and require prompt/validator correction |
 | T2 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending clarification |
 | T3 | 🟡 `partial` | Actual pass, 100% | Actual GA execution | 🔴 `insufficient / request_clarification`, 100% | `clarification_required`; `clarification` | Not applicable until clarified | Blocked pending contradiction resolution |
 | T4 | 🟢 `complete` | Actual pass, 100% | Actual GA execution | 🟢 `sufficient / proceed`, 100% | `eligible_for_human_approval`; `human_review` | 🔴 Actual `HA-R02 / changes_requested`, 100% | Not eligible; routed to correction |

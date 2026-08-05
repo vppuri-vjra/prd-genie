@@ -2,7 +2,15 @@
 
 ## Status
 
-Core workflow `v0.1.0` prepared for import and T11 execution. Prompt baseline: `prd-generator-v0.1-grounded-template`.
+Core workflow `v0.1.0` imported as n8n workflow `eQRkZR8t6VS4q1Xu`. Prompt candidate: `prd-generator-v0.2-exact-schema`.
+
+## First T11 execution
+
+The first core execution reached the PRD parser after a successful model call, then stopped correctly. The response remained source-grounded but used a generic PRD structure instead of the approved contract: it introduced unsupported top-level structures such as `problem_statement`, `goals_and_success_metrics`, `user_stories`, and `dependencies_and_assumptions`, while omitting the required separate arrays.
+
+The deterministic validator rejected the result. No invalid PRD was accepted. Prompt v0.2 now enumerates the exact approved top-level and nested field structure and explicitly prohibits the generic aliases observed in the failed run.
+
+The v0.2 rerun completed all nodes but did not pass independent T11 review. It exposed incomplete nested validation: invalid document metadata and sourced-text status values, omitted approved goal/metric/acceptance-criterion content, and an invalid milestone shape were not rejected. This execution is recorded as a failed candidate. The approved T11 ground truth remains unchanged, and Langfuse will not be added until both the prompt and nested validator pass.
 
 ## Purpose
 
@@ -41,4 +49,3 @@ The Agent makes the only model call. Entry validation, output validation and Mar
 6. Export the verified workflow and record execution evidence.
 
 Groundedness target: **100%**.
-
