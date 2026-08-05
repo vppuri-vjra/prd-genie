@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0.0",
+  "result_type": "prd_generation_release_result",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "test_id": "T11",
+  "execution_status": "completed",
+  "contract_status": "passed",
+  "groundedness_percent": 100,
+  "prd": {
+    "schema_version": "1.0.0",
+    "run_id": "RUN-T1-GROUND-TRUTH",
+    "document": {
+      "product_name": "TBD - stakeholder input required",
+      "document_version": "0.1",
+      "author": "PRD Genie",
+      "date": "2026-08-05",
+      "status": "Draft"
+    },
+    "product_overview": {
+      "value": "Users should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. Sarah is the PM.",
+      "status": "grounded",
+      "source_requirement_ids": ["FR-001", "NFR-001", "STK-001"]
+    },
+    "goals_and_objectives": {
+      "business_goal": {
+        "value": "TBD - stakeholder input required",
+        "status": "tbd",
+        "source_requirement_ids": []
+      },
+      "user_goal": {
+        "value": "Users should be able to filter reports by date range, category, and status.",
+        "status": "grounded",
+        "source_requirement_ids": ["FR-001"]
+      },
+      "success_metrics": [
+        {
+          "value": "Results load in under 2 seconds.",
+          "status": "grounded",
+          "source_requirement_ids": ["NFR-001"]
+        }
+      ]
+    },
+    "user_personas": [],
+    "functional_requirements": [
+      {
+        "id": "FR-001",
+        "requirement": "Users should be able to filter reports by date range, category, and status.",
+        "priority": "Unspecified",
+        "source_requirement_ids": ["FR-001"]
+      }
+    ],
+    "non_functional_requirements": [
+      {
+        "id": "NFR-001",
+        "requirement": "Results must load in under 2 seconds.",
+        "category": "Performance",
+        "target": "under 2 seconds",
+        "source_requirement_ids": ["NFR-001"]
+      }
+    ],
+    "acceptance_criteria": [
+      {
+        "id": "AC-001",
+        "feature": "Report filtering",
+        "criterion": "Reports can be filtered by date range, category, and status.",
+        "source_requirement_ids": ["FR-001"]
+      },
+      {
+        "id": "AC-002",
+        "feature": "Report results",
+        "criterion": "Results load in under 2 seconds.",
+        "source_requirement_ids": ["NFR-001"]
+      }
+    ],
+    "out_of_scope": [],
+    "dependencies": [],
+    "assumptions": [],
+    "open_questions": [],
+    "timeline": [
+      {
+        "milestone": "Deadline",
+        "target_date": "Q3",
+        "status": "grounded",
+        "source_requirement_ids": ["DDL-001"]
+      }
+    ]
+  },
+  "prd_markdown_file": "generated-prd.md",
+  "validation": {
+    "structurally_valid": true,
+    "nested_schema_valid": true,
+    "run_id_preserved": true,
+    "approved_ids_only": true,
+    "canonical_t11_coverage": true,
+    "template_sections": 10,
+    "validated_at": "2026-08-05T20:14:29.403Z"
+  },
+  "audit": {
+    "n8n_workflow_id": "30ZYQxRHWggFgrAe",
+    "n8n_execution_id": "8621",
+    "trace_id": "05e9aa534e4286e17ec65512a72e48ff",
+    "prompt_version": "prd-generator-v0.4-array-and-feature-shape",
+    "model_call": true,
+    "token_usage_status": "not_exposed_by_chain_output"
+  },
+  "langfuse": {
+    "region": "US",
+    "trace_id": "05e9aa534e4286e17ec65512a72e48ff",
+    "ingestion_status_code": 200,
+    "ingestion_accepted": true
+  },
+  "recorded_at": "2026-08-05T20:14:30.037Z"
+}
