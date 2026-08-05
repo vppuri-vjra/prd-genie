@@ -1,33 +1,64 @@
 {
-  "schema_version": "1.0.0",
-  "run_id": "RUN-T1-001",
+  "schema_version": "1.1.0",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "test_id": "T12",
+  "source_prd_run_id": "RUN-T1-GROUND-TRUTH",
   "epics": [
     {
       "id": "EPIC-001",
       "title": "Report Filtering",
-      "description": "Allow users to narrow report results using the stated filters.",
+      "description": "Provide the approved report-filtering capability with the approved performance target.",
+      "status": "grounded",
       "source_requirement_ids": ["FR-001", "NFR-001"],
       "features": [
         {
           "id": "FEAT-001",
           "title": "Report Filter Controls",
+          "description": "Allow report filtering by date range, category, and status.",
+          "status": "grounded",
           "source_requirement_ids": ["FR-001", "NFR-001"],
           "stories": [
             {
               "id": "US-001",
               "persona": "user",
               "capability": "filter reports by date range, category, and status",
-              "benefit": "view report results matching selected criteria",
-              "story": "As a user, I want to filter reports by date range, category, and status so that I can view report results matching selected criteria.",
+              "benefit": "TBD - stakeholder input required",
+              "story": "As a user, I want to filter reports by date range, category, and status so that TBD - stakeholder input is required.",
               "priority": "Unspecified",
-              "acceptance_criteria": ["Results load in under 2 seconds."],
+              "status": "partially_grounded",
+              "acceptance_criteria": [
+                {
+                  "id": "AC-001",
+                  "criterion": "Reports can be filtered by date range, category, and status.",
+                  "source_requirement_ids": ["FR-001"]
+                },
+                {
+                  "id": "AC-002",
+                  "criterion": "Results load in under 2 seconds.",
+                  "source_requirement_ids": ["NFR-001"]
+                }
+              ],
               "dependencies": [],
-              "source_requirement_ids": ["FR-001", "NFR-001"]
+              "source_requirement_ids": ["FR-001", "NFR-001"],
+              "source_acceptance_criteria_ids": ["AC-001", "AC-002"]
             }
           ]
         }
       ]
     }
   ],
-  "unresolved_questions": ["Which specific user persona needs report filtering?"]
+  "unresolved_questions": [
+    {
+      "id": "OQ-001",
+      "question": "Which specific user persona needs report filtering?",
+      "missing_field": "persona specificity",
+      "source_requirement_ids": ["FR-001"]
+    },
+    {
+      "id": "OQ-002",
+      "question": "What user benefit should report filtering deliver?",
+      "missing_field": "user-story benefit",
+      "source_requirement_ids": ["FR-001"]
+    }
+  ]
 }
