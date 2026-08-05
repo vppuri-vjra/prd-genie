@@ -17,14 +17,14 @@ owner: Vipin Puri
 | 3 | `PRD Genie - Human Approval v0.1` | Record approve, approve-with-conditions, changes-requested, clarification, or rejection decisions | Active; all five eligible T-test routes passed | 100% |
 | 4 | `PRD Genie - PRD Generator + Langfuse v0.1` | Generate and validate the ten-section PRD | Active; T11/T1 observable release passed | 100% |
 | 5 | `PRD Genie - Story Breakdown + Langfuse v0.2` | Generate and validate epics, features, user stories, criteria, and unresolved questions | Active; T12/T1 observable release passed | 100% |
-| 6 | `PRD Genie - Connected Orchestrator v0.1` | Pass one run envelope through the separate workflows and enforce route stops | Built through Requirement Extractor and Gap Analyzer route validation; T1 n8n canary pending | 100% target |
+| 6 | `PRD Genie - Connected Orchestrator v0.1` | Pass one run envelope through the separate workflows and enforce route stops | T1 connected canary passed through Requirement Extractor, Gap Analyzer and Human Approval route validation | 100% |
 
 ## Integration-ready child exports
 
 | Sequence | Child workflow | Parent supplies | Child returns | Status |
 |---:|---|---|---|---|
-| 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Built; import test pending |
-| 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Built; import test pending |
+| 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Imported; connected T1 canary passed |
+| 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Imported; connected T1 canary passed |
 
 These child exports are integration interfaces, not additional AI agents. The standalone workflows remain the regression and release-evidence canvases.
 

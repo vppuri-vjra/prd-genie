@@ -151,6 +151,12 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 | GA-T9 | `7638` | `insufficient / block_generation` | `generation_blocked / blocked` | Pass, 100% | `52466facd1650beec8cd0f0f42658f3d` |
 | GA-T10 | `7639` | `partially_sufficient / proceed_with_tbd` | `eligible_with_tbd / human_review_with_tbd` | Pass, 100% | `d975a5fc176633dcc1e6dd4bb336804f` |
 
+### Connected Orchestrator T1 two-child canary
+
+| Run | Connected stages | Result | Route | Groundedness | Parent trace | Requirement Extractor trace | Gap Analyzer trace |
+|---|---|---|---|---:|---|---|---|
+| `RUN-T1-CONNECTED-1785970186388` | Requirement Extractor → Gap Analyzer → Generation Gate | Pass | `human_review` → `human_approval` | 100% | `b995873732fcebdc16daa9b573b4cba5` | `2d28f18c2c61fed623dfd96c25ee3fb4` | `20f91a743e6c98cdc55a7b8807b811a8` |
+
 ## Stage-entry rule
 
 Passing Requirement Extraction does not authorize PRD generation. A case may enter the PRD Generator only when:
@@ -169,4 +175,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, all five eligible Human Approval executions, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all five eligible Human Approval executions, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
