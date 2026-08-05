@@ -45,3 +45,18 @@ The controlled input reproduces T4’s documented historical semantic defect. It
 | Approval statement | “Approve HA-R02” |
 | Case | `HA-R02` |
 | Source test | T4 |
+
+## Execution evidence
+
+| Field | Result |
+|---|---|
+| Execution status | **Passed** |
+| Contract status | **Passed** |
+| Groundedness | **100%** |
+| Review status | `changes_requested` |
+| Route | `correction` |
+| PRD-generation eligible | `false` |
+| Langfuse ingestion | **Accepted — HTTP 200** |
+| Langfuse trace ID | `d7b8a4a6fe2f356d5f6b9101994074b3` |
+| Model call | None |
+| Token usage | 0 input, 0 output, 0 total |

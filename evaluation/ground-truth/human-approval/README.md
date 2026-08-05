@@ -5,7 +5,7 @@ This dataset validates deterministic Human Approval decisions and routes. Human 
 | Route case | Source T-test | Human decision/path | Expected route | Groundedness target | Status |
 |---|---|---|---|---:|---|
 | `HA-R01` | T1 | `approved` | `prd_generation` | 100% | Passed — T1 canary |
-| `HA-R02` | T4 | `changes_requested` | `correction` | 100% | Approved by Vipin — 2026-08-04 |
+| `HA-R02` | T4 | `changes_requested` | `correction` | 100% | **Passed — 2026-08-04** |
 | `HA-R03` | To be selected | `clarification_required` | `clarification` | 100% | Pending |
 | `HA-R04` | To be selected | `rejected` | `stopped` | 100% | Pending |
 | `HA-R05` | T10 | `approved_with_conditions` | `prd_generation_with_conditions` | 100% | Pending |
