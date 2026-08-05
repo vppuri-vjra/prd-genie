@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/orchestration-stage-result.schema.json",
+  "title": "PRD Genie Orchestration Stage Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "stage", "execution_status", "decision", "next_route", "groundedness_percent", "output", "observability"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+    "stage": {
+      "enum": ["requirement_extraction", "gap_analysis", "human_approval", "prd_generation", "story_breakdown", "final_validation"]
+    },
+    "execution_status": { "enum": ["passed", "stopped", "failed"] },
+    "decision": {
+      "enum": ["continue", "human_review", "human_review_with_tbd", "clarification", "correction", "blocked", "rejected", "completed", "failed"]
+    },
+    "next_route": {
+      "enum": ["gap_analysis", "human_approval", "clarification", "correction", "stopped", "prd_generation", "prd_generation_with_conditions", "story_breakdown", "final_validation", "completed", "failure_observer"]
+    },
+    "groundedness_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+    "output": { "type": ["object", "array", "null"] },
+    "observability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["parent_trace_id", "stage_trace_id", "prompt_version", "ingestion_accepted"],
+      "properties": {
+        "parent_trace_id": { "type": "string", "minLength": 1 },
+        "stage_trace_id": { "type": ["string", "null"] },
+        "prompt_version": { "type": ["string", "null"] },
+        "ingestion_accepted": { "type": "boolean" }
+      }
+    }
+  }
+}

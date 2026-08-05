@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-GROUND-TRUTH",
+  "stage": "requirement_extraction",
+  "execution_status": "passed",
+  "decision": "continue",
+  "next_route": "gap_analysis",
+  "groundedness_percent": 100,
+  "output": {
+    "contract_status": "passed",
+    "extraction_status": "complete"
+  },
+  "observability": {
+    "parent_trace_id": "PARENT-TRACE-T1",
+    "stage_trace_id": "f14cabccaaea5d00e29f27373adb0002",
+    "prompt_version": "extractor-v1.5-product-fragment-status-boundary",
+    "ingestion_accepted": true
+  }
+}
