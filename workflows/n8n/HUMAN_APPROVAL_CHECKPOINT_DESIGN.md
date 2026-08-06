@@ -95,3 +95,7 @@ On 2026-08-05, Vipin approved the T7 and T8 packages through `HA-R01`. Both exec
 ## HA-R05 conditional-route evidence
 
 On 2026-08-05, Vipin approved the T10 package with conditions through `HA-R05`. The execution passed at 100% groundedness, approved `FR-001`, `DEP-001` and `RSK-001`, reviewed `GAP-001`, preserved `GAP-001`, `DEP-001` and `RSK-001` as controlled TBD context, and routed to `prd_generation_with_conditions`. The condition explicitly prohibits inventing an ETA. Langfuse US accepted the non-LLM trace with HTTP 200 and zero token usage. See `evaluation/results/human-approval-ha-r05-t10-approved-with-conditions-2026-08-05.md`.
+
+## Connected checkpoint evidence
+
+On 2026-08-05, the integration-ready checkpoint child v1.0.1 completed as a true waiting sub-workflow inside Connected Orchestrator v0.2. The child exposed n8n's signed `$execution.resumeFormUrl`, accepted Vipin's T1 approval, resumed the parent, preserved `run_id` and `parent_trace_id`, sent the non-LLM approval trace to Langfuse, and routed to `prd_generation`. All deterministic checks passed at **100% groundedness**. See `evaluation/results/connected-orchestrator-t1-human-approval-canary-2026-08-05.md`.

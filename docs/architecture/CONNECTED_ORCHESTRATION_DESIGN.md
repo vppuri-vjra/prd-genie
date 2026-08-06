@@ -117,8 +117,8 @@ Groundedness target for every generated artifact: **100%**.
 | Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
 | Gap Analyzer child | `workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
 | Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Passed through Gap Analyzer and Human Approval route validation | 100% |
-| Human Approval checkpoint child | `workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` | Built with persistent Wait-form resume; n8n canary pending | 100% |
-| Connected parent with approval | `workflows/n8n/prd-genie-connected-orchestrator-v0.2.json` | Built through validated Human Approval and PRD route validation; n8n canary pending | 100% |
+| Human Approval checkpoint child | `workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` | Runtime workflow v1.0.1 passed persistent signed-form resume in connected T1 canary | 100% |
+| Connected parent with approval | `workflows/n8n/prd-genie-connected-orchestrator-v0.2.json` | Passed connected T1 through validated Human Approval and `prd_generation` route | 100% |
 
 The child exports do not contain fixed T-test loaders. They start with an Execute Sub-workflow Trigger, validate the parent payload, preserve `run_id` and `parent_trace_id`, execute the validated agent and deterministic controls, send the stage trace to Langfuse, and return the standard orchestration stage envelope.
 
@@ -129,3 +129,7 @@ The v0.1 parent canary loads approved T1 source evidence, creates one `run_id` a
 Actual connected-canary evidence is recorded in `evaluation/results/connected-orchestrator-t1-two-child-canary-2026-08-05.md`.
 
 The v0.2 parent invokes a dedicated Human Approval checkpoint child. Its Wait node keeps both child and parent executions waiting until an actual form submission arrives. The submitted decision is validated against upstream item and gap IDs, the five evidence checks and the approved decision matrix. No response, timeout or malformed decision can produce an approval route.
+
+The checkpoint child exposes n8n's exact signed `$execution.resumeFormUrl` immediately before pausing. Reviewers must use that runtime URL; unsigned or manually constructed form URLs are rejected. The transient signed URL is not retained in evaluation evidence.
+
+The connected T1 Human Approval canary passed on 2026-08-05 with run ID `RUN-T1-CONNECTED-1785976225480`, parent trace ID `bf7baca7f89710c926bbb053a1b3b904`, Human Approval trace ID `810191523bb85a5d806cc0f19b267a55`, route `prd_generation`, accepted Langfuse ingestion and 100% groundedness. See `evaluation/results/connected-orchestrator-t1-human-approval-canary-2026-08-05.md`.

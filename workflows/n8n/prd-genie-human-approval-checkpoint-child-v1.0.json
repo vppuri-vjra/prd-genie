@@ -1,5 +1,5 @@
 {
-  "name": "PRD Genie - Human Approval Checkpoint Child v1.0",
+  "name": "PRD Genie - Human Approval Checkpoint Child v1.0.1",
   "nodes": [
     {
       "parameters": {
@@ -27,6 +27,30 @@
       ],
       "id": "5c083115-92cb-47d1-a4d4-8a20457d0102",
       "name": "Validate Eligibility and Build Review Packet"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5c083115-92cb-47d1-a4d4-8a20457d0110",
+              "name": "approval_form_url",
+              "value": "={{ $execution.resumeFormUrl }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        0
+      ],
+      "id": "5c083115-92cb-47d1-a4d4-8a20457d0103",
+      "name": "Expose Human Approval Form URL"
     },
     {
       "parameters": {
@@ -272,6 +296,17 @@
       ]
     },
     "Validate Eligibility and Build Review Packet": {
+      "main": [
+        [
+          {
+            "node": "Expose Human Approval Form URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expose Human Approval Form URL": {
       "main": [
         [
           {
