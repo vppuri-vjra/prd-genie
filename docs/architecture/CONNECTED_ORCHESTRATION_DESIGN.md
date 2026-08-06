@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Connected Orchestration Design
-version: 0.5
-status: Human Approval pause/resume increment built; n8n canary pending
-last_updated: 2026-08-05
+version: 0.6
+status: Connected T1-to-T12 canary passed; final validation/export next
+last_updated: 2026-08-06
 owner: Vipin Puri
 ---
 

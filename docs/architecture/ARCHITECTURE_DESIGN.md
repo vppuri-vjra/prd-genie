@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Architecture Design
-version: 0.2
-status: Draft Baseline
-last_updated: 2026-08-04
+version: 0.3
+status: Connected T1-to-T12 architecture verified; final validation/export planned
+last_updated: 2026-08-06
 owner: Vipin Puri
 ---
 
@@ -10,7 +10,7 @@ owner: Vipin Puri
 
 ## 1. Purpose and status
 
-This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, and Langfuse tracing are implemented and have passed their complete T1-T10 release regressions. The Human Approval contract and n8n design are defined; its implementation, PRD Generation, Story Breakdown, final validation, and Markdown export remain planned. The design will be updated through controlled versions as implementation and evaluation reveal necessary changes.
+This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, and Langfuse tracing are implemented. Standalone release regressions have passed, and Connected Orchestrator v0.4 has proven the contiguous T1-to-T12 path at 100% groundedness through the `final_validation` route. Final cross-stage validation/export, shared-source ingestion, and full-pipeline regression remain planned.
 
 ## 2. Architecture principles
 
@@ -100,9 +100,10 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Implemented; all five eligible T-test routes passed at 100% with Langfuse evidence |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Implemented for T11/T1; observable release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Implemented for T12/T1; observable v0.2 release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
+| Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected stage result | Implemented through v0.4; connected T1-to-T12 canary passed at 100% and reached `final_validation` |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
-| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, all Human Approval executions, and T11 PRD generation; model token counts remain unavailable in the PRD chain output |
+| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, Human Approval, PRD Generation, Story Breakdown, and connected canaries; model token counts remain unavailable where n8n chain output does not expose them |
 
 ## 7. Data contracts
 
@@ -128,7 +129,7 @@ The approval stage receives the extraction, Gap Analysis, and deterministic gate
 
 Each LLM stage should create a Langfuse generation nested under one pipeline trace. Required metadata includes run ID, test ID, agent name, prompt version, model, input, output, validation, latency, input/output tokens, estimated cost, environment, and error details. Validation and failure observations remain visible even when the pipeline stops.
 
-The Requirement Extractor and Gap Analyzer use root, generation, and validation observations plus deterministic stage observations. Human Approval emits a non-LLM `human-approval` span with the decision, route, evidence checks, 100% groundedness, `model_call=false`, and zero token usage. The verified T1 approval trace is `04c6b3386a8197b7c553429a57b75bc8` in Langfuse US.
+The Requirement Extractor, Gap Analyzer, PRD Generator, and Story Breakdown stages use root, generation, and validation observations plus deterministic stage observations. Human Approval emits a non-LLM `human-approval` span with the decision, route, evidence checks, 100% groundedness, `model_call=false`, and zero token usage. Connected Orchestrator v0.4 preserves one parent trace ID across stage envelopes while each child records its own stage trace. The verified connected Story Breakdown trace is `8e7fc5b6a49f0ef550fdee4f4b76f4ca` in Langfuse US.
 
 ## 11. Failure handling
 
@@ -148,7 +149,7 @@ The Requirement Extractor and Gap Analyzer use root, generation, and validation 
 - Workflow exports are inspected before commit.
 - Screenshots exclude credentials, account identifiers, personal email addresses, and secret-bearing URLs.
 - Supplied project resources remain read-only.
-- The public repository contains only submission-safe artifacts.
+- The repository remains private during active development and contains only submission-safe artifacts; visibility can be changed before grading if the submission rules require reviewer access.
 
 ## 13. Deployment and environments
 
@@ -156,4 +157,4 @@ The capstone baseline runs in n8n Cloud and sends evaluation traces to the Langf
 
 ## 14. Architecture evolution
 
-This baseline is version 0.1. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
+This architecture baseline is version 0.3. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
