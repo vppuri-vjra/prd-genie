@@ -67,3 +67,9 @@ The Agent makes the only model call. Entry validation, output validation and Mar
 6. Export the verified workflow and record execution evidence.
 
 Groundedness target: **100%**.
+
+## Connected child v1.0
+
+`prd-genie-prd-generator-child-v1.0.json` is the integration wrapper for the validated T11/T1 baseline. It replaces the manual loader with an Execute Sub-workflow Trigger and consumes the actual `human_approval` stage envelope. It accepts only a passed `prd_generation` route at 100% groundedness, maps only human-approved extraction IDs, preserves the parent and Human Approval trace IDs, and returns a standard `prd_generation` stage envelope with `next_route: story_breakdown`.
+
+The standalone workflow remains unchanged for regression evidence. The connected child is not yet marked passed; it requires an n8n import and a fresh connected T1-to-T11 canary.

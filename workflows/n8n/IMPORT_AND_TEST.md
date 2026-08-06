@@ -25,6 +25,13 @@ For the Human Approval increment, import these as new workflows:
 
 In parent v0.2, select all three child workflows in their Execute Sub-workflow nodes. Run the parent. It must enter a waiting state at `Wait for Human Decision`; open the waiting form and submit the approved T1 decision with approved IDs `FR-001,NFR-001,STK-001,DDL-001` and all five verification boxes checked. After submission, the same execution must resume and end with `next_route: prd_generation`, 100% groundedness and accepted Human Approval Langfuse ingestion.
 
+For the PRD Generation increment, import these as new workflows:
+
+1. `prd-genie-prd-generator-child-v1.0.json`
+2. `prd-genie-connected-orchestrator-v0.3.json`
+
+In the PRD child, bind the existing OpenAI and `Langfuse US - PRD Genie` credentials. In parent v0.3, select all four child workflows in execution order: Requirement Extractor, Gap Analyzer, Human Approval Checkpoint v1.0.1, and PRD Generator Child v1.0. Run the parent and complete the new signed Human Approval form. The final node must report `current_stage: prd_generation`, `next_route: story_breakdown`, `groundedness_percent: 100`, a passed T11 contract, preserved run/parent trace IDs, and accepted PRD Langfuse ingestion.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`

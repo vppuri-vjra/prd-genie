@@ -17,7 +17,8 @@ owner: Vipin Puri
 | 3 | `PRD Genie - Human Approval v0.1` | Record approve, approve-with-conditions, changes-requested, clarification, or rejection decisions | Active; all five eligible T-test routes passed | 100% |
 | 4 | `PRD Genie - PRD Generator + Langfuse v0.1` | Generate and validate the ten-section PRD | Active; T11/T1 observable release passed | 100% |
 | 5 | `PRD Genie - Story Breakdown + Langfuse v0.2` | Generate and validate epics, features, user stories, criteria, and unresolved questions | Active; T12/T1 observable release passed | 100% |
-| 6 | `PRD Genie - Connected Orchestrator v0.1` | Pass one run envelope through the separate workflows and enforce route stops | T1 connected canary passed through Requirement Extractor, Gap Analyzer and Human Approval route validation | 100% |
+| 6 | `PRD Genie - Connected Orchestrator v0.2` | Pass one run envelope through extraction, gap analysis and an actual Human Approval checkpoint | T1 connected canary passed through `prd_generation` route | 100% |
+| 7 | `PRD Genie - Connected Orchestrator v0.3` | Continue an approved connected run through PRD generation | Built; connected T1-to-T11 canary pending | 100% |
 
 ## Integration-ready child exports
 
@@ -25,7 +26,8 @@ owner: Vipin Puri
 |---:|---|---|---|---|
 | 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Imported; connected T1 canary passed |
 | 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Imported; connected T1 canary passed |
-| 3 | `PRD Genie - Human Approval Checkpoint Child v1.0` | Eligible extraction, Gap Analysis, gate and orchestration context | Validated Human Approval stage envelope after form submission | Built; pause/resume n8n canary pending |
+| 3 | `PRD Genie - Human Approval Checkpoint Child v1.0.1` | Eligible extraction, Gap Analysis, gate and orchestration context | Validated Human Approval stage envelope after signed-form submission | Connected T1 pause/resume canary passed |
+| 4 | `PRD Genie - PRD Generator Child v1.0` | Validated Human Approval stage and approved package | PRD Generation stage envelope; next route `story_breakdown` | Built; connected canary pending |
 
 These child exports are integration interfaces, not additional AI agents. The standalone workflows remain the regression and release-evidence canvases.
 
