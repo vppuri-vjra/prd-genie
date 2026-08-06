@@ -1,0 +1,42 @@
+flowchart TD
+    A[Source transcript, brief, notes, or evaluation input]
+
+    subgraph P[Connected Orchestrator]
+        B[Create run envelope and parent trace]
+        C[Requirement Extractor Child]
+        D[Validate extraction stage]
+        E[Gap Analyzer Child]
+        F{Deterministic generation gate}
+        G[Clarification, correction, or blocked result]
+        H[Human Approval Checkpoint Child]
+        I[Signed form pause and resume]
+        J{Validated human decision}
+        K[PRD Generator Child]
+        L[Validate canonical T11 PRD]
+        M[Story Breakdown Child]
+        N[Validate canonical T12 stories]
+        O[Final cross-stage validation and export]
+    end
+
+    A --> B --> C --> D --> E --> F
+    F -- Clarify, correct, or block --> G
+    F -- Eligible for review --> H --> I --> J
+    J -- Reject, revise, or clarify --> G
+    J -- Approve --> K --> L --> M --> N --> O
+
+    C -. stage trace .-> LF[Langfuse US]
+    E -. stage trace .-> LF
+    H -. approval trace .-> LF
+    K -. generation and validation trace .-> LF
+    M -. generation and validation trace .-> LF
+    O -. final validation trace .-> LF
+
+    C -. versioned JSON stage contract .-> D
+    E -. versioned JSON stage contract .-> F
+    H -. versioned JSON stage contract .-> J
+    K -. versioned JSON stage contract .-> L
+    M -. versioned JSON stage contract .-> N
+
+    O --> X[Markdown, JSON, scorecard, and submission evidence]
+    X --> GH[Private GitHub during development]
+    X --> OB[Obsidian project documentation]

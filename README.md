@@ -30,16 +30,20 @@ Product managers spend significant time translating fragmented meeting transcrip
 
 ```mermaid
 flowchart TD
-    A[Transcript, brief, or stakeholder notes] --> B[Input validation]
-    B --> C[Requirement Extractor]
-    C --> D[Gap Analyzer]
-    D --> E{Generation allowed?}
-    E -- No --> F[Clarification or refusal]
-    E -- Yes --> G[Human approval]
-    G --> H[PRD Generator]
-    H --> I[Story Breakdown]
-    I --> J[Final validation]
-    J --> K[Markdown output and Langfuse trace]
+    A[Source input] --> B[Connected Orchestrator]
+    B --> C[Requirement Extractor Child]
+    C --> D[Gap Analyzer Child]
+    D --> E{Deterministic gate}
+    E -- Clarify, correct, or block --> F[Controlled non-generation route]
+    E -- Eligible --> G[Signed Human Approval checkpoint]
+    G -- Approved --> H[PRD Generator Child]
+    H --> I[Story Breakdown Child]
+    I --> J[Final validation and export]
+    C -. trace .-> K[Langfuse]
+    D -. trace .-> K
+    G -. trace .-> K
+    H -. trace .-> K
+    I -. trace .-> K
 ```
 
 The sequential pattern is intentional: each stage depends on an approved output from the previous stage. Material ambiguity or insufficient input blocks downstream generation.

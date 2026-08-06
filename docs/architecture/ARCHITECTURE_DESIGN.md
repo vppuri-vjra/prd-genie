@@ -31,29 +31,37 @@ PRD Genie receives source text from a PM, TPM, evaluator, or file-ingestion step
 
 ```mermaid
 flowchart TD
-    A[Source transcript, brief, notes, or test input] --> B[Normalize and validate input]
-    B --> C[Requirement Extractor]
-    C --> D[Structured-output validation]
-    D --> E[Gap Analyzer]
-    E --> F{Generation gate}
-    F -- Block or clarify --> G[Clarification or refusal output]
-    F -- Eligible --> H[Human approval]
-    H -- Reject or revise --> C
-    H -- Approve --> I[PRD Generator]
-    I --> J[PRD validation]
-    J --> K[Story Breakdown]
-    K --> L[Cross-stage consistency validation]
-    L --> M[Markdown output]
-    C -. traces .-> N[Langfuse]
-    E -. traces .-> N
-    I -. traces .-> N
-    K -. traces .-> N
-    D -. validation .-> N
-    J -. validation .-> N
-    L -. validation .-> N
+    A[Source transcript, brief, notes, or evaluation input]
+    subgraph P[Connected Orchestrator]
+        B[Create run envelope and parent trace]
+        C[Requirement Extractor Child]
+        D[Validate extraction stage]
+        E[Gap Analyzer Child]
+        F{Deterministic generation gate}
+        G[Clarification, correction, or blocked result]
+        H[Human Approval Checkpoint Child]
+        I[Signed form pause and resume]
+        J{Validated human decision}
+        K[PRD Generator Child]
+        L[Validate canonical T11 PRD]
+        M[Story Breakdown Child]
+        N[Validate canonical T12 stories]
+        O[Final cross-stage validation and export]
+    end
+    A --> B --> C --> D --> E --> F
+    F -- Clarify, correct, or block --> G
+    F -- Eligible for review --> H --> I --> J
+    J -- Reject, revise, or clarify --> G
+    J -- Approve --> K --> L --> M --> N --> O
+    C -. stage trace .-> LF[Langfuse US]
+    E -. stage trace .-> LF
+    H -. approval trace .-> LF
+    K -. generation and validation trace .-> LF
+    M -. generation and validation trace .-> LF
+    O --> X[Markdown, JSON, scorecard, and submission evidence]
 ```
 
-The editable diagram source is also stored in `assets/diagrams/prd-genie-architecture-v0.1.mmd`.
+The current editable diagram source is stored in `assets/diagrams/prd-genie-architecture-v0.2.mmd`. Version 0.1 is retained as the original baseline.
 
 ## 5. Orchestration pattern
 
