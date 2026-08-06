@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "HA-R03",
+  "test_id": "T8",
+  "run_id": "RUN-T8-HA-R03-CLARIFICATION",
+  "upstream_packet_ref": "../../ha-r01-approved/t08/input-packet.json",
+  "upstream_packet_sha256": "a7312a5c38560f410fafd592d6d58fed4b923ad3be0423883f94bea677cab993",
+  "input_mutation": "none",
+  "decision_under_test": "clarification_required",
+  "review_focus": {
+    "item_ids": ["PER-002", "FR-002"],
+    "source_evidence": "End users need a simplified view.",
+    "clarification_boundary": "The source does not define which information, controls, or actions constitute the simplified view."
+  }
+}

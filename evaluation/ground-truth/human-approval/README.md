@@ -6,7 +6,7 @@ This dataset validates deterministic Human Approval decisions and routes. Human 
 |---|---|---|---|---:|---|
 | `HA-R01` | T1, T7, T8 | `approved` | `prd_generation` | 100% | T1, T7 and T8 passed |
 | `HA-R02` | T4 | `changes_requested` | `correction` | 100% | **Passed — 2026-08-04** |
-| `HA-R03` | T7 or T8 — selection pending | `clarification_required` | `clarification` | 100% | Pending |
+| `HA-R03` | T8 | `clarification_required` | `clarification` | 100% | **Passed — 2026-08-06** |
 | `HA-R04` | T7 or T8 — selection pending | `rejected` | `stopped` | 100% | Pending |
 | `HA-R05` | T10 | `approved_with_conditions` | `prd_generation_with_conditions` | 100% | **Passed — 2026-08-05** |
 | `HA-R06` | Controlled invalid variant of T1, T4, T7, T8 or T10 | validation failure | No route | 100% | Pending |

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T8-HA-R03-CLARIFICATION",
+  "review_status": "clarification_required",
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-06T16:22:30.000Z",
+  "gate_status_reviewed": "eligible_for_human_approval",
+  "approved_item_ids": [],
+  "rejected_item_ids": [],
+  "reviewed_gap_ids": [],
+  "controlled_tbd_ids": [],
+  "conditions": [],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": true,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Clarification is required before PRD generation. FR-002 states that End users need a simplified view, but the approved evidence does not define which information, controls, or actions constitute that view. Preserve all T8 source statements and relationships; do not invent the missing definition.",
+  "next_route": "clarification"
+}
