@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "HA-R04",
+  "test_id": "T8",
+  "run_id": "RUN-T8-HA-R04-REJECTED",
+  "upstream_packet_ref": "../../ha-r01-approved/t08/input-packet.json",
+  "upstream_packet_sha256": "a7312a5c38560f410fafd592d6d58fed4b923ad3be0423883f94bea677cab993",
+  "input_mutation": "none",
+  "decision_under_test": "rejected",
+  "review_focus": {
+    "item_ids": ["PER-001", "FR-001", "PER-002", "FR-002", "PER-003", "FR-003"],
+    "authorization_boundary": "The reviewer does not authorize any T8 item for downstream PRD generation in this run.",
+    "content_boundary": "Preserve the upstream statements and relationships exactly; rejection creates no replacement product content."
+  }
+}

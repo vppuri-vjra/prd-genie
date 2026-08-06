@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0.0",
+  "case_id": "HA-R06",
+  "test_id": "T8",
+  "run_id": "RUN-T8-HA-R06-INVALID-GATE",
+  "upstream_packet_ref": "../../ha-r01-approved/t08/input-packet.json",
+  "upstream_packet_sha256": "a7312a5c38560f410fafd592d6d58fed4b923ad3be0423883f94bea677cab993",
+  "input_mutation": {
+    "json_path": "generation_gate.gate_status",
+    "original_value": "eligible_for_human_approval",
+    "mutated_value": "generation_blocked"
+  },
+  "decision_under_test": "validation_failure",
+  "expected_failure": {
+    "stage": "Parse and Validate Human Approval",
+    "message_contains": "HA-R06 is not eligible for Human Approval.",
+    "route_emitted": false,
+    "langfuse_ingestion_attempted": false,
+    "model_call": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T8-HA-R04-REJECTED",
+  "review_status": "rejected",
+  "reviewer": "Vipin",
+  "reviewed_at": "2026-08-06T18:00:00.000Z",
+  "gate_status_reviewed": "eligible_for_human_approval",
+  "approved_item_ids": [],
+  "rejected_item_ids": ["PER-001", "FR-001", "PER-002", "FR-002", "PER-003", "FR-003"],
+  "reviewed_gap_ids": [],
+  "controlled_tbd_ids": [],
+  "conditions": [],
+  "evidence_checks": {
+    "source_grounding_verified": true,
+    "exact_values_verified": true,
+    "relationships_verified": true,
+    "gap_analysis_verified": true,
+    "unsupported_claims_absent": true
+  },
+  "review_notes": "Reject this T8 package for this run. Preserve all source statements and persona-to-capability relationships exactly, but do not authorize any item for PRD generation and do not create replacement product content.",
+  "next_route": "stopped"
+}

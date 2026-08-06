@@ -10,7 +10,7 @@
 | Approval date | 2026-08-04 |
 | Approval statement | “Approve Human Approval contract” |
 | Scope of approval | Contract semantics, decisions, validations, routing and grounding controls |
-| Implementation status | n8n checkpoint implemented; HA-R01 and HA-R02 executed |
+| Implementation status | n8n checkpoint implemented; HA-R01 through HA-R06 route suite executed at 100% groundedness |
 
 This approved version is the implementation baseline. Any material change to its decision meanings, validation rules or downstream routes requires a new version and approval record.
 

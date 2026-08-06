@@ -1,0 +1,19 @@
+{
+  "case_id": "HA-R06",
+  "test_id": "T8",
+  "run_id": "RUN-T8-HA-R06-INVALID-GATE",
+  "execution_status": "failed",
+  "contract_status": "validation_failed",
+  "failure_stage": "Parse and Validate Human Approval",
+  "error_message_contains": "HA-R06 is not eligible for Human Approval.",
+  "next_route": null,
+  "prd_generation_eligible": false,
+  "langfuse_ingestion_attempted": false,
+  "model_call": false,
+  "token_usage": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "groundedness_percent": 100
+}

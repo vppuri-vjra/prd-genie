@@ -30,7 +30,7 @@ It distinguishes:
 | Gap Analyzer unchanged release regression | 10/10 | Passed at 100%; prompt v1.0 promoted |
 | Deterministic generation-gate execution | 10/10 | Human review, clarification, explicit block, and human-review-with-TBD routes verified |
 | T-tests eligible to reach Human Approval | 5/10 | T1, T4, T7, T8 and T10 |
-| Human Approval route execution | 5/5 eligible tests | T1, T7 and T8 approved; T4 changes requested; T10 approved with conditions; all passed at 100% groundedness |
+| Human Approval route execution | 8/8 route-suite executions | Three standard approvals plus changes-requested, clarification, rejection, conditional approval, and controlled validation failure; all passed at 100% groundedness |
 | Eligible for PRD after Human Approval | 4/5 eligible tests | T1, T7 and T8 approved; T10 conditionally approved; T4 returned to correction |
 | PRD Generator evaluation | T11 observable release passed | Prompt v0.4 passed at 100% with ten sections and Langfuse trace `05e9aa534e4286e17ec65512a72e48ff` |
 | Story Breakdown evaluation | T12 observable release passed | Prompt v0.2 passed at 100%; 1 epic, 1 feature, 1 story, 2 criteria, 2 unresolved questions; Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b` |
@@ -95,7 +95,10 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 | T4 | `HA-R02 / changes_requested` | Passed | `correction` | Pass, 100% | `d7b8a4a6fe2f356d5f6b9101994074b3` |
 | T7 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `ef61a737842a797efd6f1818ac6854af` |
 | T8 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `2f6530b30b1180af0acf3e234aa19ac6` |
+| T8 | `HA-R03 / clarification_required` | Passed | `clarification` | Pass, 100% | `da9636799e681033008b70cd8c5ab065` |
+| T8 | `HA-R04 / rejected` | Passed | `stopped` | Pass, 100% | `f28fc75639f5aeffa9525c8501c6a0b9` |
 | T10 | `HA-R05 / approved_with_conditions` | Passed | `prd_generation_with_conditions` | Pass, 100% | `4be0fcf52527b2ccb2797f71a7aaf389` |
+| T8 controlled invalid variant | `HA-R06 / validation failure` | Passed negative case | No route | Pass, 100% | Not emitted by design |
 
 ## Execution and observability evidence
 
@@ -181,4 +184,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all five eligible Human Approval executions, the connected T1-to-T11 PRD canary, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 PRD canary, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
