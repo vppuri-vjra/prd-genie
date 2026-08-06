@@ -8,8 +8,6 @@ owner: Vipin Puri
 
 # PRD Genie Architecture Design
 
-> Current canonical version: **v0.3**. Immutable prior snapshots are maintained in [`docs/architecture/versions/`](versions/README.md).
-
 ## 1. Purpose and status
 
 This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, and Langfuse tracing are implemented. Standalone release regressions have passed, and Connected Orchestrator v0.4 has proven the contiguous T1-to-T12 path at 100% groundedness through the `final_validation` route. Final cross-stage validation/export, shared-source ingestion, and full-pipeline regression remain planned.
@@ -168,10 +166,3 @@ The capstone baseline runs in n8n Cloud and sends evaluation traces to the Langf
 ## 14. Architecture evolution
 
 This architecture baseline is version 0.3. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
-
-### Version history
-
-| Version | Date | Summary | Snapshot |
-|---|---|---|---|
-| 0.2 | 2026-08-04 | Standalone architecture baseline before connected downstream completion | [`ARCHITECTURE_DESIGN-v0.2.md`](versions/ARCHITECTURE_DESIGN-v0.2.md) |
-| 0.3 | 2026-08-06 | Connected T1-to-T12 path verified; logical architecture updated for parent/child orchestration | [`ARCHITECTURE_DESIGN-v0.3.md`](versions/ARCHITECTURE_DESIGN-v0.3.md) |
