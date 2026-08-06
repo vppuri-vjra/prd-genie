@@ -41,6 +41,16 @@ Import these into new canvases:
 
 Bind the existing OpenAI and `Langfuse US - PRD Genie` credentials in the Story Breakdown child. In parent v0.4, select all five children in execution order: Requirement Extractor, Gap Analyzer, Human Approval Checkpoint v1.0.1, PRD Generator Child v1.0, and Story Breakdown Child v1.0. Run the parent, obtain the new signed approval URL from the current Human Approval child execution, and submit the approved T1 decision. The final node must report `current_stage: story_breakdown`, `next_route: final_validation`, `groundedness_percent: 100`, passed canonical T12 coverage, preserved run/parent trace IDs, and accepted Story Breakdown Langfuse ingestion.
 
+## Connected T1-to-Final validation/export canary
+
+Import in this order:
+
+1. `prd-genie-prd-generator-child-v1.0.1.json`
+2. `prd-genie-final-validator-child-v1.0.json`
+3. `prd-genie-connected-orchestrator-v0.5.json`
+
+Bind the existing OpenAI and `Langfuse US - PRD Genie` credentials where shown. Parent v0.5 invokes Requirement Extractor, Gap Analyzer, Human Approval Checkpoint v1.0.1, PRD Generator Child v1.0.1, Story Breakdown Child v1.0, and Final Validator/export v1.0. Submit the approved T1 decision at the signed Human Approval form. The final node must report `execution_status: completed`, `contract_status: passed`, `current_stage: final_validation`, `next_route: completed`, `groundedness_percent: 100`, zero unsupported claims, accepted Langfuse ingestion, and a Markdown export named `prd-genie-t1-final.md`.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`

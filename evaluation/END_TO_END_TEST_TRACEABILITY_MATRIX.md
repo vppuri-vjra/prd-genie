@@ -2,7 +2,7 @@
 title: PRD Genie End-to-End Test Traceability Matrix
 version: 1.0
 status: Living Evidence Dashboard
-last_updated: 2026-08-05
+last_updated: 2026-08-06
 owner: Vipin Puri
 ---
 
@@ -34,6 +34,7 @@ It distinguishes:
 | Eligible for PRD after Human Approval | 4/5 eligible tests | T1, T7 and T8 approved; T10 conditionally approved; T4 returned to correction |
 | PRD Generator evaluation | T11 observable release passed | Prompt v0.4 passed at 100% with ten sections and Langfuse trace `05e9aa534e4286e17ec65512a72e48ff` |
 | Story Breakdown evaluation | T12 observable release passed | Prompt v0.2 passed at 100%; 1 epic, 1 feature, 1 story, 2 criteria, 2 unresolved questions; Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b` |
+| Connected final validation/export | T1-to-Final canary passed | n8n `9578`; all stage and cross-stage contracts passed; Markdown exported; Langfuse trace `a7722b22651568c775987fbb09e3be1c`; 100% groundedness |
 
 ## Status legend
 
@@ -166,6 +167,12 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 |---|---|---|---|---:|---|---|
 | `RUN-T1-CONNECTED-1786024618558` | Requirement Extractor → Gap Analyzer → Generation Gate → signed Human Approval → PRD Generator → PRD Validator | Pass | `story_breakdown` | 100% | `bf02a72bc3e9bf90963c0baebf15f367` | `16e338b742209d0345456aa43dbdf565` |
 
+### Connected Orchestrator T1-to-Final export canary
+
+| n8n execution | Run | Connected stages | Result | Final route | Groundedness | Parent trace | Final Validation trace | Export |
+|---:|---|---|---|---|---:|---|---|---|
+| `9578` | `RUN-T1-CONNECTED-1786039807443` | Requirement Extractor → Gap Analyzer → Generation Gate → signed Human Approval → PRD Generator → Story Breakdown → Final Validator/export | Pass | `completed` | 100% | `d9b944978c5ad2078c639dda899399e0` | `a7722b22651568c775987fbb09e3be1c` | `prd-genie-t1-final.md` |
+
 ## Stage-entry rule
 
 Passing Requirement Extraction does not authorize PRD generation. A case may enter the PRD Generator only when:
@@ -184,4 +191,4 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 PRD canary, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 and T1-to-Final canaries, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.

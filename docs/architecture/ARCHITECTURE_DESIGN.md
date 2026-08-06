@@ -12,7 +12,7 @@ owner: Vipin Puri
 
 ## 1. Purpose and status
 
-This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, and Langfuse tracing are implemented. Standalone release regressions have passed, and Connected Orchestrator v0.4 has proven the contiguous T1-to-T12 path at 100% groundedness through the `final_validation` route. Final cross-stage validation/export, shared-source ingestion, and full-pipeline regression remain planned.
+This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, Final Validation/export, and Langfuse tracing are implemented. Connected Orchestrator v0.5 has proven the contiguous T1 source-to-final Markdown path at 100% groundedness. Shared-source ingestion and full route regression remain planned.
 
 ## 2. Architecture principles
 
@@ -110,7 +110,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Implemented; all five eligible T-test routes passed at 100% with Langfuse evidence |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Implemented for T11/T1; observable release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
 | Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Implemented for T12/T1; observable v0.2 release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
-| Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected stage result | Implemented through v0.4; connected T1-to-T12 canary passed at 100% and reached `final_validation` |
+| Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected final result and Markdown export | Implemented through v0.5; execution `9578` completed at 100% |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
 | Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, Human Approval, PRD Generation, Story Breakdown, and connected canaries; model token counts remain unavailable where n8n chain output does not expose them |

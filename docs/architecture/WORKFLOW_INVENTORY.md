@@ -20,6 +20,7 @@ owner: Vipin Puri
 | 6 | `PRD Genie - Connected Orchestrator v0.2` | Pass one run envelope through extraction, gap analysis and an actual Human Approval checkpoint | T1 connected canary passed through `prd_generation` route | 100% |
 | 7 | `PRD Genie - Connected Orchestrator v0.3` | Continue an approved connected run through PRD generation | Connected T1-to-T11 canary passed; routed to Story Breakdown | 100% |
 | 8 | `PRD Genie - Connected Orchestrator v0.4` | Continue the connected run through Story Breakdown | Connected T1-to-T12 canary passed; routed to final validation | 100% |
+| 9 | `PRD Genie - Connected Orchestrator v0.5` | Continue the connected run through Final Validation and Markdown export | Connected T1-to-Final execution `9578` passed and completed | 100% |
 
 ## Integration-ready child exports
 
@@ -28,8 +29,9 @@ owner: Vipin Puri
 | 1 | `PRD Genie - Requirement Extractor Child v1.0` | Workflow input plus orchestration context | Requirement Extraction stage envelope; next route `gap_analysis` | Imported; connected T1 canary passed |
 | 2 | `PRD Genie - Gap Analyzer Child v1.0` | Requirement Extraction plus orchestration context | Gap Analysis and Generation Gate stage envelope | Imported; connected T1 canary passed |
 | 3 | `PRD Genie - Human Approval Checkpoint Child v1.0.1` | Eligible extraction, Gap Analysis, gate and orchestration context | Validated Human Approval stage envelope after signed-form submission | Connected T1 pause/resume canary passed |
-| 4 | `PRD Genie - PRD Generator Child v1.0` | Validated Human Approval stage and approved package | PRD Generation stage envelope; next route `story_breakdown` | Connected T1-to-T11 canary passed |
+| 4 | `PRD Genie - PRD Generator Child v1.0.1` | Validated Human Approval stage and approved package | PRD Generation stage envelope; next route `story_breakdown` | Connected final canary passed; canonical TBD normalization added |
 | 5 | `PRD Genie - Story Breakdown Child v1.0` | Validated T11 PRD stage | Validated T12 Story Breakdown stage envelope | Connected T1-to-T12 canary passed |
+| 6 | `PRD Genie - Final Validator and Export Child v1.0` | Passed PRD and Story Breakdown stage envelopes | Final Validation envelope plus combined Markdown export | Connected execution `9578` passed; Langfuse accepted |
 
 These child exports are integration interfaces, not additional AI agents. The standalone workflows remain the regression and release-evidence canvases.
 
