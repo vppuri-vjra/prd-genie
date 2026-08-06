@@ -19,7 +19,7 @@ owner: Vipin Puri
 | Human Approval | Complete | All 5 eligible cases executed | Passed | 100% |
 | PRD Generator | Complete for T11/T1 | Ten-section actual PRD, strict validation and Langfuse trace | Passed | 100% |
 | Story Breakdown Agent | Complete for T12/T1 | Canonical JSON, Markdown, strict validation and Langfuse trace | Passed | 100% |
-| Connected orchestration | Parent plus Requirement Extractor, Gap Analyzer, Human Approval and PRD Generator children implemented | T1-to-T11 connected canary passed PRD validation and reached Story Breakdown route with preserved run/trace IDs and accepted Langfuse traces | Passed through PRD Generation | 100% |
+| Connected orchestration | Parent plus Requirement Extractor, Gap Analyzer, Human Approval, PRD Generator and Story Breakdown children implemented | T1-to-T11 connected canary passed; T1-to-T12 runtime canary is pending | Passed through PRD Generation; Story integration built | 100% passed / 100% target |
 | Submission package | In progress | Rubric and final evidence audit pending | In progress | — |
 
 ## Proven end-to-end path
@@ -52,7 +52,7 @@ The individual validated stages prove this path through Story Breakdown at **100
 
 ## Next implementation milestone
 
-Add the Story Breakdown child to the connected parent, then implement final validation/export, shared-source ingestion, and full-pipeline regression.
+Run the Connected Orchestrator v0.4 T1-to-T12 canary. After it passes, implement final validation/export, shared-source ingestion, and full-pipeline regression.
 
 ## Required multi-source expansion
 

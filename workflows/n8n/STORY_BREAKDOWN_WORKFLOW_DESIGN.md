@@ -22,6 +22,10 @@ Manual Trigger
 
 The workflow contains 11 nodes including the model node. The Story Breakdown Agent makes the only model call. Entry validation, output validation, Markdown rendering, trace construction, and final release recording are deterministic.
 
+## Connected child
+
+`prd-genie-story-breakdown-child-v1.0.json` is the integration wrapper. It accepts only a passed, 100%-grounded T11 `prd_generation` stage envelope, derives the approved T12 package from that live PRD output, preserves the connected `run_id` and parent trace, enforces canonical T12 coverage, sends a child-stage Langfuse trace, and returns `next_route: final_validation`. It does not replace or modify the standalone release-evidence workflow.
+
 ## Entry validation
 
 - `test_id` is `T12`.

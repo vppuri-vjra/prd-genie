@@ -32,6 +32,15 @@ For the PRD Generation increment, import these as new workflows:
 
 In the PRD child, bind the existing OpenAI and `Langfuse US - PRD Genie` credentials. In parent v0.3, select all four child workflows in execution order: Requirement Extractor, Gap Analyzer, Human Approval Checkpoint v1.0.1, and PRD Generator Child v1.0. Run the parent and complete the new signed Human Approval form. The final node must report `current_stage: prd_generation`, `next_route: story_breakdown`, `groundedness_percent: 100`, a passed T11 contract, preserved run/parent trace IDs, and accepted PRD Langfuse ingestion.
 
+## Connected Story Breakdown increment
+
+Import these into new canvases:
+
+1. `prd-genie-story-breakdown-child-v1.0.json`
+2. `prd-genie-connected-orchestrator-v0.4.json`
+
+Bind the existing OpenAI and `Langfuse US - PRD Genie` credentials in the Story Breakdown child. In parent v0.4, select all five children in execution order: Requirement Extractor, Gap Analyzer, Human Approval Checkpoint v1.0.1, PRD Generator Child v1.0, and Story Breakdown Child v1.0. Run the parent, obtain the new signed approval URL from the current Human Approval child execution, and submit the approved T1 decision. The final node must report `current_stage: story_breakdown`, `next_route: final_validation`, `groundedness_percent: 100`, passed canonical T12 coverage, preserved run/parent trace IDs, and accepted Story Breakdown Langfuse ingestion.
+
 ## Compatibility target
 
 - n8n Cloud `2.31.5`
