@@ -89,16 +89,16 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 
 ### Human Approval actual executions
 
-| Test | Case / decision | Contract | PRD route | Evaluator | Langfuse trace |
-|---|---|---|---|---|---|
-| T1 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `04c6b3386a8197b7c553429a57b75bc8` |
-| T4 | `HA-R02 / changes_requested` | Passed | `correction` | Pass, 100% | `d7b8a4a6fe2f356d5f6b9101994074b3` |
-| T7 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `ef61a737842a797efd6f1818ac6854af` |
-| T8 | `HA-R01 / approved` | Passed | `prd_generation` | Pass, 100% | `2f6530b30b1180af0acf3e234aa19ac6` |
-| T8 | `HA-R03 / clarification_required` | Passed | `clarification` | Pass, 100% | `da9636799e681033008b70cd8c5ab065` |
-| T8 | `HA-R04 / rejected` | Passed | `stopped` | Pass, 100% | `f28fc75639f5aeffa9525c8501c6a0b9` |
-| T10 | `HA-R05 / approved_with_conditions` | Passed | `prd_generation_with_conditions` | Pass, 100% | `4be0fcf52527b2ccb2797f71a7aaf389` |
-| T8 controlled invalid variant | `HA-R06 / validation failure` | Passed negative case | No route | Pass, 100% | Not emitted by design |
+| Test | Case / decision | n8n execution | Contract | PRD route | Evaluator | Langfuse trace |
+|---|---|---:|---|---|---|---|
+| T1 | `HA-R01 / approved` | `7832` | Passed | `prd_generation` | Pass, 100% | `04c6b3386a8197b7c553429a57b75bc8` |
+| T4 | `HA-R02 / changes_requested` | `7941` | Passed | `correction` | Pass, 100% | `d7b8a4a6fe2f356d5f6b9101994074b3` |
+| T7 | `HA-R01 / approved` | `8376` | Passed | `prd_generation` | Pass, 100% | `ef61a737842a797efd6f1818ac6854af` |
+| T8 | `HA-R01 / approved` | `8615` | Passed | `prd_generation` | Pass, 100% | `2f6530b30b1180af0acf3e234aa19ac6` |
+| T8 | `HA-R03 / clarification_required` | `9518` | Passed | `clarification` | Pass, 100% | `da9636799e681033008b70cd8c5ab065` |
+| T8 | `HA-R04 / rejected` | `9521` | Passed | `stopped` | Pass, 100% | `f28fc75639f5aeffa9525c8501c6a0b9` |
+| T10 | `HA-R05 / approved_with_conditions` | `8616` | Passed | `prd_generation_with_conditions` | Pass, 100% | `4be0fcf52527b2ccb2797f71a7aaf389` |
+| T8 controlled invalid variant | `HA-R06 / validation failure` | `9551` | Passed negative case | No route | Pass, 100% | Not emitted by design |
 
 ## Execution and observability evidence
 
