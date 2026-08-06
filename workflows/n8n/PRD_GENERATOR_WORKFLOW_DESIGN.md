@@ -72,4 +72,4 @@ Groundedness target: **100%**.
 
 `prd-genie-prd-generator-child-v1.0.json` is the integration wrapper for the validated T11/T1 baseline. It replaces the manual loader with an Execute Sub-workflow Trigger and consumes the actual `human_approval` stage envelope. It accepts only a passed `prd_generation` route at 100% groundedness, maps only human-approved extraction IDs, preserves the parent and Human Approval trace IDs, and returns a standard `prd_generation` stage envelope with `next_route: story_breakdown`.
 
-The standalone workflow remains unchanged for regression evidence. The connected child is not yet marked passed; it requires an n8n import and a fresh connected T1-to-T11 canary.
+The standalone workflow remains unchanged for regression evidence. The connected child passed the fresh connected T1-to-T11 canary on 2026-08-06. It preserved the run and parent trace IDs, passed the strict ten-section T11 validator, recorded an accepted Langfuse trace, maintained 100% groundedness, and returned `story_breakdown` as the next route.

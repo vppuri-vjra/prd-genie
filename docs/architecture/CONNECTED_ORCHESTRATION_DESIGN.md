@@ -119,8 +119,8 @@ Groundedness target for every generated artifact: **100%**.
 | Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Passed through Gap Analyzer and Human Approval route validation | 100% |
 | Human Approval checkpoint child | `workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` | Runtime workflow v1.0.1 passed persistent signed-form resume in connected T1 canary | 100% |
 | Connected parent with approval | `workflows/n8n/prd-genie-connected-orchestrator-v0.2.json` | Passed connected T1 through validated Human Approval and `prd_generation` route | 100% |
-| PRD Generator child | `workflows/n8n/prd-genie-prd-generator-child-v1.0.json` | Built; connected T1-to-T11 canary pending n8n import | 100% |
-| Connected parent through PRD | `workflows/n8n/prd-genie-connected-orchestrator-v0.3.json` | Built; invokes PRD only after validated Human Approval | 100% |
+| PRD Generator child | `workflows/n8n/prd-genie-prd-generator-child-v1.0.json` | Imported; connected T1-to-T11 canary passed | 100% |
+| Connected parent through PRD | `workflows/n8n/prd-genie-connected-orchestrator-v0.3.json` | Passed connected T1 through PRD validation and `story_breakdown` route | 100% |
 
 The child exports do not contain fixed T-test loaders. They start with an Execute Sub-workflow Trigger, validate the parent payload, preserve `run_id` and `parent_trace_id`, execute the validated agent and deterministic controls, send the stage trace to Langfuse, and return the standard orchestration stage envelope.
 
@@ -137,3 +137,5 @@ The checkpoint child exposes n8n's exact signed `$execution.resumeFormUrl` immed
 The connected T1 Human Approval canary passed on 2026-08-05 with run ID `RUN-T1-CONNECTED-1785976225480`, parent trace ID `bf7baca7f89710c926bbb053a1b3b904`, Human Approval trace ID `810191523bb85a5d806cc0f19b267a55`, route `prd_generation`, accepted Langfuse ingestion and 100% groundedness. See `evaluation/results/connected-orchestrator-t1-human-approval-canary-2026-08-05.md`.
 
 The v0.3 parent adds the PRD Generator child after the validated Human Approval route. The child accepts the actual approved package, filters extraction items to the human-approved IDs, preserves the parent and Human Approval trace identifiers, applies the approved T11/T1 prompt and deterministic validator, records its Langfuse trace, and returns a standard `prd_generation` stage envelope with next route `story_breakdown`. The existing standalone PRD workflow remains the release-evidence baseline.
+
+The connected T1-to-T11 canary passed on 2026-08-06. All deterministic PRD checks passed, the generated document contained ten template sections, both run and parent trace identifiers were preserved, the PRD trace was accepted by Langfuse, and the parent reached `story_breakdown` at 100% groundedness. See `evaluation/results/connected-orchestrator-t1-prd-generation-canary-2026-08-06.md`.

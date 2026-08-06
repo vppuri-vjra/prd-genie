@@ -2,7 +2,7 @@
 title: PRD Genie Overall End-to-End Status
 version: 1.0
 status: Living Status Dashboard
-last_updated: 2026-08-05
+last_updated: 2026-08-06
 owner: Vipin Puri
 ---
 
@@ -19,14 +19,14 @@ owner: Vipin Puri
 | Human Approval | Complete | All 5 eligible cases executed | Passed | 100% |
 | PRD Generator | Complete for T11/T1 | Ten-section actual PRD, strict validation and Langfuse trace | Passed | 100% |
 | Story Breakdown Agent | Complete for T12/T1 | Canonical JSON, Markdown, strict validation and Langfuse trace | Passed | 100% |
-| Connected orchestration | Parent plus Requirement Extractor and Gap Analyzer children implemented | T1 connected canary reached Human Approval route with preserved run/trace IDs and accepted Langfuse traces | Passed through Human Approval boundary | 100% |
+| Connected orchestration | Parent plus Requirement Extractor, Gap Analyzer, Human Approval and PRD Generator children implemented | T1-to-T11 connected canary passed PRD validation and reached Story Breakdown route with preserved run/trace IDs and accepted Langfuse traces | Passed through PRD Generation | 100% |
 | Submission package | In progress | Rubric and final evidence audit pending | In progress | — |
 
 ## Proven end-to-end path
 
 `T1 input → Requirement Extractor → Gap Analyzer → Generation Gate → Human Approval → PRD Generator → Story Breakdown → Langfuse → actual PRD and story artifacts`
 
-The individual validated stages prove this path through Story Breakdown at **100% groundedness**. The new connected parent execution currently proves the contiguous path from T1 source input through Requirement Extraction, Gap Analysis and deterministic routing to the Human Approval boundary at **100% groundedness**.
+The individual validated stages prove this path through Story Breakdown at **100% groundedness**. Connected Orchestrator v0.3 now proves the contiguous path from T1 source input through Requirement Extraction, Gap Analysis, deterministic routing, signed Human Approval and PRD Generation to the Story Breakdown route at **100% groundedness**.
 
 ## T1-T10 downstream disposition
 
@@ -47,10 +47,12 @@ The individual validated stages prove this path through Story Breakdown at **100
 - Langfuse ingestion: accepted, HTTP `200`
 - Actual T11 Markdown: `evaluation/actual/prd-generation/t11/generated-prd.md`
 - Actual T11 JSON: `evaluation/actual/prd-generation/t11/output.json`
+- Connected T1-to-T11 PRD trace: `16e338b742209d0345456aa43dbdf565`
+- Connected T1-to-T11 evidence: `evaluation/results/connected-orchestrator-t1-prd-generation-canary-2026-08-06.md`
 
 ## Next implementation milestone
 
-Add persistent Human Approval pause/resume behavior to the connected parent, then add PRD and Story child wrappers, final validation/export, shared-source ingestion, and full-pipeline regression.
+Add the Story Breakdown child to the connected parent, then implement final validation/export, shared-source ingestion, and full-pipeline regression.
 
 ## Required multi-source expansion
 
