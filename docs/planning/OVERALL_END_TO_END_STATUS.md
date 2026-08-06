@@ -19,14 +19,14 @@ owner: Vipin Puri
 | Human Approval | Complete | All 5 eligible cases executed | Passed | 100% |
 | PRD Generator | Complete for T11/T1 | Ten-section actual PRD, strict validation and Langfuse trace | Passed | 100% |
 | Story Breakdown Agent | Complete for T12/T1 | Canonical JSON, Markdown, strict validation and Langfuse trace | Passed | 100% |
-| Connected orchestration | Parent plus Requirement Extractor, Gap Analyzer, Human Approval, PRD Generator and Story Breakdown children implemented | T1-to-T11 connected canary passed; T1-to-T12 runtime canary is pending | Passed through PRD Generation; Story integration built | 100% passed / 100% target |
+| Connected orchestration | Parent plus Requirement Extractor, Gap Analyzer, Human Approval, PRD Generator and Story Breakdown children implemented | T1-to-T12 connected canary passed canonical Story Breakdown validation and reached Final Validation | Passed through Story Breakdown | 100% |
 | Submission package | In progress | Rubric and final evidence audit pending | In progress | — |
 
 ## Proven end-to-end path
 
 `T1 input → Requirement Extractor → Gap Analyzer → Generation Gate → Human Approval → PRD Generator → Story Breakdown → Langfuse → actual PRD and story artifacts`
 
-The individual validated stages prove this path through Story Breakdown at **100% groundedness**. Connected Orchestrator v0.3 now proves the contiguous path from T1 source input through Requirement Extraction, Gap Analysis, deterministic routing, signed Human Approval and PRD Generation to the Story Breakdown route at **100% groundedness**.
+The individual validated stages prove this path through Story Breakdown at **100% groundedness**. Connected Orchestrator v0.4 now proves the contiguous path from T1 source input through Requirement Extraction, Gap Analysis, deterministic routing, signed Human Approval, PRD Generation and canonical Story Breakdown to the Final Validation route at **100% groundedness**.
 
 ## T1-T10 downstream disposition
 
@@ -49,10 +49,12 @@ The individual validated stages prove this path through Story Breakdown at **100
 - Actual T11 JSON: `evaluation/actual/prd-generation/t11/output.json`
 - Connected T1-to-T11 PRD trace: `16e338b742209d0345456aa43dbdf565`
 - Connected T1-to-T11 evidence: `evaluation/results/connected-orchestrator-t1-prd-generation-canary-2026-08-06.md`
+- Connected T1-to-T12 Story Breakdown trace: `8e7fc5b6a49f0ef550fdee4f4b76f4ca`
+- Connected T1-to-T12 evidence: `evaluation/results/connected-orchestrator-t1-story-breakdown-canary-2026-08-06.md`
 
 ## Next implementation milestone
 
-Run the Connected Orchestrator v0.4 T1-to-T12 canary. After it passes, implement final validation/export, shared-source ingestion, and full-pipeline regression.
+Implement final validation/export, shared-source ingestion, and full-pipeline regression.
 
 ## Required multi-source expansion
 
