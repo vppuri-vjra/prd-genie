@@ -11,6 +11,12 @@ After import, confirm the OpenAI and `Langfuse US - PRD Genie` credentials on ea
 
 The first canary will pass T1 through Requirement Extractor Child and Gap Analyzer Child. Both results must preserve the same `run_id` and `parent_trace_id`, report 100% groundedness, and the Gap Analyzer must route T1 to `human_approval`.
 
+## Multi-source T1 parity canary
+
+Import `prd-genie-requirement-extractor-child-v1.1.1.json`, bind `OpenAI account 25` with model `gpt-5.6-terra`, and refresh the `Langfuse US - PRD Genie` credential binding. Then import `prd-genie-multi-source-t1-parity-orchestrator-v0.2.json` and select the v1.1.1 child. The routes are alternatives: use the canonical PB+MT+SN packet or the legacy `eval_prdgenie_inputs` payload, never both in one run.
+
+The final node must return exactly four approved T1 IDs, semantic parity, exact source traceability, `unsupported_claims: 0`, `groundedness_percent: 100`, `next_route: gap_analysis`, and accepted Langfuse ingestion. Authoritative passing evidence: n8n execution `9638`, trace `2f0e20055d7765ca3bb0bb0d2bea866b`.
+
 Import `prd-genie-connected-orchestrator-v0.1.json` after both child workflows are saved. Open its two Execute Sub-workflow nodes and select:
 
 - `PRD Genie - Requirement Extractor Child v1.0`

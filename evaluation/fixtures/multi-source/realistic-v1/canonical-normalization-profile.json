@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "profile_id": "CNP-REALISTIC-PB-MT-SN-V1",
+  "mode": "approved_controlled_parity",
+  "packet_id": "SP-REALISTIC-PB-MT-SN-V1",
+  "canonical_extraction_path": "evaluation/fixtures/multi-source/realistic-v1/expected-requirement-extraction.json",
+  "canonical_extraction_sha256": "e108ff8e08577f18c69dc2862b717c78f3c0ddf0fe3b745a9733f8fd655579e9",
+  "requirements": {
+    "complete_coverage_ledger": true,
+    "exact_candidate_evidence": true,
+    "exact_profile_evidence": true,
+    "unknown_packet_policy": "fail_closed",
+    "hash_mismatch_policy": "fail_closed"
+  },
+  "scope": "This profile is valid only for the approved realistic multi-source controlled parity packet."
+}

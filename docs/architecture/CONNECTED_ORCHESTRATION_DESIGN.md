@@ -106,15 +106,28 @@ The canary passes only when all child `run_id` values match, all stage groundedn
 6. Add Final Validator/export and the parent Langfuse trace.
 7. Run the connected T1 canary.
 8. Run clarification, correction, conditional and blocked route canaries.
-9. Add shared-source ingestion and realistic multi-source regression.
+9. Add the validated source-packet adapter to n8n and run the controlled T1 multi-source parity canary. **Complete:** execution `9638` passed.
+10. Run broader realistic multi-source and full route regression.
 
 Groundedness target for every generated artifact: **100%**.
+
+The controlled step 9 implementation is complete. `source-packet.schema.json`, the T1 PB+MT+SN fixtures, Requirement Extractor Child v1.1.1 and parity parent v0.2 preserve source identity, provenance, exact line citations and content hashes. `eval_prdgenie_inputs` remains the alternative regression/control producer; it is never combined with the PB+MT+SN route in one run. The Requirement Extractor remains responsible for producing the unified requirement packet, and the only mandatory Human Approval checkpoint remains after Gap Analysis. Execution `9638` passed at 100% groundedness with zero unsupported claims and accepted Langfuse trace `2f0e20055d7765ca3bb0bb0d2bea866b`.
+
+The stakeholder clarification loop adds a fourth, later authoritative source without modifying the frozen PB/MT/SN evidence: `PB + MT + SN + stakeholder clarification → Requirement Extractor → Gap Analyzer → Generation Gate`. The first live v2 verification stopped in Requirement Extractor validation at execution `9678`; Gap Analysis and Human Approval were not invoked. This preserves the architectural fail-closed boundary.
+
+The accepted v2 verification is execution `9684`. Requirement Extractor v1.7 derives citation routing from emitted evidence, then applies the existing strict validator. Gap Analysis found only the controlled budget TBD and pending Raj technical evaluation; the gate returned `clarification`, so the clarification loop remained active and the Human Approval boundary was not entered.
+
+The accepted v3 verification is execution `9692`. The amendment source resolves the remaining controls by selecting SPA and making budget approval non-blocking with Sarah's separate management deadline of 2026-09-10. Requirement Extractor v1.9 preserves exact canonical provenance, Gap Analysis returns no remaining gaps, contradictions, or risks, and the gate routes to `human_approval` at **100% groundedness** with zero unsupported claims. The canary stops at that boundary; it does not submit approval or invoke PRD generation.
+
+The v4 clarification loop adds a sixth immutable source, `SRC-REALISTIC-CLAR-MOBILE-001`. It resolves the retained PB line-25/SN line-26 mobile-delivery contradiction by requiring responsive web access in the 2026-09-30 production release while permitting desktop-first implementation sequencing. The deterministic boundary preserves raw Gap Analyzer gaps, contradictions, missing-information context, and risks as audit records, classifies only source-backed authoritative outcomes as `resolved`, `controlled_tbd`, or `deferred`, and fails closed on any unmapped blocking record. Local validation passes at **100% groundedness** with zero unsupported decisions or claims. n8n executions `9700`–`9703` are rejected integration evidence because the UI deployment malformed the source adapter before any AI or Langfuse stage ran.
 
 ## Implementation status
 
 | Component | Export | Status | Groundedness target |
 |---|---|---|---:|
 | Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
+| Multi-source Requirement Extractor child | `workflows/n8n/prd-genie-requirement-extractor-child-v1.1.1.json` | PB+MT+SN execution `9638` passed exact traceability and semantic parity | 100% |
+| Multi-source T1 parity parent | `workflows/n8n/prd-genie-multi-source-t1-parity-orchestrator-v0.2.json` | Execution `9638` passed; Langfuse accepted | 100% |
 | Gap Analyzer child | `workflows/n8n/prd-genie-gap-analyzer-child-v1.0.json` | Imported and passed connected T1 canary | 100% |
 | Connected parent | `workflows/n8n/prd-genie-connected-orchestrator-v0.1.json` | Passed through Gap Analyzer and Human Approval route validation | 100% |
 | Human Approval checkpoint child | `workflows/n8n/prd-genie-human-approval-checkpoint-child-v1.0.json` | Runtime workflow v1.0.1 passed persistent signed-form resume in connected T1 canary | 100% |

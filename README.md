@@ -114,6 +114,7 @@ The initial extractor implementation package includes:
 
 - [`prompts/requirement-extractor-v0.8.md`](prompts/requirement-extractor-v0.8.md) - current provider-neutral system prompt with cumulative evaluation corrections
 - [`evaluation/fixtures/t01-t10-extractor-cases.json`](evaluation/fixtures/t01-t10-extractor-cases.json) - machine-readable T1-T10 expectations
+- [`VALID_N8N_WORKFLOW_REGISTRY.md`](docs/architecture/VALID_N8N_WORKFLOW_REGISTRY.md) - authoritative live workflow allowlist by name and immutable n8n ID
 - [`workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md`](workflows/n8n/REQUIREMENT_EXTRACTOR_MAPPING.md) - initial node sequence, data mapping, validation, and retry behavior
 - [`workflows/n8n/prd-genie-requirement-extractor-v0.2.json`](workflows/n8n/prd-genie-requirement-extractor-v0.2.json) - importable inactive ten-node T1 workflow with Langfuse OTLP tracing
 - [`workflows/n8n/IMPORT_AND_TEST.md`](workflows/n8n/IMPORT_AND_TEST.md) - n8n Cloud import, configuration, and first-test guide
@@ -133,6 +134,10 @@ Exports contain credential references by ID and name, not API-key values. Creden
 ## Baseline evaluation
 
 The current cross-stage status and evidence chain are maintained in the [`PRD Genie End-to-End Test Traceability Matrix`](evaluation/END_TO_END_TEST_TRACEABILITY_MATRIX.md).
+
+The production-style ingestion route is defined by [`SOURCE_PACKET_CONTRACT.md`](docs/architecture/SOURCE_PACKET_CONTRACT.md). It represents T1 as separate Product Brief, Meeting Transcript and Stakeholder Notes fixtures while keeping `eval_prdgenie_inputs` as an alternative regression/control producer of the same logical Requirement Extractor input boundary. n8n execution `9638` passed this route at 100% groundedness with zero unsupported claims and accepted Langfuse trace `2f0e20055d7765ca3bb0bb0d2bea866b`.
+
+The broader [`realistic-v1`](evaluation/fixtures/multi-source/realistic-v1/) intake preserves the three supplied capstone resources byte-for-byte with 70 reviewed citations. Input grounding is 100%; model execution remains gated on approval of its expected unified extraction.
 
 The project includes 12 required baseline cases:
 

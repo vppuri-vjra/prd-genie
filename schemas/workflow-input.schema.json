@@ -11,7 +11,7 @@
     "run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
     "test_id": { "type": ["string", "null"], "pattern": "^T(?:[1-9]|1[0-2])$" },
     "input_type": {
-      "enum": ["meeting_transcript", "product_brief", "stakeholder_notes", "evaluation_test"]
+      "enum": ["meeting_transcript", "product_brief", "stakeholder_notes", "stakeholder_clarification", "evaluation_test"]
     },
     "source_name": { "type": "string", "minLength": 1 },
     "source_text": { "type": "string", "minLength": 1 },
@@ -24,6 +24,16 @@
         "meeting_date": { "type": ["string", "null"], "format": "date" },
         "document_version": { "type": ["string", "null"] },
         "language": { "type": "string", "default": "en" }
+      }
+    },
+    "orchestration_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active_run_id", "parent_trace_id", "environment"],
+      "properties": {
+        "active_run_id": { "type": "string", "pattern": "^RUN-[A-Za-z0-9-]+$" },
+        "parent_trace_id": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 }
       }
     }
   }

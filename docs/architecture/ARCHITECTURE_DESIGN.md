@@ -1,18 +1,22 @@
 ---
 title: PRD Genie Architecture Design
-version: 0.3
-status: Connected T1-to-T12 architecture verified; final validation/export planned
+version: 0.4
+status: Technical system architecture v0.4; connected final export and realistic Gap Analysis verified
 last_updated: 2026-08-06
 owner: Vipin Puri
 ---
 
 # PRD Genie Architecture Design
 
-> Current canonical version: **v0.3**. Immutable prior snapshots are maintained in [`docs/architecture/versions/`](versions/README.md).
+> Current canonical version: **v0.4**. Immutable prior snapshots are maintained in [`docs/architecture/versions/`](versions/README.md).
 
 ## 1. Purpose and status
 
-This document defines the baseline architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, Final Validation/export, and Langfuse tracing are implemented. Connected Orchestrator v0.5 has proven the contiguous T1 source-to-final Markdown path at 100% groundedness. Shared-source ingestion and full route regression remain planned.
+This document defines the technical system architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, Final Validation/export, and Langfuse tracing are implemented. Connected Orchestrator v0.5 proved the contiguous T1 source-to-final Markdown path at 100% groundedness. The realistic PB+MT+SN route passed Requirement Extraction execution `9661` and Gap Analysis execution `9667`; the deterministic gate correctly selected clarification with zero unsupported claims and 100% groundedness.
+
+The clarification return loop preserves the original PB/MT/SN sources and adds a dated stakeholder clarification source as later evidence before re-entering Requirement Extraction. The v2 live attempt (`9678`) demonstrated fail-closed behavior: an invalid clarification citation-ledger relationship was rejected before Gap Analysis, Human Approval, PRD generation or accepted tracing.
+
+Execution `9684` subsequently verified the corrected loop at 100% groundedness with zero unsupported claims. The deterministic gate retained two unresolved controls and routed back to clarification rather than allowing Human Approval or PRD generation.
 
 ## 2. Architecture principles
 
@@ -27,43 +31,25 @@ This document defines the baseline architecture for PRD Genie. Requirement Extra
 
 ## 3. System context
 
-PRD Genie receives source text from a PM, TPM, evaluator, or file-ingestion step. n8n normalizes and validates the input, coordinates agents, applies routing and approval gates, and exports the final Markdown. OpenAI performs structured language tasks. Langfuse records traces and evaluation evidence. GitHub stores versioned implementation and submission artifacts; Obsidian mirrors working project documentation.
+PRD Genie receives either one evaluation-control input or a production-style source packet from a PM, TPM, evaluator, or file-ingestion step. The source packet preserves separate source IDs, types, raw text, provenance, line citations, metadata, and SHA-256 hashes. n8n normalizes and validates the selected route, coordinates agents, applies routing and approval gates, and exports the final Markdown. OpenAI performs structured language tasks. Langfuse records traces and evaluation evidence. GitHub stores versioned implementation and submission artifacts; Obsidian mirrors working project documentation.
 
 ## 4. Logical architecture
 
 ```mermaid
-flowchart TD
-    A[Source transcript, brief, notes, or evaluation input]
-    subgraph P[Connected Orchestrator]
-        B[Create run envelope and parent trace]
-        C[Requirement Extractor Child]
-        D[Validate extraction stage]
-        E[Gap Analyzer Child]
-        F{Deterministic generation gate}
-        G[Clarification, correction, or blocked result]
-        H[Human Approval Checkpoint Child]
-        I[Signed form pause and resume]
-        J{Validated human decision}
-        K[PRD Generator Child]
-        L[Validate canonical T11 PRD]
-        M[Story Breakdown Child]
-        N[Validate canonical T12 stories]
-        O[Final cross-stage validation and export]
-    end
-    A --> B --> C --> D --> E --> F
-    F -- Clarify, correct, or block --> G
-    F -- Eligible for review --> H --> I --> J
-    J -- Reject, revise, or clarify --> G
-    J -- Approve --> K --> L --> M --> N --> O
-    C -. stage trace .-> LF[Langfuse US]
-    E -. stage trace .-> LF
-    H -. approval trace .-> LF
-    K -. generation and validation trace .-> LF
-    M -. generation and validation trace .-> LF
-    O --> X[Markdown, JSON, scorecard, and submission evidence]
+flowchart LR
+    I["Separate input routes<br/>evaluation control or PB + MT + SN"] --> N["n8n Cloud<br/>orchestration, validators, gates and Human Approval"]
+    N --> U["Unified Requirement Packet"] --> G["Gap Analysis and deterministic routing"]
+    G --> D["PRD, stories and final export"]
+    O["OpenAI<br/>model calls"] <--> N
+    N -. "traces" .-> L["Langfuse US"]
+    S["JSON Schemas and grounding policy"] -. "deterministic validation" .-> N
+    C["n8n credentials<br/>approved environment configuration"] -. "authenticated connections" .-> O
+    C -. "authenticated connections" .-> L
+    N -. "errors" .-> F["Failure Observer"] -. "failure traces" .-> L
+    D --> A["Versioned artifacts and evidence"] --> H["Private GitHub"] -. "documentation sync" .-> B["Obsidian"]
 ```
 
-The current editable diagram source is stored in `assets/diagrams/prd-genie-architecture-v0.2.mmd`. Version 0.1 is retained as the original baseline.
+The compact diagram above is the document overview. The complete editable technical system diagram is stored in `assets/diagrams/prd-genie-architecture-v0.4.mmd`; it explicitly separates input, n8n Cloud, contract/validation, external-service, credential, and artifact/documentation boundaries. Versions 0.1 and 0.2 are retained as historical baselines.
 
 ## 5. Orchestration pattern
 
@@ -102,7 +88,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 
 | Component | Responsibility | Input contract | Output contract | Status |
 |---|---|---|---|---|
-| Input Normalizer | Create a consistent run envelope | Raw source | Workflow Input | Implemented |
+| Input Normalizer | Create a consistent run envelope without merging alternative producers | Evaluation source or validated source packet | Workflow Input / Source Packet | Single-source implemented; local PB+MT+SN packet contract validated |
 | Input Validator | Reject invalid envelopes | Workflow Input | Validated Workflow Input | Implemented |
 | Requirement Extractor | Extract grounded product information | Workflow Input | Requirement Extraction | Implemented; v1.5 release regression passed 10/10 |
 | Gap Analyzer | Identify missing, ambiguous, contradictory, or blocking information | Requirement Extraction | Gap Analysis | Implemented; v1.0 release regression passed 10/10 |
@@ -117,7 +103,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 
 ## 7. Data contracts
 
-Nine design areas are represented through seven standalone JSON schemas and supporting objects: Workflow Input, Requirement Extraction, Gap Analysis, Human Review, PRD Output, Story Breakdown, and Evaluation Result. Contracts reject unknown properties, control status values, preserve IDs, and require source evidence or approved upstream references.
+The machine-readable boundary now includes nine standalone JSON schemas and supporting objects: Workflow Input, Source Packet, Requirement Extraction, Gap Analysis, Human Review, PRD Output, Story Breakdown, Evaluation Result, and Orchestration Stage Result. Contracts reject unknown properties, control status values, preserve IDs, and require source evidence or approved upstream references. `docs/architecture/SOURCE_PACKET_CONTRACT.md` defines the multi-source producer boundary.
 
 Schema changes require a version update, regression validation, and documentation of downstream impact.
 
@@ -167,7 +153,7 @@ The capstone baseline runs in n8n Cloud and sends evaluation traces to the Langf
 
 ## 14. Architecture evolution
 
-This architecture baseline is version 0.3. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
+This architecture baseline is version 0.4. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
 
 ### Version history
 
@@ -175,3 +161,4 @@ This architecture baseline is version 0.3. Material changes are reflected in thi
 |---|---|---|---|
 | 0.2 | 2026-08-04 | Standalone architecture baseline before connected downstream completion | [`ARCHITECTURE_DESIGN-v0.2.md`](versions/ARCHITECTURE_DESIGN-v0.2.md) |
 | 0.3 | 2026-08-06 | Connected T1-to-T12 path verified; logical architecture updated for parent/child orchestration | [`ARCHITECTURE_DESIGN-v0.3.md`](versions/ARCHITECTURE_DESIGN-v0.3.md) |
+| 0.4 | 2026-08-06 | Technical system boundaries added for n8n Cloud, OpenAI, Langfuse, contracts, credentials, storage, GitHub, Obsidian and failure handling | Current canonical document; editable diagram [`prd-genie-architecture-v0.4.mmd`](../../assets/diagrams/prd-genie-architecture-v0.4.mmd) |

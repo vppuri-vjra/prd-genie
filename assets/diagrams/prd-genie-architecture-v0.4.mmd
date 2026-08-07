@@ -1,0 +1,98 @@
+flowchart TD
+    subgraph INPUTS["Input and source boundary"]
+        EVAL["Evaluation control<br/>eval_prdgenie_inputs.txt<br/>T1-T10"]
+        PB["Product Brief"]
+        MT["Meeting Transcripts"]
+        SN["Stakeholder Notes"]
+        PACKET["Canonical source packet<br/>source IDs, raw text, provenance,<br/>citations, metadata, SHA-256 hashes"]
+        PB --> PACKET
+        MT --> PACKET
+        SN --> PACKET
+    end
+
+    subgraph N8N["n8n Cloud — orchestration and control boundary"]
+        SELECT{"Select exactly one input route"}
+        ADAPTER["Validate and adapt input contract"]
+        RUN["Create run envelope<br/>run ID and parent trace"]
+        RE["Requirement Extractor Child"]
+        UNIFIED["Unified Requirement Packet"]
+        REV["Requirement Extraction validator"]
+        GA["Gap Analyzer Child"]
+        GAV["Gap Analysis validator"]
+        GATE{"Deterministic Generation Gate"}
+        CLARIFY["Clarification or correction"]
+        STOP["Blocked or rejected — stop"]
+        HA["Human Approval Checkpoint<br/>signed pause and resume"]
+        HAGATE{"Validated human decision"}
+        PRD["PRD Generator Child"]
+        PRDV["PRD contract validator"]
+        STORY["Story Breakdown Child"]
+        STORYV["Story contract validator"]
+        FINAL["Final cross-stage validation and export"]
+        FAILURE["Failure Observer"]
+
+        SELECT --> ADAPTER --> RUN --> RE --> UNIFIED --> REV --> GA --> GAV --> GATE
+        GATE -- "Clarification required" --> CLARIFY --> SELECT
+        GATE -- "Blocked" --> STOP
+        GATE -- "Eligible" --> HA --> HAGATE
+        HAGATE -- "Clarify or changes requested" --> CLARIFY
+        HAGATE -- "Rejected" --> STOP
+        HAGATE -- "Approved or approved with conditions" --> PRD --> PRDV --> STORY --> STORYV --> FINAL
+    end
+
+    EVAL --> SELECT
+    PACKET --> SELECT
+
+    subgraph CONTRACTS["Versioned contracts and deterministic validation"]
+        SCHEMAS["JSON Schemas<br/>workflow input, source packet,<br/>extraction, gaps, approval,<br/>PRD, stories, stage result"]
+        POLICY["Grounding policy<br/>exact IDs and citations<br/>zero unsupported claims"]
+    end
+    SCHEMAS -. "validate" .-> ADAPTER
+    SCHEMAS -. "validate" .-> REV
+    SCHEMAS -. "validate" .-> GAV
+    SCHEMAS -. "validate" .-> PRDV
+    SCHEMAS -. "validate" .-> STORYV
+    SCHEMAS -. "validate" .-> FINAL
+    POLICY -. "enforce" .-> REV
+    POLICY -. "enforce" .-> GAV
+    POLICY -. "enforce" .-> FINAL
+
+    subgraph EXTERNAL["External service boundary"]
+        OPENAI["OpenAI model calls<br/>structured language tasks"]
+        LANGFUSE["Langfuse US<br/>traces, evaluation evidence,<br/>latency and audit metadata"]
+    end
+    RE -->|"model call"| OPENAI
+    GA -->|"model call"| OPENAI
+    PRD -->|"model call"| OPENAI
+    STORY -->|"model call"| OPENAI
+    RE -. "generation and validation trace" .-> LANGFUSE
+    GA -. "generation and validation trace" .-> LANGFUSE
+    HA -. "approval audit trace" .-> LANGFUSE
+    PRD -. "generation and validation trace" .-> LANGFUSE
+    STORY -. "generation and validation trace" .-> LANGFUSE
+    FINAL -. "final validation trace" .-> LANGFUSE
+    FAILURE -. "failure trace" .-> LANGFUSE
+
+    subgraph SECURITY["Credential and connection boundary"]
+        CREDS["n8n Credentials / approved environment configuration<br/>secret values never stored in workflow exports"]
+    end
+    CREDS -. "authenticated HTTPS" .-> OPENAI
+    CREDS -. "authenticated HTTPS" .-> LANGFUSE
+
+    subgraph EVIDENCE["Artifact and documentation boundary"]
+        ARTIFACTS["Source fixtures, workflow exports,<br/>actual JSON and Markdown,<br/>scorecards and execution evidence"]
+        GITHUB["Private GitHub repository<br/>versioned implementation and evidence"]
+        OBSIDIAN["Obsidian vault<br/>synchronized working documentation"]
+    end
+    FINAL --> ARTIFACTS
+    INPUTS -. "versioned source fixtures" .-> ARTIFACTS
+    SCHEMAS -. "versioned contracts" .-> ARTIFACTS
+    ARTIFACTS --> GITHUB
+    GITHUB -. "documentation synchronization" .-> OBSIDIAN
+
+    RE -. "errors" .-> FAILURE
+    GA -. "errors" .-> FAILURE
+    HA -. "errors" .-> FAILURE
+    PRD -. "errors" .-> FAILURE
+    STORY -. "errors" .-> FAILURE
+    FINAL -. "errors" .-> FAILURE

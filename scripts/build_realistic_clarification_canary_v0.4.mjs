@@ -1,0 +1,16 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const extractorId=process.argv[2];if(!extractorId)throw new Error('Extractor workflow ID required');
+const input='workflows/n8n/prd-genie-realistic-clarification-v2-canary-v0.3.json',output='workflows/n8n/prd-genie-realistic-clarification-v3-canary-v0.4.json';
+const packet=JSON.parse(fs.readFileSync('evaluation/fixtures/multi-source/realistic-v1/source-packet-v3.json','utf8'));
+const original=JSON.parse(fs.readFileSync('evaluation/fixtures/multi-source/realistic-v1/stakeholder-clarification-decisions-2026-08-07.json','utf8'));
+const amendment=JSON.parse(fs.readFileSync('evaluation/fixtures/multi-source/realistic-v1/stakeholder-clarification-amendment-2026-08-07.json','utf8'));
+const workflow=JSON.parse(fs.readFileSync(input,'utf8'));workflow.name='PRD Genie - Realistic Clarification v3 Canary v0.4';workflow.versionId=crypto.randomUUID();
+const load=workflow.nodes.find(n=>n.name==='Load Approved Four-Source Packet v2');load.name='Load Approved Five-Source Packet v3';
+const ids=[...original.decisions.map(d=>d.decision_id),...amendment.amendments.map(d=>d.decision_id)];
+load.parameters.jsCode=`const packet=${JSON.stringify(packet)}; const parent_trace_id=Array.from({length:32},()=>Math.floor(Math.random()*16).toString(16)).join(''); return [{json:{...packet,submitted_at:new Date().toISOString(),orchestration_context:{parent_trace_id,active_run_id:packet.run_id,test_id:'REALISTIC-CLARIFICATION-V3',environment:'realistic-clarification-canary'},clarification_contract:{decision_maker:'Vipin',decision_date:'2026-08-07',decision_ids:${JSON.stringify(ids)},supersessions:${JSON.stringify(amendment.amendments.map(a=>({decision_id:a.decision_id,amends:a.amends,supersession_reason:a.supersession_reason})))}}}}];`;
+const old='Execute Requirement Extractor Child v1.7',next='Execute Requirement Extractor Child v1.8',exec=workflow.nodes.find(n=>n.name===old);exec.name=next;exec.parameters.workflowId.value=extractorId;exec.parameters.workflowId.cachedResultName='PRD Genie - Requirement Extractor Child v1.8';
+const validate=workflow.nodes.find(n=>n.name==='Validate Four-Source Extraction');validate.name='Validate Five-Source Extraction';validate.parameters.jsCode=validate.parameters.jsCode.replaceAll("$('Load Approved Four-Source Packet v2')","$('Load Approved Five-Source Packet v3')").replace("!==4","!==5");
+const final=workflow.nodes.find(n=>n.name==='Validate Clarification Runtime and Stop');final.parameters.jsCode=final.parameters.jsCode.replace("'SP-REALISTIC-PB-MT-SN-CLAR-V2'","'SP-REALISTIC-PB-MT-SN-CLAR-V3'").replace('source_count:4','source_count:5').replaceAll("$('Validate Four-Source Extraction')","$('Validate Five-Source Extraction')");
+const c=workflow.connections;c['Manual Trigger'].main[0][0].node=load.name;c[load.name]=c['Load Approved Four-Source Packet v2'];delete c['Load Approved Four-Source Packet v2'];c[load.name].main[0][0].node=next;c[next]=c[old];delete c[old];c[next].main[0][0].node=validate.name;c[validate.name]=c['Validate Four-Source Extraction'];delete c['Validate Four-Source Extraction'];
+fs.writeFileSync(output,JSON.stringify(workflow,null,2)+'\n');console.log(`Wrote ${output}`);

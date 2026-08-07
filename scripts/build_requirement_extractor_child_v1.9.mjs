@@ -1,0 +1,12 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const input='workflows/n8n/prd-genie-requirement-extractor-child-v1.8.json',output='workflows/n8n/prd-genie-requirement-extractor-child-v1.9.json';
+const workflow=JSON.parse(fs.readFileSync(input,'utf8'));workflow.name='PRD Genie - Requirement Extractor Child v1.9';workflow.versionId=crypto.randomUUID();
+const trace=workflow.nodes.find(n=>n.name==='Create Trace Context');trace.parameters.jsCode=trace.parameters.jsCode.replace('child-v1.8.0','child-v1.9.0').replace('extractor-v1.13-authoritative-amendment-precedence','extractor-v1.14-deterministic-provenance-hydration');
+const normalize=workflow.nodes.find(n=>n.name==='Normalize Candidate Coverage Ledger');
+normalize.name='Normalize Candidate Provenance and Coverage';
+const marker='const itemEvidence=new Map(),missingEvidence=new Map(),conflictsByItem=new Map();';
+const hydration=`const approved=new Map();\nfor(const sourceEntry of source.sources||[])for(const citation of sourceEntry.citations||[])approved.set(sourceEntry.source_id+'|'+citation.location,{source:sourceEntry,citation});\nconst hydrate=(record,label)=>{if(!Array.isArray(record.evidence)||!record.evidence.length)throw new Error(label+' has no evidence before provenance hydration');record.evidence=record.evidence.map(evidence=>{const match=approved.get(evidence.source_id+'|'+evidence.location);if(!match||evidence.quote!==match.citation.quote)throw new Error(label+' has unknown or altered citation '+(evidence.source_id||'')+'|'+(evidence.location||''));const {source:sourceEntry,citation}=match;return {quote:citation.quote,source_id:sourceEntry.source_id,source_type:sourceEntry.source_type,source_name:sourceEntry.source_name,location:citation.location,speaker:citation.speaker??null,content_hash:sourceEntry.content_hash};});};\nfor(const record of result.items||[])hydrate(record,record.id||'item');for(const record of result.missing_information||[])hydrate(record,record.id||'missing');\n`;
+if(!normalize.parameters.jsCode.includes(marker))throw new Error('normalizer marker not found');normalize.parameters.jsCode=normalize.parameters.jsCode.replace(marker,hydration+marker);
+workflow.connections['Requirement Extractor'].main[0][0].node=normalize.name;workflow.connections[normalize.name]=workflow.connections['Normalize Candidate Coverage Ledger'];delete workflow.connections['Normalize Candidate Coverage Ledger'];
+fs.writeFileSync(output,JSON.stringify(workflow,null,2)+'\n');console.log(`Wrote ${output}`);

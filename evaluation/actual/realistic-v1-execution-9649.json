@@ -1,0 +1,899 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-REALISTIC-MULTI-SOURCE-V1",
+  "extraction_status": "partial",
+  "summary": "Extracted dashboard, reporting, export, access-control, integration, performance, mobile, deadline, and stakeholder-preference items. Extraction is partial because refresh requirements conflict, API-call minimization conflicts with five-second refresh, architecture preferences require reconciliation, and several open questions and incomplete fragments remain unresolved.",
+  "items": [
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Priya Sharma, Product Manager",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "owner",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Author: Priya Sharma, Product Manager",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:3",
+          "speaker": "Author",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "PER-001",
+      "type": "persona",
+      "statement": "Business analysts who currently export data to Excel",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "target_user",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "- Business analysts who currently export data to Excel",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:11",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "PER-002",
+      "type": "persona",
+      "statement": "Team leads who need weekly performance summaries",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "target_user",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "- Team leads who need weekly performance summaries",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:12",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-004"
+      ]
+    },
+    {
+      "id": "PER-003",
+      "type": "persona",
+      "statement": "Executives who want a high-level overview without digging into details",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "target_user",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "- Executives who want a high-level overview without digging into details",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:13",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-004"
+      ]
+    },
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Dashboard should display 5 core metrics: revenue, active users, churn rate, NPS score, and support ticket volume",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "dashboard",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "1. Dashboard should display 5 core metrics: revenue, active users, churn rate, NPS score, and support ticket volume",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:16",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-002",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter by date range (last 7 days, 30 days, 90 days, custom)",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "filtering",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "2. Users should be able to filter by date range (last 7 days, 30 days, 90 days, custom)",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:17",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-003",
+      "type": "functional_requirement",
+      "statement": "Data should refresh every 15 minutes (not real-time, to manage cost)",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "data_refresh",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "3. Data should refresh every 15 minutes (not real-time, to manage cost)",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:18",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-010"
+      ]
+    },
+    {
+      "id": "FR-004",
+      "type": "functional_requirement",
+      "statement": "Must support role-based access: executives see all data, team leads see their team only",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "access_control",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "4. Must support role-based access: executives see all data, team leads see their team only",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:19",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "PER-002",
+        "PER-003"
+      ]
+    },
+    {
+      "id": "FR-005",
+      "type": "functional_requirement",
+      "statement": "Export to PDF for monthly board reports",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "reports",
+      "evidence": [
+        {
+          "quote": "5. Export to PDF for monthly board reports",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:20",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-012",
+        "AC-001"
+      ]
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Must integrate with our existing PostgreSQL data warehouse",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "integration",
+      "target": "our existing PostgreSQL data warehouse",
+      "evidence": [
+        {
+          "quote": "- Must integrate with our existing PostgreSQL data warehouse",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:23",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "CON-001",
+      "type": "constraint",
+      "statement": "Cannot use any third-party analytics tools (licensing cost concern)",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "technology",
+      "target": "analytics tools",
+      "evidence": [
+        {
+          "quote": "- Cannot use any third-party analytics tools (licensing cost concern)",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:24",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "NFR-002",
+      "type": "non_functional_requirement",
+      "statement": "Must be accessible on mobile (responsive design)",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "accessibility",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "- Must be accessible on mobile (responsive design)",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:25",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "Target launch: Q3 2026",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "launch",
+      "target": "analytics dashboard",
+      "evidence": [
+        {
+          "quote": "- Target launch: Q3 2026",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:26",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-006",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter reports by date range, category, and status.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "filtering",
+      "target": "reports",
+      "evidence": [
+        {
+          "quote": "Sarah: Okay let's talk about the reporting feature. Users have been asking for this for months. The key requirement is that users should be able to filter reports by date range, category, and status.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:12",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "NFR-003"
+      ]
+    },
+    {
+      "id": "NFR-003",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "report results",
+      "evidence": [
+        {
+          "quote": "Sarah: Good point. Results must load in under 2 seconds. That's a hard requirement from the enterprise customers.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:16",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-006"
+      ]
+    },
+    {
+      "id": "FR-007",
+      "type": "functional_requirement",
+      "statement": "New dedicated page.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "reporting_page",
+      "target": "reporting feature",
+      "evidence": [
+        {
+          "quote": "Sarah: New dedicated page. But it should match our existing design system.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:20",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "CON-002"
+      ]
+    },
+    {
+      "id": "CON-002",
+      "type": "constraint",
+      "statement": "It should match our existing design system.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "design",
+      "target": "new dedicated page",
+      "evidence": [
+        {
+          "quote": "Sarah: New dedicated page. But it should match our existing design system.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:20",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": [
+        "FR-007"
+      ]
+    },
+    {
+      "id": "STK-002",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM owner.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "owner",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-002",
+      "type": "deadline",
+      "statement": "Deadline is end of Q3.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "delivery",
+      "target": "reporting feature",
+      "evidence": [
+        {
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 0.96,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-003",
+      "type": "deadline",
+      "statement": "Lisa, we'd need designs by end of April.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "design_delivery",
+      "target": "designs",
+      "evidence": [
+        {
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 0.96,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-008",
+      "type": "functional_requirement",
+      "statement": "Users need to export reports as PDF and CSV.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "reports",
+      "evidence": [
+        {
+          "quote": "Ananya: Users need to export reports as PDF and CSV. For the PDF export, it must include the company logo at the top of every page. For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:74",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "AC-001",
+        "AC-002",
+        "FR-012"
+      ]
+    },
+    {
+      "id": "AC-001",
+      "type": "acceptance_criterion",
+      "statement": "For the PDF export, it must include the company logo at the top of every page.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "PDF export",
+      "evidence": [
+        {
+          "quote": "Ananya: Users need to export reports as PDF and CSV. For the PDF export, it must include the company logo at the top of every page. For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:74",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-005",
+        "FR-008"
+      ]
+    },
+    {
+      "id": "AC-002",
+      "type": "acceptance_criterion",
+      "statement": "For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "CSV export",
+      "evidence": [
+        {
+          "quote": "Ananya: Users need to export reports as PDF and CSV. For the PDF export, it must include the company logo at the top of every page. For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:74",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-008",
+        "FR-012"
+      ]
+    },
+    {
+      "id": "FR-009",
+      "type": "functional_requirement",
+      "statement": "The user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "export control",
+      "evidence": [
+        {
+          "quote": "Ananya: That works. But the user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:82",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-012"
+      ]
+    },
+    {
+      "id": "FR-010",
+      "type": "functional_requirement",
+      "statement": "We need the dashboard to auto-refresh every 5 seconds so users always see the latest data.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "data_refresh",
+      "target": "dashboard",
+      "evidence": [
+        {
+          "quote": "Priya: We need the dashboard to auto-refresh every 5 seconds so users always see the latest data.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:52",
+          "speaker": "Priya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-003",
+        "NFR-004"
+      ]
+    },
+    {
+      "id": "NFR-004",
+      "type": "non_functional_requirement",
+      "statement": "We need to minimize API calls.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "performance",
+      "target": "infrastructure",
+      "evidence": [
+        {
+          "quote": "Kevin: Yeah, from a DevOps perspective, that's concerning. Performance is critical. We need to minimize API calls. Our infrastructure can't handle that load.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:56",
+          "speaker": "Kevin",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 1,
+      "related_item_ids": [
+        "FR-010"
+      ]
+    },
+    {
+      "id": "CON-003",
+      "type": "constraint",
+      "statement": "The analytics service should be its own service, not bolted onto the monolith.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "analytics service",
+      "evidence": [
+        {
+          "quote": "\"We're moving to microservices architecture. The analytics service should be its own service, not bolted onto the monolith.\"",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:12",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "confidence": 0.94,
+      "related_item_ids": [
+        "CON-005"
+      ]
+    },
+    {
+      "id": "CON-004",
+      "type": "constraint",
+      "statement": "For the data model, we should use the existing events table. It has everything we need. But it needs an index on the timestamp column — right now full table scans take 8+ seconds.",
+      "status": "suggested",
+      "priority": "Unspecified",
+      "category": "data_model",
+      "target": "existing events table",
+      "evidence": [
+        {
+          "quote": "\"For the data model, we should use the existing events table. It has everything we need. But it needs an index on the timestamp column — right now full table scans take 8+ seconds.\"",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:14",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "confidence": 0.93,
+      "related_item_ids": []
+    },
+    {
+      "id": "CON-005",
+      "type": "constraint",
+      "statement": "I'd like to explore a single-page app approach. But I know engineering prefers server-rendered pages for SEO. We'll need to discuss.",
+      "status": "contradictory",
+      "priority": "Unspecified",
+      "category": "architecture",
+      "target": "application approach",
+      "evidence": [
+        {
+          "quote": "\"I'd like to explore a single-page app approach. But I know engineering prefers server-rendered pages for SEO. We'll need to discuss.\"",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:24",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "confidence": 0.91,
+      "related_item_ids": [
+        "CON-003"
+      ]
+    },
+    {
+      "id": "FR-011",
+      "type": "functional_requirement",
+      "statement": "Customers want to see their own data, filtered by their account. Multi-tenant support is critical.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "multi_tenancy",
+      "target": "customers",
+      "evidence": [
+        {
+          "quote": "\"Customers want to see their own data, filtered by their account. Multi-tenant support is critical.\"",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:48",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "confidence": 0.98,
+      "related_item_ids": []
+    },
+    {
+      "id": "FR-012",
+      "type": "functional_requirement",
+      "statement": "We can do XLSX instead of plain CSV for the formula support.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "export",
+      "target": "formula-supporting export",
+      "evidence": [
+        {
+          "quote": "Dev: Okay, we can do XLSX instead of plain CSV for the formula support.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:80",
+          "speaker": "Dev",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "quote": "Ananya: That works. But the user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:82",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "confidence": 0.96,
+      "related_item_ids": [
+        "FR-005",
+        "FR-008",
+        "FR-009",
+        "AC-002"
+      ]
+    }
+  ],
+  "contradictions": [
+    {
+      "id": "CTR-001",
+      "description": "The stated dashboard refresh cadence is every 15 minutes and not real-time, while a later stated dashboard refresh cadence is every 5 seconds.",
+      "item_ids": [
+        "FR-003",
+        "FR-010"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "Which dashboard refresh cadence should apply: every 15 minutes (not real-time) or every 5 seconds?"
+    },
+    {
+      "id": "CTR-002",
+      "description": "A five-second dashboard auto-refresh requirement conflicts with the requirement to minimize API calls because each refresh hits the backend.",
+      "item_ids": [
+        "FR-010",
+        "NFR-004"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "How should the dashboard provide current data while minimizing API calls?"
+    },
+    {
+      "id": "CTR-003",
+      "description": "Suggested microservices architecture and a suggested single-page app approach require reconciliation.",
+      "item_ids": [
+        "CON-003",
+        "CON-005"
+      ],
+      "resolution_status": "unresolved",
+      "clarification_question": "What architecture and application approach should be selected for the analytics service and dashboard?"
+    }
+  ],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "dashboard_layout",
+      "description": "Whether to support custom dashboard layouts or ship a fixed layout first is open.",
+      "clarification_question": "Should the product support custom dashboard layouts or ship a fixed layout first?",
+      "evidence": [
+        {
+          "quote": "- Should we support custom dashboard layouts or ship a fixed layout first?",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:29",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ]
+    },
+    {
+      "id": "MISS-002",
+      "category": "alerting",
+      "description": "Whether alerting is needed is open.",
+      "clarification_question": "Is alerting required, including notification when churn exceeds 5%?",
+      "evidence": [
+        {
+          "quote": "- Do we need alerting (e.g., notify when churn exceeds 5%)?",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:30",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ]
+    },
+    {
+      "id": "MISS-003",
+      "category": "performance",
+      "description": "The acceptable page load time is open; an under-3-second value is presented as a suggestion.",
+      "clarification_question": "What is the acceptable page load time?",
+      "evidence": [
+        {
+          "quote": "- What is the acceptable page load time? (Suggestion: under 3 seconds)",
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:31",
+          "speaker": null,
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ]
+    },
+    {
+      "id": "MISS-004",
+      "category": "data_source",
+      "description": "The reporting data source is TBD between querying live and using a pre-computed data warehouse.",
+      "clarification_question": "Should reporting query live data or use a pre-computed data warehouse?",
+      "evidence": [
+        {
+          "quote": "Sarah: TBD on that. Let's decide after we see Lisa's designs and understand the query patterns.",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:28",
+          "speaker": "Sarah",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ]
+    },
+    {
+      "id": "MISS-005",
+      "category": "ai_reporting",
+      "description": "The AI reporting request lacks specified data and expected outputs.",
+      "clarification_question": "What data should AI analyze and what outputs are expected for AI reporting?",
+      "evidence": [
+        {
+          "quote": "Ananya: We'd need to scope this more. What data would the AI analyze? What outputs are we expecting?",
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:42",
+          "speaker": "Ananya",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ]
+    },
+    {
+      "id": "MISS-006",
+      "category": "churn_prediction",
+      "description": "The churn-prediction request does not specify source data or acceptable accuracy.",
+      "clarification_question": "What data should churn prediction use and what accuracy is acceptable?",
+      "evidence": [
+        {
+          "quote": "[Note: Tom did not specify what data the churn prediction should use or what accuracy is acceptable]",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:42",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ]
+    },
+    {
+      "id": "MISS-007",
+      "category": "white_labeling",
+      "description": "White-labeling is not confirmed as in scope.",
+      "clarification_question": "Is white-labeling, including customers putting their own logo on reports, in scope?",
+      "evidence": [
+        {
+          "quote": "\"Some customers have asked for white-labeling — putting their own logo on reports. Not sure if that's in scope.\"",
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:50",
+          "speaker": null,
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ]
+    }
+  ],
+  "extractor_notes": []
+}

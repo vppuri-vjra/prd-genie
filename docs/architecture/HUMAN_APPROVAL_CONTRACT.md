@@ -115,3 +115,11 @@ The decision conforms to `schemas/human-review.schema.json` and records:
 ## Grounding rationale
 
 The checkpoint does not create product content. It records human authority over already-grounded content, preventing an LLM from automatically promoting proposed, incomplete or contradictory material into a PRD.
+
+## Realistic v4 decision-disposition extension
+
+The isolated realistic v4 approval tail extends this validated contract without changing the accepted control workflow. Its signed result must preserve the immutable six-source packet, accepted parent trace `26c7466f817aa1511f4a4e239bb52a62`, exact first-release item allowlist, all effective August 7 decision IDs, and the complete 17-record decision-disposition allowlist.
+
+The signer is `Vipin`, the decision date is `2026-08-07`, groundedness must equal 100%, and unsupported claims must equal zero. Validation fails closed on missing or duplicate decisions, a missing decision citation, a conflicting disposition, a missing supersession target, a changed source/hash, or an ID outside the allowlist. The signed output stops before PRD Generation.
+
+Canonical artifacts are `decision-to-prd-disposition-v4.json`, `human-approval-v4-input.json`, and `prd-genie-realistic-v4-human-approval-tail-v0.1.json`.

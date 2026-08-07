@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0.0",
+  "run_id": "RUN-T1-MULTI-SOURCE-PARITY",
+  "extraction_status": "complete",
+  "summary": "Users require report filtering with a stated performance target, PM owner, and Q3 deadline.",
+  "items": [
+    {
+      "id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter reports by date range, category, and status.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": null,
+      "target": null,
+      "evidence": [
+        {
+          "quote": "The user should be able to filter reports by date range, category, and status.",
+          "source_id": "SRC-T1-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:1",
+          "speaker": null,
+          "content_hash": "sha256:c680266d62840f6ec05291b73faaf2877491843c8c81f7fdc496a27ca5aa09c0"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    },
+    {
+      "id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Performance",
+      "target": "under 2 seconds",
+      "evidence": [
+        {
+          "quote": "Results must load in under 2 seconds.",
+          "source_id": "SRC-T1-PB-001",
+          "source_type": "product_brief",
+          "source_name": "product-brief.txt",
+          "location": "line:2",
+          "speaker": null,
+          "content_hash": "sha256:c680266d62840f6ec05291b73faaf2877491843c8c81f7fdc496a27ca5aa09c0"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": ["FR-001"]
+    },
+    {
+      "id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Owner",
+      "target": null,
+      "evidence": [
+        {
+          "quote": "PM: Sarah.",
+          "source_id": "SRC-T1-MT-001",
+          "source_type": "meeting_transcript",
+          "source_name": "meeting-transcript.txt",
+          "location": "line:1",
+          "speaker": null,
+          "content_hash": "sha256:946b190e5418cb35c52e451329d48354bedcb201c6efc83fce3c508c473b0324"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    },
+    {
+      "id": "DDL-001",
+      "type": "deadline",
+      "statement": "The deadline is Q3.",
+      "status": "stated",
+      "priority": "Unspecified",
+      "category": "Delivery",
+      "target": "Q3",
+      "evidence": [
+        {
+          "quote": "Deadline: Q3.",
+          "source_id": "SRC-T1-SN-001",
+          "source_type": "stakeholder_notes",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:1",
+          "speaker": null,
+          "content_hash": "sha256:927fda1118a4800e6ec7a8e44c2e4d834bda1b829a7e7189670c1281b99b4615"
+        }
+      ],
+      "confidence": 1.0,
+      "related_item_ids": []
+    }
+  ],
+  "contradictions": [],
+  "missing_information": [
+    {
+      "id": "MISS-001",
+      "category": "persona",
+      "description": "The sources identify only a generic user and provide no specific persona.",
+      "clarification_question": "Which user persona needs report filtering?"
+    },
+    {
+      "id": "MISS-002",
+      "category": "deadline",
+      "description": "The year and calendar dates represented by Q3 are not specified.",
+      "clarification_question": "Which year and calendar dates define the Q3 deadline?"
+    }
+  ],
+  "extractor_notes": [
+    "No priority was stated; priority remains Unspecified."
+  ]
+}

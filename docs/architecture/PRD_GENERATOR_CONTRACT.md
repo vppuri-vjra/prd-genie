@@ -117,3 +117,11 @@ T11 passes only when:
 - the LLM call and validation result are observable in Langfuse.
 
 Contract groundedness target: **100%**.
+
+## August 7 stakeholder-decision coverage
+
+For realistic packet v4, the future PRD input must include the signed `effective_decision_ids` and `decision_disposition_allowlist`. Every effective decision must be represented according to its single disposition, while superseded decisions remain audit evidence and must not be emitted as active requirements.
+
+Each PRD representation must cite the stable decision ID and `Stakeholder Clarification, Vipin, 2026-08-07`, plus original PB/MT/SN evidence where supplied by the decision record. Validation fails closed for less than 100% effective-decision coverage, duplicate or conflicting dispositions, missing citations, stale superseded content, or unsupported PRD content. PRD Generation has not been invoked for this package.
+
+The isolated realistic v4 implementation is deterministic and produces exactly one `prd-output.schema.json` object plus a synchronized Markdown rendering and provenance ledger. Its entry is pinned to Human Approval execution `9724` and trace `f4e298e120d6503b5dfac4688adae1db`. It requires 19/19 approved-item coverage, 17/17 dispositions, 15/15 effective decisions, 2/2 superseded audit-only records, and 6/6 source manifests. The workflow stops before Story Breakdown.
