@@ -50,3 +50,15 @@ The authorized approval input is pinned to Requirement Extractor execution `9722
 Human Approval execution `9724` satisfied that contract. Reviewer `Vipin` approved the exact 19-item allowlist on `2026-08-07`; Langfuse accepted stage trace `f4e298e120d6503b5dfac4688adae1db`; `stop_before_prd_generation=true` and `prd_generation_invoked=false`.
 
 Realistic v4 PRD execution `9725` accounts for 19/19 signed items, 17/17 dispositions, 15/15 effective decisions, two superseded audit-only records, and all six source manifests. JSON and Markdown are synchronized; groundedness is 100% with zero unsupported claims. Langfuse accepted trace `f8879ebe22d888152a77f892230c62ba`; Story Breakdown was not invoked.
+
+## Realistic v4 Story Breakdown lineage
+
+The Story Breakdown starts only from PRD execution `9725`. It preserves the packet/run/parent/approval/PRD lineage and copies the six-source manifest and 17-decision disposition ledger without mutation. Its coverage ledger accounts for all 19 signed PRD item IDs and links active story behavior to 3 epics, 4 features, 7 stories, and 12 criteria. Deferred, superseded, and controlled-TBD decisions remain non-active.
+
+Native execution `9726` of workflow `KKYU4QssjUTovd8U` stopped in the deterministic breakdown validator on `duplicate IDs`. This was a false duplicate-parent-ID integration defect: Story Breakdown trace construction and Langfuse ingestion were not invoked, so no runtime hierarchy, grounding result, or trace is accepted. The upstream PRD `9725` lineage remains intact and 100% grounded.
+
+The v0.2 workflow preserves that failure evidence and the complete upstream lineage while correcting ID uniqueness by hierarchy level. Native execution `9727` passed 3/4/7/12 counts, 19/19 coverage, 6/6 source-hash preservation, 17/17 decision provenance, JSON/Markdown equivalence, and four true-duplicate negative cases. Langfuse accepted trace `f772ec699a437bc70de67ac124976161` with HTTP 200.
+
+## Realistic v4 Story Breakdown runtime — 2026-08-07
+
+Approved PRD execution `9725` / trace `f8879ebe22d888152a77f892230c62ba` → Story Breakdown workflow `MEm1VyILsMyn53HU` → execution `9727` → trace `f772ec699a437bc70de67ac124976161`. Result: 3 epics, 4 features, 7 stories, 12 criteria; 19/19 approved IDs and 6/6 sources covered; zero orphans; no active deferred, superseded, or controlled-TBD scope; groundedness 100%; unsupported claims 0.

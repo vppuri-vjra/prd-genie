@@ -95,7 +95,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
 | Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Implemented; all five eligible T-test routes passed at 100% with Langfuse evidence |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Implemented for T11/T1; observable release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
-| Story Breakdown | Produce epics, features, and stories | Approved PRD | Story Breakdown | Implemented for T12/T1; observable v0.2 release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
+| Story Breakdown | Produce epics, features, stories, and story acceptance criteria | Approved PRD | Story Breakdown | T12/T1 observable v0.2 release passed; realistic-v4 v0.1 execution `9726` is retained failure evidence; isolated v0.2 per-level uniqueness correction passes locally and awaits native import |
 | Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected final result and Markdown export | Implemented through v0.5; execution `9578` completed at 100% |
 | Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
@@ -103,7 +103,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 
 ## 7. Data contracts
 
-The machine-readable boundary now includes nine standalone JSON schemas and supporting objects: Workflow Input, Source Packet, Requirement Extraction, Gap Analysis, Human Review, PRD Output, Story Breakdown, Evaluation Result, and Orchestration Stage Result. Contracts reject unknown properties, control status values, preserve IDs, and require source evidence or approved upstream references. `docs/architecture/SOURCE_PACKET_CONTRACT.md` defines the multi-source producer boundary.
+The machine-readable boundary includes the standalone control schemas plus a separate realistic-v4 Story Breakdown schema. Contracts reject unknown properties, control status values, preserve IDs, and require source evidence or approved upstream references. `docs/architecture/SOURCE_PACKET_CONTRACT.md` defines the multi-source producer boundary; the realistic Story Breakdown contract preserves all six hashes and upstream approval/PRD lineage.
 
 Schema changes require a version update, regression validation, and documentation of downstream impact.
 

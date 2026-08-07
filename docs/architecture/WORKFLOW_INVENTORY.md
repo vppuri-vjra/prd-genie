@@ -40,6 +40,8 @@ The same allowlist is visible in n8n as registry workflow `isz9Jj1qVbwQVceS`; it
 | 22 | `PRD Genie - Realistic Clarification v4 Deterministic Gate Canary v0.11` | Preserve immutable `original_packet` context through the validated extraction and Gap Analysis boundary | Unpublished `ZUYumiSo2xdAJva5`; RE `9722`, GA `9723`; deterministic gate accepted and stopped at Human Approval | 100% |
 | 23 | `PRD Genie - Realistic v4 Human Approval Tail v0.1` | Sign the exact accepted v0.11 allowlists and stop before PRD Generation | Unpublished `xcBnMPcnCI6xVS4h`; execution `9724` passed; trace `f4e298e120d6503b5dfac4688adae1db` accepted | 100% |
 | 24 | `PRD Genie - Realistic v4 Production PRD Generator v0.1` | Produce one synchronized JSON/Markdown PRD and complete provenance ledger from signed approval `9724` | Unpublished `2K9dntvZDaUgudrl`; execution `9725` passed; trace `f8879ebe22d888152a77f892230c62ba`; stopped before Story Breakdown | 100% |
+| 25 | `PRD Genie - Realistic v4 Story Breakdown Child v0.1` | Convert only PRD execution `9725` into a traceable epic/feature/story hierarchy | Unpublished `KKYU4QssjUTovd8U`; saved trigger passthrough and Langfuse credential verified; execution `9726` failed closed on false duplicate-parent-ID validation before trace construction | Runtime not evaluated; local 100% |
+| 26 | `PRD Genie - Realistic v4 Story Breakdown Child v0.2` | Versioned correction with per-level hierarchy uniqueness | Local seven-node import candidate; no n8n identity; not executed or published | Local 100% |
 
 ## Integration-ready child exports
 
@@ -84,4 +86,14 @@ Current realistic set: Requirement Extractor v1.10 `eDAl2qSb4ai17JZk`, Canary v0
 
 The isolated seven-node `Realistic v4 Production PRD Generator v0.1` is now runtime-validated as unpublished workflow `2K9dntvZDaUgudrl`. Execution `9725` produced the synchronized PRD and stopped before Story Breakdown.
 
+The isolated seven-node `Realistic v4 Story Breakdown Child v0.1` is saved unpublished as `KKYU4QssjUTovd8U`. The trigger is `inputSource: passthrough`, the Langfuse credential is correct, and the corrected local export checksum is `70586ad1f8b8629d16c81d6df0c210ff93e2ca2ccce47eb3f340918a74234a39`. Execution `9726` failed closed before trace construction because the validator counted the same parent Epic/Feature ID once per story and misclassified the expected repetition as duplicate IDs. Preserve v0.1 as failed evidence and create a versioned correction before rerun.
+
+The versioned v0.2 workflow checks identifiers independently at each hierarchy level and passes true-duplicate negatives for 4/4 levels while accepting valid repeated parent relationships. It retains the seven-node topology, passthrough trigger, Langfuse credential convention, full lineage/provenance, 19/19 coverage, and 100% groundedness. Native execution `9727` and trace `f772ec699a437bc70de67ac124976161` are accepted.
+
 The Failure Observer and Langfuse operate across this sequence. Clarification, correction, rejection, and blocked routes must stop before unauthorized downstream generation.
+
+## 2026-08-07 runtime and complete-list reconciliation
+
+Story Breakdown v0.2 is runtime-validated as unpublished workflow `MEm1VyILsMyn53HU`. Execution `9727` and accepted trace `f772ec699a437bc70de67ac124976161` prove 3/4/7/12 hierarchy counts, 19/19 coverage, 6/6 sources, zero orphans, JSON/Markdown equivalence, 100% groundedness, and zero unsupported claims. Story Breakdown v0.1 `KKYU4QssjUTovd8U` / `9726` remains failed evidence.
+
+The read-only n8n review enumerated 68 PRD Genie workflows: 18 current-active, 6 current-unpublished, 27 superseded evidence, 16 failed evidence, and 1 cleanup candidate. See [`COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`](COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md).

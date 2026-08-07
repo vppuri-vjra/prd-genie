@@ -11,6 +11,10 @@ This local list distinguishes validated current workflows from published product
 | PRD Genie - Realistic Clarification v4 Deterministic Gate Canary v0.11 | `ZUYumiSo2xdAJva5` | v0.11 | Six-source adapter, RE/GA orchestration, gate | 6 | Unpublished | Current, validated | children `9722`/`9723`; parent trace `26c7466f817aa1511f4a4e239bb52a62` | packet → RE v1.10 → GA v1.0 → Human Approval | 100% |
 | PRD Genie - Realistic v4 Human Approval Tail v0.1 | `xcBnMPcnCI6xVS4h` | v0.1 | Signed Human Approval | 9 | Unpublished | Current, validated | `9724`; trace `f4e298e120d6503b5dfac4688adae1db` | Canary v0.11 → realistic PRD Generator | 100% |
 | PRD Genie - Realistic v4 Production PRD Generator v0.1 | `2K9dntvZDaUgudrl` | v0.1 | Deterministic JSON/Markdown PRD and ledger | 7 | Unpublished | Current, validated | `9725`; trace `f8879ebe22d888152a77f892230c62ba` | approval `9724` → stop before Story Breakdown | 100% |
+| PRD Genie - Realistic v4 Story Breakdown Child v0.2 | `MEm1VyILsMyn53HU` | v0.2 | Approved PRD-to-Epic/Feature/Story hierarchy | 7 | Unpublished | Current, validated | `9727`; trace `f772ec699a437bc70de67ac124976161`; Langfuse HTTP 200 | PRD `9725` → stop before downstream publication | 100% |
+| PRD Genie - Realistic v4 Story Breakdown Child v0.1 | `KKYU4QssjUTovd8U` | v0.1 | Failed Story Breakdown candidate | 7 | Unpublished | Failed-evidence-only; retain | `9726` failed closed before trace construction on false duplicate-parent-ID detection | PRD `9725` → stopped in deterministic validator | Runtime not evaluated; local 100% |
+
+The complete read-only live-project reconciliation is recorded in `COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`: 83 total workflows, including 68 PRD Genie workflows and 15 unrelated workflows. The smallest safe cleanup-review set is one duplicate non-authoritative Connected Orchestrator; no workflow state was changed.
 
 ## Relevant validated controls
 
@@ -32,6 +36,12 @@ This local list distinguishes validated current workflows from published product
 | Realistic Clarification v4 Canary | `vMShSs7pPjzm7EWr` | v0.9 / 6 | Superseded; evidence only | `9707`–`9711` | 3 |
 | Realistic Clarification v4 Canary | `LuCOCCe1jRhb6g5o` | v0.10 / 6 | Superseded; evidence only | `9712`–`9717` | 4 |
 
-Discrepancy resolved: the earlier inventory did not include a live PRD-stage workflow and formerly showed v0.11/Human Approval as pending. The accepted chain now includes PRD workflow `2K9dntvZDaUgudrl` and execution `9725`. Cleanup requires separate authorization; no archive or deletion occurred.
+The active review now includes unpublished Story Breakdown workflow `KKYU4QssjUTovd8U`. Its trigger and credential are valid, but execution `9726` exposed a false duplicate-ID integration-validator defect before trace construction. It is failure evidence, not a validated current stage. Cleanup requires separate authorization; no archive or deletion occurred.
 
 Groundedness: **100%** for accepted evidence and local PRD validation. Unsupported claims: **0**.
+
+## 2026-08-07 Story Breakdown v0.2 runtime update
+
+`PRD Genie - Realistic v4 Story Breakdown Child v0.2` is now saved and unpublished as `MEm1VyILsMyn53HU`. Execution `9727` passed with trace `f772ec699a437bc70de67ac124976161`, Langfuse HTTP 200, 3 epics, 4 features, 7 stories, 12 acceptance criteria, 19/19 approved-scope coverage, 6/6 sources, zero orphans, 100% groundedness, and zero unsupported claims. It replaces v0.1 for current use; v0.1 `KKYU4QssjUTovd8U` and execution `9726` remain failure evidence.
+
+The complete 68-workflow reconciliation and one-item safe cleanup recommendation are in [`COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`](COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md).

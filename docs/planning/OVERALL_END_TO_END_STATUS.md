@@ -114,3 +114,11 @@ The final connected regression must therefore include at least one product brief
 ## Realistic six-source production path
 
 The realistic v4 path has passed Requirement Extraction `9722`, Gap Analysis `9723`, signed Human Approval `9724`, and Production PRD Generation `9725`. The PRD JSON/Markdown pair and provenance ledger passed at 100% groundedness with zero unsupported claims. Execution stopped before Story Breakdown.
+
+Story Breakdown workflow `KKYU4QssjUTovd8U` is saved unpublished with a valid passthrough trigger and Langfuse credential. Execution `9726` failed closed in deterministic validation on a false duplicate-parent-ID check before a Story Breakdown result or trace existed. This is an integration defect; runtime groundedness is not evaluated. The next action is a versioned validator correction, not an unchanged retry.
+
+The v0.2 correction is locally complete and import-ready. It checks uniqueness independently at all four hierarchy levels, retains the 3/4/7/12 hierarchy and 19/19 coverage, and passes at 100% groundedness with zero unsupported claims. It has not been imported, executed, or published.
+
+## 2026-08-07 Story Breakdown checkpoint
+
+Realistic Story Breakdown v0.2 is runtime accepted: workflow `MEm1VyILsMyn53HU`, execution `9727`, trace `f772ec699a437bc70de67ac124976161`, counts 3/4/7/12, coverage 19/19, sources 6/6, groundedness 100%, unsupported claims 0. The stage stopped before any delivery publication. Next controlled stage is Final Validation/export planning; it is not authorized in this checkpoint.

@@ -87,3 +87,7 @@ These canvases are retained only for diagnostic or historical evidence:
 ## Operating rule
 
 Before importing, invoking, or documenting a workflow, verify its ID against the final runnable set. New workflows enter the allowlist only after an accepted n8n execution, required Langfuse evidence, zero unsupported claims, and **100% groundedness** where grounding applies.
+
+## Pending promotion — Story Breakdown v0.2
+
+Saved unpublished workflow `PRD Genie - Realistic v4 Story Breakdown Child v0.2`, ID `MEm1VyILsMyn53HU`, passed execution `9727` with accepted trace `f772ec699a437bc70de67ac124976161`, 19/19 approved-scope coverage, 6/6 sources, zero orphans, 100% groundedness, and zero unsupported claims. It is validated but not published or promoted. v0.1 `KKYU4QssjUTovd8U` remains failure evidence.

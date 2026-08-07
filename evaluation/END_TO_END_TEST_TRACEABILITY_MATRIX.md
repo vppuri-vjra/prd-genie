@@ -215,6 +215,8 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 | Full run / children `9722`, `9723` | `Realistic Clarification v4 Canary v0.11` | Pass; stopped at Human Approval boundary | Immutable six-source `original_packet` preserved through Requirement Extraction, Gap Analysis and deterministic resolution | Yes | No | RE 100%; GA 100%; unsupported claims/decisions 0 | RE `320fb727a808c8228001e1aef5de7d98`; GA `322897a2600add94152dbf938c837c00`; parent trace `26c7466f817aa1511f4a4e239bb52a62`; accepted |
 | `9724` | `Realistic v4 Human Approval Tail v0.1` | Pass; signed approval completed | Exact v0.11 evidence plus 17/17 decision dispositions, 15/15 effective decisions and 19 approved item IDs | Yes | Yes; stopped immediately afterward | 100%; unsupported claims/decisions 0 | `f4e298e120d6503b5dfac4688adae1db` accepted; parent trace `26c7466f817aa1511f4a4e239bb52a62`; PRD Generator absent |
 | `9725` | `Realistic v4 Production PRD Generator v0.1` | Pass | One schema-valid synchronized JSON/Markdown PRD; 19/19 items, 17/17 dispositions, 15/15 effective decisions, 2/2 superseded audit-only, 6/6 sources | Yes | PRD generated; Story Breakdown no | 100%; unsupported claims 0 | PRD trace `f8879ebe22d888152a77f892230c62ba` accepted; HTTP 200; parent trace preserved |
+| `9726` | `Realistic v4 Story Breakdown Child v0.1` / `KKYU4QssjUTovd8U` | Integration-validator rejection | Trigger, loader and PRD entry passed; deterministic validator falsely treated repeated parent Epic/Feature references as duplicate IDs | N/A | Trace construction, Langfuse and downstream publication not invoked | Runtime not evaluated; upstream/local baseline 100% | No Story Breakdown trace; failed before ingestion |
+| Local candidate; not executed | `Realistic v4 Story Breakdown Child v0.2` | Local remediation pass | Per-level uniqueness; 3 epics, 4 features, 7 stories, 12 criteria; 19/19 coverage; 4/4 true-duplicate negatives | N/A | No live invocation; native import pending | Local 100%; unsupported claims 0 | No runtime trace claimed |
 
 ## Stage-entry rule
 
@@ -235,3 +237,9 @@ Update this matrix after every evaluated agent execution. For each stage, record
 ## Groundedness statement
 
 Matrix groundedness: **100% for the recorded Requirement Extractor results, the n8n T1 and realistic PB+MT+SN parity canaries, realistic Gap Analysis execution `9667`, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 and T1-to-Final canaries, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. Realistic extraction execution `9661` has 70/70 coverage and accepted trace `4adf60a1f5f83849170303de20471d81`; realistic Gap Analysis execution `9667` has 12/12 missing-information, 4/4 contradiction and 2/2 source-risk coverage with accepted trace `a727f4397ede1de96d15e18a78d6bdd0`. Both record zero unsupported claims and 100% groundedness. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+
+## Realistic Story Breakdown v0.2 — accepted runtime evidence
+
+| Stage | Workflow / execution | Assertions | Result |
+|---|---|---|---|
+| Story Breakdown | `MEm1VyILsMyn53HU` / `9727`; trace `f772ec699a437bc70de67ac124976161` | 3 epics; 4 features; 7 stories; 12 criteria; 19/19 scope; 6/6 sources; 0 orphans; no active deferred/superseded/controlled-TBD; JSON/Markdown equivalent; Langfuse accepted | Pass — groundedness 100%, unsupported claims 0 |
