@@ -97,3 +97,5 @@ The Failure Observer and Langfuse operate across this sequence. Clarification, c
 Story Breakdown v0.2 is runtime-validated as unpublished workflow `MEm1VyILsMyn53HU`. Execution `9727` and accepted trace `f772ec699a437bc70de67ac124976161` prove 3/4/7/12 hierarchy counts, 19/19 coverage, 6/6 sources, zero orphans, JSON/Markdown equivalence, 100% groundedness, and zero unsupported claims. Story Breakdown v0.1 `KKYU4QssjUTovd8U` / `9726` remains failed evidence.
 
 The read-only n8n review enumerated 68 PRD Genie workflows: 18 current-active, 6 current-unpublished, 27 superseded evidence, 16 failed evidence, and 1 cleanup candidate. See [`COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`](COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md).
+
+The isolated realistic chain now ends at unpublished Final Validator/export `3A8biYxoQ7Q1E9FQ`. Execution `9728` passed with trace `4e1ef40a6da7a838ad9e9cc3a37a1a35`, final Markdown hash `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`, 100% groundedness, and zero unsupported claims. The existing connected Final Validator child remains unchanged.

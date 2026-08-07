@@ -45,3 +45,7 @@ Groundedness: **100%** for accepted evidence and local PRD validation. Unsupport
 `PRD Genie - Realistic v4 Story Breakdown Child v0.2` is now saved and unpublished as `MEm1VyILsMyn53HU`. Execution `9727` passed with trace `f772ec699a437bc70de67ac124976161`, Langfuse HTTP 200, 3 epics, 4 features, 7 stories, 12 acceptance criteria, 19/19 approved-scope coverage, 6/6 sources, zero orphans, 100% groundedness, and zero unsupported claims. It replaces v0.1 for current use; v0.1 `KKYU4QssjUTovd8U` and execution `9726` remain failure evidence.
 
 The complete 68-workflow reconciliation and one-item safe cleanup recommendation are in [`COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`](COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md).
+
+## 2026-08-07 Final Validation/export runtime update
+
+`PRD Genie - Realistic v4 Final Validator and Export v0.1` is saved and unpublished as `3A8biYxoQ7Q1E9FQ`. Execution `9728` passed with trace `4e1ef40a6da7a838ad9e9cc3a37a1a35`, accepted Langfuse HTTP 200, final export SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`, 100% groundedness, and zero unsupported claims. The prior control `gPc9aTRQ8qLWdZgL` is unchanged.

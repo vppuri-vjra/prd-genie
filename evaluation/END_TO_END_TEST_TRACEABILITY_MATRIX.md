@@ -243,3 +243,4 @@ Matrix groundedness: **100% for the recorded Requirement Extractor results, the 
 | Stage | Workflow / execution | Assertions | Result |
 |---|---|---|---|
 | Story Breakdown | `MEm1VyILsMyn53HU` / `9727`; trace `f772ec699a437bc70de67ac124976161` | 3 epics; 4 features; 7 stories; 12 criteria; 19/19 scope; 6/6 sources; 0 orphans; no active deferred/superseded/controlled-TBD; JSON/Markdown equivalent; Langfuse accepted | Pass — groundedness 100%, unsupported claims 0 |
+| Final Validation/export | `3A8biYxoQ7Q1E9FQ` / `9728`; trace `4e1ef40a6da7a838ad9e9cc3a37a1a35` | Story authority `9727`; 3/4/7/12; 19/19; 6/6; 17/17; zero orphans; exact lineage/hashes; JSON/Markdown equivalent; export SHA `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`; Langfuse accepted | Pass — groundedness 100%, unsupported claims 0 |

@@ -62,3 +62,5 @@ The v0.2 workflow preserves that failure evidence and the complete upstream line
 ## Realistic v4 Story Breakdown runtime — 2026-08-07
 
 Approved PRD execution `9725` / trace `f8879ebe22d888152a77f892230c62ba` → Story Breakdown workflow `MEm1VyILsMyn53HU` → execution `9727` → trace `f772ec699a437bc70de67ac124976161`. Result: 3 epics, 4 features, 7 stories, 12 criteria; 19/19 approved IDs and 6/6 sources covered; zero orphans; no active deferred, superseded, or controlled-TBD scope; groundedness 100%; unsupported claims 0.
+
+Story Breakdown `9727` / trace `f772ec699a437bc70de67ac124976161` → Final Validator/export `3A8biYxoQ7Q1E9FQ` → execution `9728` → trace `4e1ef40a6da7a838ad9e9cc3a37a1a35` → citation-preserving Markdown SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`. Result: complete lineage, sources, decisions, hierarchy, citations, and scope dispositions preserved; groundedness 100%; unsupported claims 0.

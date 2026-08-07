@@ -122,3 +122,5 @@ The v0.2 correction is locally complete and import-ready. It checks uniqueness i
 ## 2026-08-07 Story Breakdown checkpoint
 
 Realistic Story Breakdown v0.2 is runtime accepted: workflow `MEm1VyILsMyn53HU`, execution `9727`, trace `f772ec699a437bc70de67ac124976161`, counts 3/4/7/12, coverage 19/19, sources 6/6, groundedness 100%, unsupported claims 0. The stage stopped before any delivery publication. Next controlled stage is Final Validation/export planning; it is not authorized in this checkpoint.
+
+Final Validation/export is now runtime accepted: unpublished workflow `3A8biYxoQ7Q1E9FQ`, execution `9728`, trace `4e1ef40a6da7a838ad9e9cc3a37a1a35`, final export SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`, groundedness 100%, unsupported claims 0. No Jira or delivery-publication stage was invoked.

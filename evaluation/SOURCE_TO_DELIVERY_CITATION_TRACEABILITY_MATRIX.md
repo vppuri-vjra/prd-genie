@@ -37,3 +37,7 @@ Authority: PRD execution `9725` · PRD trace `f8879ebe22d888152a77f892230c62ba` 
 - Active deferred, superseded, or controlled-TBD items: **0**
 - Groundedness: **100%**
 - Unsupported claims: **0**
+
+## Final delivery export — 2026-08-07
+
+Final Validator/export workflow `3A8biYxoQ7Q1E9FQ`, execution `9728`, trace `4e1ef40a6da7a838ad9e9cc3a37a1a35` preserves the six-source manifest/hashes, 17 decision dispositions, 19/19 approved scope, PRD summary, 3/4/7/12 hierarchy, all citations, and upstream execution/trace lineage in Markdown export SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`. Groundedness: 100%. Unsupported claims: 0.

@@ -49,8 +49,8 @@ def main() -> int:
     schema_paths = sorted(SCHEMA_DIR.glob("*.schema.json"))
     example_paths = sorted(EXAMPLE_DIR.glob("*.json"))
 
-    if len(schema_paths) != 11:
-        failures.append(f"Expected 11 schemas, found {len(schema_paths)}")
+    if len(schema_paths) != 12:
+        failures.append(f"Expected 12 schemas, found {len(schema_paths)}")
 
     for schema_path in schema_paths:
         try:

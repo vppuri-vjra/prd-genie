@@ -65,3 +65,11 @@ The formal plan models four one-week iterations. Actual execution is intentional
 - Acceptance: 3 epics, 4 features, 7 stories, 12 criteria; 19/19 scope; 6/6 sources; zero orphans; 100% groundedness; zero unsupported claims
 - v0.1 `KKYU4QssjUTovd8U` and `9726` retained as failure evidence
 - Stop boundary: no Jira/delivery publication and no Final Validation invocation
+
+## Final Validator/export v0.1 runtime result — 2026-08-07
+
+- Accepted unpublished workflow: `3A8biYxoQ7Q1E9FQ`
+- Execution/trace: `9728` / `4e1ef40a6da7a838ad9e9cc3a37a1a35`
+- Export hash: `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`
+- Acceptance: 3/4/7/12; 19/19 scope; 6/6 sources; 17/17 decisions; zero orphans; JSON/Markdown equivalent; 100% groundedness; zero unsupported claims
+- Stop boundary: unpublished, inactive, no Jira/delivery publication

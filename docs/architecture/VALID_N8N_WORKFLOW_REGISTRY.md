@@ -91,3 +91,5 @@ Before importing, invoking, or documenting a workflow, verify its ID against the
 ## Pending promotion — Story Breakdown v0.2
 
 Saved unpublished workflow `PRD Genie - Realistic v4 Story Breakdown Child v0.2`, ID `MEm1VyILsMyn53HU`, passed execution `9727` with accepted trace `f772ec699a437bc70de67ac124976161`, 19/19 approved-scope coverage, 6/6 sources, zero orphans, 100% groundedness, and zero unsupported claims. It is validated but not published or promoted. v0.1 `KKYU4QssjUTovd8U` remains failure evidence.
+
+Saved unpublished workflow `PRD Genie - Realistic v4 Final Validator and Export v0.1`, ID `3A8biYxoQ7Q1E9FQ`, passed execution `9728` with accepted trace `4e1ef40a6da7a838ad9e9cc3a37a1a35` and export SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`. It is validated at 100% groundedness with zero unsupported claims but remains pending promotion/publication.
