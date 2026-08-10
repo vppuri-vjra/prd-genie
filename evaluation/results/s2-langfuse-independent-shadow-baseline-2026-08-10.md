@@ -58,5 +58,6 @@ Do not activate the Agreement Gate yet. Preserve this run as the immutable first
 - Code Evaluator version 3 (`cmsnk60ao0idzad0krzyrwtbh`) fixes the T5 claim-free false failure.
 - The unpublished extractor candidate `CNZIUbNBFEap9ioy` preserves `Competitor X` and keeps T2 `partial`; T2 and T5 passed the latest ground-truth rerun.
 - The unpublished evaluator candidate `lNRM0vzmggdpAoJe` has its Langfuse Basic Auth binding refreshed.
-- T6 is not a mechanical defect. Its reviewed ground truth requires `partial` plus an unresolved contradiction, while the semantic judge flags that interpretation because microservices and a single-page app can coexist. Candidate runs alternate between those policies, so promotion remains blocked pending human adjudication.
+- T6 was human-adjudicated on 2026-08-10. It remains `partial` for missing approval, deadline, and scope information, while the unsupported contradiction and cross-links were removed because microservices and a single-page app can coexist.
+- Post-adjudication execution `10256` passed T1-T10 at 10/10. The full independent result is recorded in `evaluation/results/s2-langfuse-independent-shadow-hardening-2026-08-10.md`.
 - No candidate workflow was published and no workflow was deleted.

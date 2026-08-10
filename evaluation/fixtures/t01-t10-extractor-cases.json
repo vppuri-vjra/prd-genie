@@ -53,7 +53,7 @@
       "expected_status": "partial",
       "required_exact_values": ["Engineering", "microservices", "Design", "single-page app", "PM", "March"],
       "required_item_types": ["constraint", "deadline"],
-      "required_behaviors": ["Capture all three viewpoints.", "Identify tensions without favoring a stakeholder."],
+      "required_behaviors": ["Capture all three viewpoints.", "Preserve the architecture preferences as separate suggested constraints without inventing a contradiction or cross-link.", "Keep the result partial because approval status, the exact March deadline, and the delivery scope remain unclear."],
       "prohibited_content": ["choosing microservices", "choosing single-page app"]
     },
     {

@@ -57,4 +57,6 @@ The Code Evaluator is currently on version 3 (`cmsnk60ao0idzad0krzyrwtbh`). Vers
 | Requirement Extractor child v0.2 | `CNZIUbNBFEap9ioy` | Unpublished shadow candidate |
 | T1-T10 Evaluator v0.4 | `lNRM0vzmggdpAoJe` | Unpublished shadow candidate |
 
-The candidate prompt now preserves named comparison references and keeps the vague T2 request `partial`; T2 and T5 pass the reviewed ground truth. T6 remains an explicit adjudication item: the reviewed dataset expects a `partial` architecture contradiction, while the semantic judge notes that a microservices backend and a single-page application frontend can coexist. Do not change the reviewed ground truth or promote the agreement gate until this policy is human-adjudicated.
+The candidate prompt preserves named comparison references and keeps the vague T2 request `partial`. T6 was human-adjudicated on 2026-08-10: it remains `partial` for missing approval, deadline, and scope information, but the unsupported contradiction and cross-links were removed because microservices and a single-page app can coexist.
+
+Fresh execution `10256` passed T1-T10 at 10/10 with 100% groundedness, zero unsupported claims, 10/10 Code Evaluator passes, average LLM faithfulness `0.894`, and average LLM hallucination `0.044`. Keep the agreement gate in shadow mode because provisional per-trace LLM thresholds are still missed by T2, T6, and T10. The next judge calibration must exclude administrative metadata from the semantic answer projection.

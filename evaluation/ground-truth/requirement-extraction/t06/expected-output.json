@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "run_id": "RUN-T6-GROUND-TRUTH",
   "extraction_status": "partial",
-  "summary": "Engineering prefers microservices, Design prefers a single-page app, and the PM wants delivery by March; the architecture viewpoints require neutral reconciliation.",
+  "summary": "Engineering prefers microservices, Design prefers a single-page app, and the PM wants delivery by March; approval status, the precise deadline, and the delivery scope remain unspecified.",
   "items": [
     {
       "id": "CON-001",
@@ -21,7 +21,7 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["CON-002"]
+      "related_item_ids": []
     },
     {
       "id": "CON-002",
@@ -40,7 +40,7 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["CON-001"]
+      "related_item_ids": []
     },
     {
       "id": "DDL-001",
@@ -62,21 +62,13 @@
       "related_item_ids": []
     }
   ],
-  "contradictions": [
-    {
-      "id": "CTR-001",
-      "description": "Engineering and Design expressed separate architecture or technology preferences that require reconciliation; the source does not approve, prioritize, or establish incompatibility between them.",
-      "item_ids": ["CON-001", "CON-002"],
-      "resolution_status": "unresolved",
-      "clarification_question": "How should the Engineering and Design preferences be evaluated and reconciled, and has either preference been approved?"
-    }
-  ],
+  "contradictions": [],
   "missing_information": [
     {
       "id": "MISS-001",
       "category": "decision_status",
       "description": "The source does not state whether either architecture preference is approved.",
-      "clarification_question": "Have microservices or the single-page app been approved, or are both still proposals?"
+      "clarification_question": "What is the approval status of the microservices proposal and, independently, what is the approval status of the single-page app proposal?"
     },
     {
       "id": "MISS-002",
@@ -93,6 +85,6 @@
   ],
   "extractor_notes": [
     "The viewpoints remain separate and neither architecture preference is selected.",
-    "Microservices and a single-page app may concern different system layers; the source supports a need for reconciliation, not a claim of technical incompatibility."
+    "Microservices and a single-page app may concern different system layers and can coexist; the source does not support a contradiction or cross-link between them."
   ]
 }
