@@ -1,7 +1,7 @@
 # S2 Langfuse Independent Shadow Hardening Result
 
 Date: 2026-08-10  
-n8n execution: `10256`  
+n8n execution: `10300`
 Extractor candidate: `CNZIUbNBFEap9ioy`  
 Evaluator candidate: `lNRM0vzmggdpAoJe`  
 Mode: Unpublished shadow
@@ -14,17 +14,17 @@ The fresh S2 T1-T10 pipeline completed successfully: **10/10 passed**, **100% gr
 
 | Test | Trace ID | Code pass | LLM faithfulness | LLM hallucination |
 |---|---|---:|---:|---:|
-| T1 | `ab9052b1aa367a23f62cf5e2fa7c6c3a` | true | 0.85 | 0.08 |
-| T2 | `2b3ade01fbef0dea15761c7200d2cd6b` | true | 0.70 | 0.12 |
-| T3 | `8abab44bd10930023cbd4333aae06c5e` | true | 1.00 | 0.08 |
-| T4 | `af71c0219264c64c2fdbddb456a043bd` | true | 1.00 | 0.00 |
-| T5 | `41e6360d9abf78b4effdaa82d6bb3062` | true | 1.00 | 0.02 |
-| T6 | `5730c01a80aac93958aaa909ef287d16` | true | 0.78 | 0.08 |
-| T7 | `e5af958f13b3607773b9f9582aab6396` | true | 1.00 | 0.00 |
-| T8 | `ce6e7408b934c8e59ae21f931456c6e2` | true | 1.00 | 0.05 |
-| T9 | `cefcc0a0e04b47b773f3162eece28b03` | true | 0.83 | 0.00 |
-| T10 | `01605779cbfe1246e371ea72e7604fc4` | true | 0.78 | 0.01 |
-| **Aggregate** | **10 traces** | **10/10** | **0.894 average** | **0.044 average** |
+| T1 | `cfbee7adf89e464f3d5b7ab5df6bdcd1` | true | 1.00 | 0.00 |
+| T2 | `5c4fc53274333d1eb52100d413422fa7` | true | 1.00 | 0.00 |
+| T3 | `d04a280c3131762cc2fd976bd55ca0d6` | true | 0.40 | 0.08 |
+| T4 | `d6926d16c60391003edc23b6bd7cefb6` | true | 1.00 | 0.00 |
+| T5 | `8dad926046c8e69c360ed88cf2d4d31c` | true | 1.00 | 0.00 |
+| T6 | `ed93078d2fd4e7977fa7c8b36d2a578a` | true | 1.00 | 0.00 |
+| T7 | `6e0ff0c42171e4c99233d34a0dbf1e2d` | true | 1.00 | 0.00 |
+| T8 | `01be811c908df37c85c9d81fdba6961a` | true | 1.00 | 0.00 |
+| T9 | `347a928ed7574e5e7f73185221a1840a` | true | 1.00 | 0.00 |
+| T10 | `36ce470d3ba2cca7329444926b7237c7` | true | 1.00 | 0.00 |
+| **Aggregate** | **10 traces** | **10/10** | **0.940 average** | **0.008 average** |
 
 ## T6 adjudication outcome
 
@@ -34,6 +34,6 @@ This improved T6 hallucination from the first shadow baseline's `0.40` to `0.08`
 
 ## Promotion decision
 
-Keep the agreement gate in shadow mode. The deterministic pipeline and Code Evaluator now agree 10/10, but provisional per-trace LLM thresholds are not yet met by T2 (`faithfulness 0.70`, `hallucination 0.12`), T6 (`faithfulness 0.78`), and T10 (`faithfulness 0.78`). Judge comments attribute much of the remaining penalty to administrative metadata such as run IDs, source filenames, schema fields, locations, and confidence values rather than unsupported product claims.
+Keep the agreement gate in shadow mode. The deterministic pipeline and Code Evaluator agree 10/10, and 9/10 cases meet both provisional LLM thresholds after separating evaluation inputs. The Code Evaluator receives the complete structured extraction. The two LLM judges receive the dedicated `requirement-extractor-semantic-evaluation` observation with the `substantive-v1` projection; administrative run and schema metadata remain on the auditable parent trace but are excluded from semantic scoring.
 
-Next calibration: send the LLM judges a substantive projection of the output instead of the complete administrative envelope, then rerun in shadow mode before considering a blocking agreement gate.
+T3 is the sole threshold exception (`faithfulness 0.40`, `hallucination 0.08`). The faithfulness judge accepts both extracted requirements but does not believe the source itself establishes that five-second auto-refresh and minimizing API calls are contradictory. This is a substantive dataset-policy question, not an administrative-metadata artifact. Human adjudication is required before changing either the T3 ground truth or the extractor behavior.
