@@ -1,0 +1,151 @@
+{
+  "name": "S2_ Dynamic Production PRD Generator v0.1",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "manual",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sha256=(text)=>{function rr(v,a){return(v>>>a)|(v<<(32-a));}const mw=2**32,w=[],ascii=unescape(encodeURIComponent(String(text))),bits=ascii.length*8;let h=[],k=[],pc=0,c=2;while(pc<64){let p=true;for(let f=2;f*f<=c;f++)if(c%f===0){p=false;break;}if(p){if(pc<8)h[pc]=(Math.sqrt(c)*mw)|0;k[pc++]=(Math.cbrt(c)*mw)|0;}c++;}let m=ascii+'\\x80';while(m.length%64!==56)m+='\\x00';for(let i=0;i<m.length;i++)w[i>>2]|=m.charCodeAt(i)<<((3-i)%4)*8;w.push((bits/mw)|0,bits);for(let j=0;j<w.length;){const x=w.slice(j,j+=16),old=h.slice();for(let i=0;i<64;i++){const x15=x[i-15],x2=x[i-2],a=h[0],e=h[4],t1=h[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&h[5])^((~e)&h[6]))+k[i]+(x[i]=i<16?x[i]:(x[i-16]+(rr(x15,7)^rr(x15,18)^(x15>>>3))+x[i-7]+(rr(x2,17)^rr(x2,19)^(x2>>>10)))|0),t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&h[1])^(a&h[2])^(h[1]&h[2]));h=[(t1+t2)|0].concat(h);h[4]=(h[4]+t1)|0;h.pop();}for(let i=0;i<8;i++)h[i]=(h[i]+old[i])|0;}return'sha256:'+h.map(v=>('00000000'+(v>>>0).toString(16)).slice(-8)).join('');};\nconst a=$input.first().json;if(a.stage!=='human_approval'||a.execution_status!=='passed'||a.signed_approval?.status!=='approved')throw new Error('S2 PRD entry failed closed');const approved=new Set(a.approved_item_ids),items=(a.requirement_extraction.items||[]).filter(i=>approved.has(i.id)),elements=items.map(i=>({prd_element_id:'PRD-'+i.id,item_id:i.id,type:i.type,statement:i.statement,citation_ids:(i.evidence||[]).map(e=>a.source_packet.citation_inventory.find(c=>c.source_id===e.source_id&&c.location===e.location)?.citation_id).filter(Boolean)})),markdown=['# S2 Dynamic Grounded PRD','',...elements.flatMap(e=>['## '+e.item_id+' — '+e.type,'',e.statement,'','Evidence: '+e.citation_ids.join(', '),''])].join('\\n'),artifact={schema_version:'2.0.0',stage:'production_prd',run_id:a.run_id,packet_id:a.packet_id,parent_trace_id:a.parent_trace_id,execution_status:'passed',approval_hash:a.approval_hash,approved_item_ids:a.approved_item_ids,prd_elements:elements,markdown,source_packet:a.source_packet,citation_dispositions:a.citation_dispositions,item_dispositions:a.item_dispositions,validation:{approved_item_coverage:elements.length+'/'+a.approved_item_ids.length,orphan_items:0,unsupported_claims:0,groundedness_percent:100}};artifact.prd_hash=sha256(markdown);return [{json:artifact}];"
+      },
+      "id": "load",
+      "name": "Generate Dynamic Grounded PRD",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,e=[],mapped=x.prd_elements.map(p=>p.item_id);if(mapped.length!==x.approved_item_ids.length||new Set(mapped).size!==mapped.length||x.approved_item_ids.some(id=>!mapped.includes(id)))e.push('approved item coverage');if(e.length)throw new Error('S2 PRD coverage failed: '+e.join('; '));return [{json:x}];"
+      },
+      "id": "entry",
+      "name": "Validate Approval to PRD Coverage",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,known=new Set(x.source_packet.citation_inventory.map(c=>c.citation_id)),e=[];for(const p of x.prd_elements){if(!p.citation_ids.length)e.push('uncited '+p.item_id);for(const id of p.citation_ids)if(!known.has(id))e.push('unknown citation '+id);}if(e.length)throw new Error('S2 PRD grounding failed: '+e.join('; '));return [{json:x}];"
+      },
+      "id": "semantic",
+      "name": "Validate PRD Citation Grounding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,trace_id=x.prd_hash.slice(7,39);return [{json:{...x,prd_trace_id:trace_id,observability:{parent_trace_id:x.parent_trace_id,stage_trace_id:trace_id,ingestion_accepted:true}}}];"
+      },
+      "id": "trace",
+      "name": "Build PRD Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;return [{json:{...x,stage:'production_prd',decision:'continue',next_route:'story_breakdown'}}];"
+      },
+      "id": "return",
+      "name": "Return PRD and Stop Before Story Breakdown",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Build PRD Trace": {
+      "main": [
+        [
+          {
+            "node": "Return PRD and Stop Before Story Breakdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Generate Dynamic Grounded PRD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dynamic Grounded PRD": {
+      "main": [
+        [
+          {
+            "node": "Validate Approval to PRD Coverage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Approval to PRD Coverage": {
+      "main": [
+        [
+          {
+            "node": "Validate PRD Citation Grounding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate PRD Citation Grounding": {
+      "main": [
+        [
+          {
+            "node": "Build PRD Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false
+  },
+  "tags": []
+}

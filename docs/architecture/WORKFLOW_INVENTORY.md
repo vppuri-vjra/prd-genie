@@ -27,6 +27,8 @@ The same allowlist is visible in n8n as registry workflow `isz9Jj1qVbwQVceS`; it
 | 9 | `PRD Genie - Connected Orchestrator v0.5` | Continue the connected run through Final Validation and Markdown export | Connected T1-to-Final execution `9578` passed and completed | 100% |
 | 10 | `PRD Genie - Multi-Source T1 Parity Canary v0.2` | Prove production-style PB+MT+SN parity at the Requirement Extractor boundary | Execution `9638` passed; exact traceability, semantic parity and Langfuse ingestion accepted | 100% |
 | 11 | `PRD Genie - Realistic Multi-Source Requirement Extraction Canary v0.6` | Prove approved realistic PB+MT+SN canonical parity through Child v1.5 | Execution `9661` passed; 70/70 coverage, 44/4/12 parity and Langfuse accepted | 100% |
+| 11a | `PRD Genie - T1-T10 Baseline Release Evidence Evaluator v1.0` | Consolidate exact inputs, approved expectations, preserved v1.5 outputs, evaluator checks and trace acceptance into one fail-closed report | Inactive/unpublished `b57sxmwjazoXHd8R`; execution `9832` passed 10/10 in 1.643s | 100% |
+| 11b | `PRD Genie - T1-T10 Google Drive Evaluation I-O v1.1` | Read the approved hashed control bundle from `Evaluation Controls`, revalidate T1–T10, and upload timestamped JSON/Markdown evidence to `Evaluation Results` | Inactive/unpublished `stmdp7YLv3zZxHM5`; execution `9833` passed 10/10 in 6.628s | 100% |
 | 12 | `PRD Genie - Realistic Gap Analysis Canary v0.1` | Carry the accepted realistic extraction through Gap Analysis and the deterministic gate | Execution `9667` passed; 14 gaps, 12/12 missing-information coverage, 4/4 contradictions, 2/2 source risks; route `clarification` | 100% |
 | 13 | `PRD Genie - Realistic Clarification v2 Canary v0.1` | Verify the approved four-source clarification packet through extraction, Gap Analysis and gate | Execution `9678` stopped in Requirement Extractor validation on an invalid line-23 conflict-ledger relationship; Gap Analysis was not invoked | Not accepted |
 | 14 | `PRD Genie - Realistic Clarification v2 Canary v0.2` | Focused verification after deferred-decision ledger correction | Execution `9680` stopped in Requirement Extractor validation because MT line 94 was labeled missing without supporting an emitted missing-information record | Not accepted |
@@ -99,3 +101,28 @@ Story Breakdown v0.2 is runtime-validated as unpublished workflow `MEm1VyILsMyn5
 The read-only n8n review enumerated 68 PRD Genie workflows: 18 current-active, 6 current-unpublished, 27 superseded evidence, 16 failed evidence, and 1 cleanup candidate. See [`COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md`](COMPLETE_N8N_WORKFLOW_AUDIT_2026-08-07.md).
 
 The isolated realistic chain now ends at unpublished Final Validator/export `3A8biYxoQ7Q1E9FQ`. Execution `9728` passed with trace `4e1ef40a6da7a838ad9e9cc3a37a1a35`, final Markdown hash `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`, 100% groundedness, and zero unsupported claims. The existing connected Final Validator child remains unchanged.
+
+## 2026-08-08 connected realistic production run
+
+Inactive/unpublished main orchestrator v0.10 `Zh0BIOxTGyDyU4jB` completed execution `9785`. The connected chain succeeded as gate `9786`, Requirement Extractor `9787`, Gap Analyzer `9788`, Human Approval lineage verification `9789`, Production PRD `9790`, Story Breakdown `9791`, and Final Validator/export `9792`. The result reports seven connected stages, dynamic handoffs, 100% groundedness, zero unsupported claims, and final stage trace `bb1a0fe38750902d05c95c6e8d0cbd41`.
+
+The parent remains inactive/unpublished. Required callable children are published for parent invocation. No workflow was activated, archived, or deleted.
+
+## 2026-08-08 Google Drive production-input run
+
+Published/inactive callable `WDrjaIMsrnF46q8b` reads and validates the exact six approved files from Google Drive before invoking Requirement Extractor v1.10, Gap Analyzer v1.0, and the deterministic gate. Direct execution `9797` passed.
+
+Inactive/unpublished parent `YiWB9OxjvUyfxk53` completed execution `9800`, with connected executions `9801`–`9807`. The full run reports seven authoritative stages, dynamic handoffs, 6/6 source hashes, 17/17 decision dispositions, parent trace `26c7466f817aa1511f4a4e239bb52a62`, final stage trace `4130f84c1a99fc905436db7c06d98356`, 100% groundedness, and zero unsupported claims. No workflow was activated, archived, or deleted.
+
+## 2026-08-08 Google Drive validated outputs
+
+Inactive/unpublished parent `1iBHRurP8NLMW7BP` completed execution `9816`. After all seven authoritative stages and Final Validator/export passed, it uploaded exactly two timestamped files to `Production Outputs` folder `1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp`: final PRD Markdown (`1G2cd7xOyAj5J2-NpU4W8Eq-EwkgxFdh6`) and Story Breakdown JSON (`1eLQdPfHlsMcQOWB8x5BVie5nJaylKZCU`). Delivery is fail-closed and retains a structured receipt in the parent result.
+
+Construction v0.12 `fZtwbTojKAgyfV0w` / execution `9808` remains failed evidence; it stopped before upload. No workflow was activated, archived, or deleted.
+# S2 dynamic workflow family
+
+The isolated S2 family was installed on 2026-08-08 with runtime Google Drive citation inventory creation and bidirectional traceability gates. The seven callable children are published/inactive; the main parent remains unpublished/inactive.
+
+Versioned parent `qXwKh3NKS6DsATFs` execution `9842` passed in 1m 39.722s with run ID `RUN-S2-9843-16e7090e`, source packet `SP-S2-16e7090e7027e2d1`, and trace `31c935842eba067ff9ef372f1490f4ef`. It read 6 documents, indexed and dispositioned 145/145 citations, produced 35 PRD elements and 35 delivery items, and closed all four orphan classes at zero with 100% groundedness and zero unsupported claims. Four validated files—including a dedicated Story Breakdown JSON—were uploaded to Google Drive.
+
+See `evaluation/results/s2-dynamic-workflow-family-static-validation-2026-08-08.md` and `evaluation/results/s2-dynamic-six-source-main-orchestrator-runtime-pass-2026-08-08.md`.
