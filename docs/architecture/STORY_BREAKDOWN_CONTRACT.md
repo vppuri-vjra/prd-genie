@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Story Breakdown Contract
-version: 1.1.0
-status: Approved for T12 Implementation
-last_updated: 2026-08-05
+version: 2.0.0
+status: Realistic v4 Local Candidate; T12 Control Preserved
+last_updated: 2026-08-07
 owner: Vipin Puri
 ---
 
@@ -61,3 +61,15 @@ Groundedness target: **100%**, treating explicit controlled TBDs as safe missing
 ## Approval
 
 Contract v1.1.0 and the T12 canonical ground truth were approved by Vipin Puri on 2026-08-05 at **100% groundedness**.
+
+## Realistic v4 production route
+
+The realistic route is separate from the unchanged T12 control. Its sole product-content authority is the signed, synchronized PRD from execution `9725`, trace `f8879ebe22d888152a77f892230c62ba`. Entry validation also preserves approval execution `9724`, packet `SP-REALISTIC-PB-MT-SN-CLAR-V4`, run `RUN-REALISTIC-MULTI-SOURCE-V4`, parent trace `26c7466f817aa1511f4a4e239bb52a62`, all six source hashes, and the complete August 7 decision ledger.
+
+The output contract is `schemas/realistic-story-breakdown.schema.json` v2.0.0. It produces `Epic → Feature → User Story → Acceptance Criteria`, a 19-item coverage ledger, non-active scope dispositions, and copied provenance ledgers. Deferred and superseded decisions cannot become active stories. The controlled budget TBD stays metadata only and cannot create a delivery item.
+
+The local canonical candidate contains 3 epics, 4 features, 7 user stories, and 12 acceptance criteria. Every semantic item has approved PRD references; 19/19 approved items are accounted for as active story content, active constraints, dependency/timeline context, or resolved-source audit evidence. Local acceptance requires zero orphans, JSON/Markdown equivalence, 100% groundedness, and zero unsupported claims.
+
+### v0.2 uniqueness rule
+
+After v0.1 execution `9726` falsely counted repeated parent references as duplicate IDs, v0.2 collects and validates IDs once at each hierarchy level: all Epics, all Features, all User Stories, and all Acceptance Criteria. A parent with multiple children is valid. A true duplicate within any of the four levels fails closed. The v0.1 workflow and execution remain retained failure evidence.

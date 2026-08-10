@@ -1,0 +1,27 @@
+{
+  "parent_execution_id": 9715,
+  "requirement_extraction": {
+    "execution_id": 9716,
+    "shape": ["schema_version", "run_id", "stage", "execution_status", "decision", "next_route", "groundedness_percent", "output", "validation", "source_packet", "observability"],
+    "stage": "requirement_extraction",
+    "execution_status": "passed",
+    "groundedness_percent": 100,
+    "parent_trace_id": "511d92c8703f66a2a0d85635ca0ca6f4",
+    "stage_trace_id": "7184f321485d2952f2a799a07cf8c3b0",
+    "ingestion_accepted": true
+  },
+  "validated_extraction_v0_10": {
+    "shape": ["schema_version", "run_id", "extraction", "orchestration_context", "requirement_extraction_stage", "clarification_contract"],
+    "missing_key": "original_packet"
+  },
+  "gap_analysis": {
+    "execution_id": 9717,
+    "shape": ["schema_version", "run_id", "stage", "execution_status", "decision", "next_route", "groundedness_percent", "output", "observability"],
+    "stage": "gap_analysis",
+    "execution_status": "passed",
+    "groundedness_percent": 100,
+    "parent_trace_id": "511d92c8703f66a2a0d85635ca0ca6f4",
+    "stage_trace_id": "982c0290088dcabb14c8d7ce652ed86d",
+    "ingestion_accepted": true
+  }
+}

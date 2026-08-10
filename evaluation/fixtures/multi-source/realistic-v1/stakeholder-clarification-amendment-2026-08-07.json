@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "stakeholder_clarification_amendment",
+  "artifact_id": "CLAR-REALISTIC-2026-08-07-A1",
+  "source_packet_id": "SP-REALISTIC-PB-MT-SN-CLAR-V3",
+  "decision_maker": "Vipin",
+  "decision_date": "2026-08-07",
+  "runtime_status": "pending_n8n_verification",
+  "amendments": [
+    {
+      "decision_id": "DEC-2026-08-07-GAP-008-A1",
+      "gap_id": "GAP-008",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_amendment",
+      "decision_text": "Budget approval is not required to complete the PRD. Sarah will manage the budget separately by September 10, 2026. Product scope must continue to respect the existing cost constraints.",
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-AMEND-001",
+        "source_name": "stakeholder-clarification-amendment-2026-08-07.md",
+        "location": "line:10",
+        "quote": "- DEC-2026-08-07-GAP-008-A1: Budget approval is not required to complete the PRD. Sarah will manage the budget separately by September 10, 2026. Product scope must continue to respect the existing cost constraints.",
+        "content_hash": "sha256:4bb1edb4d3a13f0868bf3e13ff3a618db073b84d0d7e38f0a5d27860d9e49d16"
+      },
+      "amends": {
+        "decision_id": "DEC-2026-08-07-GAP-008",
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "location": "line:17",
+        "quote": "- DEC-2026-08-07-GAP-008: Budget remains a controlled TBD; owner Sarah; decision deadline 2026-08-31.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersession_reason": "Replaces the earlier August 31 budget deadline and removes budget approval as a PRD-generation prerequisite.",
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-014-A1",
+      "gap_id": "GAP-014",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_amendment",
+      "decision_text": "Use a single-page application (SPA) for the analytics dashboard.",
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-AMEND-001",
+        "source_name": "stakeholder-clarification-amendment-2026-08-07.md",
+        "location": "line:11",
+        "quote": "- DEC-2026-08-07-GAP-014-A1: Use a single-page application (SPA) for the analytics dashboard.",
+        "content_hash": "sha256:4bb1edb4d3a13f0868bf3e13ff3a618db073b84d0d7e38f0a5d27860d9e49d16"
+      },
+      "amends": {
+        "decision_id": "DEC-2026-08-07-GAP-014",
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "location": "line:23",
+        "quote": "- DEC-2026-08-07-GAP-014: Defer SPA versus server-rendered pages to a technical evaluation owned by Raj, due 2026-08-14.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersession_reason": "Replaces the deferred SPA-versus-server-rendered technical evaluation with the approved SPA choice.",
+      "runtime_status": "pending_n8n_verification"
+    }
+  ],
+  "validation": {
+    "coverage": "2/2",
+    "groundedness_percent": 100,
+    "unsupported_decisions": 0,
+    "runtime_claimed": false
+  }
+}

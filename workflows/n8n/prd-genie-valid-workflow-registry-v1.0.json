@@ -1,0 +1,34 @@
+{
+  "name": "[REGISTRY] PRD Genie - VALID WORKFLOWS v1.0 - DO NOT EXECUTE AS PIPELINE",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "915e9044-17ad-4f76-9a91-d62fb9c33935",
+      "name": "Open Registry",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-320, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{json:{schema_version:'1.0.0',registry_status:'authoritative_allowlist',rule:'A workflow is valid only when both name and n8n ID match.',groundedness_percent:100,valid_workflows:[{name:'PRD Genie - Requirement Extractor + Langfuse v0.2',id:'NXJLNsdf3N8HfrnQ',role:'standalone evaluation'},{name:'PRD Genie - Gap Analyzer + Generation Gate v1.0',id:'xrtf52GK57IRI1NI',role:'standalone evaluation'},{name:'PRD Genie - Human Approval v0.3',id:'hE3ekoftADwnQog2',role:'standalone evaluation'},{name:'PRD Genie - PRD Generator + Langfuse v0.1',id:'30ZYQxRHWggFgrAe',role:'standalone evaluation'},{name:'PRD Genie - Story Breakdown + Langfuse v0.2',id:'sYjmLbuEQNhrm6xK',role:'standalone evaluation'},{name:'PRD Genie - Failure Observer v0.1',id:'ydNRRELKulEfzCeo',role:'cross-cutting error workflow'},{name:'PRD Genie - Requirement Extractor Child v1.0',id:'BTdoh2JW0mNlq9eT',role:'legacy connected child'},{name:'PRD Genie - Requirement Extractor Child v1.1.1',id:'f6W7bxcrodOPXh21',role:'multi-source connected child'},{name:'PRD Genie - Gap Analyzer Child v1.0',id:'wGBE80XMjD5rTKql',role:'connected child'},{name:'PRD Genie - Human Approval Checkpoint Child v1.0.1',id:'lx7vCf4zxBlBjveh',role:'connected child'},{name:'PRD Genie - PRD Generator Child v1.0.1',id:'T07vf7xPOWegbCJk',role:'connected child'},{name:'PRD Genie - Story Breakdown Child v1.0',id:'M85Dvpg0uriViX14',role:'connected child'},{name:'PRD Genie - Final Validator and Export Child v1.0',id:'gPc9aTRQ8qLWdZgL',role:'connected child'},{name:'PRD Genie - Connected Orchestrator v0.5',id:'OTmIj7I1AFVvCceV',role:'final connected parent',accepted_execution:'9578'},{name:'PRD Genie - Multi-Source T1 Parity Canary v0.2',id:'wXIY2Wn4umHsvWft',role:'multi-source canary',accepted_execution:'9638',langfuse_trace:'2f0e20055d7765ca3bb0bb0d2bea866b'}],do_not_use:[{id:'Unz88umJAaPdrnpQ',reason:'diagnostic extractor v1.1'},{id:'e2EkaBwL1awV5Fa8',reason:'diagnostic parity canary v0.1'},{id:'DRneGVklJT1DhDKv',reason:'duplicate non-authoritative connected orchestrator v0.5'}],updated_at:'2026-08-06T20:10:00Z'}}];"
+      },
+      "id": "07c2aeea-5c20-4d63-aafe-9b78bd0c09c7",
+      "name": "Final Valid Workflow Allowlist",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-60, 0]
+    }
+  ],
+  "connections": {
+    "Open Registry": {
+      "main": [[{"node":"Final Valid Workflow Allowlist","type":"main","index":0}]]
+    }
+  },
+  "pinData": {},
+  "settings": {"executionOrder":"v1"},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "versionId": "25e0903b-307c-46dc-8932-6905a90cc6fd"
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/clarification-decisions.schema.json",
+  "title": "PRD Genie Stakeholder Clarification Decisions",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_type", "artifact_id", "source_packet_id", "decision_maker", "decision_date", "runtime_status", "decisions", "validation"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "artifact_type": { "enum": ["stakeholder_clarification_decisions", "expected_clarification_resolution"] },
+    "artifact_id": { "type": "string", "pattern": "^[A-Z0-9-]+$" },
+    "source_packet_id": { "const": "SP-REALISTIC-PB-MT-SN-CLAR-V2" },
+    "decision_maker": { "const": "Vipin" },
+    "decision_date": { "const": "2026-08-07" },
+    "runtime_status": { "const": "pending_n8n_verification" },
+    "decisions": {
+      "type": "array",
+      "minItems": 14,
+      "maxItems": 14,
+      "items": { "$ref": "#/$defs/decision" }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_coverage", "groundedness_percent", "unsupported_decisions", "runtime_claimed"],
+      "properties": {
+        "decision_coverage": { "const": "14/14" },
+        "groundedness_percent": { "const": 100 },
+        "unsupported_decisions": { "const": 0 },
+        "runtime_claimed": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_name", "location", "quote", "content_hash"],
+      "properties": {
+        "source_id": { "pattern": "^SRC-REALISTIC-(PB|MT|SN)-001$" },
+        "source_name": { "enum": ["product-brief.txt", "meeting-transcripts.txt", "stakeholder-notes.txt"] },
+        "location": { "pattern": "^line:[1-9][0-9]*$" },
+        "quote": { "type": "string", "minLength": 1 },
+        "content_hash": { "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "supersession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_name", "location", "quote", "content_hash", "reason"],
+      "properties": {
+        "source_id": { "pattern": "^SRC-REALISTIC-(PB|MT|SN)-001$" },
+        "source_name": { "enum": ["product-brief.txt", "meeting-transcripts.txt", "stakeholder-notes.txt"] },
+        "location": { "pattern": "^line:[1-9][0-9]*$" },
+        "quote": { "type": "string", "minLength": 1 },
+        "content_hash": { "pattern": "^sha256:[a-f0-9]{64}$" },
+        "reason": { "type": "string", "minLength": 1 }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_id", "gap_id", "category", "decision_maker", "decision_date", "decision_status", "decision_text", "downstream_item_ids", "original_evidence", "clarification_source_citation", "supersedes", "runtime_status"],
+      "properties": {
+        "decision_id": { "pattern": "^DEC-2026-08-07-GAP-[0-9]{3}$" },
+        "gap_id": { "pattern": "^GAP-[0-9]{3}$" },
+        "category": { "type": "string", "minLength": 1 },
+        "decision_maker": { "const": "Vipin" },
+        "decision_date": { "const": "2026-08-07" },
+        "decision_status": { "const": "approved_clarification" },
+        "decision_text": { "type": "string", "minLength": 1 },
+        "downstream_item_ids": { "type": "array", "uniqueItems": true, "items": { "pattern": "^(FR|NFR|AC|CON|DEP|DDL|RSK)-[0-9]{3}$" } },
+        "original_evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/evidence" } },
+        "clarification_source_citation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source_id", "source_name", "location", "quote", "content_hash"],
+          "properties": {
+            "source_id": { "const": "SRC-REALISTIC-CLAR-001" },
+            "source_name": { "const": "stakeholder-clarifications-2026-08-07.md" },
+            "location": { "pattern": "^line:[1-9][0-9]*$" },
+            "quote": { "type": "string", "minLength": 1 },
+            "content_hash": { "pattern": "^sha256:[a-f0-9]{64}$" }
+          }
+        },
+        "supersedes": { "type": "array", "items": { "$ref": "#/$defs/supersession" } },
+        "runtime_status": { "const": "pending_n8n_verification" }
+      }
+    }
+  }
+}

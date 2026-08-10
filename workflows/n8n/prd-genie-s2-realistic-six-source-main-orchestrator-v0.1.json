@@ -1,0 +1,475 @@
+{
+  "name": "S2_ Dynamic Realistic Six-Source Main Orchestrator v0.1.2",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a0000000-0000-4000-8000-000000000001",
+      "name": "Manual Production Canary Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const now=Date.now();const run_id='RUN-REALISTIC-CONNECTED-'+now;\nconst seed=(now.toString(16)+Math.random().toString(16).slice(2)).replace(/[^a-f0-9]/g,'');const parent_trace_id=(seed+seed+seed).slice(0,32).padEnd(32,'0');\nreturn [{json:{run_id,parent_trace_id,orchestration_context:{run_id,parent_trace_id,orchestrator_version:'realistic-connected-v0.1',dynamic_stage_handoffs:true},started_at:new Date().toISOString()}}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000002",
+      "name": "Create Connected Parent Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "CQoNtd5ZcVYV6hlG",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Drive and Clarification Gate v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000003",
+      "name": "Execute Google Drive Clarification Gate v0.12.0",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -700,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.execution_status!=='passed'||x.next_route!=='human_approval'||x.unsupported_claims!==0)throw new Error('S2 parent blocked at gate');return [{json:{...x,stage:'clarification_gate'}}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000004",
+      "name": "Validate Dynamic Gate Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "yhA4MJhCkn6tpH96",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Human Approval v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000005",
+      "name": "Execute Human Approval Tail v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -180,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='human_approval'||x.execution_status!=='passed'||x.validation?.orphan_citations!==0)throw new Error('S2 parent blocked at approval');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000006",
+      "name": "Validate Dynamic Approval Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "IisHTFOM9TAK1l0l",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Production PRD Generator v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000007",
+      "name": "Execute Production PRD v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='production_prd'||x.execution_status!=='passed'||x.validation?.orphan_items!==0)throw new Error('S2 parent blocked at PRD');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000008",
+      "name": "Validate Dynamic PRD Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "ZTzLknRbkro5n4yE",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Story Breakdown v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000009",
+      "name": "Execute Story Breakdown v0.2",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        860,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='story_breakdown'||x.execution_status!=='passed'||x.validation?.orphan_delivery_items!==0)throw new Error('S2 parent blocked at story');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000010",
+      "name": "Validate Dynamic Story Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "BedDap8PQoauQcbw",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Final Validator and Export v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000011",
+      "name": "Execute Final Validator v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1380,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='final_validation'||x.execution_status!=='passed'||!x.validation?.bidirectional_traceability)throw new Error('S2 parent blocked at final validation');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000012",
+      "name": "Return Connected Production Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1640,
+        0
+      ]
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000001",
+      "name": "Prepare Validated Drive Exports",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2440,
+        220
+      ],
+      "parameters": {
+        "jsCode": "const final=$input.first().json;if(final.execution_status!=='passed'||final.validation?.groundedness_percent!==100||final.validation?.unsupported_claims!==0||Object.entries(final.validation).some(([k,v])=>k.startsWith('orphan_')&&v!==0))throw new Error('S2 Drive export blocked');const safe=final.run_id.replace(/[^A-Za-z0-9._-]/g,'-'),stamp=new Date().toISOString().replace(/[:.]/g,'-'),summary={run_id:final.run_id,starting_point:{input_documents:final.reconciliation.source_documents,citations:final.reconciliation.citations_indexed},ending_point:final.counts,reconciliation:final.reconciliation,groundedness_percent:100,unsupported_claims:0},story_breakdown={schema_version:'2.0.0',artifact_type:'story_breakdown',run_id:final.run_id,packet_id:final.packet_id,parent_trace_id:final.parent_trace_id,source_manifest:final.source_packet.sources.map(s=>({source_id:s.source_id,source_name:s.source_name,source_hash:s.source_hash,drive_file_id:s.provenance?.drive_file_id})),counts:final.counts,validation:final.validation,epics:final.epics},files=[{file_name:safe+'-'+stamp+'-run-summary.json',mime_type:'application/json',content:JSON.stringify(summary,null,2)},{file_name:safe+'-'+stamp+'-final-prd.md',mime_type:'text/markdown',content:final.final_export.content},{file_name:safe+'-'+stamp+'-story-breakdown.json',mime_type:'application/json',content:JSON.stringify(story_breakdown,null,2)},{file_name:safe+'-'+stamp+'-traceability.json',mime_type:'application/json',content:JSON.stringify({source_packet:final.source_packet,citation_dispositions:final.citation_dispositions,item_dispositions:final.item_dispositions,prd_elements:final.prd_elements,epics:final.epics,reconciliation:final.reconciliation},null,2)}];return files.map(f=>({json:{run_id:final.run_id,file_name:f.file_name,mime_type:f.mime_type,output_folder_id:'1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp',run_summary:summary},binary:{data:{data:Buffer.from(f.content,'utf8').toString('base64'),mimeType:f.mime_type,fileName:f.file_name}}}));"
+      }
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000002",
+      "name": "Google Drive - Upload Validated Outputs",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2680,
+        220
+      ],
+      "parameters": {
+        "resource": "file",
+        "operation": "upload",
+        "inputDataFieldName": "data",
+        "name": "={{ $json.file_name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "DZoFbCtywQ7hR4Wd",
+          "name": "Google Drive account 13"
+        }
+      }
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000003",
+      "name": "Confirm Validated Drive Delivery",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2920,
+        220
+      ],
+      "parameters": {
+        "jsCode": "const uploaded=$input.all(),final=$('Return Connected Production Result').first().json;if(uploaded.length!==4||uploaded.some(i=>!i.json.id&&!i.json.webViewLink)||!uploaded.some(i=>String(i.json.name||'').endsWith('-story-breakdown.json')))throw new Error('S2 Drive delivery confirmation failed');return [{json:{...final,drive_delivery:{status:'passed',folder_id:'1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp',file_count:uploaded.length,files:uploaded.map(i=>({id:i.json.id,name:i.json.name,webViewLink:i.json.webViewLink}))}}}];"
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Production Canary Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create Connected Parent Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Connected Parent Context": {
+      "main": [
+        [
+          {
+            "node": "Execute Google Drive Clarification Gate v0.12.0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Gate Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Human Approval Tail v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Human Approval Tail v0.1": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Approval Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Approval Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Production PRD v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Production PRD v0.1": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic PRD Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic PRD Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Story Breakdown v0.2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Story Breakdown v0.2": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Story Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Story Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Final Validator v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Final Validator v0.1": {
+      "main": [
+        [
+          {
+            "node": "Return Connected Production Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Google Drive Clarification Gate v0.12.0": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Gate Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Connected Production Result": {
+      "main": [
+        [
+          {
+            "node": "Prepare Validated Drive Exports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Validated Drive Exports": {
+      "main": [
+        [
+          {
+            "node": "Google Drive - Upload Validated Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive - Upload Validated Outputs": {
+      "main": [
+        [
+          {
+            "node": "Confirm Validated Drive Delivery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false
+  },
+  "tags": []
+}

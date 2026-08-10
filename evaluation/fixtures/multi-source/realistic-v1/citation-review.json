@@ -1,0 +1,574 @@
+{
+  "schema_version": "1.0.0",
+  "packet_id": "SP-REALISTIC-PB-MT-SN-V1",
+  "review_status": "approved",
+  "policy": {
+    "citations_are_evidence_candidates_not_automatic_requirements": true,
+    "preserve_conflicts_without_resolution": true,
+    "preserve_suggestions_as_suggested": true,
+    "vague_fragments_become_missing_information_not_requirements": true,
+    "context_only_lines_do_not_create_items": true
+  },
+  "reviewed_citations": [
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:3",
+      "quote": "Author: Priya Sharma, Product Manager",
+      "speaker": "Author",
+      "disposition": "stakeholder_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:4",
+      "quote": "Date: March 2026",
+      "speaker": "Date",
+      "disposition": "document_metadata"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:5",
+      "quote": "Status: Draft",
+      "speaker": "Status",
+      "disposition": "document_metadata"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:8",
+      "quote": "We are building an analytics dashboard that gives business users visibility into key metrics without needing to write SQL queries or ask the data team. This is the #1 requested feature from our Enterprise customers.",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:11",
+      "quote": "- Business analysts who currently export data to Excel",
+      "speaker": null,
+      "disposition": "persona_requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:12",
+      "quote": "- Team leads who need weekly performance summaries",
+      "speaker": null,
+      "disposition": "persona_requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:13",
+      "quote": "- Executives who want a high-level overview without digging into details",
+      "speaker": null,
+      "disposition": "persona_requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:16",
+      "quote": "1. Dashboard should display 5 core metrics: revenue, active users, churn rate, NPS score, and support ticket volume",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:17",
+      "quote": "2. Users should be able to filter by date range (last 7 days, 30 days, 90 days, custom)",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:18",
+      "quote": "3. Data should refresh every 15 minutes (not real-time, to manage cost)",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:19",
+      "quote": "4. Must support role-based access: executives see all data, team leads see their team only",
+      "speaker": null,
+      "disposition": "persona_requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:20",
+      "quote": "5. Export to PDF for monthly board reports",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:23",
+      "quote": "- Must integrate with our existing PostgreSQL data warehouse",
+      "speaker": null,
+      "disposition": "constraint_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:24",
+      "quote": "- Cannot use any third-party analytics tools (licensing cost concern)",
+      "speaker": null,
+      "disposition": "constraint_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:25",
+      "quote": "- Must be accessible on mobile (responsive design)",
+      "speaker": null,
+      "disposition": "nonfunctional_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:26",
+      "quote": "- Target launch: Q3 2026",
+      "speaker": null,
+      "disposition": "deadline_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:29",
+      "quote": "- Should we support custom dashboard layouts or ship a fixed layout first?",
+      "speaker": null,
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:30",
+      "quote": "- Do we need alerting (e.g., notify when churn exceeds 5%)?",
+      "speaker": null,
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:31",
+      "quote": "- What is the acceptable page load time? (Suggestion: under 3 seconds)",
+      "speaker": null,
+      "disposition": "missing_information_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:34",
+      "quote": "- Competitor X has a similar dashboard but charges $50/user/month extra",
+      "speaker": null,
+      "disposition": "context_only"
+    },
+    {
+      "source_id": "SRC-REALISTIC-PB-001",
+      "source_type": "product_brief",
+      "location": "line:35",
+      "quote": "- Competitor Y has basic dashboards included in their Enterprise plan",
+      "speaker": null,
+      "disposition": "context_only"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:12",
+      "quote": "Sarah: Okay let's talk about the reporting feature. Users have been asking for this for months. The key requirement is that users should be able to filter reports by date range, category, and status.",
+      "speaker": "Sarah",
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:14",
+      "quote": "Raj: Makes sense. What about performance? If they're pulling large datasets we need to think about load times.",
+      "speaker": "Raj",
+      "disposition": "question_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:16",
+      "quote": "Sarah: Good point. Results must load in under 2 seconds. That's a hard requirement from the enterprise customers.",
+      "speaker": "Sarah",
+      "disposition": "nonfunctional_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:18",
+      "quote": "Lisa: Are we doing this as a new page or adding it to the existing dashboard?",
+      "speaker": "Lisa",
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:20",
+      "quote": "Sarah: New dedicated page. But it should match our existing design system.",
+      "speaker": "Sarah",
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:22",
+      "quote": "Raj: Who owns this? And what's the timeline?",
+      "speaker": "Raj",
+      "disposition": "question_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:24",
+      "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+      "speaker": "Sarah",
+      "disposition": "mixed_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:26",
+      "quote": "Raj: We'll need to decide on the data source. Are we querying live or using a pre-computed data warehouse?",
+      "speaker": "Raj",
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:28",
+      "quote": "Sarah: TBD on that. Let's decide after we see Lisa's designs and understand the query patterns.",
+      "speaker": "Sarah",
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:36",
+      "quote": "Tom: So I've been thinking, we really need to do something with AI. Competitors are all doing it. We need better reporting. Something like what Competitor X has. Their stuff looks really smart.",
+      "speaker": "Tom",
+      "disposition": "vague_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:38",
+      "quote": "Ananya: What specifically about their reporting do you like?",
+      "speaker": "Ananya",
+      "disposition": "question_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:40",
+      "quote": "Tom: I don't know, just the whole thing. It feels intelligent. Can we just add AI to our reports? Make them smarter.",
+      "speaker": "Tom",
+      "disposition": "ambiguous_fragment"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:42",
+      "quote": "Ananya: We'd need to scope this more. What data would the AI analyze? What outputs are we expecting?",
+      "speaker": "Ananya",
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:44",
+      "quote": "Tom: Just figure it out. Everyone has AI now. We need AI too. Let's discuss again next week.",
+      "speaker": "Tom",
+      "disposition": "context_only"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:52",
+      "quote": "Priya: We need the dashboard to auto-refresh every 5 seconds so users always see the latest data.",
+      "speaker": "Priya",
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:54",
+      "quote": "Mike: That's going to be a lot of API calls. Each refresh hits our backend.",
+      "speaker": "Mike",
+      "disposition": "risk_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:56",
+      "quote": "Kevin: Yeah, from a DevOps perspective, that's concerning. Performance is critical. We need to minimize API calls. Our infrastructure can't handle that load.",
+      "speaker": "Kevin",
+      "disposition": "mixed_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:58",
+      "quote": "Priya: But users complain that data is stale. They want real-time.",
+      "speaker": "Priya",
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:60",
+      "quote": "Mike: We could do WebSockets instead of polling. But that's a bigger project.",
+      "speaker": "Mike",
+      "disposition": "solution_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:62",
+      "quote": "Priya: Let's just do the 5-second refresh for now.",
+      "speaker": "Priya",
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:64",
+      "quote": "Kevin: I strongly disagree. We'll have outages.",
+      "speaker": "Kevin",
+      "disposition": "risk_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:66",
+      "quote": "Priya: Okay we'll discuss this offline. Moving on.",
+      "speaker": "Priya",
+      "disposition": "unresolved_contradiction"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:74",
+      "quote": "Ananya: Users need to export reports as PDF and CSV. For the PDF export, it must include the company logo at the top of every page. For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+      "speaker": "Ananya",
+      "disposition": "mixed_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:76",
+      "quote": "Dev: That's tricky for CSV. Most CSV implementations only export values.",
+      "speaker": "Dev",
+      "disposition": "feasibility_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:78",
+      "quote": "Ananya: I know, but that's the requirement from the finance team. They import into Excel and need the formulas intact.",
+      "speaker": "Ananya",
+      "disposition": "acceptance_rationale"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:80",
+      "quote": "Dev: Okay, we can do XLSX instead of plain CSV for the formula support.",
+      "speaker": "Dev",
+      "disposition": "solution_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:82",
+      "quote": "Ananya: That works. But the user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+      "speaker": "Ananya",
+      "disposition": "constraint_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:90",
+      "quote": "- Discussed dashboard... something about real-time updates",
+      "speaker": null,
+      "disposition": "ambiguous_fragment"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:91",
+      "quote": "- John mentioned something about real-time... need to check",
+      "speaker": null,
+      "disposition": "ambiguous_fragment"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:92",
+      "quote": "- Budget for the project is TBD",
+      "speaker": null,
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:93",
+      "quote": "- Someone said we need to talk to the analytics team",
+      "speaker": null,
+      "disposition": "dependency_fragment"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:94",
+      "quote": "- Action item: follow up with design (who?)",
+      "speaker": null,
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-MT-001",
+      "source_type": "meeting_transcript",
+      "location": "line:95",
+      "quote": "- Next meeting: sometime next week",
+      "speaker": null,
+      "disposition": "schedule_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:10",
+      "quote": "\"The biggest issue right now is our API. It's slow. We need to optimize the query layer before adding any new features. If you're building a dashboard, make sure it doesn't hammer the database with expensive queries.\"",
+      "speaker": null,
+      "disposition": "mixed_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:12",
+      "quote": "\"We're moving to microservices architecture. The analytics service should be its own service, not bolted onto the monolith.\"",
+      "speaker": null,
+      "disposition": "constraint_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:14",
+      "quote": "\"For the data model, we should use the existing events table. It has everything we need. But it needs an index on the timestamp column — right now full table scans take 8+ seconds.\"",
+      "speaker": null,
+      "disposition": "mixed_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:16",
+      "quote": "\"I'd say we need at least 2 sprints for the backend work. Maybe 3 if we include the API redesign.\"",
+      "speaker": null,
+      "disposition": "estimate_context"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:22",
+      "quote": "\"Users don't want another dashboard. They want answers. Every tool we've evaluated has too many charts and not enough insights.\"",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:24",
+      "quote": "\"I'd like to explore a single-page app approach. But I know engineering prefers server-rendered pages for SEO. We'll need to discuss.\"",
+      "speaker": null,
+      "disposition": "contradiction_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:26",
+      "quote": "\"Mobile is important but I don't want to compromise the desktop experience. Maybe we do desktop first and mobile as a fast follow.\"",
+      "speaker": null,
+      "disposition": "scope_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:28",
+      "quote": "\"Can we add dark mode? Users have asked for it. Not critical but would be nice.\"",
+      "speaker": null,
+      "disposition": "feature_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:34",
+      "quote": "\"I need this for the next board meeting. Can we get something out by end of March? Even if it's basic?\"",
+      "speaker": null,
+      "disposition": "deadline_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:36",
+      "quote": "\"Our top 3 enterprise accounts have specifically asked for this. If we don't ship by Q3, we risk losing at least one of them.\"",
+      "speaker": null,
+      "disposition": "deadline_risk_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:38",
+      "quote": "\"I don't care about the tech details. Just make it look professional and give me a number I can show the board.\"",
+      "speaker": null,
+      "disposition": "vague_requirement"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:40",
+      "quote": "\"Also, can it predict churn? That would be a game-changer for my team.\"",
+      "speaker": null,
+      "disposition": "feature_suggestion"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:42",
+      "quote": "[Note: Tom did not specify what data the churn prediction should use or what accuracy is acceptable]",
+      "speaker": null,
+      "disposition": "missing_information"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:48",
+      "quote": "\"Customers want to see their own data, filtered by their account. Multi-tenant support is critical.\"",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:50",
+      "quote": "\"Some customers have asked for white-labeling — putting their own logo on reports. Not sure if that's in scope.\"",
+      "speaker": null,
+      "disposition": "scope_question"
+    },
+    {
+      "source_id": "SRC-REALISTIC-SN-001",
+      "source_type": "stakeholder_notes",
+      "location": "line:52",
+      "quote": "\"The biggest complaint I hear is 'I can't find what I need.' So search and filtering are more important than adding new metrics.\"",
+      "speaker": null,
+      "disposition": "requirement_candidate"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0.0",
+  "packet_id": "SP-T1-PB-MT-SN",
+  "run_id": "RUN-T1-MULTI-SOURCE-PARITY",
+  "test_id": "T1",
+  "producer": "production_multi_source",
+  "sources": [
+    {
+      "source_id": "SRC-T1-PB-001",
+      "source_type": "product_brief",
+      "source_name": "product-brief.txt",
+      "raw_text": "The user should be able to filter reports by date range, category, and status.\nResults must load in under 2 seconds.\n",
+      "provenance": {
+        "origin": "controlled_fixture",
+        "fixture_path": "evaluation/fixtures/multi-source/t1/product-brief.txt"
+      },
+      "citations": [
+        {
+          "quote": "The user should be able to filter reports by date range, category, and status.",
+          "location": "line:1",
+          "speaker": null
+        },
+        {
+          "quote": "Results must load in under 2 seconds.",
+          "location": "line:2",
+          "speaker": null
+        }
+      ],
+      "metadata": {
+        "document_version": "t1-parity-v1",
+        "language": "en"
+      },
+      "content_hash": "sha256:c680266d62840f6ec05291b73faaf2877491843c8c81f7fdc496a27ca5aa09c0"
+    },
+    {
+      "source_id": "SRC-T1-MT-001",
+      "source_type": "meeting_transcript",
+      "source_name": "meeting-transcript.txt",
+      "raw_text": "PM: Sarah.\n",
+      "provenance": {
+        "origin": "controlled_fixture",
+        "fixture_path": "evaluation/fixtures/multi-source/t1/meeting-transcript.txt"
+      },
+      "citations": [
+        {
+          "quote": "PM: Sarah.",
+          "location": "line:1",
+          "speaker": null
+        }
+      ],
+      "metadata": {
+        "document_version": "t1-parity-v1",
+        "language": "en",
+        "meeting_date": null
+      },
+      "content_hash": "sha256:946b190e5418cb35c52e451329d48354bedcb201c6efc83fce3c508c473b0324"
+    },
+    {
+      "source_id": "SRC-T1-SN-001",
+      "source_type": "stakeholder_notes",
+      "source_name": "stakeholder-notes.txt",
+      "raw_text": "Deadline: Q3.\n",
+      "provenance": {
+        "origin": "controlled_fixture",
+        "fixture_path": "evaluation/fixtures/multi-source/t1/stakeholder-notes.txt"
+      },
+      "citations": [
+        {
+          "quote": "Deadline: Q3.",
+          "location": "line:1",
+          "speaker": null
+        }
+      ],
+      "metadata": {
+        "document_version": "t1-parity-v1",
+        "language": "en"
+      },
+      "content_hash": "sha256:927fda1118a4800e6ec7a8e44c2e4d834bda1b829a7e7189670c1281b99b4615"
+    }
+  ],
+  "submitted_at": "2026-08-06T00:00:00Z",
+  "metadata": {
+    "language": "en",
+    "logical_input_contract": "requirement_extractor_input_v1",
+    "route_policy": "alternative_not_combined"
+  }
+}

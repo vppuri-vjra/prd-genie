@@ -1,0 +1,12 @@
+import crypto from 'node:crypto';
+import fs from 'node:fs';
+const extractorId=process.argv[2];
+if(!extractorId)throw new Error('Extractor workflow ID is required');
+const input='workflows/n8n/prd-genie-realistic-clarification-v2-canary-v0.2.json';
+const output='workflows/n8n/prd-genie-realistic-clarification-v2-canary-v0.3.json';
+const workflow=JSON.parse(fs.readFileSync(input,'utf8'));
+workflow.name='PRD Genie - Realistic Clarification v2 Canary v0.3';workflow.versionId=crypto.randomUUID();
+const old='Execute Requirement Extractor Child v1.6.1',next='Execute Requirement Extractor Child v1.7';
+const node=workflow.nodes.find(n=>n.name===old);node.name=next;node.parameters.workflowId.value=extractorId;node.parameters.workflowId.cachedResultName='PRD Genie - Requirement Extractor Child v1.7';
+workflow.connections['Load Approved Four-Source Packet v2'].main[0][0].node=next;workflow.connections[next]=workflow.connections[old];delete workflow.connections[old];
+fs.writeFileSync(output,JSON.stringify(workflow,null,2)+'\n');console.log(`Wrote ${output}`);

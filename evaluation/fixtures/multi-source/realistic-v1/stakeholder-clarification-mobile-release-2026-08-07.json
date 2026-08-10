@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "stakeholder_clarification_decision",
+  "artifact_id": "CLAR-REALISTIC-2026-08-07-MOBILE-V1",
+  "source_packet_id": "SP-REALISTIC-PB-MT-SN-CLAR-V4",
+  "decision_maker": "Vipin",
+  "decision_date": "2026-08-07",
+  "runtime_status": "pending_n8n_verification",
+  "decisions": [
+    {
+      "decision_id": "DEC-2026-08-07-MOBILE-LAUNCH-001",
+      "gap_id": "GAP-MOBILE-LAUNCH-001",
+      "category": "release_scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "The September 30, 2026 first production release must include responsive web access. The team may use a desktop-first design and implementation sequence, but mobile responsiveness must be completed before production launch. There will not be a separate post-launch mobile fast-follow for this requirement.",
+      "downstream_item_ids": [
+        "NFR-002",
+        "CON-011",
+        "DDL-001"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:25",
+          "quote": "- Must be accessible on mobile (responsive design)",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        },
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:26",
+          "quote": "\"Mobile is important but I don't want to compromise the desktop experience. Maybe we do desktop first and mobile as a fast follow.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-MOBILE-001",
+        "source_name": "stakeholder-clarification-mobile-release-2026-08-07.md",
+        "location": "line:9",
+        "quote": "- DEC-2026-08-07-MOBILE-LAUNCH-001: The September 30, 2026 first production release must include responsive web access. The team may use a desktop-first design and implementation sequence, but mobile responsiveness must be completed before production launch. There will not be a separate post-launch mobile fast-follow for this requirement.",
+        "content_hash": "sha256:390014408db99fa1f85d469d269c0819f002f63ab41ae7738b287fc3bcdbc883"
+      },
+      "supersedes": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:26",
+          "quote": "\"Mobile is important but I don't want to compromise the desktop experience. Maybe we do desktop first and mobile as a fast follow.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68",
+          "superseded_interpretation": "Mobile responsiveness may be delivered after production launch."
+        }
+      ],
+      "resolution": {
+        "classification": "resolved",
+        "release_date": "2026-09-30",
+        "required_at_launch": true,
+        "desktop_first_sequence_allowed": true,
+        "post_launch_fast_follow_allowed": false
+      },
+      "runtime_status": "pending_n8n_verification"
+    }
+  ],
+  "validation": {
+    "coverage": "1/1",
+    "groundedness_percent": 100,
+    "unsupported_decisions": 0,
+    "runtime_claimed": false
+  }
+}

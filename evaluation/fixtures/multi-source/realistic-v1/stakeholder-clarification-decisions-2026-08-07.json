@@ -1,0 +1,645 @@
+{
+  "schema_version": "1.0.0",
+  "source_packet_id": "SP-REALISTIC-PB-MT-SN-CLAR-V2",
+  "decision_maker": "Vipin",
+  "decision_date": "2026-08-07",
+  "runtime_status": "pending_n8n_verification",
+  "decisions": [
+    {
+      "decision_id": "DEC-2026-08-07-GAP-001",
+      "gap_id": "GAP-001",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Fixed dashboard layout for the first release.",
+      "downstream_item_ids": [
+        "FR-001"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:29",
+          "quote": "- Should we support custom dashboard layouts or ship a fixed layout first?",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:10",
+        "quote": "- DEC-2026-08-07-GAP-001: Fixed dashboard layout for the first release.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-002",
+      "gap_id": "GAP-002",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Defer churn-threshold alerting; reconsider only after defining the churn metric/calculation, measurement period, threshold, recipients, and notification channel.",
+      "downstream_item_ids": [
+        "FR-002"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:30",
+          "quote": "- Do we need alerting (e.g., notify when churn exceeds 5%)?",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:11",
+        "quote": "- DEC-2026-08-07-GAP-002: Defer churn-threshold alerting; reconsider only after defining the churn metric/calculation, measurement period, threshold, recipients, and notification channel.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-003",
+      "gap_id": "GAP-003",
+      "category": "performance",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Dashboard pages must load in under 3 seconds.",
+      "downstream_item_ids": [
+        "FR-001"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:31",
+          "quote": "- What is the acceptable page load time? (Suggestion: under 3 seconds)",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:12",
+        "quote": "- DEC-2026-08-07-GAP-003: Dashboard pages must load in under 3 seconds.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-004",
+      "gap_id": "GAP-004",
+      "category": "data",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Use precomputed warehouse data for dashboard reporting.",
+      "downstream_item_ids": [
+        "FR-007",
+        "DEP-001",
+        "DEP-002"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:26",
+          "quote": "Raj: We'll need to decide on the data source. Are we querying live or using a pre-computed data warehouse?",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:28",
+          "quote": "Sarah: TBD on that. Let's decide after we see Lisa's designs and understand the query patterns.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:13",
+        "quote": "- DEC-2026-08-07-GAP-004: Use precomputed warehouse data for dashboard reporting.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-005",
+      "gap_id": "GAP-005",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Defer the undefined AI capability to a later discovery phase.",
+      "downstream_item_ids": [],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:40",
+          "quote": "Tom: I don't know, just the whole thing. It feels intelligent. Can we just add AI to our reports? Make them smarter.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:42",
+          "quote": "Ananya: We'd need to scope this more. What data would the AI analyze? What outputs are we expecting?",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:44",
+          "quote": "Tom: Just figure it out. Everyone has AI now. We need AI too. Let's discuss again next week.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:14",
+        "quote": "- DEC-2026-08-07-GAP-005: Defer the undefined AI capability to a later discovery phase.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-006",
+      "gap_id": "GAP-006",
+      "category": "output_format",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Generate XLSX with formula preservation and label the action “Export to Excel”; this supersedes the earlier proposed “Export to CSV” label.",
+      "downstream_item_ids": [
+        "FR-011",
+        "AC-002",
+        "CON-004"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:74",
+          "quote": "Ananya: Users need to export reports as PDF and CSV. For the PDF export, it must include the company logo at the top of every page. For CSV, it must preserve formulas - so if a cell has a SUM formula, the CSV should export the formula, not just the value.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:76",
+          "quote": "Dev: That's tricky for CSV. Most CSV implementations only export values.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:80",
+          "quote": "Dev: Okay, we can do XLSX instead of plain CSV for the formula support.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:82",
+          "quote": "Ananya: That works. But the user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:15",
+        "quote": "- DEC-2026-08-07-GAP-006: Generate XLSX with formula preservation and label the action “Export to Excel”; this supersedes the earlier proposed “Export to CSV” label.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:82",
+          "quote": "Ananya: That works. But the user-facing label should still say \"Export to CSV\" since that's what they're used to.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8",
+          "reason": "The approved 2026-08-07 decision changes the user-facing action label to “Export to Excel”."
+        }
+      ],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-007",
+      "gap_id": "GAP-007",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Hybrid refresh: 15-minute automatic refresh plus manual refresh of the latest available precomputed warehouse data, a last-updated timestamp, and protection against excessive repeated requests; no direct live-database query.",
+      "downstream_item_ids": [
+        "FR-004",
+        "FR-009",
+        "FR-010",
+        "CON-003",
+        "RSK-001"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:18",
+          "quote": "3. Data should refresh every 15 minutes (not real-time, to manage cost)",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:52",
+          "quote": "Priya: We need the dashboard to auto-refresh every 5 seconds so users always see the latest data.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:56",
+          "quote": "Kevin: Yeah, from a DevOps perspective, that's concerning. Performance is critical. We need to minimize API calls. Our infrastructure can't handle that load.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:58",
+          "quote": "Priya: But users complain that data is stale. They want real-time.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:62",
+          "quote": "Priya: Let's just do the 5-second refresh for now.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:64",
+          "quote": "Kevin: I strongly disagree. We'll have outages.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:90",
+          "quote": "- Discussed dashboard... something about real-time updates",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:91",
+          "quote": "- John mentioned something about real-time... need to check",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:16",
+        "quote": "- DEC-2026-08-07-GAP-007: Hybrid refresh: 15-minute automatic refresh plus manual refresh of the latest available precomputed warehouse data, a last-updated timestamp, and protection against excessive repeated requests; no direct live-database query.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:52",
+          "quote": "Priya: We need the dashboard to auto-refresh every 5 seconds so users always see the latest data.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8",
+          "reason": "The approved hybrid policy replaces five-second automatic polling."
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:58",
+          "quote": "Priya: But users complain that data is stale. They want real-time.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8",
+          "reason": "The approved hybrid policy does not authorize direct real-time database queries."
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:62",
+          "quote": "Priya: Let's just do the 5-second refresh for now.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8",
+          "reason": "The approved hybrid policy replaces the provisional five-second refresh choice."
+        }
+      ],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-008",
+      "gap_id": "GAP-008",
+      "category": "budget",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Budget remains a controlled TBD; owner Sarah; decision deadline 2026-08-31.",
+      "downstream_item_ids": [],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:92",
+          "quote": "- Budget for the project is TBD",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:17",
+        "quote": "- DEC-2026-08-07-GAP-008: Budget remains a controlled TBD; owner Sarah; decision deadline 2026-08-31.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-009",
+      "gap_id": "GAP-009",
+      "category": "ownership",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Sarah owns design follow-up; Lisa remains responsible for providing designs.",
+      "downstream_item_ids": [
+        "DDL-002"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:94",
+          "quote": "- Action item: follow up with design (who?)",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:18",
+        "quote": "- DEC-2026-08-07-GAP-009: Sarah owns design follow-up; Lisa remains responsible for providing designs.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-010",
+      "gap_id": "GAP-010",
+      "category": "deadline",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Designs complete 2026-08-21; internal basic version 2026-09-04; launch 2026-09-30. These supersede expired/general milestone wording.",
+      "downstream_item_ids": [
+        "DDL-001",
+        "DDL-002",
+        "DDL-003"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:34",
+          "quote": "\"I need this for the next board meeting. Can we get something out by end of March? Even if it's basic?\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:26",
+          "quote": "- Target launch: Q3 2026",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:19",
+        "quote": "- DEC-2026-08-07-GAP-010: Designs complete 2026-08-21; internal basic version 2026-09-04; launch 2026-09-30. These supersede expired/general milestone wording.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:34",
+          "quote": "\"I need this for the next board meeting. Can we get something out by end of March? Even if it's basic?\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68",
+          "reason": "The month-only end-of-March request is replaced by the approved 2026-09-04 internal basic-version date."
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8",
+          "reason": "The general end-of-Q3 and end-of-April wording is replaced by exact approved dates."
+        },
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:26",
+          "quote": "- Target launch: Q3 2026",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5",
+          "reason": "The quarter-level Q3 2026 launch target is replaced by the exact approved 2026-09-30 launch date."
+        }
+      ],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-011",
+      "gap_id": "GAP-011",
+      "category": "data",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Defer churn prediction to a later discovery phase until inputs, users, outputs, feasibility, and minimum accuracy are defined.",
+      "downstream_item_ids": [
+        "FR-014"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:40",
+          "quote": "\"Also, can it predict churn? That would be a game-changer for my team.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        },
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:42",
+          "quote": "[Note: Tom did not specify what data the churn prediction should use or what accuracy is acceptable]",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:20",
+        "quote": "- DEC-2026-08-07-GAP-011: Defer churn prediction to a later discovery phase until inputs, users, outputs, feasibility, and minimum accuracy are defined.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-012",
+      "gap_id": "GAP-012",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Defer white-labeling to a later release.",
+      "downstream_item_ids": [
+        "FR-016"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:50",
+          "quote": "\"Some customers have asked for white-labeling — putting their own logo on reports. Not sure if that's in scope.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:21",
+        "quote": "- DEC-2026-08-07-GAP-012: Defer white-labeling to a later release.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-013",
+      "gap_id": "GAP-013",
+      "category": "scope",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Deliverable mapping approved: 2026-08-21 completed dashboard designs; 2026-09-04 internal basic version with fixed layout, five core metrics, precomputed warehouse data, 15-minute auto-refresh, manual refresh, and last-updated timestamp; 2026-09-30 first production release with all approved first-release requirements.",
+      "downstream_item_ids": [
+        "DDL-001",
+        "DDL-002",
+        "DDL-003"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:34",
+          "quote": "\"I need this for the next board meeting. Can we get something out by end of March? Even if it's basic?\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        },
+        {
+          "source_id": "SRC-REALISTIC-MT-001",
+          "source_name": "meeting-transcripts.txt",
+          "location": "line:24",
+          "quote": "Sarah: I'm the PM owner. Deadline is end of Q3. Raj, your team would handle the backend. Lisa, we'd need designs by end of April.",
+          "content_hash": "sha256:15111349acf5fa92a2f5a33cbbedfc06765e2bb341473d451c49d5123f49dcc8"
+        },
+        {
+          "source_id": "SRC-REALISTIC-PB-001",
+          "source_name": "product-brief.txt",
+          "location": "line:26",
+          "quote": "- Target launch: Q3 2026",
+          "content_hash": "sha256:a8f93fd8b88bd8e52b69197b378cf655be87d88a34d020ce992df6acd6e33ce5"
+        },
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:36",
+          "quote": "\"Our top 3 enterprise accounts have specifically asked for this. If we don't ship by Q3, we risk losing at least one of them.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:22",
+        "quote": "- DEC-2026-08-07-GAP-013: Deliverable mapping approved: 2026-08-21 completed dashboard designs; 2026-09-04 internal basic version with fixed layout, five core metrics, precomputed warehouse data, 15-minute auto-refresh, manual refresh, and last-updated timestamp; 2026-09-30 first production release with all approved first-release requirements.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    },
+    {
+      "decision_id": "DEC-2026-08-07-GAP-014",
+      "gap_id": "GAP-014",
+      "category": "decision_status",
+      "decision_maker": "Vipin",
+      "decision_date": "2026-08-07",
+      "decision_status": "approved_clarification",
+      "decision_text": "Defer SPA versus server-rendered pages to a technical evaluation owned by Raj, due 2026-08-14.",
+      "downstream_item_ids": [
+        "CON-009",
+        "CON-010"
+      ],
+      "original_evidence": [
+        {
+          "source_id": "SRC-REALISTIC-SN-001",
+          "source_name": "stakeholder-notes.txt",
+          "location": "line:24",
+          "quote": "\"I'd like to explore a single-page app approach. But I know engineering prefers server-rendered pages for SEO. We'll need to discuss.\"",
+          "content_hash": "sha256:c4b9737007fdce22f23f293634a5a7caa23732848624e874184a4be76fb1fa68"
+        }
+      ],
+      "clarification_source_citation": {
+        "source_id": "SRC-REALISTIC-CLAR-001",
+        "source_name": "stakeholder-clarifications-2026-08-07.md",
+        "location": "line:23",
+        "quote": "- DEC-2026-08-07-GAP-014: Defer SPA versus server-rendered pages to a technical evaluation owned by Raj, due 2026-08-14.",
+        "content_hash": "sha256:a10d68b226cf1f4ac48dc1c08ddc6205e137146657db035c3cae5da46dad5300"
+      },
+      "supersedes": [],
+      "runtime_status": "pending_n8n_verification"
+    }
+  ],
+  "validation": {
+    "decision_coverage": "14/14",
+    "groundedness_percent": 100,
+    "unsupported_decisions": 0,
+    "runtime_claimed": false
+  },
+  "artifact_type": "stakeholder_clarification_decisions",
+  "artifact_id": "CLAR-REALISTIC-2026-08-07-V1"
+}

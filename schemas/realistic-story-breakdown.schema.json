@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/vppuri-vjra/prd-genie-capstone/schemas/realistic-story-breakdown.schema.json",
+  "title": "PRD Genie Realistic v4 Story Breakdown",
+  "$comment": "Runtime v0.2 additionally enforces ID uniqueness independently within Epic, Feature, User Story, and Acceptance Criterion hierarchy levels.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifact_type", "lineage", "epics", "scope_dispositions", "coverage_ledger", "provenance_ledger", "validation", "markdown"],
+  "properties": {
+    "schema_version": { "const": "2.0.0" },
+    "artifact_type": { "const": "realistic_v4_story_breakdown" },
+    "lineage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["packet_id", "run_id", "parent_trace_id", "approval_execution_id", "approval_trace_id", "prd_execution_id", "prd_trace_id"],
+      "properties": {
+        "packet_id": { "const": "SP-REALISTIC-PB-MT-SN-CLAR-V4" },
+        "run_id": { "const": "RUN-REALISTIC-MULTI-SOURCE-V4" },
+        "parent_trace_id": { "type": "string", "pattern": "^[0-9a-f]{32}$" },
+        "approval_execution_id": { "const": 9724 },
+        "approval_trace_id": { "type": "string", "pattern": "^[0-9a-f]{32}$" },
+        "prd_execution_id": { "const": 9725 },
+        "prd_trace_id": { "type": "string", "pattern": "^[0-9a-f]{32}$" }
+      }
+    },
+    "epics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/epic" } },
+    "scope_dispositions": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/disposition" } },
+    "coverage_ledger": { "type": "array", "minItems": 19, "items": { "$ref": "#/$defs/coverage" } },
+    "provenance_ledger": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_manifest", "decision_dispositions"],
+      "properties": {
+        "source_manifest": { "type": "array", "minItems": 6, "maxItems": 6, "items": { "type": "object" } },
+        "decision_dispositions": { "type": "array", "minItems": 17, "maxItems": 17, "items": { "type": "object" } }
+      }
+    },
+    "validation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["approved_scope_coverage", "orphan_items", "active_deferred_items", "active_superseded_items", "controlled_tbd_active_items", "json_markdown_synchronized", "groundedness_percent", "unsupported_claims"],
+      "properties": {
+        "approved_scope_coverage": { "const": "19/19" },
+        "orphan_items": { "const": 0 },
+        "active_deferred_items": { "const": 0 },
+        "active_superseded_items": { "const": 0 },
+        "controlled_tbd_active_items": { "const": 0 },
+        "json_markdown_synchronized": { "const": true },
+        "groundedness_percent": { "const": 100 },
+        "unsupported_claims": { "const": 0 }
+      }
+    },
+    "markdown": { "type": "string", "minLength": 1 }
+  },
+  "$defs": {
+    "refs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^(FR|NFR|AC|CON|DDL|DEP|RSK)-[0-9]{3}$|^DEC-2026-08-07-[A-Z0-9-]+$" } },
+    "criterion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "criterion", "source_refs"],
+      "properties": { "id": { "type": "string", "pattern": "^SBAC-[0-9]{3}$" }, "criterion": { "type": "string", "minLength": 1 }, "source_refs": { "$ref": "#/$defs/refs" } }
+    },
+    "story": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "story", "priority", "acceptance_criteria", "source_refs"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^US-[0-9]{3}$" }, "title": { "type": "string", "minLength": 1 },
+        "story": { "type": "string", "minLength": 1 }, "priority": { "const": "Must Have" },
+        "acceptance_criteria": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/criterion" } }, "source_refs": { "$ref": "#/$defs/refs" }
+      }
+    },
+    "feature": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "description", "source_refs", "stories"],
+      "properties": { "id": { "type": "string", "pattern": "^FEAT-[0-9]{3}$" }, "title": { "type": "string", "minLength": 1 }, "description": { "type": "string", "minLength": 1 }, "source_refs": { "$ref": "#/$defs/refs" }, "stories": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/story" } } }
+    },
+    "epic": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "title", "description", "source_refs", "features"],
+      "properties": { "id": { "type": "string", "pattern": "^EPIC-[0-9]{3}$" }, "title": { "type": "string", "minLength": 1 }, "description": { "type": "string", "minLength": 1 }, "source_refs": { "$ref": "#/$defs/refs" }, "features": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/feature" } } }
+    },
+    "disposition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decision_id", "disposition", "active_delivery_scope", "reason"],
+      "properties": { "decision_id": { "type": "string" }, "disposition": { "enum": ["deferred", "controlled_tbd", "superseded"] }, "active_delivery_scope": { "const": false }, "reason": { "type": "string", "minLength": 1 } }
+    },
+    "coverage": {
+      "type": "object", "additionalProperties": false,
+      "required": ["approved_item_id", "treatment", "breakdown_item_ids", "source_hashes_preserved"],
+      "properties": { "approved_item_id": { "type": "string" }, "treatment": { "enum": ["active_story", "active_constraint", "dependency_context", "timeline_context", "resolved_source_audit"] }, "breakdown_item_ids": { "type": "array", "items": { "type": "string" } }, "source_hashes_preserved": { "const": true } }
+    }
+  }
+}

@@ -17,7 +17,7 @@ The formal plan models four one-week iterations. Actual execution is intentional
 | Iteration 1 | Week 1 | Foundation, planning, and Requirement Extraction | Review sources; create BRD, Product PRD, Architecture Design, diagram, and initial ADRs; select tools; define contracts; organize GitHub and Obsidian; build Requirement Extractor; connect Langfuse; run T1-T10 | Foundation documents exist; schemas validate; Requirement Extractor works; T1-T10 are documented; T10 correction passes | Complete |
 | Iteration 2 | Week 2 | Ground truth and evaluation controls | Complete T10 before/after comparison; build and human-review the in-scope T1–T10 ground truth; reconcile prompt versions; strengthen deterministic evaluation and scorecards | Approved ground truth exists; automated evaluator runs against actual n8n outputs; v1.5 passes the unchanged T1–T10 release gate 10/10 with accepted Langfuse traces | Complete |
 | Iteration 3 | Week 3 | Complete multi-agent pipeline | Build Gap Analyzer, Generation Gate, Human Approval, PRD Generator, Story Breakdown, final validation, Markdown export, and per-agent tracing; run T11-T12 | Core and extended capabilities work end-to-end; T11-T12 are documented; human approval is demonstrated | Complete: connected T1-to-Final execution `9578` passed at 100% groundedness |
-| Iteration 4 | Week 4 | Final evaluation and submission | Ingest the supplied product brief, meeting transcript, and stakeholder notes; run multi-source and route regression; calculate metrics and cost per user; finish Q1-Q4, screenshots, architecture write-up, slides, demo, links, exports, and security audit | Three realistic source types pass through controlled extraction and routing; submission is complete, reproducible, public, and ready for grading | Not started |
+| Iteration 4 | Week 4 | Final evaluation and submission | Ingest the supplied product brief, meeting transcript, and stakeholder notes; run multi-source and route regression; calculate metrics and cost per user; finish Q1-Q4, screenshots, architecture write-up, slides, demo, links, exports, and security audit | Three realistic source types pass through controlled extraction and routing; submission is complete, reproducible, public, and ready for grading | In progress: controlled T1 PB+MT+SN n8n parity execution `9638` passed at 100%; broader regression and submission work remain |
 
 ## Compressed execution target
 
@@ -46,7 +46,30 @@ The formal plan models four one-week iterations. Actual execution is intentional
 - Iterations 1 and 2 are complete.
 - Gap Analyzer v1.0 passed its unchanged T1-T10 regression at 100% groundedness.
 - All five eligible Human Approval routes are executed: T1/T7/T8 approved, T4 changes requested, and T10 approved with conditions; all passed at 100% groundedness.
+- Realistic v4 Human Approval execution `9724` passed with Vipin's signed approval, 17/17 decision dispositions, 15/15 effective decisions, accepted Langfuse trace `f4e298e120d6503b5dfac4688adae1db`, and 100% groundedness. PRD Generation remains intentionally stopped.
+- Realistic v4 PRD execution `9725` passed with synchronized JSON/Markdown, complete provenance coverage, accepted trace `f8879ebe22d888152a77f892230c62ba`, 100% groundedness, and zero unsupported claims. Story Breakdown remains stopped pending separate authorization.
+- Realistic v4 Story Breakdown v0.2 is runtime-validated from PRD execution `9725`: execution `9727`, trace `f772ec699a437bc70de67ac124976161`, 3 epics, 4 features, 7 stories, 12 criteria, 19/19 approved-item coverage, zero orphan or active deferred/superseded/TBD items, 100% groundedness, and zero unsupported claims.
+- Native workflow `KKYU4QssjUTovd8U` passed topology, trigger, saved-version, publication-node absence, and Langfuse-credential checks. Execution `9726` then failed closed on a false duplicate-parent-ID validator defect before trace construction. A new versioned deterministic-validator correction is the next step; v0.1 must not be retried unchanged.
+- Story Breakdown v0.2 passed native import, credential verification, deterministic validation, and Langfuse ingestion. Execution `9727` is the accepted runtime boundary; no downstream delivery publication occurred.
 - T11 generated and validated the actual ten-section T1 PRD at 100% groundedness. Langfuse US accepted trace `05e9aa534e4286e17ec65512a72e48ff`, and the actual JSON and Markdown are preserved.
 - T12 Story Breakdown v0.2 passed at 100% groundedness with accepted Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b`; actual JSON and Markdown are preserved.
 - Connected Orchestrator v0.5 passed source-to-final Markdown export in execution `9578` at 100% groundedness with accepted Final Validation trace `a7722b22651568c775987fbb09e3be1c`.
-- Multi-source ingestion, full route regression, assignments, visuals, cost evidence, and the submission package remain open.
+- Controlled T1 Product Brief, Meeting Transcript and Stakeholder Notes fixtures, the canonical source-packet contract, and deterministic integrity/parity tests pass locally at 100% groundedness with zero unsupported claims.
+- Controlled n8n multi-source ingestion passed execution `9638` at 100% groundedness with zero unsupported claims; broader full route regression, assignments, visuals, cost evidence, and the submission package remain open.
+- The supplied realistic Product Brief, Meeting Transcripts and Stakeholder Notes are preserved in `realistic-v1` with verified hashes, route separation and 70 exact citations. Input grounding is 100%; expected extraction review remains open before n8n execution.
+
+## Story Breakdown v0.2 runtime result — 2026-08-07
+
+- Accepted workflow: `MEm1VyILsMyn53HU` (saved, unpublished)
+- Execution/trace: `9727` / `f772ec699a437bc70de67ac124976161`
+- Acceptance: 3 epics, 4 features, 7 stories, 12 criteria; 19/19 scope; 6/6 sources; zero orphans; 100% groundedness; zero unsupported claims
+- v0.1 `KKYU4QssjUTovd8U` and `9726` retained as failure evidence
+- Stop boundary: no Jira/delivery publication and no Final Validation invocation
+
+## Final Validator/export v0.1 runtime result — 2026-08-07
+
+- Accepted unpublished workflow: `3A8biYxoQ7Q1E9FQ`
+- Execution/trace: `9728` / `4e1ef40a6da7a838ad9e9cc3a37a1a35`
+- Export hash: `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`
+- Acceptance: 3/4/7/12; 19/19 scope; 6/6 sources; 17/17 decisions; zero orphans; JSON/Markdown equivalent; 100% groundedness; zero unsupported claims
+- Stop boundary: unpublished, inactive, no Jira/delivery publication

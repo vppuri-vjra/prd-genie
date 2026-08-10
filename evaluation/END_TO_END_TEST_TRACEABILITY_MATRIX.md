@@ -35,6 +35,10 @@ It distinguishes:
 | PRD Generator evaluation | T11 observable release passed | Prompt v0.4 passed at 100% with ten sections and Langfuse trace `05e9aa534e4286e17ec65512a72e48ff` |
 | Story Breakdown evaluation | T12 observable release passed | Prompt v0.2 passed at 100%; 1 epic, 1 feature, 1 story, 2 criteria, 2 unresolved questions; Langfuse trace `8e2078937f42afa208b3b2dc8d0f159b` |
 | Connected final validation/export | T1-to-Final canary passed | n8n `9578`; all stage and cross-stage contracts passed; Markdown exported; Langfuse trace `a7722b22651568c775987fbb09e3be1c`; 100% groundedness |
+| T1 multi-source parity | PB+MT+SN n8n canary passed | Execution `9638`; four approved facts, exact source traceability, 100% groundedness, 0 unsupported claims; Langfuse `2f0e20055d7765ca3bb0bb0d2bea866b` |
+| Realistic multi-source intake v1 | Supplied PB+MT+SN Requirement Extraction canary passed | Three byte-identical resources; execution `9661`; 70/70 candidate and canonical citations; 44 items / 4 contradictions / 12 missing-information records; exact traceability and semantic parity passed; Langfuse accepted; 0 unsupported claims; 100% groundedness; next route `gap_analysis` |
+| Realistic multi-source Gap Analysis v1 | Accepted extraction passed Gap Analysis and deterministic gate | Execution `9667`; 14 traceable gaps; 12/12 missing-information, 4/4 contradiction and 2/2 source-risk coverage; Langfuse `a727f4397ede1de96d15e18a78d6bdd0`; route `clarification`; Human Approval and PRD generation not invoked; 0 unsupported claims; 100% groundedness |
+| Realistic four-source clarification v2 | Local packet accepted; live extraction rejected | Local 14/14 decision, citation, supersession and hash checks passed at 100%. n8n `9676` exposed a credential integration defect; after correction, n8n `9678` failed deterministic coverage-ledger validation for clarification line 23. No accepted extraction, Langfuse trace, Gap Analysis, gate decision, Human Approval or PRD generation is claimed. Runtime groundedness not accepted. |
 
 ## Status legend
 
@@ -173,6 +177,47 @@ This view makes the stage boundary explicit. A Human Approval route test must be
 |---:|---|---|---|---|---:|---|---|---|
 | `9578` | `RUN-T1-CONNECTED-1786039807443` | Requirement Extractor → Gap Analyzer → Generation Gate → signed Human Approval → PRD Generator → Story Breakdown → Final Validator/export | Pass | `completed` | 100% | `d9b944978c5ad2078c639dda899399e0` | `a7722b22651568c775987fbb09e3be1c` | `prd-genie-t1-final.md` |
 
+### Realistic PB+MT+SN Requirement Extraction canary
+
+| n8n execution | Workflow | Result | Canonical counts | Citation coverage | Semantic parity | Groundedness | Unsupported claims | Langfuse trace |
+|---:|---|---|---|---:|---|---:|---:|---|
+| `9661` | `Realistic Multi-Source Requirement Extraction Canary v0.6` | Pass | 44 items / 4 contradictions / 12 missing | 70/70 | Pass | 100% | 0 | `4adf60a1f5f83849170303de20471d81` |
+
+### Realistic PB+MT+SN Gap Analysis canary
+
+| n8n execution | Workflow | Result | Gaps | Missing coverage | Contradictions | Source risks | Gate route | Human Approval invoked | Groundedness | Unsupported claims | Langfuse trace |
+|---:|---|---|---:|---:|---:|---:|---|---|---:|---:|---|
+| `9667` | `Realistic Gap Analysis Canary v0.1` | Pass | 14 | 12/12 | 4/4 | 2/2 | `clarification` | No | 100% | 0 | `a727f4397ede1de96d15e18a78d6bdd0` |
+
+### Realistic PB+MT+SN+clarification v2 canary
+
+| Execution | Workflow | Result | Boundary reached | Gap Analyzer invoked | Human Approval invoked | Runtime groundedness | Langfuse |
+|---|---|---|---|---|---|---|---|
+| `9676` | `Realistic Clarification v2 Canary v0.1` | Integration failure | OpenAI model credential binding | No | No | Not evaluated | None |
+| `9678` | `Realistic Clarification v2 Canary v0.1` | Deterministic rejection | Requirement Extractor citation-ledger validation | No | No | Not accepted | Not claimed |
+| `9680` | `Realistic Clarification v2 Canary v0.2` | Deterministic rejection | Requirement Extractor MT line-94 ledger/evidence validation | No | No | Not accepted | Not claimed |
+| `9684` | `Realistic Clarification v2 Canary v0.3` | Pass | Requirement Extractor → Gap Analyzer → Generation Gate | Yes | No; gate returned `clarification` | 100% | RE `8788033ddbc1d3d113d62f421902c363`; GA `0b1f4aa95724a894367f77f2cc44da84` |
+| `9687` | `Realistic Clarification v3 Canary v0.4` | Deterministic rejection | Requirement Extractor provenance validation | No | No | Not accepted | Not claimed |
+| `9692` | `Realistic Clarification v3 Canary v0.6` | Pass | Requirement Extractor → Gap Analyzer → Generation Gate | Yes | No; stopped at eligible Human Approval boundary | 100% | RE `1b0f5b1c7c4ee1b2fce03db6d3fd1585`; GA `b3ef34f731507c2570f240d86091c382` |
+| `9700`–`9703` | `Realistic Clarification v4 Deterministic Gate Canary v0.8` | Integration failure | Source-packet adapter syntax | No | No | Not evaluated; local v4 baseline 100% | None; no observable stage invoked |
+| `9704` | `Realistic Clarification v4 Deterministic Gate Canary v0.8` | Adapter pass | Six-source source-packet adapter only | No | No | Local/adapter contract 100%; no model grounding stage | None; intentionally syntax-only |
+| `9705` | `Realistic Clarification v4 Deterministic Gate Canary v0.8` | Integration rejection | Requirement Extractor v1.9 legacy exactly-three-source validator | No | No | Not evaluated; local v4 baseline 100% | None; rejected before model stage |
+| Pending native import | `Requirement Extractor Child v1.10` / `Realistic Clarification v4 Canary v0.9` | Local contract pass | Versioned production input boundary | Not yet | No | Local 100%; unsupported content 0 | Pending live execution |
+| `9707` | `Realistic Clarification v4 Canary v0.9` | Adapter pass | Six-source packet adapter only | No | No | Adapter contract 100% | None by design |
+| `9708` / child `9709` | `Realistic Clarification v4 Canary v0.9` | Extractor-only pass | Requirement Extraction v1.10 | No | No | 100%; unsupported content 0 | `c7a4403a6b558ff53db3ff2c755ca8f4` accepted |
+| `9710` / child `9711` | `Realistic Clarification v4 Canary v0.9` | Integration rejection after accepted RE | Stale five-source reference in `Validate Six-Source Extraction`; Gap Analysis not invoked | No | No | RE 100%; full run not accepted | RE `4927a95c7a93422f2b2a83b14c534c95` accepted |
+| Pending native import | `Realistic Clarification v4 Canary v0.10` | Local correction pass | Six-source validation boundary | Not yet | No | Local 100%; unsupported content 0 | Pending live execution |
+| `9712` | `Realistic Clarification v4 Canary v0.10` | Adapter pass | Six-source adapter only | No | No | Adapter contract 100% | None by design |
+| `9713` / child `9714` | `Realistic Clarification v4 Canary v0.10` | Extractor-only pass | Requirement Extraction v1.10 | No | No | 100%; unsupported claims 0 | `43699b4bf9b73fa97ea955a475459339` accepted |
+| `9715` / children `9716`, `9717` | `Realistic Clarification v4 Canary v0.10` | Integration rejection after accepted RE and GA | Original packet not propagated to deterministic resolution boundary | Yes | No | RE 100%; GA 100%; gate not accepted | RE `7184f321485d2952f2a799a07cf8c3b0`; GA `982c0290088dcabb14c8d7ce652ed86d`; both accepted |
+| Adapter-only; parent record not retained by save policy | `Realistic Clarification v4 Canary v0.11` | Pass | Canonical six-source packet adapter | No | No | Contract 100%; no model grounding stage | None by design |
+| Extractor-only / child `9720` | `Realistic Clarification v4 Canary v0.11` | Pass | Requirement Extraction v1.10 | No | No | 100%; unsupported claims 0 | RE `6c94725e2a0151150cafe5c9f4566f7b` accepted; parent trace `aa4949051224a1f657367dfffa6c416d` |
+| Full run / children `9722`, `9723` | `Realistic Clarification v4 Canary v0.11` | Pass; stopped at Human Approval boundary | Immutable six-source `original_packet` preserved through Requirement Extraction, Gap Analysis and deterministic resolution | Yes | No | RE 100%; GA 100%; unsupported claims/decisions 0 | RE `320fb727a808c8228001e1aef5de7d98`; GA `322897a2600add94152dbf938c837c00`; parent trace `26c7466f817aa1511f4a4e239bb52a62`; accepted |
+| `9724` | `Realistic v4 Human Approval Tail v0.1` | Pass; signed approval completed | Exact v0.11 evidence plus 17/17 decision dispositions, 15/15 effective decisions and 19 approved item IDs | Yes | Yes; stopped immediately afterward | 100%; unsupported claims/decisions 0 | `f4e298e120d6503b5dfac4688adae1db` accepted; parent trace `26c7466f817aa1511f4a4e239bb52a62`; PRD Generator absent |
+| `9725` | `Realistic v4 Production PRD Generator v0.1` | Pass | One schema-valid synchronized JSON/Markdown PRD; 19/19 items, 17/17 dispositions, 15/15 effective decisions, 2/2 superseded audit-only, 6/6 sources | Yes | PRD generated; Story Breakdown no | 100%; unsupported claims 0 | PRD trace `f8879ebe22d888152a77f892230c62ba` accepted; HTTP 200; parent trace preserved |
+| `9726` | `Realistic v4 Story Breakdown Child v0.1` / `KKYU4QssjUTovd8U` | Integration-validator rejection | Trigger, loader and PRD entry passed; deterministic validator falsely treated repeated parent Epic/Feature references as duplicate IDs | N/A | Trace construction, Langfuse and downstream publication not invoked | Runtime not evaluated; upstream/local baseline 100% | No Story Breakdown trace; failed before ingestion |
+| Local candidate; not executed | `Realistic v4 Story Breakdown Child v0.2` | Local remediation pass | Per-level uniqueness; 3 epics, 4 features, 7 stories, 12 criteria; 19/19 coverage; 4/4 true-duplicate negatives | N/A | No live invocation; native import pending | Local 100%; unsupported claims 0 | No runtime trace claimed |
+
 ## Stage-entry rule
 
 Passing Requirement Extraction does not authorize PRD generation. A case may enter the PRD Generator only when:
@@ -191,4 +236,11 @@ Update this matrix after every evaluated agent execution. For each stage, record
 
 ## Groundedness statement
 
-Matrix groundedness: **100% for the recorded Requirement Extractor results, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 and T1-to-Final canaries, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+Matrix groundedness: **100% for the recorded Requirement Extractor results, the n8n T1 and realistic PB+MT+SN parity canaries, realistic Gap Analysis execution `9667`, all ten human-approved GA ground-truth decisions, the unchanged GA-T1-T10 v1.0 release regression, the connected T1 two-child canary, all eight Human Approval route-suite executions, the connected T1-to-T11 and T1-to-Final canaries, the T11/T1 observable PRD release, and the T12/T1 observable Story Breakdown release**. Realistic extraction execution `9661` has 70/70 coverage and accepted trace `4adf60a1f5f83849170303de20471d81`; realistic Gap Analysis execution `9667` has 12/12 missing-information, 4/4 contradiction and 2/2 source-risk coverage with accepted trace `a727f4397ede1de96d15e18a78d6bdd0`. Both record zero unsupported claims and 100% groundedness. PRD generation for T7, T8 and T10 remains explicitly unexecuted rather than projected as completed.
+
+## Realistic Story Breakdown v0.2 — accepted runtime evidence
+
+| Stage | Workflow / execution | Assertions | Result |
+|---|---|---|---|
+| Story Breakdown | `MEm1VyILsMyn53HU` / `9727`; trace `f772ec699a437bc70de67ac124976161` | 3 epics; 4 features; 7 stories; 12 criteria; 19/19 scope; 6/6 sources; 0 orphans; no active deferred/superseded/controlled-TBD; JSON/Markdown equivalent; Langfuse accepted | Pass — groundedness 100%, unsupported claims 0 |
+| Final Validation/export | `3A8biYxoQ7Q1E9FQ` / `9728`; trace `4e1ef40a6da7a838ad9e9cc3a37a1a35` | Story authority `9727`; 3/4/7/12; 19/19; 6/6; 17/17; zero orphans; exact lineage/hashes; JSON/Markdown equivalent; export SHA `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`; Langfuse accepted | Pass — groundedness 100%, unsupported claims 0 |

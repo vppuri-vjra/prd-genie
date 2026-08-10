@@ -32,9 +32,12 @@
       "required": ["quote", "source_name", "location"],
       "properties": {
         "quote": { "type": "string", "minLength": 1 },
+        "source_id": { "type": "string", "pattern": "^SRC-[A-Z0-9-]+$" },
+        "source_type": { "enum": ["product_brief", "meeting_transcript", "stakeholder_notes", "stakeholder_clarification", "evaluation_test"] },
         "source_name": { "type": "string", "minLength": 1 },
         "location": { "type": "string", "minLength": 1 },
-        "speaker": { "type": ["string", "null"] }
+        "speaker": { "type": ["string", "null"] },
+        "content_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
       }
     },
     "extractedItem": {
@@ -80,7 +83,12 @@
         "id": { "type": "string", "pattern": "^MISS-[0-9]{3}$" },
         "category": { "type": "string", "minLength": 1 },
         "description": { "type": "string", "minLength": 1 },
-        "clarification_question": { "type": "string", "minLength": 1 }
+        "clarification_question": { "type": "string", "minLength": 1 },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/evidence" }
+        }
       }
     }
   }

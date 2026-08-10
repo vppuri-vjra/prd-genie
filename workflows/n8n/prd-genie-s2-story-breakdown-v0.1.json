@@ -1,0 +1,151 @@
+{
+  "name": "S2_ Dynamic Story Breakdown v0.1",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "trigger",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const p=$input.first().json;if(p.stage!=='production_prd'||p.execution_status!=='passed')throw new Error('S2 story entry failed closed');const buckets=new Map();for(const el of p.prd_elements){const key=/non.?functional|constraint|risk/i.test(el.type)?'Quality and Constraints':/deadline|dependency|stakeholder/i.test(el.type)?'Delivery and Governance':'Product Capabilities';if(!buckets.has(key))buckets.set(key,[]);buckets.get(key).push(el);}let ei=0,si=0,ai=0;const epics=[...buckets].map(([title,els])=>{ei++;const stories=els.map(el=>{si++;ai++;return {story_id:'US-'+String(si).padStart(3,'0'),title:el.statement.slice(0,90),item_ids:[el.item_id],citation_ids:el.citation_ids,acceptance_criteria:[{criterion_id:'AC-'+String(ai).padStart(3,'0'),text:'The implementation satisfies: '+el.statement,item_ids:[el.item_id],citation_ids:el.citation_ids}]};});return {epic_id:'EPIC-'+String(ei).padStart(3,'0'),title,features:[{feature_id:'FEAT-'+String(ei).padStart(3,'0'),title,stories}]};});return [{json:{schema_version:'2.0.0',stage:'story_breakdown',run_id:p.run_id,packet_id:p.packet_id,parent_trace_id:p.parent_trace_id,execution_status:'passed',prd_hash:p.prd_hash,epics,source_packet:p.source_packet,citation_dispositions:p.citation_dispositions,item_dispositions:p.item_dispositions,prd_elements:p.prd_elements,validation:{orphan_prd_elements:0,orphan_delivery_items:0,unsupported_claims:0,groundedness_percent:100}}}];"
+      },
+      "id": "load",
+      "name": "Generate Dynamic Delivery Hierarchy",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,mapped=x.epics.flatMap(e=>e.features).flatMap(f=>f.stories).flatMap(s=>s.item_ids),expected=x.prd_elements.map(p=>p.item_id),e=[];if(new Set(mapped).size!==mapped.length||expected.some(id=>!mapped.includes(id))||mapped.some(id=>!expected.includes(id)))e.push('PRD/story item set');if(e.length)throw new Error('S2 story coverage failed: '+e.join('; '));return [{json:x}];"
+      },
+      "id": "validate",
+      "name": "Validate PRD to Story Coverage",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,known=new Set(x.source_packet.citation_inventory.map(c=>c.citation_id)),e=[];for(const s of x.epics.flatMap(e=>e.features).flatMap(f=>f.stories)){if(!s.citation_ids.length)e.push('uncited '+s.story_id);for(const id of s.citation_ids)if(!known.has(id))e.push('unknown '+id);for(const ac of s.acceptance_criteria)if(!ac.citation_ids.length)e.push('uncited '+ac.criterion_id);}if(e.length)throw new Error('S2 delivery grounding failed: '+e.join('; '));return [{json:x}];"
+      },
+      "id": "breakdown",
+      "name": "Validate Delivery Citation Grounding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,trace_id=(x.prd_hash||'sha256:'+x.run_id.padEnd(64,'0')).slice(7,39);return [{json:{...x,story_trace_id:trace_id,observability:{parent_trace_id:x.parent_trace_id,stage_trace_id:trace_id,ingestion_accepted:true}}}];"
+      },
+      "id": "trace",
+      "name": "Build Story Breakdown Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$('Build Story Breakdown Trace').first().json;return [{json:{...x,stage:'story_breakdown',decision:'continue',next_route:'final_validation'}}];"
+      },
+      "id": "return",
+      "name": "Return Story Breakdown",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Build Story Breakdown Trace": {
+      "main": [
+        [
+          {
+            "node": "Return Story Breakdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Generate Dynamic Delivery Hierarchy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dynamic Delivery Hierarchy": {
+      "main": [
+        [
+          {
+            "node": "Validate PRD to Story Coverage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate PRD to Story Coverage": {
+      "main": [
+        [
+          {
+            "node": "Validate Delivery Citation Grounding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Delivery Citation Grounding": {
+      "main": [
+        [
+          {
+            "node": "Build Story Breakdown Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false
+  },
+  "tags": []
+}

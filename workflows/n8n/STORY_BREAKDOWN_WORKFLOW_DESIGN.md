@@ -1,5 +1,17 @@
 # Story Breakdown n8n Workflow Design
 
+## Realistic v4 isolated child candidate
+
+`prd-genie-realistic-v4-story-breakdown-child-v0.1.json` is a seven-node, six-connection unpublished child candidate derived only from approved PRD execution `9725`:
+
+`Execute Workflow Trigger → Load Approved PRD 9725 → Validate Approved PRD Entry → Build and Validate Deterministic Breakdown → Build Story Breakdown Trace → Send Story Trace to Langfuse → Return Story Breakdown`
+
+The trigger explicitly uses `inputSource: passthrough`. It returns synchronized JSON/Markdown content, full lineage, 19/19 coverage and copied provenance. It fails closed on entry, scope, orphan, grounding, or trace-ingestion failure. Native import must preserve the export definition; bind the HTTP node to `Langfuse US - PRD Genie`. No n8n identity or runtime trace is claimed until that verification occurs.
+
+### v0.2 remediation
+
+The import-ready v0.2 export retains the same seven-node topology and passthrough trigger. Its deterministic validator creates independent `epicIds`, `featureIds`, `storyIds`, and `criterionIds` arrays and checks uniqueness within each. This replaces the v0.1 loop that repeated parent IDs per child story. The v0.2 candidate is not executed or published.
+
 ## Purpose
 
 Run T12 as a separate workflow that consumes the approved actual T11/T1 PRD, generates the canonical epic-feature-story hierarchy, validates it deterministically, renders readable Markdown, sends an observable trace to Langfuse US, and records the release result.

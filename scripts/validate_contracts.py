@@ -24,6 +24,11 @@ EXAMPLE_TO_SCHEMA = {
     "evaluation-result": "evaluation-result.schema.json",
 }
 
+EXACT_EXAMPLE_TO_SCHEMA = {
+    "t1-orchestration-stage-result.json": "orchestration-stage-result.schema.json",
+    "t1-requirement-extractor-child-input.json": "workflow-input.schema.json",
+}
+
 
 def load_json(path: Path) -> dict:
     with path.open(encoding="utf-8") as stream:
@@ -31,6 +36,8 @@ def load_json(path: Path) -> dict:
 
 
 def schema_for_example(path: Path) -> Path:
+    if path.name in EXACT_EXAMPLE_TO_SCHEMA:
+        return SCHEMA_DIR / EXACT_EXAMPLE_TO_SCHEMA[path.name]
     for suffix, schema_name in EXAMPLE_TO_SCHEMA.items():
         if path.stem.endswith(suffix):
             return SCHEMA_DIR / schema_name
@@ -42,8 +49,8 @@ def main() -> int:
     schema_paths = sorted(SCHEMA_DIR.glob("*.schema.json"))
     example_paths = sorted(EXAMPLE_DIR.glob("*.json"))
 
-    if len(schema_paths) != 7:
-        failures.append(f"Expected 7 schemas, found {len(schema_paths)}")
+    if len(schema_paths) != 12:
+        failures.append(f"Expected 12 schemas, found {len(schema_paths)}")
 
     for schema_path in schema_paths:
         try:
