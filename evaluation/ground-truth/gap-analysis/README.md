@@ -20,6 +20,8 @@ The fresh three-layer shadow evaluation raised semantic-review signals for GA-T1
 
 Machine-readable register: `HUMAN_ADJUDICATIONS_2026-08-11.json`.
 
+The unchanged post-adjudication v2 shadow rerun passed 10/10 deterministic and code evaluations, with 10/10 faithfulness scores at 1.00 and 10/10 hallucination scores at 0.00. See `evaluation/results/s2-gap-analyzer-adjudicated-langfuse-v2-shadow-2026-08-11.md` for the trace-level receipts. The Agreement Gate remains in shadow mode.
+
 ## Authoritative inputs
 
 Each case consumes the corresponding human-approved Requirement Extraction canonical output under `evaluation/ground-truth/requirement-extraction/`. Raw transcripts are not passed directly to the Gap Analyzer.
