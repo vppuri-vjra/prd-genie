@@ -8,6 +8,18 @@ Review date: 2026-08-03
 
 Status: Approved
 
+## Semantic evaluator adjudications — 2026-08-11
+
+The fresh three-layer shadow evaluation raised semantic-review signals for GA-T1, GA-T4, and GA-T8. Human review confirmed the existing canonical outputs and classified the findings as evaluator-policy clarifications rather than business-source or ground-truth corrections.
+
+| Case | Adjudication | Disposition | Canonical output |
+|---|---|---|---|
+| GA-T1 | `GA-T1-HUMAN-ADJUDICATION-2026-08-11` | Treat controlled non-material unknowns and mandatory human review as part of the sufficiency policy | Unchanged |
+| GA-T4 | `GA-T4-HUMAN-ADJUDICATION-2026-08-11` | Separate source faithfulness from external technical-feasibility critique | Unchanged |
+| GA-T8 | `GA-T8-HUMAN-ADJUDICATION-2026-08-11` | Judge deterministic routing against the approved decision policy, not business text alone | Unchanged |
+
+Machine-readable register: `HUMAN_ADJUDICATIONS_2026-08-11.json`.
+
 ## Authoritative inputs
 
 Each case consumes the corresponding human-approved Requirement Extraction canonical output under `evaluation/ground-truth/requirement-extraction/`. Raw transcripts are not passed directly to the Gap Analyzer.
