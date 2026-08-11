@@ -1,8 +1,8 @@
 # S2 Evaluation Hardening — Native Langfuse Scores Runtime
 
-Date: 2026-08-10  
-Workflow: `S2_ Evaluation-Hardening T1-T10 Evaluator v0.2`  
-n8n workflow ID: `IXUDC6jJC2M65ruT`  
+Date: 2026-08-10
+Workflow: `S2_ Evaluation-Hardening T1-T10 Evaluator v0.2`
+n8n workflow ID: `IXUDC6jJC2M65ruT`
 Execution: `10074`
 
 ## Result
@@ -55,4 +55,3 @@ Do not change the T10 expected status automatically. Human review must decide wh
 
 1. `complete` remains canonical and the S2 Requirement Extractor needs a stability correction; or
 2. `partial` is the preferred behavior when an explicit unknown dependency ETA creates a clarification record, requiring a reviewed ground-truth version update.
-

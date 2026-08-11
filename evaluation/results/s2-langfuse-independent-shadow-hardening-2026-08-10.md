@@ -1,9 +1,9 @@
 # S2 Langfuse Independent Shadow Hardening Result
 
-Date: 2026-08-10  
+Date: 2026-08-10
 n8n execution: `10333`
-Extractor candidate: `CNZIUbNBFEap9ioy`  
-Evaluator candidate: `lNRM0vzmggdpAoJe`  
+Extractor candidate: `CNZIUbNBFEap9ioy`
+Evaluator candidate: `lNRM0vzmggdpAoJe`
 Mode: Unpublished shadow
 
 ## Deterministic evaluation

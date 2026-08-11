@@ -1,8 +1,8 @@
 # S2 Langfuse Independent Shadow Baseline
 
-Date: 2026-08-10  
-Scope: S2 Requirement Extractor, T1–T10  
-Mode: Shadow; no production release impact  
+Date: 2026-08-10
+Scope: S2 Requirement Extractor, T1–T10
+Mode: Shadow; no production release impact
 Judge model: `openai / gpt-5.6-terra`
 
 ## Completion

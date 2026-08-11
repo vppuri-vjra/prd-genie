@@ -1,6 +1,6 @@
 # S2 Evaluation Score Policy
 
-Status: evaluation-hardening candidate  
+Status: evaluation-hardening candidate
 Baseline tag: `s2-validated-baseline-2026-08-10`
 
 ## Required trace scores
