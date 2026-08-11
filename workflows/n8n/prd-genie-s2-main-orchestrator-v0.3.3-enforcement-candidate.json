@@ -1,0 +1,765 @@
+{
+  "name": "S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.3 - Enforcement Candidate",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "a0000000-0000-4000-8000-000000000001",
+      "name": "Manual Production Canary Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const now=Date.now();const run_id='RUN-REALISTIC-CONNECTED-'+now;\nconst seed=(now.toString(16)+Math.random().toString(16).slice(2)).replace(/[^a-f0-9]/g,'');const parent_trace_id=(seed+seed+seed).slice(0,32).padEnd(32,'0');\nreturn [{json:{run_id,parent_trace_id,orchestration_context:{run_id,parent_trace_id,orchestrator_version:'realistic-connected-v0.1',dynamic_stage_handoffs:true},started_at:new Date().toISOString()}}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000002",
+      "name": "Create Connected Parent Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -960,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "5rHzVpxLHnO1KSv5",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Drive and Clarification Gate v0.2.4 - Contract Shadow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000003",
+      "name": "Execute Google Drive Clarification Gate v0.12.0",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -700,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.execution_status!=='passed'||x.next_route!=='human_approval'||x.unsupported_claims!==0)throw new Error('S2 parent blocked at gate');return [{json:{...x,stage:'clarification_gate'}}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000004",
+      "name": "Validate Dynamic Gate Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "c2bgrqVym4XpBeT8",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Human Approval v0.2 - Langfuse Shadow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000005",
+      "name": "Execute Human Approval Tail v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -180,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='human_approval'||x.execution_status!=='passed'||x.validation?.orphan_citations!==0)throw new Error('S2 parent blocked at approval');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000006",
+      "name": "Validate Dynamic Approval Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "qWz4DvR5o5f3No9p",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Production PRD v0.2 - Langfuse Shadow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000007",
+      "name": "Execute Production PRD v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='production_prd'||x.execution_status!=='passed'||x.validation?.orphan_items!==0)throw new Error('S2 parent blocked at PRD');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000008",
+      "name": "Validate Dynamic PRD Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "7kISGzKOKBnX9glV",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Story Breakdown v0.2 - Langfuse Shadow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000009",
+      "name": "Execute Story Breakdown v0.2",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        860,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='story_breakdown'||x.execution_status!=='passed'||x.validation?.orphan_delivery_items!==0)throw new Error('S2 parent blocked at story');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000010",
+      "name": "Validate Dynamic Story Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "BedDap8PQoauQcbw",
+          "mode": "list",
+          "cachedResultName": "S2_ Dynamic Final Validator and Export v0.1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "once",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "id": "a0000000-0000-4000-8000-000000000011",
+      "name": "Execute Final Validator v0.1",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        2760,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;if(x.stage!=='final_validation'||x.execution_status!=='passed'||!x.validation?.bidirectional_traceability)throw new Error('S2 parent blocked at final validation');return [{json:x}];"
+      },
+      "id": "a0000000-0000-4000-8000-000000000012",
+      "name": "Return Connected Production Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1900,
+        0
+      ]
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000001",
+      "name": "Prepare Validated Drive Exports",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2440,
+        220
+      ],
+      "parameters": {
+        "jsCode": "const final=$input.first().json;if(final.execution_status!=='passed'||final.validation?.groundedness_percent!==100||final.validation?.unsupported_claims!==0||Object.entries(final.validation).some(([k,v])=>k.startsWith('orphan_')&&v!==0))throw new Error('S2 Drive export blocked');const safe=final.run_id.replace(/[^A-Za-z0-9._-]/g,'-'),stamp=new Date().toISOString().replace(/[:.]/g,'-'),summary={run_id:final.run_id,starting_point:{input_documents:final.reconciliation.source_documents,citations:final.reconciliation.citations_indexed},ending_point:final.counts,reconciliation:final.reconciliation,groundedness_percent:100,unsupported_claims:0},story_breakdown={schema_version:'2.0.0',artifact_type:'story_breakdown',run_id:final.run_id,packet_id:final.packet_id,parent_trace_id:final.parent_trace_id,source_manifest:final.source_packet.sources.map(s=>({source_id:s.source_id,source_name:s.source_name,source_hash:s.source_hash,drive_file_id:s.provenance?.drive_file_id})),counts:final.counts,validation:final.validation,epics:final.epics},files=[{file_name:safe+'-'+stamp+'-run-summary.json',mime_type:'application/json',content:JSON.stringify(summary,null,2)},{file_name:safe+'-'+stamp+'-final-prd.md',mime_type:'text/markdown',content:final.final_export.content},{file_name:safe+'-'+stamp+'-story-breakdown.json',mime_type:'application/json',content:JSON.stringify(story_breakdown,null,2)},{file_name:safe+'-'+stamp+'-traceability.json',mime_type:'application/json',content:JSON.stringify({source_packet:final.source_packet,citation_dispositions:final.citation_dispositions,item_dispositions:final.item_dispositions,prd_elements:final.prd_elements,epics:final.epics,reconciliation:final.reconciliation},null,2)}];return files.map(f=>({json:{run_id:final.run_id,file_name:f.file_name,mime_type:f.mime_type,output_folder_id:'1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp',run_summary:summary},binary:{data:{data:Buffer.from(f.content,'utf8').toString('base64'),mimeType:f.mime_type,fileName:f.file_name}}}));"
+      }
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000002",
+      "name": "Google Drive - Upload Validated Outputs",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        2680,
+        220
+      ],
+      "parameters": {
+        "resource": "file",
+        "operation": "upload",
+        "inputDataFieldName": "data",
+        "name": "={{ $json.file_name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp"
+        },
+        "options": {}
+      },
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "DZoFbCtywQ7hR4Wd",
+          "name": "Google Drive account 13"
+        }
+      }
+    },
+    {
+      "id": "d1000000-0000-4000-8000-000000000003",
+      "name": "Confirm Validated Drive Delivery",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2920,
+        220
+      ],
+      "parameters": {
+        "jsCode": "const uploaded=$input.all(),final=$('Return Connected Production Result').first().json;if(uploaded.length!==4||uploaded.some(i=>!i.json.id&&!i.json.webViewLink)||!uploaded.some(i=>String(i.json.name||'').endsWith('-story-breakdown.json')))throw new Error('S2 Drive delivery confirmation failed');return [{json:{...final,drive_delivery:{status:'passed',folder_id:'1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp',file_count:uploaded.length,files:uploaded.map(i=>({id:i.json.id,name:i.json.name,webViewLink:i.json.webViewLink}))}}}];"
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nconst validation = x.validation ?? {};\n\nconst isPresent = (value) => value !== undefined && value !== null && value !== '';\nconst firstPresent = (...values) => values.find(isPresent);\nconst numberOrOriginal = (value) => {\n  if (!isPresent(value)) return null;\n  const numeric = Number(value);\n  return Number.isFinite(numeric) ? numeric : value;\n};\nconst passLike = (value) => {\n  if (value === true) return true;\n  if (typeof value === 'string') return ['pass', 'passed'].includes(value.toLowerCase());\n  const numeric = Number(value);\n  return Number.isFinite(numeric) && numeric >= 1;\n};\n\nconst unsupportedClaims = firstPresent(validation.unsupported_claims, x.unsupported_claims);\nconst orphanChecks = Object.entries(validation).filter(([key]) => key.startsWith('orphan_'));\nconst deterministicPresent = x.execution_status !== undefined && isPresent(unsupportedClaims);\nconst deterministicPass = deterministicPresent\n  && x.execution_status === 'passed'\n  && Number(unsupportedClaims) === 0\n  && orphanChecks.every(([, value]) => Number(value) === 0);\n\nconst codeRaw = firstPresent(\n  x.evaluation_scores?.langfuse_code,\n  x.langfuse_scores?.code,\n  x.langfuse?.code_score,\n);\nconst faithfulnessRaw = firstPresent(\n  x.evaluation_scores?.llm_faithfulness,\n  x.langfuse_scores?.faithfulness,\n  x.langfuse?.faithfulness,\n);\nconst hallucinationRaw = firstPresent(\n  x.evaluation_scores?.llm_hallucination,\n  x.langfuse_scores?.hallucination,\n  x.langfuse?.hallucination,\n);\n\nconst status = (present, passed) => present ? (passed ? 'pass' : 'fail') : 'missing';\nconst codePresent = isPresent(codeRaw);\nconst faithfulnessPresent = isPresent(faithfulnessRaw);\nconst hallucinationPresent = isPresent(hallucinationRaw);\nconst faithfulnessValue = numberOrOriginal(faithfulnessRaw);\nconst hallucinationValue = numberOrOriginal(hallucinationRaw);\n\nconst layers = {\n  deterministic_controls: {\n    status: status(deterministicPresent, deterministicPass),\n    observed: {\n      execution_status: x.execution_status ?? null,\n      unsupported_claims: isPresent(unsupportedClaims) ? Number(unsupportedClaims) : null,\n      orphan_checks: Object.fromEntries(orphanChecks),\n    },\n  },\n  langfuse_code: {\n    status: status(codePresent, codePresent && passLike(codeRaw)),\n    observed: numberOrOriginal(codeRaw),\n  },\n  llm_faithfulness: {\n    status: status(\n      faithfulnessPresent,\n      faithfulnessPresent && typeof faithfulnessValue === 'number' && faithfulnessValue >= 0.90,\n    ),\n    observed: faithfulnessValue,\n  },\n  llm_hallucination: {\n    status: status(\n      hallucinationPresent,\n      hallucinationPresent && typeof hallucinationValue === 'number' && hallucinationValue <= 0.10,\n    ),\n    observed: hallucinationValue,\n  },\n};\n\nconst layerEntries = Object.entries(layers);\nconst failed = layerEntries.filter(([, layer]) => layer.status === 'fail').map(([name]) => name);\nconst missing = layerEntries.filter(([, layer]) => layer.status === 'missing').map(([name]) => name);\nconst wouldRelease = layerEntries.every(([, layer]) => layer.status === 'pass');\nconst enforcementEnabled = true; // Enabled only in this separate, owner-approved enforcement candidate.\nconst releaseAuthorized = !enforcementEnabled || wouldRelease;\nconst reasons = [\n  ...failed.map((name) => `${name}:fail`),\n  ...missing.map((name) => `${name}:missing`),\n];\n\nreturn [{\n  json: {\n    ...x,\n    agreement_gate: {\n      policy_version: 'agreement-production-candidate-v0.2',\n      mode: enforcementEnabled ? 'enforced' : 'shadow',\n      evaluated_at: new Date().toISOString(),\n      thresholds: {\n        faithfulness_min: 0.90,\n        hallucination_max: 0.10,\n      },\n      layers,\n      score_completeness: codePresent && faithfulnessPresent && hallucinationPresent\n        ? 'complete'\n        : 'incomplete',\n      would_release: wouldRelease,\n      decision: wouldRelease ? 'agreement' : (failed.length ? 'disagreement' : 'insufficient_evidence'),\n      reasons,\n      release_action: enforcementEnabled\n        ? (wouldRelease ? 'release' : 'hold_for_human_review')\n        : 'continue_shadow_only',\n      note: enforcementEnabled\n        ? 'Enforced mode releases only after complete evaluator agreement.'\n        : 'Candidate remains non-blocking until explicit owner approval.',\n    },\n    production_loop: {\n      policy_version: 'production-loop-candidate-v0.1',\n      enforcement_enabled: enforcementEnabled,\n      release_authorized: releaseAuthorized,\n      on_failure_when_enforced: 'hold_for_human_review',\n      timeout_policy_when_enforced: 'fail_closed',\n      rerun_scope: 'affected_stage_then_downstream_validation',\n      promotion_requirement: 'explicit_owner_approval',\n    },\n  },\n}];\n"
+      },
+      "id": "80f66ac5-9344-4f14-a6bb-9d2a07ef0bca",
+      "name": "Production Agreement Gate v0.3 - Enforced",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2300,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nconst previous = Number(x.evaluation_poll?.attempt ?? 0);\nconst maxAttempts = Number(x.evaluation_poll?.max_attempts ?? 6);\nreturn [{ json: {\n  ...x,\n  evaluation_poll: {\n    ...(x.evaluation_poll ?? {}),\n    attempt: previous + 1,\n    max_attempts: maxAttempts,\n    interval_seconds: 10,\n    started_at: x.evaluation_poll?.started_at ?? new Date().toISOString(),\n    status: 'polling',\n  },\n} }];"
+      },
+      "id": "b1000000-0000-4000-8000-000000000011",
+      "name": "Prepare Score Poll Attempt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://us.cloud.langfuse.com/api/public/v3/scores",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "traceId",
+              "value": "={{ $json.stage_trace_id || $json.observability?.stage_trace_id }}"
+            },
+            {
+              "name": "fields",
+              "value": "details,subject"
+            },
+            {
+              "name": "limit",
+              "value": "100"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "b1000000-0000-4000-8000-000000000012",
+      "name": "Query Current-Run Langfuse Scores",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1700,
+        0
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json;\nconst pollItems = $('Prepare Score Poll Attempt').all();\nconst original = pollItems[pollItems.length - 1].json;\nconst traceId = original.stage_trace_id || original.observability?.stage_trace_id || null;\nconst body = response.body ?? response;\nconst scores = Array.isArray(body.data) ? body.data : (Array.isArray(body) ? body : []);\n\nconst scoreName = (score) => score.name ?? score.scoreName ?? score.config?.name ?? null;\nconst scoreTraceId = (score) => score.traceId ?? score.trace_id ?? score.subject?.traceId ?? score.subject?.trace_id ?? null;\nconst scoreValue = (score) => {\n  for (const key of ['value', 'numericValue', 'booleanValue', 'stringValue']) {\n    if (score[key] !== undefined && score[key] !== null) return score[key];\n  }\n  return null;\n};\nconst current = scores.filter((score) => !traceId || !scoreTraceId(score) || scoreTraceId(score) === traceId);\nconst find = (name) => current.find((score) => scoreName(score) === name);\nconst code = find('story_lf_code_evaluation_pass');\nconst faithfulness = find('story_llm_faithfulness') ?? find('llm_faithfulness');\nconst hallucination = find('story_llm_hallucination') ?? find('llm_hallucination');\n\nreturn [{ json: {\n  ...original,\n  evaluation_scores: {\n    langfuse_code: code ? scoreValue(code) : null,\n    llm_faithfulness: faithfulness ? scoreValue(faithfulness) : null,\n    llm_hallucination: hallucination ? scoreValue(hallucination) : null,\n  },\n  evaluation_poll: {\n    ...(original.evaluation_poll ?? {}),\n    score_complete: Boolean(code && faithfulness && hallucination),\n    observed_required_scores: [code, faithfulness, hallucination].filter(Boolean).length,\n    last_checked_at: new Date().toISOString(),\n  },\n  evaluation_score_evidence: {\n    source: 'Langfuse Scores API v3',\n    trace_id: traceId,\n    retrieved_at: new Date().toISOString(),\n    current_run_correlation: true,\n    http_status: response.statusCode ?? null,\n    raw_score_count: scores.length,\n    correlated_score_count: current.length,\n    required_score_names: [\n      'story_lf_code_evaluation_pass',\n      'llm_faithfulness (consolidated; story_llm_faithfulness accepted)',\n      'llm_hallucination (consolidated; story_llm_hallucination accepted)',\n    ],\n    observed_score_names: current.map(scoreName).filter(Boolean),\n  },\n} }];"
+      },
+      "id": "b1000000-0000-4000-8000-000000000013",
+      "name": "Normalize Current-Run Langfuse Scores",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nif (x.production_loop?.release_authorized !== true) return [];\nreturn [{ json: { ...x, production_loop: { ...x.production_loop, route: 'release' } } }];"
+      },
+      "id": "c1000000-0000-4000-8000-000000000001",
+      "name": "Release Authorized Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2520,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nif (x.production_loop?.release_authorized === true) return [];\nconst failed = Object.entries(x.agreement_gate?.layers ?? {}).filter(([, layer]) => layer.status !== 'pass').map(([name, layer]) => ({ layer: name, status: layer.status }));\nreturn [{ json: { ...x, production_loop: { ...x.production_loop, route: 'hold_for_human_review', hold_status: 'awaiting_human_review', failed_layers: failed, correction_policy: 'record approved correction and rerun affected stage plus downstream validation', release_blocked: true } } }];"
+      },
+      "id": "c1000000-0000-4000-8000-000000000002",
+      "name": "Hold for Human Review Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2520,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nconst seconds = Number(x.evaluation_poll?.interval_seconds ?? 10);\nawait new Promise((resolve) => setTimeout(resolve, seconds * 1000));\nreturn [{ json: x }];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000001",
+      "name": "Poll Interval Wait - 10s",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nif (x.evaluation_poll?.score_complete !== true) return [];\nreturn [{ json: { ...x, evaluation_poll: { ...x.evaluation_poll, status: 'complete', completed_at: new Date().toISOString() } } }];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000002",
+      "name": "Scores Complete Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nconst attempt = Number(x.evaluation_poll?.attempt ?? 0);\nconst maxAttempts = Number(x.evaluation_poll?.max_attempts ?? 6);\nif (x.evaluation_poll?.score_complete === true || attempt >= maxAttempts) return [];\nreturn [{ json: x }];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000003",
+      "name": "Retry Poll Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x = $input.first().json;\nconst attempt = Number(x.evaluation_poll?.attempt ?? 0);\nconst maxAttempts = Number(x.evaluation_poll?.max_attempts ?? 6);\nif (x.evaluation_poll?.score_complete === true || attempt < maxAttempts) return [];\nreturn [{ json: { ...x, evaluation_poll: { ...x.evaluation_poll, status: 'timeout', timed_out_at: new Date().toISOString() } } }];"
+      },
+      "id": "c2000000-0000-4000-8000-000000000004",
+      "name": "Polling Timeout Path",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2080,
+        180
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Manual Production Canary Trigger": {
+      "main": [
+        [
+          {
+            "node": "Create Connected Parent Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Connected Parent Context": {
+      "main": [
+        [
+          {
+            "node": "Execute Google Drive Clarification Gate v0.12.0",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Gate Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Human Approval Tail v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Human Approval Tail v0.1": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Approval Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Approval Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Production PRD v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Production PRD v0.1": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic PRD Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic PRD Output": {
+      "main": [
+        [
+          {
+            "node": "Execute Story Breakdown v0.2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Story Breakdown v0.2": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Story Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Dynamic Story Output": {
+      "main": [
+        [
+          {
+            "node": "Prepare Score Poll Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Final Validator v0.1": {
+      "main": [
+        [
+          {
+            "node": "Return Connected Production Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Google Drive Clarification Gate v0.12.0": {
+      "main": [
+        [
+          {
+            "node": "Validate Dynamic Gate Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Return Connected Production Result": {
+      "main": [
+        [
+          {
+            "node": "Prepare Validated Drive Exports",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Validated Drive Exports": {
+      "main": [
+        [
+          {
+            "node": "Google Drive - Upload Validated Outputs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive - Upload Validated Outputs": {
+      "main": [
+        [
+          {
+            "node": "Confirm Validated Drive Delivery",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Query Current-Run Langfuse Scores": {
+      "main": [
+        [
+          {
+            "node": "Normalize Current-Run Langfuse Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Current-Run Langfuse Scores": {
+      "main": [
+        [
+          {
+            "node": "Scores Complete Path",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Retry Poll Path",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Polling Timeout Path",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Release Authorized Path": {
+      "main": [
+        [
+          {
+            "node": "Execute Final Validator v0.1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hold for Human Review Path": {
+      "main": [
+        []
+      ]
+    },
+    "Prepare Score Poll Attempt": {
+      "main": [
+        [
+          {
+            "node": "Poll Interval Wait - 10s",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Poll Interval Wait - 10s": {
+      "main": [
+        [
+          {
+            "node": "Query Current-Run Langfuse Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scores Complete Path": {
+      "main": [
+        [
+          {
+            "node": "Production Agreement Gate v0.3 - Enforced",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Poll Path": {
+      "main": [
+        [
+          {
+            "node": "Prepare Score Poll Attempt",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Polling Timeout Path": {
+      "main": [
+        [
+          {
+            "node": "Production Agreement Gate v0.3 - Enforced",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Production Agreement Gate v0.3 - Enforced": {
+      "main": [
+        [
+          {
+            "node": "Release Authorized Path",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Hold for Human Review Path",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false,
+    "agreement_gate": "agreement-shadow-v0.1",
+    "shadow_clarification_gate_id": "n9tkDTB6UjUaEhUN",
+    "shadow_gap_analyzer_id": "K117izjuDHkBnGMR",
+    "production_loop_version": "v0.3.3",
+    "enforcement_candidate": true,
+    "enforcement_default": true,
+    "owner_approval_required_before_import_or_publish": true,
+    "rollback_workflow": "v0.3.2 bounded-polling shadow candidate"
+  },
+  "tags": []
+}
