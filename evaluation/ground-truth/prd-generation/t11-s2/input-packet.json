@@ -1,0 +1,178 @@
+{
+  "schema_version": "2.0.0",
+  "evaluation_case_id": "PRD-T11-S2",
+  "test_id": "T11-S2",
+  "source_test_id": "T1",
+  "stage": "human_approval",
+  "execution_status": "passed",
+  "run_id": "RUN-T11-S2-GROUND-TRUTH",
+  "packet_id": "PKT-T11-S2-GROUND-TRUTH",
+  "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+  "signed_approval": {
+    "status": "approved",
+    "reviewer": "Vipin",
+    "reviewed_at": "2026-08-10T00:00:00.000Z"
+  },
+  "approval_hash": "sha256:human-reviewed-t11-s2-proposal",
+  "approved_item_ids": [
+    "FR-001",
+    "NFR-001",
+    "STK-001",
+    "DDL-001"
+  ],
+  "requirement_extraction": {
+    "schema_version": "1.0.0",
+    "run_id": "RUN-T11-S2-GROUND-TRUTH",
+    "extraction_status": "complete",
+    "items": [
+      {
+        "id": "FR-001",
+        "type": "functional_requirement",
+        "statement": "Users should be able to filter reports by date range, category, and status.",
+        "priority": "Unspecified",
+        "category": null,
+        "target": null,
+        "evidence": [
+          {
+            "quote": "The user should be able to filter reports by date range, category, and status.",
+            "source_id": "SRC-T11-EVAL",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T1:FR-001"
+          }
+        ]
+      },
+      {
+        "id": "NFR-001",
+        "type": "non_functional_requirement",
+        "statement": "Results must load in under 2 seconds.",
+        "priority": "Unspecified",
+        "category": "Performance",
+        "target": "under 2 seconds",
+        "evidence": [
+          {
+            "quote": "Results must load in under 2 seconds.",
+            "source_id": "SRC-T11-EVAL",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T1:NFR-001"
+          }
+        ]
+      },
+      {
+        "id": "STK-001",
+        "type": "stakeholder",
+        "statement": "Sarah is the PM.",
+        "priority": "Unspecified",
+        "category": null,
+        "target": null,
+        "evidence": [
+          {
+            "quote": "PM: Sarah.",
+            "source_id": "SRC-T11-EVAL",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T1:STK-001"
+          }
+        ]
+      },
+      {
+        "id": "DDL-001",
+        "type": "deadline",
+        "statement": "The deadline is Q3.",
+        "priority": "Unspecified",
+        "category": null,
+        "target": "Q3",
+        "evidence": [
+          {
+            "quote": "Deadline: Q3.",
+            "source_id": "SRC-T11-EVAL",
+            "source_name": "eval_prdgenie_inputs.txt",
+            "location": "T1:DDL-001"
+          }
+        ]
+      }
+    ]
+  },
+  "source_packet": {
+    "schema_version": "1.0.0",
+    "source_packet_id": "SP-T11-S2-GROUND-TRUTH",
+    "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+    "citation_inventory": [
+      {
+        "citation_id": "CIT-T11-01",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:FR-001",
+        "quote": "The user should be able to filter reports by date range, category, and status."
+      },
+      {
+        "citation_id": "CIT-T11-02",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:NFR-001",
+        "quote": "Results must load in under 2 seconds."
+      },
+      {
+        "citation_id": "CIT-T11-03",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:STK-001",
+        "quote": "PM: Sarah."
+      },
+      {
+        "citation_id": "CIT-T11-04",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:DDL-001",
+        "quote": "Deadline: Q3."
+      }
+    ]
+  },
+  "citation_dispositions": [
+    {
+      "citation_id": "CIT-T11-01",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-02",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-03",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-04",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    }
+  ],
+  "item_dispositions": [
+    {
+      "item_id": "FR-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "NFR-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "STK-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "DDL-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    }
+  ],
+  "historical_t11_contract": {
+    "status": "preserved_separately",
+    "input_path": "evaluation/ground-truth/prd-generation/t11/input-packet.json",
+    "expected_output_path": "evaluation/ground-truth/prd-generation/t11/expected-output.json"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema_version": "2.0.0",
+  "stage": "production_prd",
+  "run_id": "RUN-T11-S2-GROUND-TRUTH",
+  "packet_id": "PKT-T11-S2-GROUND-TRUTH",
+  "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+  "execution_status": "passed",
+  "approval_hash": "sha256:human-reviewed-t11-s2-proposal",
+  "approved_item_ids": [
+    "FR-001",
+    "NFR-001",
+    "STK-001",
+    "DDL-001"
+  ],
+  "prd_elements": [
+    {
+      "prd_element_id": "PRD-FR-001",
+      "item_id": "FR-001",
+      "type": "functional_requirement",
+      "statement": "Users should be able to filter reports by date range, category, and status.",
+      "citation_ids": [
+        "CIT-T11-01"
+      ]
+    },
+    {
+      "prd_element_id": "PRD-NFR-001",
+      "item_id": "NFR-001",
+      "type": "non_functional_requirement",
+      "statement": "Results must load in under 2 seconds.",
+      "citation_ids": [
+        "CIT-T11-02"
+      ]
+    },
+    {
+      "prd_element_id": "PRD-STK-001",
+      "item_id": "STK-001",
+      "type": "stakeholder",
+      "statement": "Sarah is the PM.",
+      "citation_ids": [
+        "CIT-T11-03"
+      ]
+    },
+    {
+      "prd_element_id": "PRD-DDL-001",
+      "item_id": "DDL-001",
+      "type": "deadline",
+      "statement": "The deadline is Q3.",
+      "citation_ids": [
+        "CIT-T11-04"
+      ]
+    }
+  ],
+  "markdown": "# S2 Dynamic Grounded PRD\n\n## FR-001 — functional_requirement\n\nUsers should be able to filter reports by date range, category, and status.\n\nEvidence: CIT-T11-01\n\n## NFR-001 — non_functional_requirement\n\nResults must load in under 2 seconds.\n\nEvidence: CIT-T11-02\n\n## STK-001 — stakeholder\n\nSarah is the PM.\n\nEvidence: CIT-T11-03\n\n## DDL-001 — deadline\n\nThe deadline is Q3.\n\nEvidence: CIT-T11-04\n",
+  "source_packet": {
+    "schema_version": "1.0.0",
+    "source_packet_id": "SP-T11-S2-GROUND-TRUTH",
+    "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+    "citation_inventory": [
+      {
+        "citation_id": "CIT-T11-01",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:FR-001",
+        "quote": "The user should be able to filter reports by date range, category, and status."
+      },
+      {
+        "citation_id": "CIT-T11-02",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:NFR-001",
+        "quote": "Results must load in under 2 seconds."
+      },
+      {
+        "citation_id": "CIT-T11-03",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:STK-001",
+        "quote": "PM: Sarah."
+      },
+      {
+        "citation_id": "CIT-T11-04",
+        "source_id": "SRC-T11-EVAL",
+        "source_name": "eval_prdgenie_inputs.txt",
+        "location": "T1:DDL-001",
+        "quote": "Deadline: Q3."
+      }
+    ]
+  },
+  "citation_dispositions": [
+    {
+      "citation_id": "CIT-T11-01",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-02",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-03",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    },
+    {
+      "citation_id": "CIT-T11-04",
+      "disposition": "accepted",
+      "reason": "Approved T11 source evidence"
+    }
+  ],
+  "item_dispositions": [
+    {
+      "item_id": "FR-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "NFR-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "STK-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    },
+    {
+      "item_id": "DDL-001",
+      "disposition": "approved",
+      "reviewer": "Vipin"
+    }
+  ],
+  "validation": {
+    "approved_item_coverage": "4/4",
+    "orphan_items": 0,
+    "unsupported_claims": 0,
+    "groundedness_percent": 100
+  },
+  "prd_hash": "sha256:33a21f0623b499e80cc56d628217268733bde44edbac315f371e3b6cc0a2ee24",
+  "prd_trace_id": "33a21f0623b499e80cc56d6282172687",
+  "observability": {
+    "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+    "stage_trace_id": "33a21f0623b499e80cc56d6282172687",
+    "ingestion_accepted": true
+  },
+  "decision": "continue",
+  "next_route": "story_breakdown"
+}
