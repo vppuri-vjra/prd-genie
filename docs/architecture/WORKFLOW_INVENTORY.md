@@ -79,6 +79,9 @@ These child exports are integration interfaces, not additional AI agents. The st
 | `PRD Genie - PRD Generator Core v0.1 - PASSED` | Preserves the core T11 pass before the final observable workflow | Evidence only; do not use for release |
 | `PRD Genie - PRD Generator v0.1 - SUPERSEDED - DO NOT RUN` | Preserves earlier failed/corrected PRD workflow history | Superseded |
 | `PRD Genie - Story Breakdown + Langfuse v0.1` | Preserves T12 execution `8734`, safely rejected for nested-shape defects | Superseded; do not rerun |
+| `S2_ Evaluation-Hardening T1-T10 Evaluator v0.3` | Intermediate isolated evaluator using Drive controls v1.0 and extractor clone `J2a4iyaPDWDtEKY5` | Superseded by evaluator v0.4; archived in `workflows/n8n/archive/evaluation-hardening/`; do not use for current evidence |
+
+Current independent Requirement Extractor evaluation uses `S2_ Evaluation-Hardening T1-T10 Evaluator v0.4` (`lNRM0vzmggdpAoJe`) with Drive controls v1.2, the T3 and T10 human adjudications, and isolated extractor `CNZIUbNBFEap9ioy`.
 
 ## Connected target
 

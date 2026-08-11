@@ -57,6 +57,8 @@ The Code Evaluator is currently on version 3 (`cmsnk60ao0idzad0krzyrwtbh`). Vers
 | Requirement Extractor child v0.2 | `CNZIUbNBFEap9ioy` | Unpublished shadow candidate |
 | T1-T10 Evaluator v0.4 | `lNRM0vzmggdpAoJe` | Unpublished shadow candidate |
 
+Evaluator v0.3 is superseded development evidence. It remains archived in the repository and must not be used for current scores because it reads Drive controls v1.0 and does not enforce the T3/T10 adjudications carried by v1.2.
+
 The candidate prompt preserves named comparison references and keeps the vague T2 request `partial`. T6 was human-adjudicated on 2026-08-10: it remains `partial` for missing approval, deadline, and scope information, but the unsupported contradiction and cross-links were removed because microservices and a single-page app can coexist.
 
 Drive-only execution `10333` read authoritative control bundle `v1.1` with case-payload hash `559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82`; no evaluator-side T3 overlay was used. It passed T1-T10 at 10/10 with 100% groundedness, zero unsupported claims, and 10/10 Code Evaluator passes. Average LLM faithfulness is `0.943` and average LLM hallucination is `0.011`; 9/10 cases meet both provisional thresholds. T3 passes at `1.00` faithfulness and `0.00` hallucination. T10 faithfulness is `0.75`, so the Agreement Gate remains shadow-only pending stability investigation and extension to the other four processing agents.
