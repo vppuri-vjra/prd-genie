@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0.0",
+  "adjudication_id": "T10-HUMAN-ADJUDICATION-2026-08-10",
+  "test_id": "T10",
+  "decision_date": "2026-08-10",
+  "reviewer": "Vipin",
+  "used_by": "independent_evaluation_only",
+  "source_text": "SSO login requires the new auth service which is being built by Team Alpha. ETA unknown.",
+  "decision": {
+    "stated_fact": "ETA unknown.",
+    "derived_interpretation": "The unknown ETA may create delivery risk for SSO login.",
+    "classification": "derived_risk",
+    "policy": "Delivery impact must be conditional and explicitly identified as inferred; it must not be represented as source-stated."
+  },
+  "ground_truth_version": "0.1.1",
+  "base_control_payload_sha256": "559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82",
+  "revised_case_payload_sha256": "1b54cf7725ee321dccd53f9deb6b8f35feb968b8a2b74a0f9615dd0204432092",
+  "agreement_gate_mode": "shadow"
+}

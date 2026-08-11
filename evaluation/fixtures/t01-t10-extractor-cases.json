@@ -89,8 +89,8 @@
       "expected_status": "complete",
       "required_exact_values": ["SSO login", "new auth service", "Team Alpha", "ETA unknown"],
       "required_item_types": ["functional_requirement", "dependency", "risk"],
-      "required_behaviors": ["Capture the auth-service dependency and unknown ETA risk."],
-      "prohibited_content": ["invented ETA", "invented auth-service status"]
+      "required_behaviors": ["Capture the auth-service dependency, preserve ETA unknown as a stated fact, and classify any delivery-risk conclusion as derived or inferred."],
+      "prohibited_content": ["invented ETA", "invented auth-service status", "delivery risk presented as explicitly stated"]
     }
   ]
 }

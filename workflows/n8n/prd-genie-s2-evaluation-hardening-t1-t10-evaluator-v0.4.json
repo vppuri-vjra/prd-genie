@@ -23,9 +23,8 @@
       ],
       "parameters": {
         "resource": "fileFolder",
-        "operation": "search",
         "searchMethod": "query",
-        "queryString": "'1S6JzavfMAXIEm6zu0T9n61CsC2iEQNEI' in parents and name = 'prd-genie-t1-t10-evaluation-controls-v1.1.json' and trashed = false",
+        "queryString": "'1S6JzavfMAXIEm6zu0T9n61CsC2iEQNEI' in parents and name = 'prd-genie-t1-t10-evaluation-controls-v1.2.json' and trashed = false",
         "returnAll": true,
         "filter": {
           "folderId": {
@@ -54,7 +53,7 @@
         300
       ],
       "parameters": {
-        "jsCode": "const files=$input.all();if(files.length!==1)throw new Error('Evaluation controls failed closed: expected exactly one prd-genie-t1-t10-evaluation-controls-v1.1.json; found '+files.length);const f=files[0].json;if(f.name!=='prd-genie-t1-t10-evaluation-controls-v1.1.json'||!f.id)throw new Error('Evaluation controls failed closed: unexpected file or missing Drive ID');return files;"
+        "jsCode": "const files=$input.all();if(files.length!==1)throw new Error('Evaluation controls failed closed: expected exactly one prd-genie-t1-t10-evaluation-controls-v1.2.json; found '+files.length);const f=files[0].json;if(f.name!=='prd-genie-t1-t10-evaluation-controls-v1.2.json'||!f.id)throw new Error('Evaluation controls failed closed: unexpected file or missing Drive ID');return files;"
       }
     },
     {
@@ -108,7 +107,7 @@
         300
       ],
       "parameters": {
-        "jsCode": "const raw=$input.first().json.data;let c;try{c=JSON.parse(raw)}catch(e){throw new Error('S2 evaluation controls failed closed: invalid JSON')};if(c.schema_version!=='1.1.0'||c.test_count!==10||c.case_payload_sha256!=='559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82'||!Array.isArray(c.adjudications)||!c.adjudications.some(a=>a.adjudication_id==='T3-HUMAN-ADJUDICATION-2026-08-10'&&a.used_by==='independent_evaluation_only')||!Array.isArray(c.cases)||c.cases.length!==10)throw new Error('S2 evaluation controls failed closed: v1.1 manifest, adjudication, or approved payload hash mismatch');const ids=c.cases.map(x=>x.fixture?.test_id).join(',');if(ids!=='T1,T2,T3,T4,T5,T6,T7,T8,T9,T10')throw new Error('S2 evaluation controls failed closed: exact ordered T1-T10 set required');const t3=c.cases.find(x=>x.fixture?.test_id==='T3')?.fixture;if(t3?.expected_status!=='complete'||(t3.required_behaviors||[]).some(x=>/contradiction/i.test(x)&&!/without inferring/i.test(x)))throw new Error('S2 evaluation controls failed closed: T3 adjudication is not authoritative in v1.1');return c.cases.map(({fixture})=>({json:{fixture,control_bundle_id:c.control_bundle_id,control_payload_sha256:c.case_payload_sha256,adjudication_id:'T3-HUMAN-ADJUDICATION-2026-08-10'}}));"
+        "jsCode": "const raw=$input.first().json.data;let c;try{c=JSON.parse(raw)}catch(e){throw new Error('S2 evaluation controls failed closed: invalid JSON')};const hasAdj=id=>Array.isArray(c.adjudications)&&c.adjudications.some(a=>a.adjudication_id===id&&a.used_by==='independent_evaluation_only');if(c.schema_version!=='1.2.0'||c.test_count!==10||c.case_payload_sha256!=='1b54cf7725ee321dccd53f9deb6b8f35feb968b8a2b74a0f9615dd0204432092'||!hasAdj('T3-HUMAN-ADJUDICATION-2026-08-10')||!hasAdj('T10-HUMAN-ADJUDICATION-2026-08-10')||!Array.isArray(c.cases)||c.cases.length!==10)throw new Error('S2 evaluation controls failed closed: v1.2 manifest, adjudications, or approved payload hash mismatch');const ids=c.cases.map(x=>x.fixture?.test_id).join(',');if(ids!=='T1,T2,T3,T4,T5,T6,T7,T8,T9,T10')throw new Error('S2 evaluation controls failed closed: exact ordered T1-T10 set required');const t3=c.cases.find(x=>x.fixture?.test_id==='T3')?.fixture;if(t3?.expected_status!=='complete'||(t3.required_behaviors||[]).some(x=>/contradiction/i.test(x)&&!/without inferring/i.test(x)))throw new Error('S2 evaluation controls failed closed: T3 adjudication is not authoritative in v1.2');const t10=c.cases.find(x=>x.fixture?.test_id==='T10')?.fixture;if(!(t10?.required_behaviors||[]).some(x=>/derived or inferred/i.test(x))||!(t10?.prohibited_content||[]).some(x=>/explicitly stated/i.test(x)))throw new Error('S2 evaluation controls failed closed: T10 adjudication is not authoritative in v1.2');const adjudication_ids=['T3-HUMAN-ADJUDICATION-2026-08-10','T10-HUMAN-ADJUDICATION-2026-08-10'];return c.cases.map(({fixture})=>({json:{fixture,control_bundle_id:c.control_bundle_id,control_payload_sha256:c.case_payload_sha256,adjudication_ids}}));"
       }
     },
     {
@@ -178,7 +177,7 @@
         300
       ],
       "parameters": {
-        "jsCode": "const results=$input.all().map(i=>i.json),ordered=results.map(r=>r.test_id).join(',');if(results.length!==10||ordered!=='T1,T2,T3,T4,T5,T6,T7,T8,T9,T10')throw new Error('S2 evaluation failed closed: exact ordered T1-T10 set required');const failed=results.filter(r=>r.result!=='pass'||r.groundedness_percent!==100||r.unsupported_claims!==0);if(failed.length)throw new Error('S2 evaluation failed closed: '+failed.map(r=>r.test_id+':'+r.errors.join('|')).join(';'));return [{json:{schema_version:'2.0.0',result_type:'s2_dynamic_t1_t10_evaluation',control_folder_id:'1S6JzavfMAXIEm6zu0T9n61CsC2iEQNEI',result_folder_id:'13bPMdqA4lc9EsXwcQeHaPm3ABmfStI8A',control_payload_sha256:'559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82',adjudication_id:'T3-HUMAN-ADJUDICATION-2026-08-10',release:'S2 dynamic bidirectional traceability',extractor_workflow_id:'CNZIUbNBFEap9ioy',result:'pass',tests_passed:10,tests_total:10,pass_rate_percent:100,groundedness_percent:100,unsupported_claims:0,langfuse_traces_accepted:10,results,evaluated_at:new Date().toISOString()}}];"
+        "jsCode": "const results=$input.all().map(i=>i.json),ordered=results.map(r=>r.test_id).join(',');if(results.length!==10||ordered!=='T1,T2,T3,T4,T5,T6,T7,T8,T9,T10')throw new Error('S2 evaluation failed closed: exact ordered T1-T10 set required');const failed=results.filter(r=>r.result!=='pass'||r.groundedness_percent!==100||r.unsupported_claims!==0);if(failed.length)throw new Error('S2 evaluation failed closed: '+failed.map(r=>r.test_id+':'+r.errors.join('|')).join(';'));return [{json:{schema_version:'2.0.0',result_type:'s2_dynamic_t1_t10_evaluation',control_folder_id:'1S6JzavfMAXIEm6zu0T9n61CsC2iEQNEI',result_folder_id:'13bPMdqA4lc9EsXwcQeHaPm3ABmfStI8A',control_payload_sha256:'1b54cf7725ee321dccd53f9deb6b8f35feb968b8a2b74a0f9615dd0204432092',adjudication_ids:['T3-HUMAN-ADJUDICATION-2026-08-10','T10-HUMAN-ADJUDICATION-2026-08-10'],release:'S2 dynamic bidirectional traceability',extractor_workflow_id:'CNZIUbNBFEap9ioy',result:'pass',tests_passed:10,tests_total:10,pass_rate_percent:100,groundedness_percent:100,unsupported_claims:0,langfuse_traces_accepted:10,results,evaluated_at:new Date().toISOString()}}];"
       }
     },
     {
