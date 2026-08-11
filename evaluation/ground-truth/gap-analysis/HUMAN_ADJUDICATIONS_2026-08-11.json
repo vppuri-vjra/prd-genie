@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "document_type": "human_adjudication_register",
+  "stage": "gap_analyzer",
+  "decision_date": "2026-08-11",
+  "reviewer": "Vipin",
+  "agreement_gate_mode": "shadow",
+  "adjudications": [
+    {
+      "adjudication_id": "GA-T1-HUMAN-ADJUDICATION-2026-08-11",
+      "test_id": "GA-T1",
+      "langfuse_trace_id": "f9cca1f9ab631a78a80edb3bf02d0b34",
+      "llm_faithfulness": 0.5,
+      "llm_hallucination": 0.08,
+      "disposition": "confirm_ground_truth_refine_evaluator_policy",
+      "canonical_output_changed": false,
+      "business_source_changed": false
+    },
+    {
+      "adjudication_id": "GA-T4-HUMAN-ADJUDICATION-2026-08-11",
+      "test_id": "GA-T4",
+      "langfuse_trace_id": "767881a8878946a5a31cd5b3bc26d770",
+      "llm_faithfulness": 1.0,
+      "llm_hallucination": 0.45,
+      "disposition": "confirm_ground_truth_reject_external_knowledge_risk",
+      "canonical_output_changed": false,
+      "business_source_changed": false
+    },
+    {
+      "adjudication_id": "GA-T8-HUMAN-ADJUDICATION-2026-08-11",
+      "test_id": "GA-T8",
+      "langfuse_trace_id": "ff17fc20765906d9366b50fffe9b6c54",
+      "llm_faithfulness": 0.67,
+      "llm_hallucination": 0.0,
+      "disposition": "confirm_ground_truth_refine_evaluator_policy",
+      "canonical_output_changed": false,
+      "business_source_changed": false
+    }
+  ]
+}
