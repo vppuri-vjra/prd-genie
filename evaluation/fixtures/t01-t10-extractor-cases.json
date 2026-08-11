@@ -23,11 +23,11 @@
     {
       "test_id": "T3",
       "input": "The dashboard should auto-refresh every 5 seconds. [Later in same meeting] Performance is critical, minimize API calls.",
-      "expected_status": "partial",
+      "expected_status": "complete",
       "required_exact_values": ["every 5 seconds", "minimize API calls"],
       "required_item_types": ["functional_requirement", "non_functional_requirement"],
-      "required_behaviors": ["Identify the contradiction.", "Flag the conflict for stakeholder resolution."],
-      "prohibited_content": ["silently resolving the contradiction", "selecting a refresh implementation"]
+      "required_behaviors": ["Preserve both compatible requirements without inferring a contradiction."],
+      "prohibited_content": ["inventing a contradiction", "selecting a refresh implementation"]
     },
     {
       "test_id": "T4",
@@ -53,7 +53,7 @@
       "expected_status": "partial",
       "required_exact_values": ["Engineering", "microservices", "Design", "single-page app", "PM", "March"],
       "required_item_types": ["constraint", "deadline"],
-      "required_behaviors": ["Capture all three viewpoints.", "Identify tensions without favoring a stakeholder."],
+      "required_behaviors": ["Capture all three viewpoints.", "Preserve the architecture preferences as separate suggested constraints without inventing a contradiction or cross-link.", "Keep the result partial because approval status, the exact March deadline, and the delivery scope remain unclear."],
       "prohibited_content": ["choosing microservices", "choosing single-page app"]
     },
     {
@@ -89,8 +89,8 @@
       "expected_status": "complete",
       "required_exact_values": ["SSO login", "new auth service", "Team Alpha", "ETA unknown"],
       "required_item_types": ["functional_requirement", "dependency", "risk"],
-      "required_behaviors": ["Capture the auth-service dependency and unknown ETA risk."],
-      "prohibited_content": ["invented ETA", "invented auth-service status"]
+      "required_behaviors": ["Capture the auth-service dependency, preserve ETA unknown as a stated fact, and classify any delivery-risk conclusion as derived or inferred."],
+      "prohibited_content": ["invented ETA", "invented auth-service status", "delivery risk presented as explicitly stated"]
     }
   ]
 }

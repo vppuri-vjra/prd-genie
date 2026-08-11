@@ -1,11 +1,11 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.2.0",
   "test_id": "T6",
   "capability": "requirement_extraction",
   "approval_status": "approved",
   "reviewer": "Vipin",
-  "review_date": "2026-08-03",
-  "review_notes": "Human reviewer approved the separate suggested constraints, PM deadline, neutral unresolved relationship, partial status, grounded gaps, allowed variations, and prohibited claims. The earlier model output was comparison evidence only; its stakeholder-item classifications and invalid array shapes are not adopted.",
+  "review_date": "2026-08-10",
+  "review_notes": "Human reviewer adjudicated that microservices and a single-page app can coexist because they may describe backend and frontend layers. The unsupported contradiction and cross-links were removed. Separate suggested constraints, the PM deadline, partial status, and the three grounded clarification areas remain approved. This adjudication agrees with the independent Langfuse semantic-judge concern for T6.",
   "source": {
     "source_name": "eval_prdgenie_inputs.txt",
     "location": "T6",
@@ -20,9 +20,7 @@
     "extraction_status": "partial",
     "required_exact_values": ["Engineering", "microservices", "Design", "single-page app", "PM", "March"],
     "required_item_types": ["constraint", "deadline"],
-    "required_relationships": [
-      "Engineering's and Design's suggested constraints remain separate and are linked by a neutral unresolved reconciliation record."
-    ],
+    "required_relationships": [],
     "required_evidence": [
       "Engineering wants microservices.",
       "Design wants single-page app.",
@@ -31,10 +29,10 @@
   },
   "allowed_variations": [
     "The two preferences may be called architecture, technology, or implementation constraints if both remain suggested and separately attributed.",
-    "The unresolved relationship may be described as a tension, differing viewpoints, or reconciliation need; it must not assert inherent incompatibility.",
+    "Approval status may be requested in one clarification record or in separate records, but the two proposals must not be framed as mutually exclusive.",
     "Missing approval status, March year/date, and the identity of it may be separate or combined grounded clarification records.",
     "Semantically equivalent statement wording is allowed if Engineering, microservices, Design, single-page app, PM, and March are preserved.",
-    "Item identifiers may differ if schema-valid and relationships remain correct."
+    "Item identifiers may differ if schema-valid and no unsupported relationship is introduced."
   ],
   "prohibited_claims": [
     "Selecting, approving, recommending, or prioritizing microservices or a single-page app.",
@@ -46,7 +44,7 @@
   ],
   "expected_special_handling": {
     "ambiguity": "Approval status, product scope, and the precise March deadline are unknown.",
-    "contradictions": "A neutral unresolved relationship is required for viewpoint reconciliation, without asserting technical incompatibility.",
+    "contradictions": "None. Microservices and a single-page app may coexist and the source does not state that they conflict.",
     "missing_information": "Approval status, March year/date, and the deliverable referred to as it are grounded gaps.",
     "refusal_or_tbd": "Do not select an architecture; preserve both proposals for human review."
   },

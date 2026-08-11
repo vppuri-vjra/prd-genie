@@ -45,10 +45,10 @@
     {
       "id": "RSK-001",
       "type": "risk",
-      "statement": "The ETA for the new auth service is unknown.",
-      "status": "stated",
+      "statement": "The unknown ETA for the new auth service may create delivery risk for SSO login.",
+      "status": "ambiguous",
       "priority": "Unspecified",
-      "category": "Delivery",
+      "category": "Derived delivery risk",
       "target": "ETA unknown",
       "evidence": [
         {
@@ -58,13 +58,13 @@
           "speaker": null
         }
       ],
-      "confidence": 1.0,
+      "confidence": 0.8,
       "related_item_ids": ["DEP-001"]
     }
   ],
   "contradictions": [],
   "missing_information": [],
   "extractor_notes": [
-    "The explicit unknown ETA is preserved as a grounded delivery risk and does not by itself make the extraction partial."
+    "The unknown ETA is the stated source fact. Delivery impact is a supported inference and must not be represented as explicitly stated by the source."
   ]
 }

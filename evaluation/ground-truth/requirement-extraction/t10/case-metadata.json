@@ -1,11 +1,11 @@
 {
-  "dataset_version": "0.1.0",
+  "dataset_version": "0.1.1",
   "test_id": "T10",
   "capability": "requirement_extraction",
   "approval_status": "approved",
   "reviewer": "Vipin",
-  "review_date": "2026-08-03",
-  "review_notes": "Human reviewer approved the SSO functional requirement, linked dependency and risk, complete status, exact-value preservation, allowed variations, and prohibited claims. The corrected v0.8 passing output is comparison evidence only and did not automatically define the ground truth.",
+  "review_date": "2026-08-10",
+  "review_notes": "Human reviewer preserved the stated unknown ETA and approved potential delivery impact only as a grounded inference. The risk must not be represented as explicitly stated by the source.",
   "source": {
     "source_name": "eval_prdgenie_inputs.txt",
     "location": "T10",
@@ -22,7 +22,7 @@
     "required_item_types": ["functional_requirement", "dependency", "risk"],
     "required_relationships": [
       "The SSO login functional requirement links to the new-auth-service dependency.",
-      "The unknown-ETA risk links to the new-auth-service dependency."
+      "The derived unknown-ETA delivery risk links to the new-auth-service dependency."
     ],
     "required_evidence": [
       "SSO login requires the new auth service which is being built by Team Alpha.",
@@ -32,7 +32,7 @@
   "allowed_variations": [
     "The SSO functional statement may use provide, support, enable, or require SSO login if the exact capability remains present.",
     "The dependency statement may be semantically normalized if SSO login, new auth service, being built, and Team Alpha remain preserved.",
-    "The risk statement may be paraphrased if ETA unknown is preserved exactly in the item target or verbatim evidence.",
+    "The derived risk statement may be paraphrased if it remains conditional, ETA unknown is preserved exactly in the item target or verbatim evidence, and delivery impact is not presented as source-stated.",
     "A grounded clarification may additionally ask for the ETA, but it must not replace the risk or change complete status by itself.",
     "Item identifiers may differ if schema-valid and the FR-dependency-risk links remain correct.",
     "Confidence and category wording may vary within the schema."
@@ -44,6 +44,7 @@
     "Treating the new auth service only as a generic integration NFR when the source explicitly states a prerequisite relationship.",
     "Returning only a dependency and omitting the SSO functional requirement or unknown-ETA risk.",
     "Using missing information as a replacement for the explicit risk.",
+    "Presenting delivery impact or delivery risk as explicitly stated by the source.",
     "Returning partial solely because the source explicitly states ETA unknown."
   ],
   "expected_special_handling": {

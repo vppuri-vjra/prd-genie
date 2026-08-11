@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0.0",
+  "adjudication_id": "T3-HUMAN-ADJUDICATION-2026-08-10",
+  "document_type": "human_approved_evaluation_adjudication_record",
+  "used_by": "independent_evaluation_only",
+  "reviewer": "Vipin",
+  "review_date": "2026-08-10",
+  "capability": "requirement_extraction",
+  "test_id": "T3",
+  "previous_ground_truth_version": "0.1.0",
+  "revised_ground_truth_version": "0.2.0",
+  "decision": "Five-second dashboard auto-refresh and minimizing API calls can be satisfied together and are not inherently contradictory.",
+  "changes": {
+    "expected_status": {"from": "partial", "to": "complete"},
+    "contradiction_expected": {"from": true, "to": false},
+    "item_status": {"from": "contradictory", "to": "stated"},
+    "contradiction_cross_links": {"from": true, "to": false}
+  },
+  "product_requirement_impact": "none",
+  "base_control_payload_sha256": "4ad3e09eb76eb7fa21823b5f9ccbd372dc8453a93ff200dedc588c8907eb0e26",
+  "revised_case_payload_sha256": "559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82",
+  "validation": {
+    "n8n_execution_id": "10311",
+    "tests_passed": 10,
+    "tests_total": 10,
+    "code_evaluator_passed": 10,
+    "t3_llm_faithfulness": 1.0,
+    "t3_llm_hallucination": 0.0
+  }
+}

@@ -50,9 +50,9 @@ Model outputs, prompt changes, and evaluation failures may reveal a defect in gr
 | T7 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T7 | `requirement-extraction/t07/expected-output.json` | `requirement-extraction/t07/HUMAN_REVIEW.md` | `requirement-extraction/t07/case-metadata.json` |
 | T8 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T8 | `requirement-extraction/t08/expected-output.json` | `requirement-extraction/t08/HUMAN_REVIEW.md` | `requirement-extraction/t08/case-metadata.json` |
 | T9 | `0.1.1` | Approved by Vipin on 2026-08-03; actual wording adjudicated as acceptable | `Resources/eval_prdgenie_inputs.txt`, T9 | `requirement-extraction/t09/expected-output.json` | `requirement-extraction/t09/HUMAN_REVIEW.md` | `requirement-extraction/t09/case-metadata.json` |
-| T10 | `0.1.0` | Approved by Vipin on 2026-08-03 | `Resources/eval_prdgenie_inputs.txt`, T10 | `requirement-extraction/t10/expected-output.json` | `requirement-extraction/t10/HUMAN_REVIEW.md` | `requirement-extraction/t10/case-metadata.json` |
+| T10 | `0.1.1` | Approved by Vipin on 2026-08-10; stated ETA separated from derived delivery risk | `Resources/eval_prdgenie_inputs.txt`, T10 | `requirement-extraction/t10/expected-output.json` | `requirement-extraction/t10/HUMAN_REVIEW.md` | `requirement-extraction/t10/case-metadata.json` |
 
-T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.1`. T1 and T9 contain approved adjudication updates; unchanged cases retain their original `0.1.0` case version. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
+T1-T10 Requirement Extraction ground truth is complete at dataset version `0.1.1`. T1, T9, and T10 contain approved adjudication updates; unchanged cases retain their original `0.1.0` case version. Every case has a schema-valid canonical output, source traceability, allowed variations, prohibited claims, and a recorded human approval.
 
 ## PRD Generation Review Register
 

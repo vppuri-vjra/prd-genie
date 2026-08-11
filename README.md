@@ -54,6 +54,7 @@ Foundational documentation:
 - [`PRODUCT_PRD.md`](docs/requirements/PRODUCT_PRD.md) - what the product must deliver
 - [`ARCHITECTURE_DESIGN.md`](docs/architecture/ARCHITECTURE_DESIGN.md) - how the system is designed and how it will evolve
 - [`EXTRACTION_STATUS_GUIDE.md`](docs/architecture/EXTRACTION_STATUS_GUIDE.md) - authoritative human-readable definitions for `complete`, `partial`, and `no_requirements`
+- [`DOCUMENT_CLASSIFICATION_REGISTER.md`](docs/architecture/DOCUMENT_CLASSIFICATION_REGISTER.md) - authoritative Document Type and Used By boundaries for production evidence, human decisions, and evaluation adjudications
 - [`ITERATION_PLAN.md`](docs/planning/ITERATION_PLAN.md) - formal four-week plan and compressed execution target
 - [`evaluation/ground-truth/`](evaluation/ground-truth/README.md) - human-reviewed canonical evaluation-data plan
 - [`evaluate_extraction.py`](scripts/evaluate_extraction.py) - deterministic T1-T10 evaluator and scorecard generator
