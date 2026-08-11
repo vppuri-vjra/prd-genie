@@ -14,7 +14,7 @@
     {
       "test_id": "T2",
       "input": "We need better reporting. Something like what Competitor X has.",
-      "expected_status": "complete",
+      "expected_status": "partial",
       "required_exact_values": ["Competitor X"],
       "required_item_types": ["functional_requirement"],
       "required_behaviors": ["Flag the request as ambiguous.", "Identify missing metrics, format, and users."],
@@ -23,7 +23,7 @@
     {
       "test_id": "T3",
       "input": "The dashboard should auto-refresh every 5 seconds. [Later in same meeting] Performance is critical, minimize API calls.",
-      "expected_status": "partial",
+      "expected_status": "complete",
       "required_exact_values": ["every 5 seconds", "minimize API calls"],
       "required_item_types": ["functional_requirement", "non_functional_requirement"],
       "required_behaviors": ["Preserve both compatible requirements without inferring a contradiction."],

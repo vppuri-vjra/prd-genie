@@ -1,7 +1,7 @@
 # S2 Langfuse Independent Shadow Hardening Result
 
 Date: 2026-08-10  
-n8n execution: `10311`
+n8n execution: `10333`
 Extractor candidate: `CNZIUbNBFEap9ioy`  
 Evaluator candidate: `lNRM0vzmggdpAoJe`  
 Mode: Unpublished shadow
@@ -14,17 +14,17 @@ The fresh S2 T1-T10 pipeline completed successfully: **10/10 passed**, **100% gr
 
 | Test | Trace ID | Code pass | LLM faithfulness | LLM hallucination |
 |---|---|---:|---:|---:|
-| T1 | `c6d545f0aa0e33e8dcc75d79b744f5fa` | true | 1.00 | 0.00 |
-| T2 | `323c905a3bfecd29ae26bd6eae6a6a4e` | true | 1.00 | 0.00 |
-| T3 | `59395ebbf887a731fdfbe2c90db24882` | true | 1.00 | 0.00 |
-| T4 | `19a85c3687c88f466119c8665245932a` | true | 0.98 | 0.00 |
-| T5 | `431e4c07932b13c1edb6735284ca75b7` | true | 1.00 | 0.01 |
-| T6 | `be5505c4d1088e7523286cd0e67163ea` | true | 1.00 | 0.00 |
-| T7 | `1dcdf4d0724b66e9bbd834d32251e867` | true | 1.00 | 0.00 |
-| T8 | `28bbe48eb4fc84399ce4a13a34c0850c` | true | 1.00 | 0.00 |
-| T9 | `622c486a2989db8275b55b8747da2960` | true | 1.00 | 0.00 |
-| T10 | `01e51790c59ea0aba29b8b62f9473e97` | true | 1.00 | 0.00 |
-| **Aggregate** | **10 traces** | **10/10** | **0.998 average** | **0.001 average** |
+| T1 | `22b500d819403dfa035453d9135f5ac9` | true | 0.80 | 0.02 |
+| T2 | `e335f25cd6643e4c2aecfe7840f10daf` | true | 1.00 | 0.00 |
+| T3 | `ebdf2020604b35bb3bdd0c04e92fc991` | true | 1.00 | 0.00 |
+| T4 | `bfdbfd268c2d63748505ea6a3ff5c68f` | true | 1.00 | 0.00 |
+| T5 | `044eedf64187f586c738562056b0d037` | true | 1.00 | 0.00 |
+| T6 | `4f861ab33c5bc734a16e521270e53fd9` | true | 0.88 | 0.01 |
+| T7 | `20ed3d27cc9dd6f0190a646e56660476` | true | 1.00 | 0.00 |
+| T8 | `62cf4fc705ef69497e858ed5c88adf78` | true | 1.00 | 0.00 |
+| T9 | `aaf5a0a59d0555c41e894baf1aa1a4ef` | true | 1.00 | 0.00 |
+| T10 | `d5c427afb589fdadc54e8f38e00e57c7` | true | 0.75 | 0.08 |
+| **Aggregate** | **10 traces** | **10/10** | **0.943 average** | **0.011 average** |
 
 ## T6 adjudication outcome
 
@@ -34,8 +34,8 @@ This improved T6 hallucination from the first shadow baseline's `0.40` to `0.08`
 
 ## T3 adjudication outcome
 
-The reviewer approved the Langfuse judge's finding that five-second auto-refresh and API-call minimization can be satisfied together. T3 ground truth version `0.2.0` preserves both as stated requirements, removes the inferred contradiction and cross-links, and changes extraction status from `partial` to `complete`. The live shadow evaluator verifies the original Drive bundle and then records adjudication `T3-HUMAN-ADJUDICATION-2026-08-10`, base hash `4ad3e09eb76eb7fa21823b5f9ccbd372dc8453a93ff200dedc588c8907eb0e26`, and effective-control hash `d9b032e50d30bb0b8f0b75f8977800cbea5d86e7aecdcc4e2cddc2f056657b04`.
+The reviewer approved the Langfuse judge's finding that five-second auto-refresh and API-call minimization can be satisfied together. T3 ground truth version `0.2.0` preserves both as stated requirements, removes the inferred contradiction and cross-links, and changes extraction status from `partial` to `complete`. Google Drive control bundle `v1.1` contains the adjudication directly with authoritative case-payload hash `559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82`; the evaluator-side runtime overlay has been removed.
 
 ## Promotion decision
 
-All ten cases now pass deterministic n8n evaluation, Langfuse Code Evaluation, and both provisional LLM thresholds. The Code Evaluator receives the complete structured extraction. The LLM judges receive the dedicated `requirement-extractor-semantic-evaluation` observation with the `substantive-v1` projection. Keep the Agreement Gate in shadow mode until this result is repeated for stability and equivalent independent evaluations are completed for the other four processing agents.
+All ten cases pass deterministic n8n evaluation and Langfuse Code Evaluation using the Drive-read `v1.1` bundle. Nine of ten meet both provisional LLM thresholds; T10 faithfulness is `0.75` against the `0.80` threshold while hallucination remains acceptable at `0.08`. Keep the Agreement Gate in shadow mode and investigate T10 judge stability without lowering thresholds.

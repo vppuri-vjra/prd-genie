@@ -34,7 +34,7 @@ The Langfuse LLM judge identified that the earlier T3 ground truth over-interpre
 | Used By | Independent evaluation only |
 | Product-requirement impact | None |
 | Base control hash | `4ad3e09eb76eb7fa21823b5f9ccbd372dc8453a93ff200dedc588c8907eb0e26` |
-| Effective control hash | `d9b032e50d30bb0b8f0b75f8977800cbea5d86e7aecdcc4e2cddc2f056657b04` |
-| Validation execution | n8n `10311`: T1–T10 10/10; Code 10/10; T3 faithfulness `1.00`; T3 hallucination `0.00` |
+| Authoritative v1.1 control hash | `559785b3a8788113e9b43e05dad09cab56b447a7ed322bc1f72b7aae8d923c82` |
+| Drive-only validation execution | n8n `10333`: deterministic T1–T10 10/10; Code 10/10; T3 faithfulness `1.00`; T3 hallucination `0.00` |
 
 The six production inputs therefore comprise three original business evidence sources and three human-approved production decision records. The T3 adjudication is evaluation governance, not a seventh production source.
