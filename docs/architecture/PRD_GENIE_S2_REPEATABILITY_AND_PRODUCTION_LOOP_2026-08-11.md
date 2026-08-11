@@ -103,8 +103,8 @@ The harness is isolated from production and makes no OpenAI or Langfuse calls.
 | Hallucination threshold | Verified at `<= 0.10` | Owner confirms threshold |
 | Faithfulness threshold | Verified at `>= 0.90` | Owner confirms threshold |
 | Evaluator disagreement handling | Verified | Retain human-review hold |
-| Human-review correction loop | Policy defined | Confirm reviewer and operational response time |
-| Rollback | Keep prior shadow workflow available | Confirm rollback owner |
+| Human-review correction loop | Policy defined; owner: **Vipin Puri** | Define operational response time during production operations |
+| Rollback | v0.3.2 shadow workflow retained; owner: **Vipin Puri** | Use v0.3.2 if the enforced parent must be withdrawn |
 | Enforcement | **Off** | Enable only after explicit owner approval |
 | Publishing | **Unpublished** | Publish only after release approval |
 
