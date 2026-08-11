@@ -1,7 +1,7 @@
 # S2 Langfuse Independent Shadow Hardening Result
 
 Date: 2026-08-10  
-n8n execution: `10300`
+n8n execution: `10311`
 Extractor candidate: `CNZIUbNBFEap9ioy`  
 Evaluator candidate: `lNRM0vzmggdpAoJe`  
 Mode: Unpublished shadow
@@ -14,17 +14,17 @@ The fresh S2 T1-T10 pipeline completed successfully: **10/10 passed**, **100% gr
 
 | Test | Trace ID | Code pass | LLM faithfulness | LLM hallucination |
 |---|---|---:|---:|---:|
-| T1 | `cfbee7adf89e464f3d5b7ab5df6bdcd1` | true | 1.00 | 0.00 |
-| T2 | `5c4fc53274333d1eb52100d413422fa7` | true | 1.00 | 0.00 |
-| T3 | `d04a280c3131762cc2fd976bd55ca0d6` | true | 0.40 | 0.08 |
-| T4 | `d6926d16c60391003edc23b6bd7cefb6` | true | 1.00 | 0.00 |
-| T5 | `8dad926046c8e69c360ed88cf2d4d31c` | true | 1.00 | 0.00 |
-| T6 | `ed93078d2fd4e7977fa7c8b36d2a578a` | true | 1.00 | 0.00 |
-| T7 | `6e0ff0c42171e4c99233d34a0dbf1e2d` | true | 1.00 | 0.00 |
-| T8 | `01be811c908df37c85c9d81fdba6961a` | true | 1.00 | 0.00 |
-| T9 | `347a928ed7574e5e7f73185221a1840a` | true | 1.00 | 0.00 |
-| T10 | `36ce470d3ba2cca7329444926b7237c7` | true | 1.00 | 0.00 |
-| **Aggregate** | **10 traces** | **10/10** | **0.940 average** | **0.008 average** |
+| T1 | `c6d545f0aa0e33e8dcc75d79b744f5fa` | true | 1.00 | 0.00 |
+| T2 | `323c905a3bfecd29ae26bd6eae6a6a4e` | true | 1.00 | 0.00 |
+| T3 | `59395ebbf887a731fdfbe2c90db24882` | true | 1.00 | 0.00 |
+| T4 | `19a85c3687c88f466119c8665245932a` | true | 0.98 | 0.00 |
+| T5 | `431e4c07932b13c1edb6735284ca75b7` | true | 1.00 | 0.01 |
+| T6 | `be5505c4d1088e7523286cd0e67163ea` | true | 1.00 | 0.00 |
+| T7 | `1dcdf4d0724b66e9bbd834d32251e867` | true | 1.00 | 0.00 |
+| T8 | `28bbe48eb4fc84399ce4a13a34c0850c` | true | 1.00 | 0.00 |
+| T9 | `622c486a2989db8275b55b8747da2960` | true | 1.00 | 0.00 |
+| T10 | `01e51790c59ea0aba29b8b62f9473e97` | true | 1.00 | 0.00 |
+| **Aggregate** | **10 traces** | **10/10** | **0.998 average** | **0.001 average** |
 
 ## T6 adjudication outcome
 
@@ -32,8 +32,10 @@ The reviewer confirmed that microservices and a single-page app can coexist. T6 
 
 This improved T6 hallucination from the first shadow baseline's `0.40` to `0.08`. Code evaluation passed, and the substantive Langfuse judge assessment no longer identifies the architecture interpretation as a contradiction hallucination.
 
+## T3 adjudication outcome
+
+The reviewer approved the Langfuse judge's finding that five-second auto-refresh and API-call minimization can be satisfied together. T3 ground truth version `0.2.0` preserves both as stated requirements, removes the inferred contradiction and cross-links, and changes extraction status from `partial` to `complete`. The live shadow evaluator verifies the original Drive bundle and then records adjudication `T3-HUMAN-ADJUDICATION-2026-08-10`, base hash `4ad3e09eb76eb7fa21823b5f9ccbd372dc8453a93ff200dedc588c8907eb0e26`, and effective-control hash `d9b032e50d30bb0b8f0b75f8977800cbea5d86e7aecdcc4e2cddc2f056657b04`.
+
 ## Promotion decision
 
-Keep the agreement gate in shadow mode. The deterministic pipeline and Code Evaluator agree 10/10, and 9/10 cases meet both provisional LLM thresholds after separating evaluation inputs. The Code Evaluator receives the complete structured extraction. The two LLM judges receive the dedicated `requirement-extractor-semantic-evaluation` observation with the `substantive-v1` projection; administrative run and schema metadata remain on the auditable parent trace but are excluded from semantic scoring.
-
-T3 is the sole threshold exception (`faithfulness 0.40`, `hallucination 0.08`). The faithfulness judge accepts both extracted requirements but does not believe the source itself establishes that five-second auto-refresh and minimizing API calls are contradictory. This is a substantive dataset-policy question, not an administrative-metadata artifact. Human adjudication is required before changing either the T3 ground truth or the extractor behavior.
+All ten cases now pass deterministic n8n evaluation, Langfuse Code Evaluation, and both provisional LLM thresholds. The Code Evaluator receives the complete structured extraction. The LLM judges receive the dedicated `requirement-extractor-semantic-evaluation` observation with the `substantive-v1` projection. Keep the Agreement Gate in shadow mode until this result is repeated for stability and equivalent independent evaluations are completed for the other four processing agents.

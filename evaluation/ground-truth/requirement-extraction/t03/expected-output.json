@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0.0",
   "run_id": "RUN-T3-GROUND-TRUTH",
-  "extraction_status": "partial",
-  "summary": "The source requires five-second dashboard auto-refresh while also requiring API calls to be minimized, creating an unresolved tension.",
+  "extraction_status": "complete",
+  "summary": "The dashboard should auto-refresh every 5 seconds, and performance is critical with API calls minimized.",
   "items": [
     {
       "id": "FR-001",
       "type": "functional_requirement",
       "statement": "The dashboard should auto-refresh every 5 seconds.",
-      "status": "contradictory",
+      "status": "stated",
       "priority": "Unspecified",
       "category": "Refresh",
       "target": "every 5 seconds",
@@ -21,13 +21,13 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["NFR-001"]
+      "related_item_ids": []
     },
     {
       "id": "NFR-001",
       "type": "non_functional_requirement",
-      "statement": "Performance is critical and API calls should be minimized.",
-      "status": "contradictory",
+      "statement": "Performance is critical, minimize API calls.",
+      "status": "stated",
       "priority": "Unspecified",
       "category": "Performance",
       "target": "minimize API calls",
@@ -40,20 +40,10 @@
         }
       ],
       "confidence": 1.0,
-      "related_item_ids": ["FR-001"]
+      "related_item_ids": []
     }
   ],
-  "contradictions": [
-    {
-      "id": "CTR-001",
-      "description": "Refreshing the dashboard every 5 seconds may increase API calls while API calls are required to be minimized.",
-      "item_ids": ["FR-001", "NFR-001"],
-      "resolution_status": "unresolved",
-      "clarification_question": "How should the five-second auto-refresh requirement and API-call minimization requirement be reconciled, and which takes precedence if both cannot be satisfied?"
-    }
-  ],
+  "contradictions": [],
   "missing_information": [],
-  "extractor_notes": [
-    "The unresolved tension is preserved for stakeholder resolution; no refresh implementation is selected."
-  ]
+  "extractor_notes": []
 }
