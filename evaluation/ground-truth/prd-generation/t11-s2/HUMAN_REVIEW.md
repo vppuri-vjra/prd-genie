@@ -17,6 +17,6 @@ This is a new S2-aligned contract. It does not replace the historical ten-sectio
 - [x] Approve this T11-S2 canonical input and output.
 - [ ] Request changes.
 
-Reviewer: Vipin Puri  
-Decision date: 2026-08-10  
+Reviewer: Vipin Puri
+Decision date: 2026-08-10
 Decision note: Approved after reviewing the intentionally narrow scope of FR-001, NFR-001, STK-001, and DDL-001.
