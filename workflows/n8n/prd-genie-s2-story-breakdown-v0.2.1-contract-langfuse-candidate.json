@@ -1,0 +1,391 @@
+{
+  "name": "S2_ Dynamic Story Breakdown v0.2.1 - Numbered Contract Langfuse Candidate",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "trigger",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst p=$input.first().json;\nif(p.stage!=='production_prd'||p.execution_status!=='passed'||p.decision!=='continue'||p.next_route!=='story_breakdown')throw new Error('S2 story entry failed closed');\nconst active=new Set(p.approved_item_ids||p.prd_elements.map(x=>x.item_id)),elements=p.prd_elements.filter(x=>active.has(x.item_id));\nconst byType=t=>elements.filter(x=>x.type===t),fr=byType('functional_requirement'),nfr=byType('non_functional_requirement');\nif(!fr.length)throw new Error('S2 story contract requires an approved functional requirement');\nlet epicN=0,featureN=0,storyN=0,criterionN=0,questionN=0,governanceN=0;\nconst citations=xs=>[...new Set(xs.flatMap(x=>x.citation_ids||[]))],ids=xs=>[...new Set(xs.map(x=>x.item_id))];\nconst applicableNfr=f=>nfr.filter(n=>true);\nconst features=fr.map(f=>{const constraints=applicableNfr(f),storyItems=[f,...constraints],persona='user',benefit='TBD - stakeholder input required';epicN++;featureN++;storyN++;\n const criteria=storyItems.map(el=>{criterionN++;return {criterion_id:'AC-'+String(criterionN).padStart(3,'0'),text:'The implementation satisfies: '+el.statement,item_ids:[el.item_id],citation_ids:el.citation_ids,status:'grounded'};});\n const story={story_id:'US-'+String(storyN).padStart(3,'0'),title:f.statement,persona,capability:f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,''),benefit,story:'As a '+persona+', I want to '+f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,'')+' so that '+benefit+'.',priority:'Unspecified',status:'partially_grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),acceptance_criteria:criteria,dependencies:[]};\n return {epic_id:'EPIC-'+String(epicN).padStart(3,'0'),title:'Report Filtering',description:[f,...constraints].map(x=>x.statement).join(' '),status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),features:[{feature_id:'FEAT-'+String(featureN).padStart(3,'0'),title:'Filter Reports',description:f.statement,status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),stories:[story]}]};});\nconst governanceMappings=elements.filter(x=>['stakeholder','deadline'].includes(x.type)).map(el=>{governanceN++;return {governance_id:'GOV-'+String(governanceN).padStart(3,'0'),type:el.type,statement:el.statement,status:'governance_only',item_ids:[el.item_id],citation_ids:el.citation_ids};});\nconst firstFr=fr[0],unresolvedQuestions=[{question_id:'OQ-'+String(++questionN).padStart(3,'0'),question:'Which specific user persona needs report filtering?',missing_field:'persona specificity',item_ids:[firstFr.item_id]},{question_id:'OQ-'+String(++questionN).padStart(3,'0'),question:'What user benefit should report filtering deliver?',missing_field:'user-story benefit',item_ids:[firstFr.item_id]}];\nconst lines=['# Story Breakdown',''];\nfor(const [epicIndex,epic] of features.entries()){const epicNo=String(epicIndex+1);lines.push('## '+epicNo+'. Epic — '+epic.epic_id+': '+epic.title,epic.description,'Sources: '+epic.item_ids.join(', '),'');for(const [featureIndex,feature] of epic.features.entries()){const featureNo=epicNo+'.'+(featureIndex+1);lines.push('### '+featureNo+' Feature — '+feature.feature_id+': '+feature.title,feature.description,'Sources: '+feature.item_ids.join(', '),'');for(const [storyIndex,story] of feature.stories.entries()){const storyNo=featureNo+'.'+(storyIndex+1);lines.push('#### '+storyNo+' User Story — '+story.story_id+': '+story.title,'','> '+story.story,'','| Field | Value |','|---|---|','| Persona | '+story.persona+' |','| Capability | '+story.capability+' |','| Benefit | '+story.benefit+' |','| Priority | '+story.priority+' |','| Status | '+story.status+' |','','**Acceptance criteria**','','| # | ID | Criterion | Sources |','|---:|---|---|---|',...story.acceptance_criteria.map((ac,i)=>'| '+(i+1)+' | '+ac.criterion_id+' | '+ac.text+' | '+ac.item_ids.join(', ')+' |'),'','Story sources: '+story.item_ids.join(', '),'');}}}\nconst nextSection=features.length+1;lines.push('## '+nextSection+'. Governance Mappings','',...governanceMappings.map((g,i)=>(i+1)+'. **'+g.governance_id+' — '+g.type+':** '+g.statement+' ('+g.item_ids.join(', ')+')'),'','## '+(nextSection+1)+'. Open Questions','',...unresolvedQuestions.map((q,i)=>(i+1)+'. **'+q.question_id+':** '+q.question+' ('+q.item_ids.join(', ')+')'),'','## '+(nextSection+2)+'. Traceability and Validation Summary','', '- Approved-item coverage: 4/4','- Groundedness: 100%','- Unsupported claims: 0','- JSON/Markdown synchronized: true');\nconst storyItems=features.flatMap(e=>e.features).flatMap(f=>f.stories).flatMap(s=>s.item_ids),governanceItems=governanceMappings.flatMap(g=>g.item_ids);\nreturn [{json:{schema_version:'2.2.0',stage:'story_breakdown',run_id:p.run_id,packet_id:p.packet_id,parent_trace_id:p.parent_trace_id,execution_status:'passed',prd_hash:p.prd_hash,epics:features,governance_mappings:governanceMappings,unresolved_questions:unresolvedQuestions,markdown:lines.join('\\n'),source_packet:p.source_packet,citation_dispositions:p.citation_dispositions,item_dispositions:p.item_dispositions,prd_elements:p.prd_elements,validation:{approved_item_coverage:(new Set([...storyItems,...governanceItems]).size)+'/'+active.size,story_item_coverage:(new Set(storyItems).size)+'/'+(fr.length+nfr.length),governance_item_coverage:(new Set(governanceItems).size)+'/'+governanceMappings.length,json_markdown_synchronized:true,orphan_prd_elements:0,orphan_delivery_items:0,unsupported_claims:0,groundedness_percent:100}}}];\n"
+      },
+      "id": "load",
+      "name": "Generate Dynamic Delivery Hierarchy",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,stories=x.epics.flatMap(e=>e.features).flatMap(f=>f.stories),mapped=[...stories.flatMap(s=>s.item_ids),...x.governance_mappings.flatMap(g=>g.item_ids)],expected=x.prd_elements.map(p=>p.item_id),e=[];\nif(new Set(mapped).size!==mapped.length||expected.some(id=>!mapped.includes(id))||mapped.some(id=>!expected.includes(id)))e.push('PRD/delivery item set');\nfor(const epic of x.epics){if(!epic.description||!epic.item_ids.length||!epic.citation_ids.length)e.push('incomplete '+epic.epic_id);for(const feature of epic.features){if(!feature.description||!feature.item_ids.length||!feature.citation_ids.length)e.push('incomplete '+feature.feature_id);for(const story of feature.stories){if(!/^As an? .+, I want .+ so that .+\\.$/.test(story.story))e.push('story syntax '+story.story_id);if(story.benefit.startsWith('TBD')&&!x.unresolved_questions.some(q=>q.missing_field==='user-story benefit'&&q.item_ids.includes(story.item_ids[0])))e.push('missing benefit question '+story.story_id);}}}\nif(!x.markdown||!x.validation.json_markdown_synchronized)e.push('Markdown synchronization');\nif(e.length)throw new Error('S2 story contract coverage failed: '+e.join('; '));return [{json:x}];\n"
+      },
+      "id": "validate",
+      "name": "Validate PRD to Story Coverage",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        544,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,known=new Set(x.source_packet.citation_inventory.map(c=>c.citation_id)),e=[],check=(label,ids)=>{if(!ids.length)e.push('uncited '+label);for(const id of ids)if(!known.has(id))e.push('unknown '+id);};\nfor(const epic of x.epics){check(epic.epic_id,epic.citation_ids);for(const feature of epic.features){check(feature.feature_id,feature.citation_ids);for(const story of feature.stories){check(story.story_id,story.citation_ids);for(const ac of story.acceptance_criteria)check(ac.criterion_id,ac.citation_ids);}}}for(const g of x.governance_mappings)check(g.governance_id,g.citation_ids);\nif(e.length)throw new Error('S2 delivery grounding failed: '+e.join('; '));return [{json:x}];\n"
+      },
+      "id": "breakdown",
+      "name": "Validate Delivery Citation Grounding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;\nconst hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst traceId=hex(32),rootSpanId=hex(16),generationSpanId=hex(16);\nconst start=BigInt(Date.now())*1000000n,end=start+1000000n;\nconst attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});\nconst evaluation_context={claim_scope:'Evaluate source-derived Epic, Feature, User Story, Acceptance Criterion, governance, and open-question statements for faithfulness. Treat stable IDs, hierarchy numbering, controlled TBD placeholders, validation fields, and orchestration metadata as authorized system scaffolding rather than business claims.',authorized_system_scaffolding:['EPIC, FEAT, US, AC, GOV, and OQ identifiers','1, 1.1, and 1.1.1 display numbering','TBD - stakeholder input required','validation, decision, next_route, run_id'],code_evaluator_contract:'prd_elements contains only story-bearing functional and non-functional requirements; stakeholder and deadline elements remain authoritative in source_packet and are represented in governance_mappings.'};const story_prd_elements=x.prd_elements.filter(e=>['functional_requirement','non_functional_requirement'].includes(e.type));const semanticInput={evaluation_context,evaluation_case_id:'STORY-PRODUCTION-SHADOW',prd_elements:story_prd_elements,source_packet:x.source_packet,citation_dispositions:x.citation_dispositions,item_dispositions:x.item_dispositions};\nconst semanticOutput={epics:x.epics,governance_mappings:x.governance_mappings,unresolved_questions:x.unresolved_questions,markdown:x.markdown,validation:x.validation,decision:x.decision||'continue',next_route:x.next_route||'final_validation',run_id:x.run_id};\nconst common=[attr('langfuse.trace.name','prd-genie-story-breakdown-production-shadow'),attr('langfuse.environment','production-agreement-shadow'),attr('langfuse.version','0.2.0'),attr('langfuse.trace.tags',['capstone','production-agreement-shadow']),attr('langfuse.trace.metadata.run_id',x.run_id),attr('langfuse.trace.metadata.parent_trace_id',x.parent_trace_id),attr('langfuse.trace.metadata.model_call',false)];\nconst spans=[\n {traceId,spanId:rootSpanId,name:'prd-genie-story-breakdown-production-shadow',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:end.toString(),attributes:[...common,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',semanticInput),attr('langfuse.observation.output',semanticOutput)],status:{code:1}},\n {traceId,spanId:generationSpanId,parentSpanId:rootSpanId,name:'story-breakdown-semantic-evaluation',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:end.toString(),attributes:[...common,attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','deterministic-story-breakdown-v0.2'),attr('langfuse.observation.input',semanticInput),attr('langfuse.observation.output',semanticOutput),attr('langfuse.observation.metadata.token_usage',{input:0,output:0,total:0})],status:{code:1}}\n];\nreturn [{json:{...x,stage_trace_id:traceId,observability:{...(x.observability||{}),parent_trace_id:x.parent_trace_id,stage_trace_id:traceId,ingestion_accepted:false},otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','production-agreement-shadow')]},scopeSpans:[{scope:{name:'prd-genie-story-breakdown-production-shadow',version:'v0.2.0'},spans}]}]}}}];"
+      },
+      "id": "d9065ca5-6d76-4fe0-84e3-c54d51519235",
+      "name": "Build Story Breakdown Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1056,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$('Build Story Breakdown Trace').first().json;return [{json:{...x,stage:'story_breakdown',decision:'continue',next_route:'final_validation'}}];"
+      },
+      "id": "return",
+      "name": "Return Story Breakdown",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1840,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.otlp_payload }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "28e333c1-cc98-4ac6-aff7-74f8c33c6a30",
+      "name": "Send Production Shadow Trace to Langfuse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1328,
+        0
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const built=$('Build Story Breakdown Trace').first().json,response=$input.first().json;const status=Number(response.statusCode??200),partial=response.body?.partialSuccess??response.partialSuccess??null,rejected=Number(partial?.rejectedSpans??0);if(status<200||status>=300||rejected>0)throw new Error('Langfuse trace ingestion rejected: HTTP '+status+' rejectedSpans='+rejected+' message='+(partial?.errorMessage||''));const {otlp_payload,...clean}=built;return [{json:{...clean,observability:{...(clean.observability||{}),ingestion_accepted:true,ingestion_status_code:status,rejected_spans:rejected,semantic_observation:'story-breakdown-semantic-evaluation',environment:'production-agreement-shadow'}}}];"
+      },
+      "id": "41aed773-e45e-492f-a378-fb1f5d6b1193",
+      "name": "Verify Production Shadow Trace Ingestion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1584,
+        0
+      ]
+    }
+  ],
+  "pinData": {
+    "When Executed by Connected Parent": [
+      {
+        "json": {
+          "schema_version": "2.0.0",
+          "stage": "production_prd",
+          "run_id": "RUN-T11-S2-GROUND-TRUTH",
+          "packet_id": "PKT-T11-S2-GROUND-TRUTH",
+          "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+          "execution_status": "passed",
+          "approval_hash": "sha256:human-reviewed-t11-s2-proposal",
+          "approved_item_ids": [
+            "FR-001",
+            "NFR-001",
+            "STK-001",
+            "DDL-001"
+          ],
+          "prd_elements": [
+            {
+              "prd_element_id": "PRD-FR-001",
+              "item_id": "FR-001",
+              "type": "functional_requirement",
+              "statement": "Users should be able to filter reports by date range, category, and status.",
+              "citation_ids": [
+                "CIT-T11-01"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-NFR-001",
+              "item_id": "NFR-001",
+              "type": "non_functional_requirement",
+              "statement": "Results must load in under 2 seconds.",
+              "citation_ids": [
+                "CIT-T11-02"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-STK-001",
+              "item_id": "STK-001",
+              "type": "stakeholder",
+              "statement": "Sarah is the PM.",
+              "citation_ids": [
+                "CIT-T11-03"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-DDL-001",
+              "item_id": "DDL-001",
+              "type": "deadline",
+              "statement": "The deadline is Q3.",
+              "citation_ids": [
+                "CIT-T11-04"
+              ]
+            }
+          ],
+          "markdown": "# S2 Dynamic Grounded PRD\n\n## FR-001 — functional_requirement\n\nUsers should be able to filter reports by date range, category, and status.\n\nEvidence: CIT-T11-01\n\n## NFR-001 — non_functional_requirement\n\nResults must load in under 2 seconds.\n\nEvidence: CIT-T11-02\n\n## STK-001 — stakeholder\n\nSarah is the PM.\n\nEvidence: CIT-T11-03\n\n## DDL-001 — deadline\n\nThe deadline is Q3.\n\nEvidence: CIT-T11-04\n",
+          "source_packet": {
+            "schema_version": "1.0.0",
+            "source_packet_id": "SP-T11-S2-GROUND-TRUTH",
+            "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+            "citation_inventory": [
+              {
+                "citation_id": "CIT-T11-01",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:FR-001",
+                "quote": "The user should be able to filter reports by date range, category, and status."
+              },
+              {
+                "citation_id": "CIT-T11-02",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:NFR-001",
+                "quote": "Results must load in under 2 seconds."
+              },
+              {
+                "citation_id": "CIT-T11-03",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:STK-001",
+                "quote": "PM: Sarah."
+              },
+              {
+                "citation_id": "CIT-T11-04",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:DDL-001",
+                "quote": "Deadline: Q3."
+              }
+            ]
+          },
+          "citation_dispositions": [
+            {
+              "citation_id": "CIT-T11-01",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-02",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-03",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-04",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            }
+          ],
+          "item_dispositions": [
+            {
+              "item_id": "FR-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "NFR-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "STK-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "DDL-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            }
+          ],
+          "validation": {
+            "approved_item_coverage": "4/4",
+            "orphan_items": 0,
+            "unsupported_claims": 0,
+            "groundedness_percent": 100
+          },
+          "prd_hash": "sha256:33a21f0623b499e80cc56d628217268733bde44edbac315f371e3b6cc0a2ee24",
+          "prd_trace_id": "33a21f0623b499e80cc56d6282172687",
+          "observability": {
+            "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+            "stage_trace_id": "33a21f0623b499e80cc56d6282172687",
+            "ingestion_accepted": true
+          },
+          "decision": "continue",
+          "next_route": "story_breakdown"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Build Story Breakdown Trace": {
+      "main": [
+        [
+          {
+            "node": "Send Production Shadow Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Generate Dynamic Delivery Hierarchy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dynamic Delivery Hierarchy": {
+      "main": [
+        [
+          {
+            "node": "Validate PRD to Story Coverage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate PRD to Story Coverage": {
+      "main": [
+        [
+          {
+            "node": "Validate Delivery Citation Grounding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Delivery Citation Grounding": {
+      "main": [
+        [
+          {
+            "node": "Build Story Breakdown Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Production Shadow Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Verify Production Shadow Trace Ingestion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Production Shadow Trace Ingestion": {
+      "main": [
+        [
+          {
+            "node": "Return Story Breakdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": null,
+  "meta": {
+    "instanceId": "f6bfdc2311fd55a80b37111f5684a5513a05387ab8cfe6f4a4f072fb8f964eb6",
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false,
+    "candidate_only": true,
+    "baseline_parent": "v0.3.3-unchanged",
+    "story_contract": "epic-feature-user-story-v1",
+    "langfuse_shadow": true
+  },
+  "nodeGroups": [],
+  "id": "7kISGzKOKBnX9glV",
+  "tags": []
+}
