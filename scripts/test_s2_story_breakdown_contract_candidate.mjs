@@ -14,5 +14,8 @@ const stories=current.epics.flatMap(e=>e.features).flatMap(f=>f.stories),criteri
 if(current.epics.length!==1||current.epics[0].features.length!==1||stories.length!==1||criteria.length!==2)throw new Error('T12-S2 hierarchy counts changed');
 if(current.governance_mappings.length!==2||current.unresolved_questions.length!==2)throw new Error('T12-S2 governance/question counts changed');
 if(stories[0].persona!=='user'||stories[0].benefit!=='TBD - stakeholder input required'||stories[0].status!=='partially_grounded')throw new Error('Controlled story fields changed');
+if(criteria.some(c=>c.text.startsWith('The implementation satisfies:')))throw new Error('Acceptance criteria remain generic requirement restatements');
+if(criteria[0].text!=='When the user selects a date range, category, or status filter, the displayed report results reflect the selected filter.')throw new Error('Functional acceptance criterion is not observable');
+if(criteria[1].text!=='Report results are displayed in under 2 seconds.')throw new Error('Performance acceptance criterion is not measurable');
 if(current.validation.approved_item_coverage!=='4/4'||current.validation.unsupported_claims!==0||current.validation.groundedness_percent!==100)throw new Error('Validation metrics failed');
 console.log(JSON.stringify({result:'PASS',epics:1,features:1,stories:1,acceptance_criteria:2,governance_mappings:2,open_questions:2,approved_item_coverage:'4/4',groundedness_percent:100,unsupported_claims:0},null,2));

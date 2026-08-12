@@ -57,8 +57,8 @@ Users should be able to filter reports by date range, category, and status.
 
 | # | ID | Criterion | Source |
 |---:|---|---|---|
-| 1 | `AC-001` | The implementation satisfies: Users should be able to filter reports by date range, category, and status. | `FR-001` |
-| 2 | `AC-002` | The implementation satisfies: Results must load in under 2 seconds. | `NFR-001` |
+| 1 | `AC-001` | When the user selects a date range, category, or status filter, the displayed report results reflect the selected filter. | `FR-001` |
+| 2 | `AC-002` | Report results are displayed in under 2 seconds. | `NFR-001` |
 
 ## 2. Governance Mappings
 
@@ -122,6 +122,25 @@ The trace input now projects only story-bearing functional and non-functional re
 | Code unsupported claims zero | `true` |
 | Code overall evaluation | `true` |
 | Candidate state | Inactive and unpublished |
+
+### Acceptance-criteria quality refinement
+
+The inactive candidate was subsequently refined so acceptance criteria express observable or measurable outcomes instead of generic requirement restatements. The final validated wording is:
+
+| ID | Acceptance criterion | Source |
+|---|---|---|
+| `AC-001` | When the user selects a date range, category, or status filter, the displayed report results reflect the selected filter. | `FR-001` |
+| `AC-002` | Report results are displayed in under 2 seconds. | `NFR-001` |
+
+Final validation references:
+
+| Field | Result |
+|---|---|
+| n8n execution | `10739` — succeeded in `2.45 s` |
+| Langfuse trace | `e07d7ce8fccd47e57911ee35134e1d6b` |
+| LLM faithfulness | `1.00` |
+| LLM hallucination | `0.00` |
+| All five Code Evaluator controls | `true` |
 
 ## Safety boundary and remaining decision
 

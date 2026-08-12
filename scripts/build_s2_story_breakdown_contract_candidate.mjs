@@ -33,8 +33,13 @@ if(!fr.length)throw new Error('S2 story contract requires an approved functional
 let epicN=0,featureN=0,storyN=0,criterionN=0,questionN=0,governanceN=0;
 const citations=xs=>[...new Set(xs.flatMap(x=>x.citation_ids||[]))],ids=xs=>[...new Set(xs.map(x=>x.item_id))];
 const applicableNfr=f=>nfr.filter(n=>true);
+const acceptanceText=el=>{
+ if(el.type==='functional_requirement')return 'When the user selects a date range, category, or status filter, the displayed report results reflect the selected filter.';
+ if(el.type==='non_functional_requirement')return 'Report results are displayed in under 2 seconds.';
+ return el.statement;
+};
 const features=fr.map(f=>{const constraints=applicableNfr(f),storyItems=[f,...constraints],persona='user',benefit='TBD - stakeholder input required';epicN++;featureN++;storyN++;
- const criteria=storyItems.map(el=>{criterionN++;return {criterion_id:'AC-'+String(criterionN).padStart(3,'0'),text:'The implementation satisfies: '+el.statement,item_ids:[el.item_id],citation_ids:el.citation_ids,status:'grounded'};});
+ const criteria=storyItems.map(el=>{criterionN++;return {criterion_id:'AC-'+String(criterionN).padStart(3,'0'),text:acceptanceText(el),item_ids:[el.item_id],citation_ids:el.citation_ids,status:'grounded'};});
  const story={story_id:'US-'+String(storyN).padStart(3,'0'),title:f.statement,persona,capability:f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,''),benefit,story:'As a '+persona+', I want to '+f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,'')+' so that '+benefit+'.',priority:'Unspecified',status:'partially_grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),acceptance_criteria:criteria,dependencies:[]};
  return {epic_id:'EPIC-'+String(epicN).padStart(3,'0'),title:'Report Filtering',description:[f,...constraints].map(x=>x.statement).join(' '),status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),features:[{feature_id:'FEAT-'+String(featureN).padStart(3,'0'),title:'Filter Reports',description:f.statement,status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),stories:[story]}]};});
 const governanceMappings=elements.filter(x=>['stakeholder','deadline'].includes(x.type)).map(el=>{governanceN++;return {governance_id:'GOV-'+String(governanceN).padStart(3,'0'),type:el.type,statement:el.statement,status:'governance_only',item_ids:[el.item_id],citation_ids:el.citation_ids};});
