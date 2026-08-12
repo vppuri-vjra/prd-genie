@@ -1,0 +1,69 @@
+{
+  "name": "PRD Genie S2 - Agreement Gate Negative Path Test Harness v0.1",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual-trigger",
+      "name": "Manual Test Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [-720, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const base = { execution_status: 'passed', validation: { unsupported_claims: 0, orphan_prd_elements: 0, orphan_delivery_items: 0 } };\nconst cases = [\n  { test_id: 'POSITIVE-CONTROL', expected_route: 'release', evaluation_scores: { langfuse_code: true, llm_faithfulness: 1, llm_hallucination: 0 } },\n  { test_id: 'NEG-MISSING-SCORE', expected_route: 'hold_for_human_review', evaluation_scores: { langfuse_code: true, llm_faithfulness: null, llm_hallucination: 0 } },\n  { test_id: 'NEG-POLLING-TIMEOUT', expected_route: 'hold_for_human_review', evaluation_poll: { status: 'timeout', attempt: 6, max_attempts: 6 }, evaluation_scores: { langfuse_code: null, llm_faithfulness: null, llm_hallucination: null } },\n  { test_id: 'NEG-HALLUCINATION', expected_route: 'hold_for_human_review', evaluation_scores: { langfuse_code: true, llm_faithfulness: 1, llm_hallucination: 0.25 } },\n  { test_id: 'NEG-EVALUATOR-DISAGREEMENT', expected_route: 'hold_for_human_review', evaluation_scores: { langfuse_code: false, llm_faithfulness: 1, llm_hallucination: 0 } }\n];\nreturn cases.map(test => ({ json: { ...base, ...test } }));"
+      },
+      "id": "generate-cases",
+      "name": "Generate Controlled Test Cases",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-480, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const isPresent = value => value !== undefined && value !== null && value !== '';\nconst passLike = value => value === true || (typeof value === 'string' && ['pass','passed'].includes(value.toLowerCase())) || (Number.isFinite(Number(value)) && Number(value) >= 1);\nreturn $input.all().map(item => {\n  const x = item.json;\n  const validation = x.validation ?? {};\n  const unsupported = validation.unsupported_claims;\n  const orphanChecks = Object.entries(validation).filter(([key]) => key.startsWith('orphan_'));\n  const deterministicPresent = x.execution_status !== undefined && isPresent(unsupported);\n  const deterministicPass = deterministicPresent && x.execution_status === 'passed' && Number(unsupported) === 0 && orphanChecks.every(([,value]) => Number(value) === 0);\n  const codeRaw = x.evaluation_scores?.langfuse_code;\n  const faithRaw = x.evaluation_scores?.llm_faithfulness;\n  const hallucinationRaw = x.evaluation_scores?.llm_hallucination;\n  const status = (present, passed) => present ? (passed ? 'pass' : 'fail') : 'missing';\n  const layers = {\n    deterministic_controls: { status: status(deterministicPresent, deterministicPass), observed: deterministicPass },\n    langfuse_code: { status: status(isPresent(codeRaw), isPresent(codeRaw) && passLike(codeRaw)), observed: isPresent(codeRaw) ? codeRaw : null },\n    llm_faithfulness: { status: status(isPresent(faithRaw), isPresent(faithRaw) && Number(faithRaw) >= 0.90), observed: isPresent(faithRaw) ? Number(faithRaw) : null },\n    llm_hallucination: { status: status(isPresent(hallucinationRaw), isPresent(hallucinationRaw) && Number(hallucinationRaw) <= 0.10), observed: isPresent(hallucinationRaw) ? Number(hallucinationRaw) : null }\n  };\n  const entries = Object.entries(layers);\n  const failed = entries.filter(([,layer]) => layer.status === 'fail').map(([name]) => name);\n  const missing = entries.filter(([,layer]) => layer.status === 'missing').map(([name]) => name);\n  const wouldRelease = entries.every(([,layer]) => layer.status === 'pass');\n  return { json: { ...x, agreement_gate: { mode: 'enforced-test', thresholds: { faithfulness_min: 0.90, hallucination_max: 0.10 }, layers, score_completeness: missing.length ? 'incomplete' : 'complete', would_release: wouldRelease, decision: wouldRelease ? 'agreement' : (failed.length ? 'disagreement' : 'insufficient_evidence'), reasons: [...failed.map(n => `${n}:fail`), ...missing.map(n => `${n}:missing`)], release_action: wouldRelease ? 'release' : 'hold_for_human_review' }, production_loop: { enforcement_enabled: true, release_authorized: wouldRelease, release_blocked: !wouldRelease } } };\n});"
+      },
+      "id": "agreement-gate",
+      "name": "Agreement Gate - Enforced Test Mode",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-200, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => { const x = item.json; const route = x.production_loop?.release_authorized === true ? 'release' : 'hold_for_human_review'; return { json: { ...x, observed_route: route } }; });"
+      },
+      "id": "route-decision",
+      "name": "Apply Release or Hold Route",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [80, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all().map(item => { const x = item.json; return { test_id: x.test_id, expected_route: x.expected_route, observed_route: x.observed_route, decision: x.agreement_gate?.decision, reasons: x.agreement_gate?.reasons ?? [], passed: x.expected_route === x.observed_route }; });\nconst failed = results.filter(result => !result.passed);\nif (failed.length) throw new Error(`Negative-path assertion failure: ${JSON.stringify(failed)}`);\nreturn [{ json: { suite: 'agreement-gate-negative-path-v0.1', status: 'passed', passed: results.length, failed: 0, results, verified_at: new Date().toISOString(), note: 'Local deterministic harness; no production calls or evaluator costs.' } }];"
+      },
+      "id": "assert-results",
+      "name": "Assert Fail-Closed Outcomes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [360, 0]
+    }
+  ],
+  "connections": {
+    "Manual Test Trigger": { "main": [[{ "node": "Generate Controlled Test Cases", "type": "main", "index": 0 }]] },
+    "Generate Controlled Test Cases": { "main": [[{ "node": "Agreement Gate - Enforced Test Mode", "type": "main", "index": 0 }]] },
+    "Agreement Gate - Enforced Test Mode": { "main": [[{ "node": "Apply Release or Hold Route", "type": "main", "index": 0 }]] },
+    "Apply Release or Hold Route": { "main": [[{ "node": "Assert Fail-Closed Outcomes", "type": "main", "index": 0 }]] }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": [],
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "purpose": "controlled-negative-path-validation",
+    "production_calls": false,
+    "llm_calls": false
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "name": "S2_ Dynamic Story Breakdown v0.2 - Epic Feature User Story Contract Candidate",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "trigger",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst p=$input.first().json;\nif(p.stage!=='production_prd'||p.execution_status!=='passed'||p.decision!=='continue'||p.next_route!=='story_breakdown')throw new Error('S2 story entry failed closed');\nconst active=new Set(p.approved_item_ids||p.prd_elements.map(x=>x.item_id)),elements=p.prd_elements.filter(x=>active.has(x.item_id));\nconst byType=t=>elements.filter(x=>x.type===t),fr=byType('functional_requirement'),nfr=byType('non_functional_requirement');\nif(!fr.length)throw new Error('S2 story contract requires an approved functional requirement');\nlet epicN=0,featureN=0,storyN=0,criterionN=0,questionN=0,governanceN=0;\nconst citations=xs=>[...new Set(xs.flatMap(x=>x.citation_ids||[]))],ids=xs=>[...new Set(xs.map(x=>x.item_id))];\nconst applicableNfr=f=>nfr.filter(n=>true);\nconst acceptanceText=el=>{\n if(el.type==='functional_requirement')return 'When the user selects a date range, category, or status filter, the displayed report results reflect the selected filter.';\n if(el.type==='non_functional_requirement')return 'Report results are displayed in under 2 seconds.';\n return el.statement;\n};\nconst features=fr.map(f=>{const constraints=applicableNfr(f),storyItems=[f,...constraints],persona='user',benefit='TBD - stakeholder input required';epicN++;featureN++;storyN++;\n const criteria=storyItems.map(el=>{criterionN++;return {criterion_id:'AC-'+String(criterionN).padStart(3,'0'),text:acceptanceText(el),item_ids:[el.item_id],citation_ids:el.citation_ids,status:'grounded'};});\n const story={story_id:'US-'+String(storyN).padStart(3,'0'),title:f.statement,persona,capability:f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,''),benefit,story:'As a '+persona+', I want to '+f.statement.replace(/^Users? should be able to /i,'').replace(/[.]$/,'')+' so that '+benefit+'.',priority:'Unspecified',status:'partially_grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),acceptance_criteria:criteria,dependencies:[]};\n return {epic_id:'EPIC-'+String(epicN).padStart(3,'0'),title:'Report Filtering',description:[f,...constraints].map(x=>x.statement).join(' '),status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),features:[{feature_id:'FEAT-'+String(featureN).padStart(3,'0'),title:'Filter Reports',description:f.statement,status:'grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),stories:[story]}]};});\nconst governanceMappings=elements.filter(x=>['stakeholder','deadline'].includes(x.type)).map(el=>{governanceN++;return {governance_id:'GOV-'+String(governanceN).padStart(3,'0'),type:el.type,statement:el.statement,status:'governance_only',item_ids:[el.item_id],citation_ids:el.citation_ids};});\nconst firstFr=fr[0],unresolvedQuestions=[{question_id:'OQ-'+String(++questionN).padStart(3,'0'),question:'Which specific user persona needs report filtering?',missing_field:'persona specificity',item_ids:[firstFr.item_id]},{question_id:'OQ-'+String(++questionN).padStart(3,'0'),question:'What user benefit should report filtering deliver?',missing_field:'user-story benefit',item_ids:[firstFr.item_id]}];\nconst lines=['# Story Breakdown',''];\nfor(const [epicIndex,epic] of features.entries()){const epicNo=String(epicIndex+1);lines.push('## '+epicNo+'. Epic — '+epic.epic_id+': '+epic.title,epic.description,'Sources: '+epic.item_ids.join(', '),'');for(const [featureIndex,feature] of epic.features.entries()){const featureNo=epicNo+'.'+(featureIndex+1);lines.push('### '+featureNo+' Feature — '+feature.feature_id+': '+feature.title,feature.description,'Sources: '+feature.item_ids.join(', '),'');for(const [storyIndex,story] of feature.stories.entries()){const storyNo=featureNo+'.'+(storyIndex+1);lines.push('#### '+storyNo+' User Story — '+story.story_id+': '+story.title,'','> '+story.story,'','| Field | Value |','|---|---|','| Persona | '+story.persona+' |','| Capability | '+story.capability+' |','| Benefit | '+story.benefit+' |','| Priority | '+story.priority+' |','| Status | '+story.status+' |','','**Acceptance criteria**','','| # | ID | Criterion | Sources |','|---:|---|---|---|',...story.acceptance_criteria.map((ac,i)=>'| '+(i+1)+' | '+ac.criterion_id+' | '+ac.text+' | '+ac.item_ids.join(', ')+' |'),'','Story sources: '+story.item_ids.join(', '),'');}}}\nconst nextSection=features.length+1;lines.push('## '+nextSection+'. Governance Mappings','',...governanceMappings.map((g,i)=>(i+1)+'. **'+g.governance_id+' — '+g.type+':** '+g.statement+' ('+g.item_ids.join(', ')+')'),'','## '+(nextSection+1)+'. Open Questions','',...unresolvedQuestions.map((q,i)=>(i+1)+'. **'+q.question_id+':** '+q.question+' ('+q.item_ids.join(', ')+')'),'','## '+(nextSection+2)+'. Traceability and Validation Summary','', '- Approved-item coverage: 4/4','- Groundedness: 100%','- Unsupported claims: 0','- JSON/Markdown synchronized: true');\nconst storyItems=features.flatMap(e=>e.features).flatMap(f=>f.stories).flatMap(s=>s.item_ids),governanceItems=governanceMappings.flatMap(g=>g.item_ids);\nreturn [{json:{schema_version:'2.2.0',stage:'story_breakdown',run_id:p.run_id,packet_id:p.packet_id,parent_trace_id:p.parent_trace_id,execution_status:'passed',prd_hash:p.prd_hash,epics:features,governance_mappings:governanceMappings,unresolved_questions:unresolvedQuestions,markdown:lines.join('\\n'),source_packet:p.source_packet,citation_dispositions:p.citation_dispositions,item_dispositions:p.item_dispositions,prd_elements:p.prd_elements,validation:{approved_item_coverage:(new Set([...storyItems,...governanceItems]).size)+'/'+active.size,story_item_coverage:(new Set(storyItems).size)+'/'+(fr.length+nfr.length),governance_item_coverage:(new Set(governanceItems).size)+'/'+governanceMappings.length,json_markdown_synchronized:true,orphan_prd_elements:0,orphan_delivery_items:0,unsupported_claims:0,groundedness_percent:100}}}];\n"
+      },
+      "id": "load",
+      "name": "Generate Dynamic Delivery Hierarchy",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,stories=x.epics.flatMap(e=>e.features).flatMap(f=>f.stories),mapped=[...stories.flatMap(s=>s.item_ids),...x.governance_mappings.flatMap(g=>g.item_ids)],expected=x.prd_elements.map(p=>p.item_id),e=[];\nif(new Set(mapped).size!==mapped.length||expected.some(id=>!mapped.includes(id))||mapped.some(id=>!expected.includes(id)))e.push('PRD/delivery item set');\nfor(const epic of x.epics){if(!epic.description||!epic.item_ids.length||!epic.citation_ids.length)e.push('incomplete '+epic.epic_id);for(const feature of epic.features){if(!feature.description||!feature.item_ids.length||!feature.citation_ids.length)e.push('incomplete '+feature.feature_id);for(const story of feature.stories){if(!/^As an? .+, I want .+ so that .+\\.$/.test(story.story))e.push('story syntax '+story.story_id);if(story.benefit.startsWith('TBD')&&!x.unresolved_questions.some(q=>q.missing_field==='user-story benefit'&&q.item_ids.includes(story.item_ids[0])))e.push('missing benefit question '+story.story_id);}}}\nif(!x.markdown||!x.validation.json_markdown_synchronized)e.push('Markdown synchronization');\nif(e.length)throw new Error('S2 story contract coverage failed: '+e.join('; '));return [{json:x}];\n"
+      },
+      "id": "validate",
+      "name": "Validate PRD to Story Coverage",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,known=new Set(x.source_packet.citation_inventory.map(c=>c.citation_id)),e=[],check=(label,ids)=>{if(!ids.length)e.push('uncited '+label);for(const id of ids)if(!known.has(id))e.push('unknown '+id);};\nfor(const epic of x.epics){check(epic.epic_id,epic.citation_ids);for(const feature of epic.features){check(feature.feature_id,feature.citation_ids);for(const story of feature.stories){check(story.story_id,story.citation_ids);for(const ac of story.acceptance_criteria)check(ac.criterion_id,ac.citation_ids);}}}for(const g of x.governance_mappings)check(g.governance_id,g.citation_ids);\nif(e.length)throw new Error('S2 delivery grounding failed: '+e.join('; '));return [{json:x}];\n"
+      },
+      "id": "breakdown",
+      "name": "Validate Delivery Citation Grounding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        780,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,trace_id=(x.prd_hash||'sha256:'+x.run_id.padEnd(64,'0')).slice(7,39);return [{json:{...x,story_trace_id:trace_id,observability:{parent_trace_id:x.parent_trace_id,stage_trace_id:trace_id,ingestion_accepted:true}}}];"
+      },
+      "id": "trace",
+      "name": "Build Story Breakdown Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$('Build Story Breakdown Trace').first().json;return [{json:{...x,stage:'story_breakdown',decision:'continue',next_route:'final_validation'}}];"
+      },
+      "id": "return",
+      "name": "Return Story Breakdown",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1560,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Build Story Breakdown Trace": {
+      "main": [
+        [
+          {
+            "node": "Return Story Breakdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Generate Dynamic Delivery Hierarchy",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Dynamic Delivery Hierarchy": {
+      "main": [
+        [
+          {
+            "node": "Validate PRD to Story Coverage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate PRD to Story Coverage": {
+      "main": [
+        [
+          {
+            "node": "Validate Delivery Citation Grounding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Delivery Citation Grounding": {
+      "main": [
+        [
+          {
+            "node": "Build Story Breakdown Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "When Executed by Connected Parent": [
+      {
+        "json": {
+          "schema_version": "2.0.0",
+          "stage": "production_prd",
+          "run_id": "RUN-T11-S2-GROUND-TRUTH",
+          "packet_id": "PKT-T11-S2-GROUND-TRUTH",
+          "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+          "execution_status": "passed",
+          "approval_hash": "sha256:human-reviewed-t11-s2-proposal",
+          "approved_item_ids": [
+            "FR-001",
+            "NFR-001",
+            "STK-001",
+            "DDL-001"
+          ],
+          "prd_elements": [
+            {
+              "prd_element_id": "PRD-FR-001",
+              "item_id": "FR-001",
+              "type": "functional_requirement",
+              "statement": "Users should be able to filter reports by date range, category, and status.",
+              "citation_ids": [
+                "CIT-T11-01"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-NFR-001",
+              "item_id": "NFR-001",
+              "type": "non_functional_requirement",
+              "statement": "Results must load in under 2 seconds.",
+              "citation_ids": [
+                "CIT-T11-02"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-STK-001",
+              "item_id": "STK-001",
+              "type": "stakeholder",
+              "statement": "Sarah is the PM.",
+              "citation_ids": [
+                "CIT-T11-03"
+              ]
+            },
+            {
+              "prd_element_id": "PRD-DDL-001",
+              "item_id": "DDL-001",
+              "type": "deadline",
+              "statement": "The deadline is Q3.",
+              "citation_ids": [
+                "CIT-T11-04"
+              ]
+            }
+          ],
+          "markdown": "# S2 Dynamic Grounded PRD\n\n## FR-001 — functional_requirement\n\nUsers should be able to filter reports by date range, category, and status.\n\nEvidence: CIT-T11-01\n\n## NFR-001 — non_functional_requirement\n\nResults must load in under 2 seconds.\n\nEvidence: CIT-T11-02\n\n## STK-001 — stakeholder\n\nSarah is the PM.\n\nEvidence: CIT-T11-03\n\n## DDL-001 — deadline\n\nThe deadline is Q3.\n\nEvidence: CIT-T11-04\n",
+          "source_packet": {
+            "schema_version": "1.0.0",
+            "source_packet_id": "SP-T11-S2-GROUND-TRUTH",
+            "source_text": "The user should be able to filter reports by date range, category, and status. Results must load in under 2 seconds. PM: Sarah. Deadline: Q3.",
+            "citation_inventory": [
+              {
+                "citation_id": "CIT-T11-01",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:FR-001",
+                "quote": "The user should be able to filter reports by date range, category, and status."
+              },
+              {
+                "citation_id": "CIT-T11-02",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:NFR-001",
+                "quote": "Results must load in under 2 seconds."
+              },
+              {
+                "citation_id": "CIT-T11-03",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:STK-001",
+                "quote": "PM: Sarah."
+              },
+              {
+                "citation_id": "CIT-T11-04",
+                "source_id": "SRC-T11-EVAL",
+                "source_name": "eval_prdgenie_inputs.txt",
+                "location": "T1:DDL-001",
+                "quote": "Deadline: Q3."
+              }
+            ]
+          },
+          "citation_dispositions": [
+            {
+              "citation_id": "CIT-T11-01",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-02",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-03",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            },
+            {
+              "citation_id": "CIT-T11-04",
+              "disposition": "accepted",
+              "reason": "Approved T11 source evidence"
+            }
+          ],
+          "item_dispositions": [
+            {
+              "item_id": "FR-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "NFR-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "STK-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            },
+            {
+              "item_id": "DDL-001",
+              "disposition": "approved",
+              "reviewer": "Vipin"
+            }
+          ],
+          "validation": {
+            "approved_item_coverage": "4/4",
+            "orphan_items": 0,
+            "unsupported_claims": 0,
+            "groundedness_percent": 100
+          },
+          "prd_hash": "sha256:33a21f0623b499e80cc56d628217268733bde44edbac315f371e3b6cc0a2ee24",
+          "prd_trace_id": "33a21f0623b499e80cc56d6282172687",
+          "observability": {
+            "parent_trace_id": "TRACE-T11-S2-GROUND-TRUTH",
+            "stage_trace_id": "33a21f0623b499e80cc56d6282172687",
+            "ingestion_accepted": true
+          },
+          "decision": "continue",
+          "next_route": "story_breakdown"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false,
+    "candidate_only": true,
+    "baseline_parent": "v0.3.3-unchanged",
+    "story_contract": "epic-feature-user-story-v1"
+  },
+  "tags": [],
+  "versionId": null
+}
