@@ -145,3 +145,17 @@ Final validation references:
 ## Safety boundary and remaining decision
 
 Local controls, native n8n execution, and independent Langfuse evaluation are complete and green. Production parent v0.3.3 and the existing published Story Breakdown child remain unchanged. Publication, any parent-reference change, and production adoption still require explicit approval after final human review.
+
+## Human acceptance
+
+| Field | Decision |
+|---|---|
+| Reviewer | Vipin Puri |
+| Decision date | 2026-08-11 |
+| Accepted candidate | S2 Story Breakdown v0.2.1 numbered contract |
+| Accepted execution | `10739` |
+| Accepted Langfuse trace | `e07d7ce8fccd47e57911ee35134e1d6b` |
+| Decision | Approved as the validated Phase 2 candidate |
+| Production authorization | Not granted by this decision |
+
+The human acceptance covers the professional Epic/Feature/User Story hierarchy, the refined observable acceptance criteria, governance mappings, open questions, and the recorded three-layer evaluation results. The workflow remains inactive and unpublished pending a separate production-adoption decision.
