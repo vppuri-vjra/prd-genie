@@ -12,13 +12,20 @@ for(const name of ['When Executed by Connected Parent','Generate Dynamic Deliver
 }
 const trace=proven.nodes.find(n=>n.name==='Build Story Breakdown Trace');
 if(!trace?.parameters?.jsCode?.includes('otlp_payload'))throw new Error('Proven trace builder lacks OTLP payload');
+trace.parameters.jsCode=trace.parameters.jsCode.replace(/const evaluation_context=\{[\s\S]*?\};const story_item_ids=new Set\([\s\S]*?\);const story_prd_elements=x\.prd_elements\.filter\(e=>story_item_ids\.has\(e\.item_id\)\);/g,'');
+trace.parameters.jsCode=trace.parameters.jsCode.replace(/evaluation_context,evaluation_context,/g,'evaluation_context,');
 trace.parameters.jsCode=trace.parameters.jsCode.replace(
  'const semanticInput={',
- "const evaluation_context={claim_scope:'Evaluate source-derived Epic, Feature, User Story, Acceptance Criterion, governance, and open-question statements for faithfulness. Treat stable IDs, hierarchy numbering, controlled TBD placeholders, validation fields, and orchestration metadata as authorized system scaffolding rather than business claims.',authorized_system_scaffolding:['EPIC, FEAT, US, AC, GOV, and OQ identifiers','1, 1.1, and 1.1.1 display numbering','TBD - stakeholder input required','validation, decision, next_route, run_id'],code_evaluator_contract:'prd_elements contains only story-bearing functional and non-functional requirements; stakeholder and deadline elements remain authoritative in source_packet and are represented in governance_mappings.'};const story_prd_elements=x.prd_elements.filter(e=>['functional_requirement','non_functional_requirement'].includes(e.type));const semanticInput={evaluation_context,"
+ "const evaluation_context={claim_scope:'Evaluate source-derived Epic, Feature, User Story, Story Breakdown Acceptance Criterion, governance, and open-question statements for faithfulness. Treat stable IDs, hierarchy numbering, controlled unresolved placeholders, grammatical capability normalization, validation fields, and orchestration metadata as authorized system scaffolding rather than business claims.',authorized_system_scaffolding:['EPIC, FEAT, US, SBAC, GOV, and OQ identifiers','1, 1.1, and 1.1.1 display numbering','product user with persona_status pending stakeholder confirmation when no approved relationship exists','[benefit pending stakeholder confirmation] with benefit_status and an open question','grammatical normalization of an approved requirement in the user-story capability field; source title and SBAC remain verbatim','validation, decision, next_route, run_id'],code_evaluator_contract:'prd_elements contains only elements mapped to stories; other approved PRD elements remain represented in governance_mappings.'};const story_prd_elements=x.prd_elements.filter(e=>['functional_requirement','non_functional_requirement'].includes(e.type));const semanticInput={evaluation_context,"
 );
 trace.parameters.jsCode=trace.parameters.jsCode.replace(
  'prd_elements:x.prd_elements,',
  'prd_elements:story_prd_elements,'
+);
+trace.parameters.jsCode=trace.parameters.jsCode.replace(/evaluation_context,evaluation_context,/g,'evaluation_context,');
+trace.parameters.jsCode=trace.parameters.jsCode.replace(
+ "const story_prd_elements=x.prd_elements.filter(e=>['functional_requirement','non_functional_requirement'].includes(e.type));",
+ "const story_item_ids=new Set(x.epics.flatMap(e=>e.features).flatMap(f=>f.stories).flatMap(s=>s.item_ids));const story_prd_elements=x.prd_elements.filter(e=>story_item_ids.has(e.item_id));"
 );
 trace.parameters.jsCode=trace.parameters.jsCode.replace(
  'const semanticOutput={epics:x.epics,validation:x.validation,decision:x.decision,next_route:x.next_route,run_id:x.run_id};',

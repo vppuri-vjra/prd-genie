@@ -1,5 +1,15 @@
 # Active n8n workflow list — 2026-08-07
 
+## 2026-08-13 isolated Agreement Gate candidate update
+
+| Workflow | ID | Lifecycle | Latest evidence | Disposition |
+|---|---|---|---|---|
+| S2 Dynamic Story Breakdown — Langfuse candidate | `4AwRsfASe07ktb5M` | Published callable child | `RUN-S2-11157-16e7090e`; 100% groundedness; 0 unsupported claims | Validated candidate child |
+| S2 Dynamic Main Orchestrator v0.3.4 — 180-second polling candidate | `SDtf0KGQuR6yo2Pu` | Unpublished | `RUN-S2-11157-16e7090e`; 1m 58.198s; Release Authorized path | Successful promotion candidate; production parent unchanged |
+| Merged-import parent copy | `PzpWjDCFV9Bcfiyb` | Unpublished | Structural inspection found both old and new Story references | Do not use; retain until approved cleanup |
+
+The Story Code Evaluator was corrected from raw mapped-array equality to unique approved-ID set equality. Repeated lineage references remain valid when one approved requirement yields multiple stories; missing or unknown IDs still fail. Details: [`s2-agreement-gate-story-evaluator-runtime-pass-2026-08-13.md`](../../evaluation/results/s2-agreement-gate-story-evaluator-runtime-pass-2026-08-13.md).
+
 This local list distinguishes validated current workflows from published production status. “Current” does not mean published. No n8n workflow was modified during this read-only review.
 
 ## Validated current chain
@@ -49,3 +59,29 @@ The complete 68-workflow reconciliation and one-item safe cleanup recommendation
 ## 2026-08-07 Final Validation/export runtime update
 
 `PRD Genie - Realistic v4 Final Validator and Export v0.1` is saved and unpublished as `3A8biYxoQ7Q1E9FQ`. Execution `9728` passed with trace `4e1ef40a6da7a838ad9e9cc3a37a1a35`, accepted Langfuse HTTP 200, final export SHA-256 `82c614c0e6608c5b0010d22de6eb66ffa9def5600acb82fd80ebf1651756c5e1`, 100% groundedness, and zero unsupported claims. The prior control `gPc9aTRQ8qLWdZgL` is unchanged.
+
+## 2026-08-08 Connected realistic orchestrator checkpoint
+
+Clean candidate `PRD Genie - Realistic Six-Source Main Orchestrator v0.2` is saved unpublished/inactive as `CJQX9sNhCsGxX0Sf`. Its local export validates a 12-node fail-closed topology with five parent sub-workflow calls; v0.11 contains the nested Requirement Extractor v1.10 and Gap Analyzer v1.0 calls, accounting for seven authoritative stages.
+
+Execution `9743` failed closed at the first dynamic child boundary; attempted v0.11 execution `9744` reported `Workflow is not active and cannot be executed.` No downstream stage or new Langfuse trace is accepted. Completing this checkpoint requires lifecycle authorization not currently granted. Construction candidate `WSrFHqt7BgwFplUT` / execution `9742` is retained as failed evidence; no archive or deletion occurred.
+
+Lifecycle authorization was subsequently granted for required children. Published Requirement Extractor v1.10 and Gap Analyzer v1.0 passed connected executions `9751` and `9752`. Callable gate v0.11.2 `6bamqbjuGMy5vHet` then failed closed in execution `9750` because two Gap Analysis records were not mapped by the deterministic clarification policy. Parent v0.4 `qKXqVnjrAQjt8Ehx` / execution `9749` stopped there; Human Approval and later stages were not invoked.
+
+## 2026-08-08 Connected production-style runtime pass
+
+`PRD Genie - Realistic Six-Source Main Orchestrator v0.10` is saved inactive/unpublished as `Zh0BIOxTGyDyU4jB`. Parent execution `9785` passed in 1m 41.714s. Connected child executions were gate `9786`, Requirement Extractor `9787`, Gap Analyzer `9788`, Human Approval lineage verifier `9789`, Production PRD `9790`, Story Breakdown `9791`, and Final Validator/export `9792`.
+
+The final contract reports seven connected stages, dynamic handoffs, 100% groundedness, zero unsupported claims, and final stage trace `bb1a0fe38750902d05c95c6e8d0cbd41`. The parent remains unpublished/inactive. Required callable children are published; no workflow was activated, archived, or deleted. See [`realistic-six-source-main-orchestrator-v0.10-runtime-pass-2026-08-08.md`](../../evaluation/results/realistic-six-source-main-orchestrator-v0.10-runtime-pass-2026-08-08.md).
+
+## 2026-08-08 Google Drive production-input runtime pass
+
+`PRD Genie - Realistic Clarification v4 Google Drive Gate Callable v0.12.0` is published but inactive as `WDrjaIMsrnF46q8b`; direct canary execution `9797` passed after listing, exact-six validation, download, text extraction, manifest comparison, Requirement Extraction, Gap Analysis, and deterministic resolution. It reads the six approved files from Drive folder `1SxIfeNPCcGQQT4DqsRdEq9DMruwCkYaS` and fails closed on missing, duplicate, extra, or content-mismatched inputs.
+
+Inactive/unpublished parent `PRD Genie - Realistic Six-Source Google Drive Main Orchestrator v0.11` is saved as `YiWB9OxjvUyfxk53`. Parent execution `9800` passed in 1m 3.682s; child executions `9801`–`9807` cover the Drive gate with nested Requirement Extractor and Gap Analyzer, Human Approval, Production PRD, Story Breakdown, and Final Validator/export. The result preserved run ID, parent trace `26c7466f817aa1511f4a4e239bb52a62`, source hashes, citations, approval lineage, 17/17 decision dispositions, 100% groundedness, and zero unsupported claims. No workflow was activated, archived, or deleted. See [`realistic-six-source-google-drive-main-orchestrator-v0.11-runtime-pass-2026-08-08.md`](../../evaluation/results/realistic-six-source-google-drive-main-orchestrator-v0.11-runtime-pass-2026-08-08.md).
+
+## 2026-08-08 Google Drive validated-output runtime pass
+
+Inactive/unpublished parent `PRD Genie - Realistic Six-Source Google Drive I/O Main Orchestrator v0.12.1` is saved as `1iBHRurP8NLMW7BP`. Execution `9816` passed in 1m 30.519s and, only after Final Validator/export passed, wrote a timestamped final PRD Markdown file and Story Breakdown JSON file to `Production Outputs` folder `1DoTRyMj2ucxkD3B8_Oq5fc02TfS0rvVp`. Google Drive returned file IDs `1G2cd7xOyAj5J2-NpU4W8Eq-EwkgxFdh6` and `1eLQdPfHlsMcQOWB8x5BVie5nJaylKZCU`.
+
+Construction v0.12 `fZtwbTojKAgyfV0w` / execution `9808` failed closed before upload on an incorrect Markdown field mapping and is retained as diagnostic evidence. No workflow was activated, archived, or deleted. See [`realistic-six-source-google-drive-io-main-orchestrator-v0.12.1-runtime-pass-2026-08-08.md`](../../evaluation/results/realistic-six-source-google-drive-io-main-orchestrator-v0.12.1-runtime-pass-2026-08-08.md).
