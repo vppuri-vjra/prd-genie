@@ -1,0 +1,142 @@
+{
+  "name": "PRD Genie - Complexity Sizing Langfuse Batch Shadow v0.1.1 - Isolated Unpublished",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "manual",
+      "name": "Manual Batch Shadow Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst cases=[{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T01\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-001\",\"feature_id\":\"FEAT-003\",\"user_story_id\":\"US-005\",\"title\":\"Display last-updated timestamp\",\"acceptance_criterion_ids\":[\"SBAC-005\"],\"source_ids\":[\"FR-003\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T01\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-005\",\"recommended_size\":\"XS\",\"total_complexity_score\":1,\"signals\":{\"scope\":0,\"technical_complexity\":0,\"uncertainty\":0,\"dependencies\":0,\"data_and_integration\":0,\"testing_effort\":1,\"risk\":0},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"ready\",\"evidence_references\":[\"FR-003\",\"SBAC-005\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T02\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-001\",\"feature_id\":\"FEAT-001\",\"user_story_id\":\"US-001\",\"title\":\"Display five core metrics\",\"acceptance_criterion_ids\":[\"SBAC-001\"],\"source_ids\":[\"FR-001\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T02\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-001\",\"recommended_size\":\"S\",\"total_complexity_score\":3,\"signals\":{\"scope\":1,\"technical_complexity\":0,\"uncertainty\":0,\"dependencies\":1,\"data_and_integration\":0,\"testing_effort\":1,\"risk\":0},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"ready\",\"evidence_references\":[\"FR-001\",\"SBAC-001\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T03\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-001\",\"feature_id\":\"FEAT-002\",\"user_story_id\":\"US-002\",\"title\":\"Preset and custom date-range filtering\",\"acceptance_criterion_ids\":[\"SBAC-002\"],\"source_ids\":[\"FR-002\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T03\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-002\",\"recommended_size\":\"M\",\"total_complexity_score\":7,\"signals\":{\"scope\":1,\"technical_complexity\":1,\"uncertainty\":2,\"dependencies\":1,\"data_and_integration\":1,\"testing_effort\":1,\"risk\":0},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"normal_candidate\",\"evidence_references\":[\"FR-002\",\"SBAC-002\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T04\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-002\",\"feature_id\":\"FEAT-004\",\"user_story_id\":\"US-007\",\"title\":\"Executive access to all data\",\"acceptance_criterion_ids\":[\"SBAC-007\"],\"source_ids\":[\"FR-004\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T04\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-007\",\"recommended_size\":\"L\",\"total_complexity_score\":10,\"signals\":{\"scope\":2,\"technical_complexity\":1,\"uncertainty\":1,\"dependencies\":2,\"data_and_integration\":1,\"testing_effort\":2,\"risk\":1},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"consider_split\",\"evidence_references\":[\"FR-004\",\"SBAC-007\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T05\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-002\",\"feature_id\":\"FEAT-007\",\"user_story_id\":\"US-011\",\"title\":\"Responsive web access completed before production launch\",\"acceptance_criterion_ids\":[\"SBAC-011\"],\"source_ids\":[\"FR-007\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T05\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-011\",\"recommended_size\":\"XL\",\"total_complexity_score\":14,\"signals\":{\"scope\":2,\"technical_complexity\":2,\"uncertainty\":2,\"dependencies\":2,\"data_and_integration\":2,\"testing_effort\":2,\"risk\":2},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"must_refine_or_split\",\"evidence_references\":[\"FR-007\",\"SBAC-011\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T06\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-001\",\"feature_id\":\"FEAT-003\",\"user_story_id\":\"US-003\",\"title\":\"15-minute automatic refresh\",\"acceptance_criterion_ids\":[\"SBAC-003\"],\"source_ids\":[\"FR-003\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T06\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-003\",\"recommended_size\":\"pending_refinement\",\"total_complexity_score\":null,\"signals\":{\"scope\":\"unknown\",\"technical_complexity\":\"unknown\",\"uncertainty\":2,\"dependencies\":\"unknown\",\"data_and_integration\":\"unknown\",\"testing_effort\":\"unknown\",\"risk\":1},\"confidence\":\"Low\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"refine_before_sizing\",\"evidence_references\":[\"FR-003\",\"SBAC-003\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T07\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-001\",\"feature_id\":\"FEAT-003\",\"user_story_id\":\"US-006\",\"title\":\"Protect against excessive repeated requests\",\"acceptance_criterion_ids\":[\"SBAC-006\"],\"source_ids\":[\"FR-003\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T07\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-006\",\"recommended_size\":\"M\",\"total_complexity_score\":6,\"signals\":{\"scope\":1,\"technical_complexity\":1,\"uncertainty\":1,\"dependencies\":1,\"data_and_integration\":1,\"testing_effort\":1,\"risk\":0},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"normal_candidate\",\"evidence_references\":[\"FR-003\",\"SBAC-006\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T08\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-003\",\"feature_id\":\"FEAT-006\",\"user_story_id\":\"US-010\",\"title\":\"Export XLSX with formulas preserved and approved label\",\"acceptance_criterion_ids\":[\"SBAC-010\"],\"source_ids\":[\"FR-006\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T08\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-010\",\"recommended_size\":\"M\",\"total_complexity_score\":8,\"signals\":{\"scope\":1,\"technical_complexity\":1,\"uncertainty\":1,\"dependencies\":1,\"data_and_integration\":1,\"testing_effort\":2,\"risk\":1},\"confidence\":\"Medium\",\"sizing_status\":\"proposed_pending_team_confirmation\",\"recommendation\":\"normal_candidate\",\"evidence_references\":[\"FR-006\",\"SBAC-010\"]},\"expected_decision\":\"continue_shadow\",\"frozen_artifacts_must_remain_unchanged\":true}},{\"input\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T12\",\"source_run_id\":\"RUN-S2-11157-16e7090e\",\"frozen_artifacts\":{\"prd_artifact\":\"PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md\",\"prd_artifact_sha256\":\"sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083\",\"story_breakdown_artifact\":\"PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md\",\"story_breakdown_artifact_sha256\":\"sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5\"},\"story\":{\"epic_id\":\"EPIC-003\",\"feature_id\":\"FEAT-005\",\"user_story_id\":\"US-009\",\"title\":\"Export monthly board reports to PDF\",\"acceptance_criterion_ids\":[\"SBAC-009\"],\"source_ids\":[\"FR-005\"]},\"mutation\":null,\"mode\":\"shadow\"},\"expected\":{\"schema_version\":\"0.1.0\",\"evaluation_case_id\":\"TS-T12\",\"expected_execution_status\":\"passed\",\"assessment\":{\"user_story_id\":\"US-009\",\"recommended_size\":\"pending_refinement\",\"total_complexity_score\":null,\"signals\":{\"scope\":\"unknown\",\"technical_complexity\":\"unknown\",\"uncertainty\":2,\"dependencies\":\"unknown\",\"data_and_integration\":\"unknown\",\"testing_effort\":\"unknown\",\"risk\":\"unknown\"},\"confidence\":\"Low\",\"sizing_status\":\"human_adjudication_required\",\"recommendation\":\"refine_before_sizing\",\"evidence_references\":[\"FR-005\",\"SBAC-009\"]},\"expected_decision\":\"human_adjudication\",\"frozen_artifacts_must_remain_unchanged\":true}}],hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});\nconst policy={policy_status:'approved_evaluation_policy',confidence_rule:{Medium:'Use when a numeric assessment is grounded but remains a proposal pending delivery-team confirmation.',Low:'Use when unknown signals require refinement before numeric sizing.'},sizing_status_rule:'All automated T-shirt sizes are proposals pending delivery-team confirmation.',size_handling:{XS:'Ready for delivery',S:'Ready for delivery',M:'Normal sprint candidate',L:'Consider splitting',XL:'Must refine or split before sprint planning',pending_refinement:'Refine before sizing'}};\nreturn cases.map(({input,expected})=>{\n  const a=expected.assessment,traceId=hex(32),spanId=hex(16),start=(BigInt(Date.now())*1000000n).toString(),end=(BigInt(Date.now()+1)*1000000n).toString();\n  const approvedProfile={status:'human_reviewed_ground_truth_profile',case_id:input.evaluation_case_id,expected_signals:a.signals,expected_total_complexity_score:a.total_complexity_score,expected_size:a.recommended_size,expected_confidence:a.confidence,expected_sizing_status:a.sizing_status,expected_recommendation:a.recommendation,scale:{XS:'0-2',S:'3-5',M:'6-8',L:'9-11',XL:'12-14'}};\n  const sourceEvidence={artifact:input.frozen_artifacts.story_breakdown_artifact,artifact_sha256:input.frozen_artifacts.story_breakdown_artifact_sha256,story:input.story,evidence_references:a.evidence_references};\n  const signalEvidence=Object.fromEntries(Object.entries(a.signals).map(([signal,score])=>[signal,{references:score==='unknown'?[]:a.evidence_references,rationale:score==='unknown'?'Insufficient approved evidence':'Human-reviewed profile supported by approved story sources and acceptance criteria'}]));\n  const output={recommended_size:a.recommended_size,total_complexity_score:a.total_complexity_score,signals:a.signals,confidence:a.confidence,sizing_status:a.sizing_status,recommendation:a.recommendation};\n  const span={traceId,spanId,name:'complexity-sizing-agent',kind:1,startTimeUnixNano:start,endTimeUnixNano:end,attributes:[attr('langfuse.trace.name','prd-genie-complexity-sizing-shadow'),attr('langfuse.environment','evaluation'),attr('langfuse.version','complexity-sizing-batch-v0.1.1'),attr('langfuse.trace.tags',['capstone','complexity-sizing','batch-shadow',input.evaluation_case_id]),attr('langfuse.trace.metadata.evaluation_case_id',input.evaluation_case_id),attr('langfuse.trace.metadata.source_run_id',input.source_run_id),attr('langfuse.trace.metadata.user_story_id',input.story.user_story_id),attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','deterministic-rules-batch-v0.1.1'),attr('langfuse.observation.input',{frozen_artifacts:input.frozen_artifacts,user_story_id:input.story.user_story_id,signal_evidence:signalEvidence,source_evidence:sourceEvidence,approved_ground_truth_profile:approvedProfile,approved_sizing_policy:policy}),attr('langfuse.observation.output',output),attr('langfuse.observation.metadata.mode','batch_shadow')],status:{code:1}};\n  return {json:{evaluation_case_id:input.evaluation_case_id,user_story_id:input.story.user_story_id,trace_id:traceId,otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','evaluation')]},scopeSpans:[{scope:{name:'prd-genie-complexity-sizing-batch',version:'v0.1.0'},spans:[span]}]}]}}};\n});\n"
+      },
+      "id": "prepare",
+      "name": "Prepare Nine Eligible Langfuse Traces",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        300,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.otlp_payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": false,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "send",
+      "name": "Send Nine Traces to Langfuse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        600,
+        0
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst responses=$input.all(),prepared=$('Prepare Nine Eligible Langfuse Traces').all();\nconst results=responses.map((item,index)=>({evaluation_case_id:prepared[index].json.evaluation_case_id,user_story_id:prepared[index].json.user_story_id,trace_id:prepared[index].json.trace_id,status_code:item.json.statusCode??200,ingestion_accepted:(item.json.statusCode??200)>=200&&(item.json.statusCode??200)<300}));\nconst failed=results.filter(result=>!result.ingestion_accepted);\nif(failed.length)throw new Error('Langfuse batch ingestion failed: '+failed.map(result=>result.evaluation_case_id).join(', '));\nreturn [{json:{schema_version:'0.1.0',stage:'complexity_sizing_langfuse_batch_shadow',mode:'isolated_unpublished',semantic_cases:results.length,ingestion_accepted:results.length,failed:0,excluded_fail_closed_cases:['TS-T09','TS-T10','TS-T11'],required_score_names:['sizing_lf_code_evaluation_pass','sizing_llm_faithfulness','sizing_llm_reasonableness','sizing_llm_hallucination'],results}}];\n"
+      },
+      "id": "confirm",
+      "name": "Confirm Nine Trace Ingestions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        900,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual Batch Shadow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Nine Eligible Langfuse Traces",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Nine Eligible Langfuse Traces": {
+      "main": [
+        [
+          {
+            "node": "Send Nine Traces to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Nine Traces to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Confirm Nine Trace Ingestions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": null,
+  "meta": {
+    "candidate_only": true,
+    "isolated": true,
+    "published": false,
+    "production_parent_unchanged": true,
+    "agreement_gate": "shadow",
+    "semantic_case_count": 9,
+    "excluded_fail_closed_cases": [
+      "TS-T09",
+      "TS-T10",
+      "TS-T11"
+    ],
+    "contract_version": "0.1.1"
+  },
+  "tags": []
+}

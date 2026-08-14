@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "evaluation_case_id": "TS-T01",
+  "source_run_id": "RUN-S2-11157-16e7090e",
+  "frozen_artifacts": {
+    "prd_artifact": "PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md",
+      "prd_artifact_sha256": "sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083",
+    "story_breakdown_artifact": "PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md",
+      "story_breakdown_artifact_sha256": "sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5"
+  },
+  "story": {
+    "epic_id": "EPIC-001",
+    "feature_id": "FEAT-003",
+    "user_story_id": "US-005",
+    "title": "Display last-updated timestamp",
+    "acceptance_criterion_ids": [
+      "SBAC-005"
+    ],
+    "source_ids": [
+      "FR-003"
+    ]
+  },
+  "mutation": null,
+  "mode": "shadow"
+}
