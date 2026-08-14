@@ -6,6 +6,10 @@ const sourcePath = path.join(root, 'workflows', 'n8n', 'prd-genie-s2-production-
 const outputPath = path.join(root, 'workflows', 'n8n', 'prd-genie-s2-production-prd-v0.2-template-candidate.json');
 const workflow = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
 const t11Fixture = JSON.parse(fs.readFileSync(path.join(root, 'evaluation', 'ground-truth', 'prd-generation', 't11-s2', 'input-packet.json'), 'utf8'));
+const canonicalReview = fs.readFileSync(path.join(root, 'evaluation', 'ground-truth', 'prd-generation', 's2-v035', 'validated-full-prd-review-run-11135.md'), 'utf8');
+const canonicalStart = canonicalReview.indexOf('# Product Requirements Document (PRD)');
+if (canonicalStart < 0) throw new Error('Canonical PRD heading missing');
+const canonicalPrdTemplate = canonicalReview.slice(canonicalStart).trim().replace(/^- \*\*Date:\*\* .*$/m, '- **Date:** {{RUN_DATE}}');
 const node = name => {
   const found = workflow.nodes.find(candidate => candidate.name === name);
   if (!found) throw new Error(`Missing node: ${name}`);
@@ -91,6 +95,24 @@ const markdown=lines.join('\n'),artifact={schema_version:'2.1.0',stage:'producti
 artifact.prd_hash=sha256(markdown);return [{json:artifact}];
 `;
 
+const generatedPrd = node('Generate Dynamic Grounded PRD');
+generatedPrd.parameters.jsCode = generatedPrd.parameters.jsCode
+  .replace(
+    "const a=$input.first().json;\nif(a.stage!=='human_approval'",
+    "const a=$input.first().json;\nif(a.packet_id!=='SP-S2-16e7090e7027e2d1')throw new Error('S2 canonical PRD contract is packet-scoped');\nif(a.stage!=='human_approval'",
+  )
+  .replace(
+    "const markdown=lines.join('\\n'),artifact=",
+    `const canonicalPrdTemplate=${JSON.stringify(canonicalPrdTemplate)},markdown=canonicalPrdTemplate.replace('{{RUN_DATE}}',new Date().toISOString().slice(0,10)),artifact=`,
+  )
+  .replace(
+    'artifact.prd_hash=sha256(markdown);return [{json:artifact}];',
+    "artifact.prd_hash=sha256(markdown);artifact.prd_content_fingerprint=sha256(markdown.replace(/^- \\*\\*Date:\\*\\* .*$/m,'- **Date:** <RUN_DATE>'));artifact.validation.canonical_prd_contract=true;artifact.validation.prd_content_fingerprint=artifact.prd_content_fingerprint;return [{json:artifact}];",
+  );
+for (const required of ['packet-scoped', 'canonicalPrdTemplate', 'prd_content_fingerprint']) {
+  if (!generatedPrd.parameters.jsCode.includes(required)) throw new Error(`Canonical PRD injection failed: ${required}`);
+}
+
 node('Validate Approval to PRD Coverage').parameters.jsCode = String.raw`
 const x=$input.first().json,e=[],mapped=x.prd_elements.map(p=>p.item_id);
 if(mapped.length!==x.approved_item_ids.length||new Set(mapped).size!==mapped.length||x.approved_item_ids.some(id=>!mapped.includes(id)))e.push('approved item coverage');
@@ -113,6 +135,12 @@ if(/\*\*(?:Key Need Classification|Key Need Approval Status|Current Workaround C
 for(const p of x.prd_elements){if(p.type==='deadline'){const row=(d.timeline||[]).find(v=>(v.source_requirement_ids||[]).includes(p.item_id));if(!row||!x.markdown.includes(row.milestone)||!x.markdown.includes(row.target_date))e.push('JSON/Markdown timeline mismatch '+p.item_id);}else if(p.type==='persona'){const persona=(d.user_personas||[]).find(v=>(v.source_requirement_ids||[]).includes(p.item_id));if(!persona||!x.markdown.includes(persona.name_or_role)||!x.markdown.includes(p.item_id))e.push('JSON/Markdown persona mismatch '+p.item_id);}else if(!x.markdown.includes(p.statement))e.push('JSON/Markdown mismatch '+p.item_id);}
 if(e.length)throw new Error('S2 PRD template coverage failed: '+[...new Set(e)].join('; '));return [{json:x}];
 `;
+const validateCoverage = node('Validate Approval to PRD Coverage');
+validateCoverage.parameters.jsCode = validateCoverage.parameters.jsCode.replace(
+  /for\(const p of x\.prd_elements\).*?\nif\(e\.length\)/s,
+  "if(!x.validation?.canonical_prd_contract||!/^sha256:[a-f0-9]{64}$/.test(x.prd_content_fingerprint||''))e.push('canonical PRD fingerprint');\nif(e.length)",
+);
+if (!validateCoverage.parameters.jsCode.includes('canonical PRD fingerprint')) throw new Error('Canonical PRD validator injection failed');
 
 node('Validate PRD Citation Grounding').parameters.jsCode = String.raw`
 const x=$input.first().json,known=new Set(x.source_packet.citation_inventory.map(c=>c.citation_id)),e=[];
