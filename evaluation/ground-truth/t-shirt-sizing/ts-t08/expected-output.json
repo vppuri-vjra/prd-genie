@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "evaluation_case_id": "TS-T08",
+  "expected_execution_status": "passed",
+  "assessment": {
+    "user_story_id": "US-010",
+    "recommended_size": "M",
+    "total_complexity_score": 8,
+    "signals": {
+      "scope": 1,
+      "technical_complexity": 1,
+      "uncertainty": 1,
+      "dependencies": 1,
+      "data_and_integration": 1,
+      "testing_effort": 2,
+      "risk": 1
+    },
+    "confidence": "Medium",
+    "sizing_status": "proposed_pending_team_confirmation",
+    "recommendation": "normal_candidate",
+    "evidence_references": [
+      "FR-006",
+      "SBAC-010"
+    ]
+  },
+  "expected_decision": "continue_shadow",
+  "frozen_artifacts_must_remain_unchanged": true
+}

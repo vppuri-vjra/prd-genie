@@ -1,0 +1,305 @@
+{
+  "name": "PRD Genie - Complexity Sizing + Langfuse Shadow v0.1 - Isolated Unpublished",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "trigger",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst p=$input.first().json,e=[];\nconst signals=['scope','technical_complexity','uncertainty','dependencies','data_and_integration','testing_effort','risk'];\nif(p.schema_version!=='0.1.0')e.push('schema_version');\nif(!p.evaluation_case_id||!p.source_run_id)e.push('identity');\nif(!p.frozen_artifacts?.prd_artifact_sha256||!p.frozen_artifacts?.story_breakdown_artifact_sha256)e.push('artifact hashes');\nif(!p.story?.epic_id||!p.story?.feature_id||!p.story?.user_story_id)e.push('story hierarchy');\nif(!Array.isArray(p.story.source_ids)||!Array.isArray(p.story.acceptance_criterion_ids))e.push('evidence inventory');\nconst known=new Set([...p.story.source_ids,...p.story.acceptance_criterion_ids]);\nfor(const signal of signals){const a=p.signal_assessments?.[signal];if(!a)continue;if(![0,1,2,'unknown'].includes(a.score))e.push('score '+signal);if(a.score!=='unknown'){if(!Array.isArray(a.evidence_references)||!a.evidence_references.length)e.push('missing evidence '+signal);else for(const id of a.evidence_references)if(!known.has(id))e.push('unsupported evidence '+id);}}\nif(e.length)throw new Error('Sizing input failed closed: '+[...new Set(e)].join('; '));return [{json:p}];\n"
+      },
+      "id": "validate-input",
+      "name": "Validate Frozen Sizing Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        280,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst p=$input.first().json,signals=['scope','technical_complexity','uncertainty','dependencies','data_and_integration','testing_effort','risk'],scores={},evidence={},assumptions=[];\nfor(const signal of signals){const a=p.signal_assessments?.[signal];scores[signal]=a?.score??'unknown';evidence[signal]={references:a?.evidence_references||[],rationale:a?.rationale||'Insufficient approved evidence'};if(a?.assumption)assumptions.push(a.assumption);}\nconst unknown=signals.filter(s=>scores[s]==='unknown'),numeric=signals.filter(s=>Number.isInteger(scores[s]));\nlet total=null,size='pending_refinement',recommendation='refine_before_sizing',confidence='Low';\nif(!unknown.length){total=numeric.reduce((n,s)=>n+scores[s],0);size=total<=2?'XS':total<=5?'S':total<=8?'M':total<=11?'L':'XL';recommendation=size==='XL'?'must_refine_or_split':size==='L'?'consider_split':size==='M'?'normal_candidate':'ready';confidence='Medium';}\nreturn [{json:{schema_version:'0.1.0',stage:'complexity_sizing',evaluation_case_id:p.evaluation_case_id,source_run_id:p.source_run_id,frozen_artifacts:p.frozen_artifacts,assessment:{user_story_id:p.story.user_story_id,recommended_size:size,total_complexity_score:total,signals:scores,signal_evidence:evidence,assumptions,confidence,sizing_status:'proposed_pending_team_confirmation',recommendation},mode:'shadow'}}];\n"
+      },
+      "id": "calculate",
+      "name": "Calculate Evidence-Backed Size",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        560,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,e=[],signals=['scope','technical_complexity','uncertainty','dependencies','data_and_integration','testing_effort','risk'],a=x.assessment;\nif(x.stage!=='complexity_sizing'||x.mode!=='shadow')e.push('stage/mode');\nif(!a?.user_story_id)e.push('story ID');\nfor(const s of signals){if(![0,1,2,'unknown'].includes(a.signals?.[s]))e.push('signal '+s);if(a.signals?.[s]!=='unknown'&&!a.signal_evidence?.[s]?.references?.length)e.push('evidence '+s);}\nconst unknown=signals.some(s=>a.signals[s]==='unknown');\nif(unknown){if(a.recommended_size!=='pending_refinement'||a.total_complexity_score!==null||a.recommendation!=='refine_before_sizing')e.push('unknown fail-closed policy');}\nelse{const total=signals.reduce((n,s)=>n+a.signals[s],0),size=total<=2?'XS':total<=5?'S':total<=8?'M':total<=11?'L':'XL';if(a.total_complexity_score!==total)e.push('arithmetic');if(a.recommended_size!==size)e.push('size mapping');if(size==='XL'&&a.recommendation!=='must_refine_or_split')e.push('XL policy');}\nif(e.length)throw new Error('Sizing output failed closed: '+e.join('; '));return [{json:{...x,deterministic_validation:{passed:true,controls:['schema','story_identity','artifact_hash_presence','signal_domain','evidence_presence','unknown_fail_closed','arithmetic','score_to_size_mapping','XL_policy']}}}];\n"
+      },
+      "id": "validate-output",
+      "name": "Deterministic Sizing Validator",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        840,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst traceId=hex(32),rootSpanId=hex(16),validationSpanId=hex(16),start=(BigInt(Date.now())*1000000n).toString(),end=(BigInt(Date.now()+1)*1000000n).toString();\nconst attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});\nconst common=[attr('langfuse.trace.name','prd-genie-complexity-sizing-shadow'),attr('langfuse.environment','evaluation'),attr('langfuse.version','complexity-sizing-v0.1.0'),attr('langfuse.trace.tags',['capstone','complexity-sizing','shadow',x.evaluation_case_id]),attr('langfuse.trace.metadata.evaluation_case_id',x.evaluation_case_id),attr('langfuse.trace.metadata.source_run_id',x.source_run_id),attr('langfuse.trace.metadata.user_story_id',x.assessment.user_story_id)];\nconst root={traceId,spanId:rootSpanId,name:'complexity-sizing-agent',kind:1,startTimeUnixNano:start,endTimeUnixNano:end,attributes:[...common,attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','deterministic-rules-v0.1'),attr('langfuse.observation.input',{frozen_artifacts:x.frozen_artifacts,user_story_id:x.assessment.user_story_id,signal_evidence:x.assessment.signal_evidence}),attr('langfuse.observation.output',{recommended_size:x.assessment.recommended_size,total_complexity_score:x.assessment.total_complexity_score,signals:x.assessment.signals,confidence:x.assessment.confidence,recommendation:x.assessment.recommendation}),attr('langfuse.observation.metadata.mode','shadow')],status:{code:1}};\nconst validation={traceId,spanId:validationSpanId,parentSpanId:rootSpanId,name:'validate-complexity-sizing',kind:1,startTimeUnixNano:start,endTimeUnixNano:end,attributes:[attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',x.assessment),attr('langfuse.observation.output',x.deterministic_validation),attr('langfuse.observation.metadata.deterministic_passed',x.deterministic_validation.passed)],status:{code:1}};\nreturn [{json:{...x,trace_id:traceId,otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','evaluation')]},scopeSpans:[{scope:{name:'prd-genie-complexity-sizing',version:'v0.1.0'},spans:[root,validation]}]}]}}}];\n"
+      },
+      "id": "build-trace",
+      "name": "Build Sizing Langfuse Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.otlp_payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": false,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      },
+      "id": "send-trace",
+      "name": "Send Sizing Trace to Langfuse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$('Build Sizing Langfuse Trace').first().json,r=$input.first().json,statusCode=r.statusCode??200;if(statusCode<200||statusCode>=300)throw new Error('Sizing Langfuse ingestion failed with HTTP '+statusCode);return [{json:{...x,otlp_payload:undefined,langfuse:{trace_id:x.trace_id,ingestion_accepted:true,status_code:statusCode},decision:'continue_shadow',next_route:'langfuse_evaluator_settlement'}}];"
+      },
+      "id": "confirm-trace",
+      "name": "Confirm Sizing Trace Ingestion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Validate Frozen Sizing Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Frozen Sizing Input": {
+      "main": [
+        [
+          {
+            "node": "Calculate Evidence-Backed Size",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Evidence-Backed Size": {
+      "main": [
+        [
+          {
+            "node": "Deterministic Sizing Validator",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deterministic Sizing Validator": {
+      "main": [
+        [
+          {
+            "node": "Build Sizing Langfuse Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Sizing Langfuse Trace": {
+      "main": [
+        [
+          {
+            "node": "Send Sizing Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Sizing Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Confirm Sizing Trace Ingestion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "When Executed by Connected Parent": [
+      {
+        "json": {
+          "schema_version": "0.1.0",
+          "evaluation_case_id": "TS-T03",
+          "source_run_id": "RUN-S2-11157-16e7090e",
+          "frozen_artifacts": {
+            "prd_artifact": "PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md",
+            "prd_artifact_sha256": "sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083",
+            "story_breakdown_artifact": "PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md",
+            "story_breakdown_artifact_sha256": "sha256:ddf9707710cb1f9feeb1cd15e3397e2b1261d4af664ac3b7aa2f2874b85f3bc5"
+          },
+          "story": {
+            "epic_id": "EPIC-001",
+            "feature_id": "FEAT-002",
+            "user_story_id": "US-002",
+            "title": "Preset and custom date-range filtering",
+            "acceptance_criterion_ids": [
+              "SBAC-002"
+            ],
+            "source_ids": [
+              "FR-002"
+            ]
+          },
+          "mutation": null,
+          "mode": "shadow",
+          "signal_assessments": {
+            "scope": {
+              "score": 1,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved scope ground-truth signal for TS-T03"
+            },
+            "technical_complexity": {
+              "score": 1,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved technical_complexity ground-truth signal for TS-T03"
+            },
+            "uncertainty": {
+              "score": 2,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved uncertainty ground-truth signal for TS-T03"
+            },
+            "dependencies": {
+              "score": 1,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved dependencies ground-truth signal for TS-T03"
+            },
+            "data_and_integration": {
+              "score": 1,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved data_and_integration ground-truth signal for TS-T03"
+            },
+            "testing_effort": {
+              "score": 1,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved testing_effort ground-truth signal for TS-T03"
+            },
+            "risk": {
+              "score": 0,
+              "evidence_references": [
+                "FR-002",
+                "SBAC-002"
+              ],
+              "rationale": "Human-approved risk ground-truth signal for TS-T03"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": null,
+  "meta": {
+    "candidate_only": true,
+    "isolated": true,
+    "published": false,
+    "production_parent_unchanged": true,
+    "agreement_gate": "shadow",
+    "contract_version": "0.1.0",
+    "langfuse_shadow": true,
+    "required_score_names": [
+      "sizing_lf_code_evaluation_pass",
+      "sizing_llm_faithfulness",
+      "sizing_llm_reasonableness",
+      "sizing_llm_hallucination"
+    ]
+  },
+  "tags": []
+}

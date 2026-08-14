@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1.0",
+  "evaluation_case_id": "TS-T10",
+  "source_run_id": "RUN-S2-11157-16e7090e",
+  "frozen_artifacts": {
+    "prd_artifact": "PRD Genie S2 - Validated Full PRD Review - RUN-S2-11135.md",
+      "prd_artifact_sha256": "sha256:0b83b2ef3cf4da06d9510790048a7956e970ca4c798d06f66901bf5084281083",
+    "story_breakdown_artifact": "PRD Genie S2 - Validated Epic Feature User Story Review - RUN-S2-11157.md",
+      "story_breakdown_artifact_sha256": "sha256:MUTATED-FOR-NEGATIVE-CONTROL"
+  },
+  "story": {
+    "epic_id": "EPIC-003",
+    "feature_id": "FEAT-005",
+    "user_story_id": "US-009-MUTATED",
+    "title": "Export monthly board reports to PDF",
+    "acceptance_criterion_ids": [
+      "SBAC-009"
+    ],
+    "source_ids": [
+      "FR-005"
+    ]
+  },
+  "mutation": "mutated_story_id_and_hash",
+  "mode": "shadow"
+}

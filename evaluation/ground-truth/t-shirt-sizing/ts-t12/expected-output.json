@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "evaluation_case_id": "TS-T12",
+  "expected_execution_status": "passed",
+  "assessment": {
+    "user_story_id": "US-009",
+    "recommended_size": "pending_refinement",
+    "total_complexity_score": null,
+    "signals": {
+      "scope": "unknown",
+      "technical_complexity": "unknown",
+      "uncertainty": 2,
+      "dependencies": "unknown",
+      "data_and_integration": "unknown",
+      "testing_effort": "unknown",
+      "risk": "unknown"
+    },
+    "confidence": "Low",
+    "sizing_status": "human_adjudication_required",
+    "recommendation": "refine_before_sizing",
+    "evidence_references": [
+      "FR-005",
+      "SBAC-009"
+    ]
+  },
+  "expected_decision": "human_adjudication",
+  "frozen_artifacts_must_remain_unchanged": true
+}

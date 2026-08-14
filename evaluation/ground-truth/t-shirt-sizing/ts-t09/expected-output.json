@@ -1,0 +1,8 @@
+{
+  "schema_version": "0.1.0",
+  "evaluation_case_id": "TS-T09",
+  "expected_execution_status": "failed",
+  "expected_decision": "fail_closed",
+  "expected_failure": "wrong_size_mapping",
+  "frozen_artifacts_must_remain_unchanged": true
+}
