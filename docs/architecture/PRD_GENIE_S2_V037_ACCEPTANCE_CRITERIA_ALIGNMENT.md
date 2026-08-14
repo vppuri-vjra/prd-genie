@@ -11,8 +11,20 @@ Baseline: accepted v0.3.6 production pipeline
 | 5 | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `gZSMQFpQsGqD87Kb` | Saved, unpublished |
 | 6 | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `1bcsB4FVVqzR9rK6` | Saved, unpublished |
 | 7 | S2_ Dynamic Final Validator and Export v0.4 - Acceptance Alignment Candidate | `GotMdQ0eX6zbYwki` | Saved, unpublished |
+| Parent | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `aYhgzgSqO8bmv9IO` | Saved manual-trigger candidate, unpublished |
 
 The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
+
+## Initial canary evidence
+
+- First attempt: parent execution `11346`; failed closed in the unchanged clarification gate because the extractor returned malformed JSON. No Stage 5–7, sizing, or delivery execution occurred.
+- Controlled retry: parent execution `11349`; correlated run `RUN-S2-11350-16e7090e`; succeeded in 2m 41.468s.
+- Stage 5 execution `11354`, Stage 6 execution `11355`, Stage 7 execution `11356`, and unchanged sizing execution `11357` all succeeded.
+- Agreement Gate: Release Authorized.
+- Structure: 3 Epics / 7 Features / 11 User Stories / 11 story acceptance criteria.
+- Stage 7 reported feature acceptance coverage and story acceptance linkage as passed.
+- Seven Production Output files were delivered.
+- PRD hash for the acceptance-aligned document: `sha256:63be9faa84ec21b988b2fce24b0643ca9b579c95f06d60f9df96c53803563fe6`.
 
 ## Objective
 
