@@ -5,9 +5,10 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const load = name => JSON.parse(fs.readFileSync(path.join(root, 'workflows/n8n', name), 'utf8'));
 const find = (workflow, name) => workflow.nodes.find(node => node.name === name);
+const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 const compileCodeNodes = workflow => {
   for (const node of workflow.nodes) {
-    if (node.parameters?.jsCode) assert.doesNotThrow(() => new Function(node.parameters.jsCode), `${workflow.name}: ${node.name}`);
+    if (node.parameters?.jsCode) assert.doesNotThrow(() => new AsyncFunction(node.parameters.jsCode), `${workflow.name}: ${node.name}`);
   }
 };
 const credentials = workflow => workflow.nodes.flatMap(node => Object.entries(node.credentials || {}).map(([type, value]) => [node.name, type, value.id, value.name]));
@@ -18,6 +19,8 @@ const storyBase = load('prd-genie-s2-story-breakdown-v0.2.5-corrected-langfuse-c
 const story = load('prd-genie-s2-story-breakdown-v0.2.6-feature-acceptance-linkage-candidate.json');
 const validatorBase = load('prd-genie-s2-final-validator-export-v0.3-full-markdown-candidate.json');
 const validator = load('prd-genie-s2-final-validator-export-v0.4-acceptance-alignment-candidate.json');
+const parentBase = load('prd-genie-s2-main-orchestrator-v0.3.6-sizing-candidate.json');
+const parent = load('prd-genie-s2-main-orchestrator-v0.3.7-acceptance-alignment-candidate.json');
 
 for (const workflow of [prd, story, validator]) {
   assert.equal(workflow.active, false);
@@ -60,5 +63,16 @@ for (const required of ['feature acceptance coverage', 'missing story acceptance
 const finalExport = find(validator, 'Build Dynamic Final Export').parameters.jsCode;
 assert.ok(finalExport.includes('feature_acceptance_coverage:true'));
 assert.ok(finalExport.includes('story_acceptance_linkage:true'));
+
+compileCodeNodes(parent);
+assert.deepEqual(credentials(parent), credentials(parentBase), 'Parent credentials changed');
+const references = Object.fromEntries(parent.nodes.filter(node=>node.parameters?.workflowId?.value).map(node=>[node.name,node.parameters.workflowId.value]));
+assert.equal(references['Execute Production PRD v0.1'], 'gZSMQFpQsGqD87Kb');
+assert.equal(references['Execute Story Breakdown v0.2'], '1bcsB4FVVqzR9rK6');
+assert.equal(references['Execute Final Validator v0.1'], 'GotMdQ0eX6zbYwki');
+assert.equal(references['Execute Non-Blocking Sizing v0.2'], 'vlLpeCD9szPEA400', 'Sizing reference changed');
+for (const unchanged of ['Execute Google Drive Clarification Gate v0.12.0','Execute Human Approval Tail v0.1']) {
+  assert.equal(references[unchanged], Object.fromEntries(parentBase.nodes.filter(node=>node.parameters?.workflowId?.value).map(node=>[node.name,node.parameters.workflowId.value]))[unchanged], `${unchanged} changed`);
+}
 
 console.log('v0.3.7 acceptance-criteria candidate contract checks passed.');

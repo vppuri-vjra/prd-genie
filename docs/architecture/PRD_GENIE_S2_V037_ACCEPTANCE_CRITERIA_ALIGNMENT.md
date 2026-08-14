@@ -4,6 +4,16 @@ Status: candidate design
 Date: 2026-08-14  
 Baseline: accepted v0.3.6 production pipeline
 
+## Inactive n8n candidates
+
+| Stage | Candidate | Live n8n ID | State |
+|---:|---|---|---|
+| 5 | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `gZSMQFpQsGqD87Kb` | Saved, unpublished |
+| 6 | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `1bcsB4FVVqzR9rK6` | Saved, unpublished |
+| 7 | S2_ Dynamic Final Validator and Export v0.4 - Acceptance Alignment Candidate | `GotMdQ0eX6zbYwki` | Saved, unpublished |
+
+The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.

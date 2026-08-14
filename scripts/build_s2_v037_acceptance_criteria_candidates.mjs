@@ -156,4 +156,25 @@ delete validator.id;
 validator.meta = {...(validator.meta||{}),candidate_only:true,baseline:'v0.3.6-stage-7',v037_delta:'fail-closed feature and story acceptance alignment'};
 write('prd-genie-s2-final-validator-export-v0.4-acceptance-alignment-candidate.json', validator);
 
-console.log('Built v0.3.7 Stage 5, Stage 6, and Stage 7 candidates.');
+// Isolated parent: preserve the complete accepted v0.3.6 orchestration and sizing
+// path, changing only the Stage 5-7 workflow references.
+const parent = read('prd-genie-s2-main-orchestrator-v0.3.6-sizing-candidate.json');
+const replacements = {
+  'Execute Production PRD v0.1': {id:'gZSMQFpQsGqD87Kb',name:prd.name},
+  'Execute Story Breakdown v0.2': {id:'1bcsB4FVVqzR9rK6',name:story.name},
+  'Execute Final Validator v0.1': {id:'GotMdQ0eX6zbYwki',name:validator.name},
+};
+for (const [nodeName, replacement] of Object.entries(replacements)) {
+  const reference = node(parent, nodeName).parameters.workflowId;
+  reference.value = replacement.id;
+  reference.cachedResultUrl = `/workflow/${replacement.id}`;
+  reference.cachedResultName = replacement.name;
+}
+parent.name = 'S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate';
+parent.active = false;
+parent.versionId = null;
+delete parent.id;
+parent.meta = {...(parent.meta||{}),candidate_only:true,baseline:'v0.3.6-parent',v037_delta:'Stage 5-7 acceptance alignment references only',sizing_included:true,sizing_policy:'unchanged advisory non-blocking'};
+write('prd-genie-s2-main-orchestrator-v0.3.7-acceptance-alignment-candidate.json', parent);
+
+console.log('Built v0.3.7 Stage 5, Stage 6, Stage 7, and isolated parent candidates.');
