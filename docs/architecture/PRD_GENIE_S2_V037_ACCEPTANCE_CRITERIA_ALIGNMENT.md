@@ -8,10 +8,15 @@ Baseline: accepted v0.3.6 production pipeline
 
 | Stage | Candidate | Live n8n ID | State |
 |---:|---|---|---|
-| 5 | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `gZSMQFpQsGqD87Kb` | Saved, unpublished |
-| 6 | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `1bcsB4FVVqzR9rK6` | Saved, unpublished |
+| 5 | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `gZSMQFpQsGqD87Kb` | Superseded initial candidate; unpublished |
+| 6 | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `1bcsB4FVVqzR9rK6` | Superseded initial candidate; unpublished |
 | 7 | S2_ Dynamic Final Validator and Export v0.4 - Acceptance Alignment Candidate | `GotMdQ0eX6zbYwki` | Saved, unpublished |
 | Parent | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `aYhgzgSqO8bmv9IO` | Saved manual-trigger candidate, unpublished |
+| 5 corrected | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `Ru10SyTRsErg8rFT` | Corrected fresh candidate; unpublished |
+| 6 corrected | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `MH7mokMz6lrBDZCp` | Corrected fresh candidate; unpublished |
+| 5 final | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `FszzWnuH2GEljqsC` | Final logo-evidence candidate; unpublished |
+| 6 final | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `F146WpcfZZVomhq0` | Final logo-evidence candidate; unpublished |
+| Parent final | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `EQ5eV8mGkDUwahmu` | Final logo-evidence parent; unpublished |
 
 The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
 
@@ -35,6 +40,14 @@ The canary passed its machine controls but is **not accepted for promotion**. Vi
 3. Stories split from the refresh and access requirements repeat the complete parent requirement rather than using story-scoped criterion text.
 
 The next candidate revision must correct all three issues and rerun before GitHub publication or production promotion.
+
+### Final logo-evidence candidate attempts
+
+- Parent execution `11395`: Stages 5 and 6 passed; held safely at Langfuse score polling before Stage 7; no delivery.
+- Parent execution `11402`: Stages 5 and 6 passed; held safely at Langfuse score polling before Stage 7; no delivery.
+- Third attempt, correlated run `RUN-S2-11410-16e7090e`: Stage 5 failed closed because the current extractor output omitted the required PDF-logo acceptance evidence. Error: `Missing required acceptance evidence for FEAT-006 / Export monthly board reports to PDF`. No Stage 6, Stage 7, sizing, or delivery occurred.
+
+The final candidate behaves as intended: it will not render the logo condition unless both the PDF-export requirement and approved company-logo criterion are present in the current approved packet. This exposes an upstream extraction-repeatability issue; weakening the Stage 5 evidence control is not acceptable.
 
 ## Objective
 

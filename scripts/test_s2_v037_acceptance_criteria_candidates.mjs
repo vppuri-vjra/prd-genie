@@ -41,6 +41,9 @@ for (const required of [
   'featureCriteriaMarkdown',
   "prd_source_ids:['FR-001']",
   "prd_source_ids:['NFR-003']",
+  "prd_source_ids:['FR-004','AC-001']",
+  'company logo at the top of every page',
+  'Missing required acceptance evidence',
   'artifact.validation.feature_acceptance_criteria_contract=true',
   "replace(/## 5\\. Acceptance Criteria",
 ]) assert.ok(prdCode.includes(required), `Stage 5 missing ${required}`);
@@ -69,8 +72,8 @@ assert.ok(finalExport.includes('story_acceptance_linkage:true'));
 compileCodeNodes(parent);
 assert.deepEqual(credentials(parent), credentials(parentBase), 'Parent credentials changed');
 const references = Object.fromEntries(parent.nodes.filter(node=>node.parameters?.workflowId?.value).map(node=>[node.name,node.parameters.workflowId.value]));
-assert.equal(references['Execute Production PRD v0.1'], 'gZSMQFpQsGqD87Kb');
-assert.equal(references['Execute Story Breakdown v0.2'], '1bcsB4FVVqzR9rK6');
+assert.equal(references['Execute Production PRD v0.1'], 'FszzWnuH2GEljqsC');
+assert.equal(references['Execute Story Breakdown v0.2'], 'F146WpcfZZVomhq0');
 assert.equal(references['Execute Final Validator v0.1'], 'GotMdQ0eX6zbYwki');
 assert.equal(references['Execute Non-Blocking Sizing v0.2'], 'vlLpeCD9szPEA400', 'Sizing reference changed');
 for (const unchanged of ['Execute Google Drive Clarification Gate v0.12.0','Execute Human Approval Tail v0.1']) {

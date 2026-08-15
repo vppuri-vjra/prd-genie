@@ -39,10 +39,10 @@ const featureDefinitions=[
     {title:'Team-lead access to team data only',criterion:'Team leads can access only data for their own team.',pattern:/role-based|team leads see their team/i}
   ]},
   {feature_id:'FEAT-005',title:'Responsive Web Access',prd_source_ids:['NFR-003'],stories:[{title:'Responsive web access completed before production launch',criterion:'Responsive web access is completed before the September 30, 2026 production launch.',pattern:/responsive web access|mobile responsiveness/i}]},
-  {feature_id:'FEAT-006',title:'PDF Reporting',prd_source_ids:['FR-004'],stories:[{title:'Export monthly board reports to PDF',criterion:'Monthly board reports can be exported to PDF.',pattern:/PDF|board reports/i}]},
+  {feature_id:'FEAT-006',title:'PDF Reporting',prd_source_ids:['FR-004','AC-001'],stories:[{title:'Export monthly board reports to PDF',criterion:'Monthly board reports can be exported to PDF with the company logo at the top of every page.',pattern:/PDF|board reports|company logo.+page/i,required_evidence_patterns:[/PDF|board reports/i,/company logo.+page/i]}]},
   {feature_id:'FEAT-007',title:'Excel Export',prd_source_ids:['FR-005'],stories:[{title:'Export XLSX with formulas preserved and approved label',criterion:'The approved “Export to Excel” action produces an XLSX file with formulas preserved.',pattern:/XLSX|formula preservation|Export to Excel/i}]}
 ];
-let facN=0;const featureAcceptanceCriteria=featureDefinitions.map(feature=>{const criteria=feature.stories.map(story=>{const sourceItems=elements.filter(element=>story.pattern.test(String(element.statement||'')));if(!sourceItems.length)throw new Error('Missing approved source for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'+String(facN).padStart(3,'0'),feature_id:feature.feature_id,feature_title:feature.title,story_scope:story.title,criterion:story.criterion,prd_requirement_ids:feature.prd_source_ids,source_requirement_ids:[...new Set(sourceItems.map(item=>item.item_id))],citation_ids:[...new Set(sourceItems.flatMap(item=>item.citation_ids||[]))],status:'grounded_controlled_restatement'};});return{feature_id:feature.feature_id,feature_title:feature.title,prd_requirement_ids:feature.prd_source_ids,criteria};});
+let facN=0;const featureAcceptanceCriteria=featureDefinitions.map(feature=>{const criteria=feature.stories.map(story=>{const sourceItems=elements.filter(element=>story.pattern.test(String(element.statement||'')));if(!sourceItems.length)throw new Error('Missing approved source for '+feature.feature_id+' / '+story.title);for(const requiredPattern of story.required_evidence_patterns||[])if(!sourceItems.some(element=>requiredPattern.test(String(element.statement||''))))throw new Error('Missing required acceptance evidence for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'+String(facN).padStart(3,'0'),feature_id:feature.feature_id,feature_title:feature.title,story_scope:story.title,criterion:story.criterion,prd_requirement_ids:feature.prd_source_ids,source_requirement_ids:[...new Set(sourceItems.map(item=>item.item_id))],citation_ids:[...new Set(sourceItems.flatMap(item=>item.citation_ids||[]))],status:'grounded_controlled_restatement'};});return{feature_id:feature.feature_id,feature_title:feature.title,prd_requirement_ids:feature.prd_source_ids,criteria};});
 const featureCriteriaMarkdown=featureAcceptanceCriteria.flatMap((feature,index)=>['### 5.'+(index+1)+' '+feature.feature_id+' — '+feature.feature_title,'',...feature.criteria.map(criterion=>'- [ ] **'+criterion.id+':** '+criterion.criterion+'\\n  - Story scope: '+criterion.story_scope+'\\n  - PRD requirement: '+criterion.prd_requirement_ids.join(', ')+'\\n  - Evidence: '+criterion.citation_ids.join(', ')),'']).join('\\n');
 `;
 prdCode = replaceOnce(
@@ -167,8 +167,8 @@ write('prd-genie-s2-final-validator-export-v0.4-acceptance-alignment-candidate.j
 // path, changing only the Stage 5-7 workflow references.
 const parent = read('prd-genie-s2-main-orchestrator-v0.3.6-sizing-candidate.json');
 const replacements = {
-  'Execute Production PRD v0.1': {id:'gZSMQFpQsGqD87Kb',name:prd.name},
-  'Execute Story Breakdown v0.2': {id:'1bcsB4FVVqzR9rK6',name:story.name},
+  'Execute Production PRD v0.1': {id:'FszzWnuH2GEljqsC',name:prd.name},
+  'Execute Story Breakdown v0.2': {id:'F146WpcfZZVomhq0',name:story.name},
   'Execute Final Validator v0.1': {id:'GotMdQ0eX6zbYwki',name:validator.name},
 };
 for (const [nodeName, replacement] of Object.entries(replacements)) {
