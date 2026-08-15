@@ -26,24 +26,24 @@ const generatePrd = node(prd, 'Generate Dynamic Grounded PRD');
 let prdCode = generatePrd.parameters.jsCode;
 const featureContract = `
 const featureDefinitions=[
-  {feature_id:'FEAT-001',title:'Dashboard Insights',stories:[{title:'Display five core metrics',criterion:'The dashboard displays revenue, active users, churn rate, NPS score, and support ticket volume.',pattern:/core metrics|revenue.+active users|NPS/i}]},
-  {feature_id:'FEAT-002',title:'Report Filtering',stories:[{title:'Preset and custom date-range filtering',criterion:'Reports can be filtered by date range, category, and status, including the approved preset and custom date ranges.',pattern:/date range|category.+status/i}]},
-  {feature_id:'FEAT-003',title:'Controlled Data Refresh',stories:[
+  {feature_id:'FEAT-001',title:'Dashboard Insights',prd_source_ids:['FR-001'],stories:[{title:'Display five core metrics',criterion:'The dashboard displays revenue, active users, churn rate, NPS score, and support ticket volume.',pattern:/core metrics|revenue.+active users|NPS/i}]},
+  {feature_id:'FEAT-002',title:'Report Filtering',prd_source_ids:['FR-002'],stories:[{title:'Preset and custom date-range filtering',criterion:'Reports can be filtered by date range, category, and status, including the approved preset and custom date ranges.',pattern:/date range|category.+status/i}]},
+  {feature_id:'FEAT-003',title:'Controlled Data Refresh',prd_source_ids:['FR-006'],stories:[
     {title:'15-minute automatic refresh',criterion:'Approved precomputed dashboard data refreshes automatically every 15 minutes.',pattern:/refresh|precomputed|last-updated/i},
     {title:'Manual refresh of latest precomputed data',criterion:'A user can manually refresh the latest available precomputed warehouse data without querying the live database.',pattern:/refresh|precomputed|live.database/i},
     {title:'Display last-updated timestamp',criterion:'The dashboard displays the timestamp of the most recent completed data refresh.',pattern:/refresh|last-updated/i},
     {title:'Protect against excessive repeated requests',criterion:'The refresh control protects the system from excessive repeated requests.',pattern:/refresh|repeated requests/i}
   ]},
-  {feature_id:'FEAT-004',title:'Role-Based Access',stories:[
+  {feature_id:'FEAT-004',title:'Role-Based Access',prd_source_ids:['FR-003'],stories:[
     {title:'Executive access to all data',criterion:'Executives can access all approved dashboard data.',pattern:/role-based|executives see all data/i},
     {title:'Team-lead access to team data only',criterion:'Team leads can access only data for their own team.',pattern:/role-based|team leads see their team/i}
   ]},
-  {feature_id:'FEAT-005',title:'Responsive Web Access',stories:[{title:'Responsive web access completed before production launch',criterion:'Responsive web access is completed before the September 30, 2026 production launch.',pattern:/responsive web access|mobile responsiveness/i}]},
-  {feature_id:'FEAT-006',title:'PDF Reporting',stories:[{title:'Export monthly board reports to PDF',criterion:'Monthly board reports can be exported to PDF with the company logo at the top of every page.',pattern:/PDF|board reports|company logo.+page/i}]},
-  {feature_id:'FEAT-007',title:'Excel Export',stories:[{title:'Export XLSX with formulas preserved and approved label',criterion:'The approved “Export to Excel” action produces an XLSX file with formulas preserved.',pattern:/XLSX|formula preservation|Export to Excel/i}]}
+  {feature_id:'FEAT-005',title:'Responsive Web Access',prd_source_ids:['NFR-003'],stories:[{title:'Responsive web access completed before production launch',criterion:'Responsive web access is completed before the September 30, 2026 production launch.',pattern:/responsive web access|mobile responsiveness/i}]},
+  {feature_id:'FEAT-006',title:'PDF Reporting',prd_source_ids:['FR-004'],stories:[{title:'Export monthly board reports to PDF',criterion:'Monthly board reports can be exported to PDF.',pattern:/PDF|board reports/i}]},
+  {feature_id:'FEAT-007',title:'Excel Export',prd_source_ids:['FR-005'],stories:[{title:'Export XLSX with formulas preserved and approved label',criterion:'The approved “Export to Excel” action produces an XLSX file with formulas preserved.',pattern:/XLSX|formula preservation|Export to Excel/i}]}
 ];
-let facN=0;const featureAcceptanceCriteria=featureDefinitions.map(feature=>{const criteria=feature.stories.map(story=>{const sourceItems=elements.filter(element=>story.pattern.test(String(element.statement||'')));if(!sourceItems.length)throw new Error('Missing approved source for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'+String(facN).padStart(3,'0'),feature_id:feature.feature_id,feature_title:feature.title,story_scope:story.title,criterion:story.criterion,source_requirement_ids:[...new Set(sourceItems.map(item=>item.item_id))],citation_ids:[...new Set(sourceItems.flatMap(item=>item.citation_ids||[]))],status:'grounded_controlled_restatement'};});return{feature_id:feature.feature_id,feature_title:feature.title,criteria};});
-const featureCriteriaMarkdown=featureAcceptanceCriteria.flatMap((feature,index)=>['### 5.'+(index+1)+' '+feature.feature_id+' — '+feature.feature_title,'',...feature.criteria.map(criterion=>'- [ ] **'+criterion.id+':** '+criterion.criterion+'\\n  - Story scope: '+criterion.story_scope+'\\n  - Sources: '+criterion.source_requirement_ids.join(', ')+'\\n  - Evidence: '+criterion.citation_ids.join(', ')),'']).join('\\n');
+let facN=0;const featureAcceptanceCriteria=featureDefinitions.map(feature=>{const criteria=feature.stories.map(story=>{const sourceItems=elements.filter(element=>story.pattern.test(String(element.statement||'')));if(!sourceItems.length)throw new Error('Missing approved source for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'+String(facN).padStart(3,'0'),feature_id:feature.feature_id,feature_title:feature.title,story_scope:story.title,criterion:story.criterion,prd_requirement_ids:feature.prd_source_ids,source_requirement_ids:[...new Set(sourceItems.map(item=>item.item_id))],citation_ids:[...new Set(sourceItems.flatMap(item=>item.citation_ids||[]))],status:'grounded_controlled_restatement'};});return{feature_id:feature.feature_id,feature_title:feature.title,prd_requirement_ids:feature.prd_source_ids,criteria};});
+const featureCriteriaMarkdown=featureAcceptanceCriteria.flatMap((feature,index)=>['### 5.'+(index+1)+' '+feature.feature_id+' — '+feature.feature_title,'',...feature.criteria.map(criterion=>'- [ ] **'+criterion.id+':** '+criterion.criterion+'\\n  - Story scope: '+criterion.story_scope+'\\n  - PRD requirement: '+criterion.prd_requirement_ids.join(', ')+'\\n  - Evidence: '+criterion.citation_ids.join(', ')),'']).join('\\n');
 `;
 prdCode = replaceOnce(
   prdCode,
@@ -98,10 +98,11 @@ storyCode = replaceOnce(
 storyCode = replaceOnce(
   storyCode,
   "criterion_id:'SBAC-'+String(criterionN).padStart(3,'0'),text:sourceItems.map(acceptanceText).join(' '),item_ids:ids(sourceItems),citation_ids:citations(sourceItems),status:'grounded'",
-  "criterion_id:'SBAC-'+String(criterionN).padStart(3,'0'),text:sourceItems.map(acceptanceText).join(' '),item_ids:ids(sourceItems),citation_ids:citations(sourceItems),parent_feature_id:parentFeatureId,feature_acceptance_criteria_ids:[facByScope.get(title)?.id].filter(Boolean),status:'grounded'",
+  "criterion_id:'SBAC-'+String(criterionN).padStart(3,'0'),text:facByScope.get(title)?.criterion||sourceItems.map(acceptanceText).join(' '),item_ids:ids(sourceItems),citation_ids:citations(sourceItems),display_source_ids:facByScope.get(title)?.prd_requirement_ids||[],parent_feature_id:parentFeatureId,feature_acceptance_criteria_ids:[facByScope.get(title)?.id].filter(Boolean),status:'grounded'",
   'link story criteria to FAC',
 );
 storyCode = replaceOnce(storyCode, 'makeStory(f,title)', 'makeStory(f,title,feature.feature_id)', 'pass parent feature ID');
+storyCode = replaceOnce(storyCode, "s.item_ids[0]+' |'", "s.acceptance_criteria[0].display_source_ids.join(', ')+' |'", 'use canonical PRD IDs in summary');
 storyCode = replaceOnce(
   storyCode,
   "prd_hash:p.prd_hash,prd_markdown:p.prd_markdown||p.markdown",
@@ -114,13 +115,19 @@ storyCode = replaceOnce(
   "feature_acceptance_linkage:true,json_markdown_synchronized:true,prd_markdown_preserved",
   'publish linkage validation',
 );
+storyCode = replaceOnce(
+  storyCode,
+  "'| # | ID | Criterion | Sources |','|---:|---|---|---|',...story.acceptance_criteria.map((ac,i)=>'| '+(i+1)+' | '+ac.criterion_id+' | '+ac.text+' | '+ac.item_ids.join(', ')+' |')",
+  "'| # | ID | Criterion | Feature criteria | PRD requirement |','|---:|---|---|---|---|',...story.acceptance_criteria.map((ac,i)=>'| '+(i+1)+' | '+ac.criterion_id+' | '+ac.text+' | '+ac.feature_acceptance_criteria_ids.join(', ')+' | '+ac.display_source_ids.join(', ')+' |')",
+  'expose FAC linkage in Story Markdown',
+);
 hierarchy.parameters.jsCode = storyCode;
 
 const validateStory = node(story, 'Validate PRD to Story Coverage');
 validateStory.parameters.jsCode = replaceOnce(
   validateStory.parameters.jsCode,
   "if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
-  "const fac=(x.feature_acceptance_criteria||[]).flatMap(feature=>feature.criteria||[]),facById=new Map(fac.map(criterion=>[criterion.id,criterion]));for(const epic of x.epics)for(const feature of epic.features)for(const story of feature.stories)for(const ac of story.acceptance_criteria){if(ac.parent_feature_id!==feature.feature_id)e.push('story parent feature '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).length)e.push('missing feature acceptance link '+story.story_id);for(const id of ac.feature_acceptance_criteria_ids||[])if(!facById.has(id)||facById.get(id).feature_id!==feature.feature_id)e.push('invalid feature acceptance link '+story.story_id);}if(fac.some(criterion=>!x.epics.flatMap(epic=>epic.features).flatMap(feature=>feature.stories).flatMap(story=>story.acceptance_criteria).some(ac=>(ac.feature_acceptance_criteria_ids||[]).includes(criterion.id))))e.push('unused feature acceptance criterion');if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
+  "const fac=(x.feature_acceptance_criteria||[]).flatMap(feature=>feature.criteria||[]),facById=new Map(fac.map(criterion=>[criterion.id,criterion]));for(const epic of x.epics)for(const feature of epic.features)for(const story of feature.stories)for(const ac of story.acceptance_criteria){if(ac.parent_feature_id!==feature.feature_id)e.push('story parent feature '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).length)e.push('missing feature acceptance link '+story.story_id);for(const id of ac.feature_acceptance_criteria_ids||[])if(!facById.has(id)||facById.get(id).feature_id!==feature.feature_id)e.push('invalid feature acceptance link '+story.story_id);if(!(ac.display_source_ids||[]).length)e.push('missing canonical PRD source '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).every(id=>x.story_markdown.includes(id)))e.push('feature acceptance link absent from Markdown '+story.story_id);}if(fac.some(criterion=>!x.epics.flatMap(epic=>epic.features).flatMap(feature=>feature.stories).flatMap(story=>story.acceptance_criteria).some(ac=>(ac.feature_acceptance_criteria_ids||[]).includes(criterion.id))))e.push('unused feature acceptance criterion');if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
   'validate PRD-to-story acceptance linkage',
 );
 story.name = 'S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate';

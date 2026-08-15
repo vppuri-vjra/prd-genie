@@ -39,6 +39,8 @@ for (const required of [
   "id:'FAC-'",
   'featureAcceptanceCriteria',
   'featureCriteriaMarkdown',
+  "prd_source_ids:['FR-001']",
+  "prd_source_ids:['NFR-003']",
   'artifact.validation.feature_acceptance_criteria_contract=true',
   "replace(/## 5\\. Acceptance Criteria",
 ]) assert.ok(prdCode.includes(required), `Stage 5 missing ${required}`);
@@ -46,13 +48,13 @@ assert.equal((prdCode.match(/feature_id:'FEAT-/g) || []).length, 7, 'Stage 5 mus
 assert.equal((prdCode.match(/title:'(?:Display five|Preset and|15-minute|Manual refresh|Display last|Protect against|Executive access|Team-lead access|Responsive web|Export monthly|Export XLSX)/g) || []).length, 11, 'Stage 5 must define eleven story scopes');
 
 const storyCode = find(story, 'Generate Dynamic Delivery Hierarchy').parameters.jsCode;
-for (const required of ['facByScope', 'parent_feature_id:parentFeatureId', 'feature_acceptance_criteria_ids', 'makeStory(f,title,feature.feature_id)', 'feature_acceptance_linkage:true']) {
+for (const required of ['facByScope', 'parent_feature_id:parentFeatureId', 'feature_acceptance_criteria_ids', 'display_source_ids', 'Feature criteria', 'makeStory(f,title,feature.feature_id)', 'feature_acceptance_linkage:true']) {
   assert.ok(storyCode.includes(required), `Stage 6 missing ${required}`);
 }
 assert.ok(storyCode.includes("criterion_id:'SBAC-'"), 'Stage 6 story acceptance criteria were removed');
 
 const storyValidation = find(story, 'Validate PRD to Story Coverage').parameters.jsCode;
-for (const required of ['missing feature acceptance link', 'invalid feature acceptance link', 'unused feature acceptance criterion']) {
+for (const required of ['missing feature acceptance link', 'invalid feature acceptance link', 'feature acceptance link absent from Markdown', 'unused feature acceptance criterion']) {
   assert.ok(storyValidation.includes(required), `Stage 6 validation missing ${required}`);
 }
 

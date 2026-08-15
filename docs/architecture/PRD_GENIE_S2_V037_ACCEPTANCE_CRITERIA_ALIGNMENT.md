@@ -26,6 +26,16 @@ The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
 - Seven Production Output files were delivered.
 - PRD hash for the acceptance-aligned document: `sha256:63be9faa84ec21b988b2fce24b0643ca9b579c95f06d60f9df96c53803563fe6`.
 
+### Human artifact review disposition
+
+The canary passed its machine controls but is **not accepted for promotion**. Visual review identified three corrections:
+
+1. PRD Section 5 displays packet source IDs while Section 4 displays canonical PRD requirement IDs, producing visible mismatches such as `FR-002` versus `FR-001` for Dashboard Insights.
+2. Story Markdown preserves all 11 `SBAC-*` criteria but does not display their `FAC-*` linkage.
+3. Stories split from the refresh and access requirements repeat the complete parent requirement rather than using story-scoped criterion text.
+
+The next candidate revision must correct all three issues and rerun before GitHub publication or production promotion.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
