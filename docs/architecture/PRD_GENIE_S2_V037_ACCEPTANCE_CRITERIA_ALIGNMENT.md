@@ -132,6 +132,10 @@ The corrected definition was imported as unpublished workflow `hkWIZY6MAH4KKpuq`
 
 The subsequent controlled canary reached Stage 6 but failed closed before Langfuse or the routing decision. Correlated run `RUN-S2-11491-16e7090e` reported invalid Feature-AC links across the generated story set plus an unused feature acceptance criterion. No Stage 7, sizing, or delivery occurred. The explicit router therefore remains implemented but not yet release-path validated.
 
+A clean import of the tested Stage 6 definition was then saved as unpublished workflow `V1ViUN8DI8YKxxSR` (`S2_ Dynamic Story Breakdown v0.2.6 - Clean Deterministic FAC Linkage Candidate`) and referenced only by isolated parent `hkWIZY6MAH4KKpuq`. Repeated canaries passed the corrected Stage 5 and clean Stage 6 contracts, confirming the earlier invalid-link failure was deployment drift.
+
+The imported parent did not retain a functional polling fan-out. After rebuilding and visually verifying Normalize Scores connections to Complete, Retry, and Timeout, runtime execution still stopped after `Scores Complete Path` on an incomplete first poll. Retry and Timeout were not scheduled. The remaining blocker is therefore the same-output polling fan-out pattern. Replace it with a single deterministic polling decision router (complete / retry / timeout) before attempting further full-pipeline evidence.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
