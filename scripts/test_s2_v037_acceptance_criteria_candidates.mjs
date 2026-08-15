@@ -89,4 +89,9 @@ assert.deepEqual(parent.connections['Production Agreement Gate v0.3 - Enforced']
 assert.deepEqual(parent.connections['Release Authorized Path'].main[0].map(edge => edge.node), ['Execute Final Validator v0.1']);
 assert.deepEqual(parent.connections['Release Authorized Path'].main[1].map(edge => edge.node), ['Hold for Human Review Path']);
 
+const pollWaitCode = find(parent, 'Single Score Readiness Wait - 45s').parameters.jsCode;
+assert.ok(pollWaitCode.includes('const seconds = 45'), 'Single delayed score check must wait 45 seconds');
+assert.ok(pollWaitCode.includes("strategy: 'single_delayed_check'"));
+assert.deepEqual(parent.connections['Normalize Current-Run Langfuse Scores'].main[0].map(edge => edge.node), ['Production Agreement Gate v0.3 - Enforced']);
+
 console.log('v0.3.7 acceptance-criteria candidate contract checks passed.');

@@ -428,10 +428,10 @@
     },
     {
       "parameters": {
-        "jsCode": "const x = $input.first().json;\nconst seconds = Number(x.evaluation_poll?.interval_seconds ?? 10);\nawait new Promise((resolve) => setTimeout(resolve, seconds * 1000));\nreturn [{ json: x }];"
+        "jsCode": "const x = $input.first().json;\nconst seconds = 45;\nawait new Promise((resolve) => setTimeout(resolve, seconds * 1000));\nreturn [{ json: { ...x, evaluation_poll: { ...(x.evaluation_poll ?? {}), interval_seconds: seconds, strategy: 'single_delayed_check' } } }];"
       },
       "id": "57acb2c3-9ea4-4f80-9c2f-1e383db614b8",
-      "name": "Poll Interval Wait - 10s",
+      "name": "Single Score Readiness Wait - 45s",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
@@ -441,12 +441,33 @@
     },
     {
       "parameters": {
-        "jsCode": "const x = $input.first().json;\nif (x.evaluation_poll?.score_complete !== true) return [];\nreturn [{ json: { ...x, evaluation_poll: { ...x.evaluation_poll, status: 'complete', completed_at: new Date().toISOString() } } }];"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4acd5eaf-d1ea-4b04-836c-a1a057610e93",
+              "leftValue": "={{ $json.evaluation_poll.score_complete }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
       "id": "57b58c00-7f3f-4760-b62b-aff5323162bc",
       "name": "Scores Complete Path",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
         -144,
         0
@@ -467,12 +488,33 @@
     },
     {
       "parameters": {
-        "jsCode": "const x = $input.first().json;\nconst attempt = Number(x.evaluation_poll?.attempt ?? 0);\nconst maxAttempts = Number(x.evaluation_poll?.max_attempts ?? 6);\nif (x.evaluation_poll?.score_complete === true || attempt < maxAttempts) return [];\nreturn [{ json: { ...x, evaluation_poll: { ...x.evaluation_poll, status: 'timeout', timed_out_at: new Date().toISOString() } } }];"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "2601f4e7-9d78-4636-a574-b6df2bf7e475",
+              "leftValue": "={{ Number($json.evaluation_poll.attempt ?? 0) >= Number($json.evaluation_poll.max_attempts ?? 18) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
       "id": "6fd8666f-a946-4b30-929d-98e9b5476736",
       "name": "Polling Timeout Path",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
         -144,
         384
@@ -694,17 +736,7 @@
       "main": [
         [
           {
-            "node": "Scores Complete Path",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Retry Poll Path",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Polling Timeout Path",
+            "node": "Production Agreement Gate v0.3 - Enforced",
             "type": "main",
             "index": 0
           }
@@ -733,14 +765,14 @@
       "main": [
         [
           {
-            "node": "Poll Interval Wait - 10s",
+            "node": "Single Score Readiness Wait - 45s",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Poll Interval Wait - 10s": {
+    "Single Score Readiness Wait - 45s": {
       "main": [
         [
           {
@@ -756,6 +788,13 @@
         [
           {
             "node": "Production Agreement Gate v0.3 - Enforced",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Polling Timeout Path",
             "type": "main",
             "index": 0
           }
@@ -778,6 +817,13 @@
         [
           {
             "node": "Production Agreement Gate v0.3 - Enforced",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Score Poll Attempt",
             "type": "main",
             "index": 0
           }

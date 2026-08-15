@@ -136,6 +136,10 @@ A clean import of the tested Stage 6 definition was then saved as unpublished wo
 
 The imported parent did not retain a functional polling fan-out. After rebuilding and visually verifying Normalize Scores connections to Complete, Retry, and Timeout, runtime execution still stopped after `Scores Complete Path` on an incomplete first poll. Retry and Timeout were not scheduled. The remaining blocker is therefore the same-output polling fan-out pattern. Replace it with a single deterministic polling decision router (complete / retry / timeout) before attempting further full-pipeline evidence.
 
+An explicit sequential complete/timeout router was tested in isolated workflow `WDfTlgWcGu8yuoRf`, using clean Stage 6 `V1ViUN8DI8YKxxSR`. Correlated document run `RUN-S2-11527-16e7090e` passed Stage 5 and Stage 6, but n8n again terminated at the first decision when its false route re-entered the polling cycle. This confirms the cycle, rather than missing visual connections, is the execution-planning blocker.
+
+The next candidate removes the polling cycle entirely: wait once for 45 seconds, query Langfuse once, normalize once, then invoke the unchanged fail-closed Agreement Gate directly. Missing scores remain a hold, while repeated score API calls and model reruns are eliminated. Local contract tests pass; no additional model canary was launched for this checkpoint.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
