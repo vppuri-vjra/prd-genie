@@ -142,6 +142,10 @@ The next candidate removes the polling cycle entirely: wait once for 45 seconds,
 
 The no-cycle definition was imported as unpublished workflow `LpRK4ibx4rXZ1IEs` and saved as `v0.3.7 no-cycle candidate named`, with only the isolated gate and clean Stage 6 references. The single controlled parent execution `11533` failed closed inside the clarification/gap-analysis chain before Stage 5 because `CTR-001` lacked `related_item_ids`. Run ID: `RUN-REALISTIC-CONNECTED-1786809672263`. The polling path was not reached, so this execution is intake-guard evidence rather than validation of the no-cycle correction. No retry was launched.
 
+The upstream contradiction-link omission was corrected without changing the production route. Isolated Gap Analyzer `rR8PH0JXrXPM6fgv` deterministically restores each returned contradiction's `related_item_ids` from the matching validated extractor contradiction's authoritative `item_ids`; unknown IDs still fail closed. Isolated gate `bi4Gvq9tNWcQ2wfR` was versioned to call that child. Local tests cover both restoration and unknown-ID rejection.
+
+One controlled canary then completed successfully as parent execution `11537`, correlated run `RUN-S2-11538-16e7090e`, in 2m 14.04s. The gate, corrected Stage 5 PRD, clean Stage 6 3/7/11 hierarchy, and single 45-second score check all passed operationally with no polling cycle or retry fan-out. The enforced Agreement Gate received a complete score set and correctly routed to human review because faithfulness was `0.82` (minimum `0.90`) and hallucination was `0.62` (maximum `0.10`). Deterministic controls and Langfuse code evaluation passed. Release, Stage 7 delivery, Drive export, and sizing therefore remained blocked, and no automatic retry was launched.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.

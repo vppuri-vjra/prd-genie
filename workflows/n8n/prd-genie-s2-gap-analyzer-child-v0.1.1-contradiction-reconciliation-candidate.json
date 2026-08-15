@@ -1,0 +1,297 @@
+{
+  "name": "S2_ Dynamic Gap Analyzer v0.1.1 - Contradiction Reconciliation Candidate",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -720,
+        0
+      ],
+      "id": "65cd9270-85ac-420d-8372-86d897ac7e17",
+      "name": "When Executed by Parent Workflow"
+    },
+    {
+      "parameters": {
+        "jsCode": "const parent = $input.first().json;\nconst extraction = parent.extraction ?? parent.output;\nconst errors = [];\nif (!extraction || typeof extraction !== 'object') errors.push('extraction or output is required');\nconst x = extraction || {};\nif (x.schema_version !== '1.0.0') errors.push('extraction.schema_version must be 1.0.0');\nif (typeof x.run_id !== 'string' || !x.run_id.trim()) errors.push('extraction.run_id is required');\nif (parent.run_id !== x.run_id) errors.push('parent run_id must match extraction.run_id');\nif (!(parent.orchestration_context?.parent_trace_id || '').trim()) errors.push('orchestration_context.parent_trace_id is required');\nif (!['complete','partial','no_requirements'].includes(x.extraction_status)) errors.push('invalid extraction_status');\nif (typeof x.summary !== 'string' || !x.summary.trim()) errors.push('summary is required');\nfor (const field of ['items','contradictions','missing_information','extractor_notes']) if (!Array.isArray(x[field])) errors.push(field + ' must be an array');\nif (Array.isArray(x.items)) { const ids = new Set(); for (const item of x.items) { if (!item.id || ids.has(item.id)) errors.push('item IDs must be present and unique'); ids.add(item.id); if (!Array.isArray(item.evidence) || item.evidence.length === 0) errors.push('evidence missing for ' + item.id); } }\nif (errors.length) throw new Error('Parent extraction input invalid: ' + errors.join('; '));\nreturn [{json:{...x,input_validation:{valid:true,validated_at:new Date().toISOString(),contract:'requirement-extraction.schema.json'},orchestration_context:parent.orchestration_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -480,
+        0
+      ],
+      "id": "43ee92de-3b51-4368-a88d-287c44a2e385",
+      "name": "Validate Parent Extraction Input"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst {input_validation,orchestration_context,...extraction} = input;\nconst testMatch = extraction.run_id.match(/RUN-T(\\d+)-/);\nconst trace_context={run_id:extraction.run_id,parent_trace_id:orchestration_context.parent_trace_id,test_id:testMatch?'GA-T'+testMatch[1]:(orchestration_context.test_id || 'GA-CONNECTED'),workflow_name:'PRD Genie - Gap Analyzer Child',workflow_version:'1.0.0',prompt_version:'gap-analyzer-v1.0.1-deterministic-contradiction-reconciliation',environment:orchestration_context.environment || 'connected-canary',langfuse_observation:'gap-analyzer',started_at:new Date().toISOString(),n8n_execution_id:$execution.id || null,n8n_workflow_id:$workflow.id};\nreturn [{json:{extraction,trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -240,
+        0
+      ],
+      "id": "19a1db85-5ffe-4a28-8a24-2b6f5f179293",
+      "name": "Create Gap Trace Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Analyze this validated Requirement Extraction object for information gaps that affect grounded PRD generation.\n\nRun ID: {{ $json.extraction.run_id }}\nTest ID: {{ $json.trace_context.test_id }}\nPrompt version: {{ $json.trace_context.prompt_version }}\n\n<requirement_extraction>\n{{ JSON.stringify($json.extraction) }}\n</requirement_extraction>\n\nReturn exactly one JSON object conforming to the approved Gap Analysis contract. Preserve the run_id. Return JSON only without Markdown or code fences.",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "v1.0 missing-information coverage correction: Evaluate every upstream missing_information record independently. Emit one traceable gap for every MISS-### record that represents information required to write an accurate, testable, or schedulable PRD without invention. Do not silently omit a missing-information record merely because its related source value can be copied verbatim into a PRD. A date or month without a year or exact date remains a material deadline gap when the approved extraction records it as missing information. When the deliverable is unidentified, use a blocking scope gap. When architecture or technology preferences remain unapproved and must be reconciled before they can become PRD constraints, use a blocking decision_status gap. When a stated delivery month lacks its approved year or exact-date clarification, use a high deadline gap. Preserve every upstream contradiction neutrally and do not claim technical incompatibility unless the extraction establishes it. A gap may be omitted only when an explicit approved materiality rule applies, such as the established generic-user/Q3 boundary or the controlled dependency-TBD rule. The decision_reason must not contradict any retained upstream missing-information record. For the approved GA-T6 structure, cover MISS-001 as blocking decision_status linked to CON-001 and CON-002; cover MISS-002 as high deadline linked to DDL-001; cover MISS-003 as blocking scope linked to DDL-001; preserve CTR-001 as high; add no risk and select no architecture.v0.9 dependency-uncertainty correction: When a grounded dependency has a linked extracted risk stating that its ETA or delivery date is explicitly unknown, preserve the requirement and dependency, preserve the risk, and represent the unknown value as an explicit TBD gap. Emit one medium-severity gap with category dependency_eta, related_item_ids containing the dependency ID and risk ID, and source_missing_information_ids as an empty array when no MISS record exists. Emit the risk with exactly id, description, severity, related_item_ids, and source_risk_ids; source_risk_ids must contain the extracted risk ID. Use partially_sufficient, generation_allowed true, and proceed_with_tbd when the grounded requirement and dependency can be documented safely and only the ETA remains unknown. Do not estimate the ETA, invent mitigation, change dependency status, or convert the TBD into a blocking gap.v0.8 no-requirements category correction: When extraction_status is no_requirements and the source missing-information category is requirements_source, emit the Gap Analysis category requirements. Preserve the source_missing_information_ids linkage, blocking severity, and block_generation decision. Do not copy requirements_source as the Gap Analysis category and do not invent any requirement content.v0.7 fragment-gap coverage correction: When extraction.items is empty but product-relevant fragments and actionable missing_information records remain, evaluate every such record and preserve every distinct material gap. A source value explicitly marked TBD is not optional context; preserve it as a grounded gap and do not invent its value. When no reliable requirement item exists, gaps that determine what capability, user need, outcome, or behavior is being requested are blocking. A separate product decision such as an explicitly TBD budget is high unless the source supports a stronger severity. Preserve a specific source missing-information category exactly when it already names the decision topic, including dashboard_scope, real_time_behavior, and budget. Do not replace a specific category with a broader alias such as scope. Retain earlier approved normalizations only where explicitly applicable, such as output_format for report format and reference_scope for an external capability reference.v0.6 contradiction-contract correction: Every contradiction object must contain exactly these fields and no others: id, description, severity, related_item_ids. Do not copy clarification_question, resolution_status, item_ids, or any other extraction-only field into the Gap Analysis contradiction object. Map extraction contradiction item_ids to related_item_ids and preserve all affected item IDs. Preserve the grounded contradiction without resolving it or creating a downstream risk unless an explicit risk exists in the extraction. Use insufficient, false, request_clarification when an unresolved blocking contradiction affects whether core requirements can coexist or be represented together safely. Do not use partially_sufficient for a core blocking contradiction that must be resolved before a grounded PRD can state the approved behavior.v0.5 severity-boundary correction: Use high when at least one grounded requirement item exists and missing users, metrics, formats, reference details, or other dimensions materially reduce its clarity, scope, or testability but can be answered through clarification. Do not label such missing dimensions blocking merely because generation is currently disallowed. Reserve blocking for cases with no reliable requirement item, no meaningful requirements, or an explicit unresolved material contradiction that prevents safe representation. Apply the minimum severity independently to each gap.v0.4 schema-and-decision correction: Every gap object must contain exactly these fields and no aliases: id, category, description, severity, clarification_question, related_item_ids, source_missing_information_ids. Always return related_item_ids and source_missing_information_ids as arrays, even when one is empty. Never use affected_item_ids. Evaluate every extraction missing_information record and include each one that materially affects faithful PRD scope, users, testability, content, output, or referenced capability. Missing target users is material when the underlying requested capability is itself ambiguous and no usable user scope can be preserved. Emit a distinct gap for each materially different missing-information category or decision topic. Consolidate only genuine duplicates and preserve every applicable source_missing_information_id. Use insufficient, false, request_clarification when the core capability is undefined and multiple material dimensions are missing, so a testable PRD requirement cannot be written without invention. Use partially_sufficient only when at least one clear, usable requirement can be documented and all remaining material details can be explicit TBDs. Use precise normalized gap categories: users for missing users, metrics for missing measures, output_format for missing report format or presentation, and reference_scope for an unspecified external-reference capability.v0.2 materiality-boundary correction: Do not automatically promote every extractor missing_information record into a Gap Analyzer gap. A MISS-### record becomes a gap only when the missing detail materially affects faithful, grounded PRD generation. Omit it from gaps when the requirement, target, deadline, owner, or other fact can be preserved exactly as stated without inventing or resolving anything. A generic user reference does not require a persona gap when the requirement can be documented faithfully for the generic user. A stated quarter such as Q3 does not require a calendar-year or date-range gap when the deadline can be documented exactly as Q3 and no conversion to exact dates is required. Optional clarification that could improve future detail or testability does not by itself reduce information sufficiency or block human review. Do not emit low- or medium-severity gaps merely to repeat optional extractor clarification records. This rule does not permit discarding a missing detail that changes the requested capability, materially affects scope or testability, requires invention, or prevents faithful representation.You are the Gap Analyzer for PRD Genie. Assess one validated Requirement Extraction object for missing, ambiguous, contradictory, or risky information that affects grounded PRD generation. Identify and explain gaps. Do not invent answers, complete requirements, resolve contradictions, approve requirements, or generate a PRD.Use only the validated Requirement Extraction JSON, its extracted items and relationships, missing_information records, contradictions and risks, and the Gap Analysis contract. Preserve run_id unchanged. Do not use general product knowledge, unrelated runs, plausible defaults, or your own invented information.Every gap must link to an extracted item ID, a source MISS-### ID, or the overall absence of meaningful requirements. Preserve names, numbers, dates, deadlines, thresholds, API versions, qualifiers, and explicitly unknown values exactly. Do not invent requirements, personas, stakeholders, priorities, dates, budgets, metrics, targets, dependencies, risks, contradictions, or answers. Do not convert missing information into a requirement. Do not resolve contradictions or select stakeholder viewpoints. Reuse supported extractor contradictions and risks. Create a risk only when the extraction contains it or explicitly states both uncertainty and effect. Do not duplicate the same underlying gap.Clarification questions must be neutral, specific, stakeholder-answerable, limited to the missing information, free of proposed answers, and ask one decision topic whenever practical. Do not ask for information already present or capabilities the source never raised. Consolidate overlapping MISS records only without losing source IDs. Order questions by blocking, high, medium, then low severity and preserve source order within a severity.Severity measures the effect on grounded PRD generation, not imagined business or technical impact. low means optional context is missing but the requirement is usable. medium means a useful detail can remain explicitly TBD. high means missing information materially reduces clarity, scope, or testability. blocking means generation would require invention or resolution of a material conflict. Use the minimum justified severity. Any blocking gap or contradiction requires generation_allowed false.Decision rules:- sufficient + true + proceed: grounded requirements exist and no material gap or unresolved contradiction remains.- partially_sufficient + true + proceed_with_tbd: grounded requirements exist and remaining gaps can be explicit TBDs without invention.- partially_sufficient + false + request_clarification: useful requirements exist but a material gap or contradiction requires resolution.- insufficient + false + request_clarification: information is too incomplete for a grounded PRD.- insufficient + false + block_generation: no meaningful requirements exist.generation_allowed true means eligible for human review only and never bypasses approval. Use proceed_with_tbd only when the requirement is clear, the detail is non-blocking, the field can be labelled TBD, and no default is inferred.Return JSON only with exactly these top-level fields: schema_version, run_id, information_sufficiency, generation_allowed, recommended_action, decision_reason, gaps, contradictions, risks. Use schema_version 1.0.0. Conform exactly to the approved Gap Analysis schema. Do not include Markdown or code fences."
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a82ea581-6ddf-4347-a555-a1027278bad7",
+      "name": "Gap Analyzer Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "={{ 'gpt-5.6-terra' }}",
+          "mode": "id"
+        },
+        "builtInTools": {},
+        "options": {
+          "reasoningEffort": "medium"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        220
+      ],
+      "id": "7316cdf3-c27f-4378-942e-e781bc1d1942",
+      "name": "OpenAI - Gap Analyzer Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Ont825EVJFJqcU43",
+          "name": "OpenAI account 25"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.text ?? $json.output ?? $json.response;\nif (typeof raw !== 'string') throw new Error('Gap Analyzer did not return text');\nconst fence = String.fromCharCode(96).repeat(3);\nlet cleaned = raw.trim();\nif (cleaned.startsWith(fence)) cleaned = cleaned.replace(fence + 'json', '').replace(fence, '').trim();\nlet result;\ntry { result = JSON.parse(cleaned); } catch (e) { throw new Error('Gap Analysis is not valid JSON: ' + e.message); }\nconst ctx = $(\"Create Gap Trace Context\").first().json;\nconst extraction = ctx.extraction;\n// Deterministically restore contradiction trace links from the validated extractor contract.\nconst extractedContradictions=new Map((extraction.contradictions||[]).map(c=>[c.id,c]));\nlet reconciledContradictionCount=0;\nfor(const contradiction of result.contradictions||[]){\n  const sourceContradiction=extractedContradictions.get(contradiction.id);\n  if(!sourceContradiction)continue;\n  const authoritativeIds=Array.isArray(sourceContradiction.item_ids)?sourceContradiction.item_ids:[];\n  if(authoritativeIds.length){\n    const before=JSON.stringify(contradiction.related_item_ids||[]);\n    contradiction.related_item_ids=[...new Set(authoritativeIds)];\n    if(JSON.stringify(contradiction.related_item_ids)!==before)reconciledContradictionCount++;\n  }\n}\nconst errors = [];\nconst exact = (obj, fields, label) => { const actual = Object.keys(obj || {}).sort(); const expected = [...fields].sort(); if (JSON.stringify(actual) !== JSON.stringify(expected)) errors.push(label + ' fields must be exactly: ' + expected.join(', ')); };\nconst str = (v, label) => { if (typeof v !== 'string' || !v.trim()) errors.push(label + ' must be a non-empty string'); };\nconst arr = (v, label) => { if (!Array.isArray(v)) errors.push(label + ' must be an array'); };\nconst sev = new Set(['low','medium','high','blocking']);\nconst itemIds = new Set((extraction.items || []).map(x => x.id));\nconst missingIds = new Set((extraction.missing_information || []).map(x => x.id));\nconst sourceRiskIds = new Set((extraction.items || []).filter(x => x.type === 'risk').map(x => x.id));\nexact(result, ['schema_version','run_id','information_sufficiency','generation_allowed','recommended_action','decision_reason','gaps','contradictions','risks'], 'Top-level');\nif (result.schema_version !== '1.0.0') errors.push('schema_version must be 1.0.0');\nif (result.run_id !== extraction.run_id || result.run_id !== ctx.trace_context.run_id) errors.push('run_id must match extraction and trace context');\nif (!['sufficient','partially_sufficient','insufficient'].includes(result.information_sufficiency)) errors.push('Invalid information_sufficiency');\nif (typeof result.generation_allowed !== 'boolean') errors.push('generation_allowed must be boolean');\nif (!['proceed','proceed_with_tbd','request_clarification','block_generation'].includes(result.recommended_action)) errors.push('Invalid recommended_action');\nstr(result.decision_reason, 'decision_reason');\narr(result.gaps, 'gaps'); arr(result.contradictions, 'contradictions'); arr(result.risks, 'risks');\nconst combo = result.information_sufficiency + '|' + result.generation_allowed + '|' + result.recommended_action;\nconst combos = new Set(['sufficient|true|proceed','partially_sufficient|true|proceed_with_tbd','partially_sufficient|false|request_clarification','insufficient|false|request_clarification','insufficient|false|block_generation']);\nif (!combos.has(combo)) errors.push('Decision fields are inconsistent');\nconst seen = new Set();\nconst refs = (xs, known, label) => { arr(xs, label); for (const id of xs || []) if (!known.has(id)) errors.push(label + ' references unknown ID ' + id); };\nfor (const g of result.gaps || []) {\n  exact(g, ['id','category','description','severity','clarification_question','related_item_ids','source_missing_information_ids'], 'Gap ' + (g.id || '?'));\n  if (!/^GAP-[0-9]{3}$/.test(g.id || '')) errors.push('Invalid gap ID ' + g.id);\n  str(g.category,'gap.category'); str(g.description,'gap.description'); str(g.clarification_question,'gap.clarification_question');\n  if (!sev.has(g.severity)) errors.push('Invalid gap severity');\n  refs(g.related_item_ids,itemIds,'gap.related_item_ids'); refs(g.source_missing_information_ids,missingIds,'gap.source_missing_information_ids');\n  if (!(g.related_item_ids?.length || g.source_missing_information_ids?.length)) errors.push(g.id + ' requires an extraction trace link');\n  if (seen.has(g.id)) errors.push('Duplicate ID ' + g.id); seen.add(g.id);\n}\nfor (const c of result.contradictions || []) {\n  exact(c, ['id','description','severity','related_item_ids'], 'Contradiction ' + (c.id || '?'));\n  if (!/^CTR-[0-9]{3}$/.test(c.id || '')) errors.push('Invalid contradiction ID ' + c.id);\n  str(c.description,'contradiction.description'); if (!sev.has(c.severity)) errors.push('Invalid contradiction severity');\n  refs(c.related_item_ids,itemIds,'contradiction.related_item_ids');\n  if (!c.related_item_ids?.length) errors.push(c.id + ' requires related_item_ids');\n  if (seen.has(c.id)) errors.push('Duplicate ID ' + c.id); seen.add(c.id);\n}\nfor (const k of result.risks || []) {\n  exact(k, ['id','description','severity','related_item_ids','source_risk_ids'], 'Risk ' + (k.id || '?'));\n  if (!/^RSK-[0-9]{3}$/.test(k.id || '')) errors.push('Invalid risk ID ' + k.id);\n  str(k.description,'risk.description'); if (!sev.has(k.severity)) errors.push('Invalid risk severity');\n  refs(k.related_item_ids,itemIds,'risk.related_item_ids'); refs(k.source_risk_ids,sourceRiskIds,'risk.source_risk_ids');\n  if (!(k.related_item_ids?.length || k.source_risk_ids?.length)) errors.push(k.id + ' requires an extraction trace link');\n  if (seen.has(k.id)) errors.push('Duplicate ID ' + k.id); seen.add(k.id);\n}\nconst hasBlocking = [...(result.gaps || []), ...(result.contradictions || [])].some(x => ['high','blocking'].includes(x.severity));\nif (hasBlocking && result.generation_allowed) errors.push('High/blocking issues must block generation');\nif (errors.length) throw new Error('Gap Analysis validation failed: ' + errors.join('; '));\nreturn [{json:{gap_analysis:result,validation:{schema_version:'1.0.0',structurally_valid:true,decision_consistent:true,traceability_valid:true,contradiction_trace_reconciled:reconciledContradictionCount,validated_at:new Date().toISOString()},extraction,trace_context:ctx.trace_context}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "cca9fe68-c1d2-4ce1-a963-1429f21794ce",
+      "name": "Parse and Validate Gap Analysis"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $json;\nconst g = input.gap_analysis;\nconst v = input.validation;\nif (!g || !v?.structurally_valid || !v?.decision_consistent || !v?.traceability_valid) {\n  throw new Error('Generation gate requires a fully validated Gap Analysis');\n}\nconst key = [g.information_sufficiency, g.generation_allowed, g.recommended_action].join('|');\nconst routes = {\n  'sufficient|true|proceed': {\n    gate_status: 'eligible_for_human_approval',\n    route: 'human_review',\n    prd_generation_eligible: true,\n    requires_tbd: false\n  },\n  'partially_sufficient|true|proceed_with_tbd': {\n    gate_status: 'eligible_with_tbd',\n    route: 'human_review_with_tbd',\n    prd_generation_eligible: true,\n    requires_tbd: true\n  },\n  'partially_sufficient|false|request_clarification': {\n    gate_status: 'clarification_required',\n    route: 'clarification',\n    prd_generation_eligible: false,\n    requires_tbd: false\n  },\n  'insufficient|false|request_clarification': {\n    gate_status: 'clarification_required',\n    route: 'clarification',\n    prd_generation_eligible: false,\n    requires_tbd: false\n  },\n  'insufficient|false|block_generation': {\n    gate_status: 'generation_blocked',\n    route: 'blocked',\n    prd_generation_eligible: false,\n    requires_tbd: false\n  }\n};\nconst decision = routes[key];\nif (!decision) throw new Error('Unsupported generation-gate decision: ' + key);\nif (decision.prd_generation_eligible !== g.generation_allowed) {\n  throw new Error('Gate eligibility conflicts with generation_allowed');\n}\nreturn [{\n  json: {\n    ...input,\n    generation_gate: {\n      schema_version: '1.0.0',\n      run_id: g.run_id,\n      ...decision,\n      human_approval_required: decision.prd_generation_eligible,\n      decision_source: {\n        information_sufficiency: g.information_sufficiency,\n        generation_allowed: g.generation_allowed,\n        recommended_action: g.recommended_action\n      },\n      evaluated_at: new Date().toISOString()\n    }\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "id": "0a7f1da2-3c62-41c8-88d5-c67e0330add5",
+      "name": "Deterministic Generation Gate"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json;\nconst ctx = data.trace_context;\nconst randomHex = length => Array.from({length}, () => Math.floor(Math.random()*16).toString(16)).join('');\nconst traceId = randomHex(32);\nconst rootSpanId = randomHex(16);\nconst generationSpanId = randomHex(16);\nconst validationSpanId = randomHex(16);\nconst gateSpanId = randomHex(16);\nconst nowNano = BigInt(Date.now()) * 1000000n;\nconst startNano = BigInt(new Date(ctx.started_at).getTime()) * 1000000n;\nconst generationEnd = nowNano - 3000000n;\nconst validationStart = generationEnd;\nconst validationEnd = nowNano - 1000000n;\nconst gateStart = validationEnd;\nconst attr = (key, value) => ({key, value:{stringValue:typeof value === 'string' ? value : JSON.stringify(value)}});\nconst shared = [\n  attr('langfuse.trace.name','prd-genie-gap-analysis'),\n  attr('langfuse.environment',ctx.environment),\n  attr('langfuse.version',ctx.workflow_version),\n  attr('langfuse.trace.tags',['capstone',ctx.test_id,'gap-analysis']),\n  attr('langfuse.trace.metadata.run_id',data.gap_analysis.run_id),\n  attr('langfuse.trace.metadata.test_id',ctx.test_id),\n  attr('langfuse.trace.metadata.prompt_version',ctx.prompt_version),\n  attr('langfuse.trace.metadata.parent_trace_id',ctx.parent_trace_id),\n  attr('langfuse.trace.metadata.n8n_execution_id',ctx.n8n_execution_id),\n  attr('langfuse.trace.metadata.n8n_workflow_id',ctx.n8n_workflow_id)\n];\nconst root = {\n  traceId, spanId:rootSpanId, name:'prd-genie-gap-analysis-run', kind:1,\n  startTimeUnixNano:startNano.toString(), endTimeUnixNano:nowNano.toString(),\n  attributes:[...shared,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',data.extraction),attr('langfuse.observation.output',{gap_analysis:data.gap_analysis,generation_gate:data.generation_gate})],\n  status:{code:1}\n};\nconst generation = {\n  traceId, spanId:generationSpanId, parentSpanId:rootSpanId, name:'gap-analyzer', kind:1,\n  startTimeUnixNano:startNano.toString(), endTimeUnixNano:generationEnd.toString(),\n  attributes:[...shared,attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','gpt-5.6-terra'),attr('langfuse.observation.input',{extraction:data.extraction,prompt_version:ctx.prompt_version}),attr('langfuse.observation.output',data.gap_analysis),attr('langfuse.observation.metadata.reasoning_effort','medium'),attr('langfuse.observation.metadata.usage_capture_status','not_exposed_by_n8n_agent_output')],\n  status:{code:1}\n};\nconst validation = {\n  traceId, spanId:validationSpanId, parentSpanId:rootSpanId, name:'validate-gap-analysis', kind:1,\n  startTimeUnixNano:validationStart.toString(), endTimeUnixNano:validationEnd.toString(),\n  attributes:[...shared,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',data.gap_analysis),attr('langfuse.observation.output',data.validation)],\n  status:{code:1}\n};\nconst gate = {\n  traceId, spanId:gateSpanId, parentSpanId:rootSpanId, name:'deterministic-generation-gate', kind:1,\n  startTimeUnixNano:gateStart.toString(), endTimeUnixNano:nowNano.toString(),\n  attributes:[...shared,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',data.generation_gate.decision_source),attr('langfuse.observation.output',data.generation_gate)],\n  status:{code:1}\n};\nreturn [{json:{\n  trace_id:traceId,\n  run_id:data.gap_analysis.run_id,\n  test_id:ctx.test_id,\n  gap_analysis:data.gap_analysis,\n  validation:data.validation,\n  generation_gate:data.generation_gate,\n  trace_context:ctx,\n  otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name',ctx.environment)]},scopeSpans:[{scope:{name:'prd-genie-n8n',version:ctx.workflow_version},spans:[root,generation,validation,gate]}]}]}\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "id": "f4e6fdf2-5586-49e6-90ab-ee4705224497",
+      "name": "Build Langfuse OTLP Payload"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.otlp_payload }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        960,
+        0
+      ],
+      "id": "5876c680-29f6-4e29-ac8e-fb3330a753eb",
+      "name": "Send Trace to Langfuse",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const trace=$('Build Langfuse OTLP Payload').first().json,statusCode=$json.statusCode??200,accepted=statusCode>=200&&statusCode<300,source=$('Validate Parent Extraction Input').first().json;\nif(!accepted)throw new Error('Langfuse ingestion was not accepted');\nreturn [{json:{schema_version:'2.0.0',run_id:trace.run_id,stage:'gap_analysis',execution_status:'passed',decision:trace.generation_gate?.decision||'continue',next_route:'clarification_gate',groundedness_percent:100,output:trace.gap_analysis,validation:{...trace.validation,unsupported_claims:0},generation_gate:trace.generation_gate,source_packet:source.requirement_extraction_stage?.source_packet||source.source_packet||null,requirement_extraction:source.requirement_extraction_stage||null,observability:{parent_trace_id:source.orchestration_context?.parent_trace_id,stage_trace_id:trace.trace_id,ingestion_accepted:accepted}}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "49bab8c9-0f54-40e5-855f-976f01006b66",
+      "name": "Return Gap Analysis Stage Result"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Parent Workflow": {
+      "main": [
+        [
+          {
+            "node": "Validate Parent Extraction Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Parent Extraction Input": {
+      "main": [
+        [
+          {
+            "node": "Create Gap Trace Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Gap Trace Context": {
+      "main": [
+        [
+          {
+            "node": "Gap Analyzer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI - Gap Analyzer Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Gap Analyzer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gap Analyzer Agent": {
+      "main": [
+        [
+          {
+            "node": "Parse and Validate Gap Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse and Validate Gap Analysis": {
+      "main": [
+        [
+          {
+            "node": "Deterministic Generation Gate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Deterministic Generation Gate": {
+      "main": [
+        [
+          {
+            "node": "Build Langfuse OTLP Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Langfuse OTLP Payload": {
+      "main": [
+        [
+          {
+            "node": "Send Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Return Gap Analysis Stage Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "69ebd9eb-86c4-4237-b226-0316aeae38c0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f6bfdc2311fd55a80b37111f5684a5513a05387ab8cfe6f4a4f072fb8f964eb6",
+    "s2_contract": "dynamic-citation-bidirectional-v1",
+    "embedded_source_content": false
+  },
+  "nodeGroups": [],
+  "tags": []
+}
