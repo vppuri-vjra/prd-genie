@@ -140,6 +140,8 @@ An explicit sequential complete/timeout router was tested in isolated workflow `
 
 The next candidate removes the polling cycle entirely: wait once for 45 seconds, query Langfuse once, normalize once, then invoke the unchanged fail-closed Agreement Gate directly. Missing scores remain a hold, while repeated score API calls and model reruns are eliminated. Local contract tests pass; no additional model canary was launched for this checkpoint.
 
+The no-cycle definition was imported as unpublished workflow `LpRK4ibx4rXZ1IEs` and saved as `v0.3.7 no-cycle candidate named`, with only the isolated gate and clean Stage 6 references. The single controlled parent execution `11533` failed closed inside the clarification/gap-analysis chain before Stage 5 because `CTR-001` lacked `related_item_ids`. Run ID: `RUN-REALISTIC-CONNECTED-1786809672263`. The polling path was not reached, so this execution is intake-guard evidence rather than validation of the no-cycle correction. No retry was launched.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
