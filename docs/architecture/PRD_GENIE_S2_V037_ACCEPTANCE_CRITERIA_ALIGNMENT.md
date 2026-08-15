@@ -101,6 +101,18 @@ The local Stage 6 candidate now:
 
 The strengthened Stage 6 contract tests pass locally. This correction must be deployed to the isolated Stage 6 candidate and rerun through the unchanged Agreement Gate before sizing evidence or promotion can be accepted.
 
+### Corrected Stage 6 deployment and canary
+
+The corrected generator and validator code was deployed to isolated Stage 6 workflow `F146WpcfZZVomhq0` and published as `v0.3.7 canonical display-source correction`. No production v0.3.6 workflow was changed.
+
+- Parent execution `11439` completed operationally in 2m 0.39s.
+- Correlated artifact run: `RUN-S2-11440-16e7090e`.
+- Corrected Stage 6 and its strengthened display-source synchronization checks passed.
+- Langfuse completed and `Release Authorized Path` emitted one item, proving the unchanged Agreement Gate authorized the corrected package.
+- The parent then terminated without invoking Stage 7 or sizing even though the editor visibly shows the release-to-validator edge.
+
+This isolates the remaining blocker to the candidate parent orchestration/runtime state, not the PRD or Stage 6 document contract. A fresh parent import or equivalent isolated-parent reconstruction is required before the full Stage 7, sizing, and delivery evidence can be accepted.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
