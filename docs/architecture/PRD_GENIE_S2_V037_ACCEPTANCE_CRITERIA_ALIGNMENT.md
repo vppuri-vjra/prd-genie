@@ -1,6 +1,6 @@
 # PRD Genie S2 v0.3.7 — Acceptance Criteria Alignment
 
-Status: validated promotion candidate; awaiting explicit production promotion approval
+Status: candidate correction in progress; Agreement Gate traceability finding must pass before promotion
 Date: 2026-08-14  
 Baseline: accepted v0.3.6 production pipeline
 
@@ -82,9 +82,24 @@ The repository candidate was imported into a fresh extractor workflow, avoiding 
 - Stage 6 rendered 11 `SBAC-*` criteria, one for every story, with visible `FAC-*` and PRD-requirement linkage.
 - `FEAT-006` / `US-010` included the approved criterion: monthly board-report PDFs contain the company logo at the top of every page, grounded by `CIT-01-0074-640ddf26`.
 - Stage 6 validation reported approved-item coverage `37/37`, groundedness `100%`, unsupported claims `0`, JSON/Markdown synchronized, feature acceptance linkage passed, and zero orphan PRD or delivery elements.
-- Current-run Langfuse polling completed on attempt 1 with code evaluation passed, faithfulness `0.94`, and hallucination `0.22`; the Agreement Gate released the run.
+- Current-run Langfuse polling completed on attempt 1 with code evaluation passed and faithfulness `0.94`, but hallucination `0.22` exceeded the `0.10` maximum. The Agreement Gate held the run for human review; Stage 7, sizing, and delivery did not execute.
 
-This run satisfies the v0.3.7 document contract and is the promotion-candidate evidence checkpoint. Promotion remains a separate explicit decision.
+The run proves the acceptance-criteria document shape, but it is not a full-pipeline promotion checkpoint.
+
+### Full-pipeline retry and Stage 6 traceability correction
+
+A controlled retry produced correlated artifact run `RUN-S2-11433-16e7090e`. Deterministic controls and code evaluation passed, and faithfulness scored `0.96`, but story hallucination scored `0.30`; the Agreement Gate again held the run and correctly prevented Stage 7, sizing, and delivery.
+
+Langfuse identified a real display-level traceability defect: detailed Epic, Feature, and User Story source labels still used packet item identifiers while their acceptance tables used canonical PRD identifiers. This produced shifted labels such as a story mapped to canonical `FR-003` displaying `Source: FR-004`, while the artifact claimed JSON/Markdown synchronization.
+
+The local Stage 6 candidate now:
+
+- carries explicit canonical `display_source_ids` on stories, features, and epics;
+- renders those same identifiers in every detailed Markdown source line;
+- verifies exact story-to-criterion display-source equality;
+- fails closed when Epic, Feature, or Story source labels are absent or unsynchronized.
+
+The strengthened Stage 6 contract tests pass locally. This correction must be deployed to the isolated Stage 6 candidate and rerun through the unchanged Agreement Gate before sizing evidence or promotion can be accepted.
 
 ## Objective
 

@@ -105,6 +105,27 @@ storyCode = replaceOnce(storyCode, 'makeStory(f,title)', 'makeStory(f,title,feat
 storyCode = replaceOnce(storyCode, "s.item_ids[0]+' |'", "s.acceptance_criteria[0].display_source_ids.join(', ')+' |'", 'use canonical PRD IDs in summary');
 storyCode = replaceOnce(
   storyCode,
+  "status:'partially_grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),acceptance_criteria:",
+  "status:'partially_grounded',item_ids:ids(storyItems),citation_ids:citations(storyItems),display_source_ids:facByScope.get(title)?.prd_requirement_ids||[],acceptance_criteria:",
+  'add canonical display sources to story contract',
+);
+storyCode = replaceOnce(
+  storyCode,
+  "feature.item_ids=[...new Set(feature.stories.flatMap(s=>s.item_ids))];feature.citation_ids=",
+  "feature.item_ids=[...new Set(feature.stories.flatMap(s=>s.item_ids))];feature.display_source_ids=[...new Set(feature.stories.flatMap(s=>s.display_source_ids||[]))];feature.citation_ids=",
+  'add canonical display sources to feature contract',
+);
+storyCode = replaceOnce(
+  storyCode,
+  "epic.item_ids=[...new Set(epic.features.flatMap(x=>x.item_ids))];epic.citation_ids=",
+  "epic.item_ids=[...new Set(epic.features.flatMap(x=>x.item_ids))];epic.display_source_ids=[...new Set(epic.features.flatMap(x=>x.display_source_ids||[]))];epic.citation_ids=",
+  'add canonical display sources to epic contract',
+);
+storyCode = replaceOnce(storyCode, "'Sources: '+epic.item_ids.join(', ')", "'Sources: '+epic.display_source_ids.join(', ')", 'render canonical epic sources');
+storyCode = replaceOnce(storyCode, "'Sources: '+feature.item_ids.join(', ')", "'Sources: '+feature.display_source_ids.join(', ')", 'render canonical feature sources');
+storyCode = replaceOnce(storyCode, "'- **Source:** '+story.item_ids.join(', ')", "'- **Source:** '+story.display_source_ids.join(', ')", 'render canonical story sources');
+storyCode = replaceOnce(
+  storyCode,
   "prd_hash:p.prd_hash,prd_markdown:p.prd_markdown||p.markdown",
   "prd_hash:p.prd_hash,prd_document:p.prd_document,feature_acceptance_criteria:p.prd_document?.feature_acceptance_criteria||[],prd_markdown:p.prd_markdown||p.markdown",
   'preserve PRD acceptance contract',
@@ -127,7 +148,7 @@ const validateStory = node(story, 'Validate PRD to Story Coverage');
 validateStory.parameters.jsCode = replaceOnce(
   validateStory.parameters.jsCode,
   "if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
-  "const fac=(x.feature_acceptance_criteria||[]).flatMap(feature=>feature.criteria||[]),facById=new Map(fac.map(criterion=>[criterion.id,criterion]));for(const epic of x.epics)for(const feature of epic.features)for(const story of feature.stories)for(const ac of story.acceptance_criteria){if(ac.parent_feature_id!==feature.feature_id)e.push('story parent feature '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).length)e.push('missing feature acceptance link '+story.story_id);for(const id of ac.feature_acceptance_criteria_ids||[])if(!facById.has(id)||facById.get(id).feature_id!==feature.feature_id)e.push('invalid feature acceptance link '+story.story_id);if(!(ac.display_source_ids||[]).length)e.push('missing canonical PRD source '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).every(id=>x.story_markdown.includes(id)))e.push('feature acceptance link absent from Markdown '+story.story_id);}if(fac.some(criterion=>!x.epics.flatMap(epic=>epic.features).flatMap(feature=>feature.stories).flatMap(story=>story.acceptance_criteria).some(ac=>(ac.feature_acceptance_criteria_ids||[]).includes(criterion.id))))e.push('unused feature acceptance criterion');if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
+  "const fac=(x.feature_acceptance_criteria||[]).flatMap(feature=>feature.criteria||[]),facById=new Map(fac.map(criterion=>[criterion.id,criterion]));for(const epic of x.epics){if(!(epic.display_source_ids||[]).length||!x.story_markdown.includes('Sources: '+epic.display_source_ids.join(', ')))e.push('epic display source synchronization '+epic.epic_id);for(const feature of epic.features){if(!(feature.display_source_ids||[]).length||!x.story_markdown.includes('Sources: '+feature.display_source_ids.join(', ')))e.push('feature display source synchronization '+feature.feature_id);for(const story of feature.stories){if(!(story.display_source_ids||[]).length||!x.story_markdown.includes('- **Source:** '+story.display_source_ids.join(', ')))e.push('story display source synchronization '+story.story_id);for(const ac of story.acceptance_criteria){if(ac.parent_feature_id!==feature.feature_id)e.push('story parent feature '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).length)e.push('missing feature acceptance link '+story.story_id);for(const id of ac.feature_acceptance_criteria_ids||[])if(!facById.has(id)||facById.get(id).feature_id!==feature.feature_id)e.push('invalid feature acceptance link '+story.story_id);if(!(ac.display_source_ids||[]).length||JSON.stringify(ac.display_source_ids)!==JSON.stringify(story.display_source_ids))e.push('canonical PRD source mismatch '+story.story_id);if(!(ac.feature_acceptance_criteria_ids||[]).every(id=>x.story_markdown.includes(id)))e.push('feature acceptance link absent from Markdown '+story.story_id);}}}}if(fac.some(criterion=>!x.epics.flatMap(epic=>epic.features).flatMap(feature=>feature.stories).flatMap(story=>story.acceptance_criteria).some(ac=>(ac.feature_acceptance_criteria_ids||[]).includes(criterion.id))))e.push('unused feature acceptance criterion');if(!x.markdown||!x.story_markdown||x.markdown!==x.story_markdown||!x.validation.json_markdown_synchronized)e.push('Story Markdown synchronization');",
   'validate PRD-to-story acceptance linkage',
 );
 story.name = 'S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate';
