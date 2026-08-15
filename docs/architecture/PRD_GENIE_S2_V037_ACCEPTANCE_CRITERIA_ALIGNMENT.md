@@ -113,6 +113,17 @@ The corrected generator and validator code was deployed to isolated Stage 6 work
 
 This isolates the remaining blocker to the candidate parent orchestration/runtime state, not the PRD or Stage 6 document contract. A fresh parent import or equivalent isolated-parent reconstruction is required before the full Stage 7, sizing, and delivery evidence can be accepted.
 
+### Fresh-parent reconstruction evidence
+
+A fresh parent was imported as workflow `TakmnVBH7BPiKWXx`. Only its clarification-gate reference was changed, from the production gate to isolated reconciliation candidate `bi4Gvq9tNWcQ2wfR`, and the reference set was saved as `v0.3.7 fresh isolated parent references`. Production v0.3.6 remained unchanged.
+
+- Parent execution `11460` failed closed when extractor run `RUN-S2-11461-16e7090e` omitted the PDF monthly-board-report requirement.
+- Parent execution `11463` passed reconciliation and approval, then failed closed at Stage 5 when run `RUN-S2-11464-16e7090e` omitted persona numbering.
+- Parent execution `11469` generated and validated both corrected documents. Correlated artifact run `RUN-S2-11470-16e7090e` passed Stage 5, corrected Stage 6, Langfuse polling, and the Agreement Gate; `Release Authorized Path` emitted one item.
+- Execution `11469` again ended after the release node. Stage 7, non-blocking sizing, and Drive delivery were not invoked.
+
+The fresh import rules out stale workflow-editor state as the sole cause. The remaining v0.3.7 blocker is the post-Agreement-Gate routing design itself. Do not treat execution `11469` as full-pipeline acceptance evidence and do not promote v0.3.7 until an isolated routing correction reaches Stage 7, sizing, and delivery in one parent execution.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
