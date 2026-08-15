@@ -68,6 +68,8 @@ The inactive final extractor candidate `q7pJlvr8eNHd0g9H` implements that reconc
 
 The first isolated parent canary from `UfN7nVXaSipRgNz0` stopped at the gate handoff with `Workflow is not active and cannot be executed.` The correlated run ID was `RUN-REALISTIC-CONNECTED-1786758779698`; no extraction, Stage 5, downstream generation, or delivery occurred. This is an activation prerequisite, not a contract failure. Publishing the extractor and gate candidates requires explicit approval before the canary can continue.
 
+After explicit approval, extractor `q7pJlvr8eNHd0g9H` and gate `bi4Gvq9tNWcQ2wfR` were published solely for the isolated canary. The rerun `RUN-REALISTIC-CONNECTED-1786758907139` reached the candidate extractor but stopped in its normalization code with `SyntaxError: Unexpected token 'const'`; no Stage 5, downstream generation, or delivery occurred. Browser inspection confirmed that the n8n draft contained editor residue in the normalization line despite the clean repository candidate and passing local contract tests. Both canary dependencies were immediately unpublished after the failed run. Production v0.3.6 and its published extractor/gate references remained unchanged.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
