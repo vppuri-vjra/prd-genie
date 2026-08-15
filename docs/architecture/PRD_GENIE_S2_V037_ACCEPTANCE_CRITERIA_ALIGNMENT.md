@@ -19,6 +19,8 @@ Baseline: accepted v0.3.6 production pipeline
 | Parent final | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `EQ5eV8mGkDUwahmu` | Final logo-evidence parent; unpublished |
 | Extractor reconciliation final | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate Final | `q7pJlvr8eNHd0g9H` | Inactive packet-scoped deterministic candidate; unpublished |
 | Extractor reconciliation incomplete | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate | `lXyJD2RBt78epFy9` | Inactive editor attempt; do not use; not published or deleted |
+| Gate reconciliation candidate | S2_ Dynamic Drive and Clarification Gate v0.2.5 - Acceptance Reconciliation Candidate | `bi4Gvq9tNWcQ2wfR` | Inactive; points only its extractor call to `q7pJlvr8eNHd0g9H` |
+| Parent reconciliation canary | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Deterministic Acceptance Canary | `UfN7nVXaSipRgNz0` | Inactive; points only its gate call to `bi4Gvq9tNWcQ2wfR` |
 
 The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
 
@@ -63,6 +65,8 @@ A read-only comparison of extractor executions `11384` (successful) and `11411` 
 The minimal next candidate should make extraction of this approved criterion deterministic (or deterministically reconcile it from the citation inventory) before the v0.3.7 end-to-end canary is accepted. Production v0.3.6 remains unchanged.
 
 The inactive final extractor candidate `q7pJlvr8eNHd0g9H` implements that reconciliation only for canonical packet `SP-S2-16e7090e7027e2d1`. It requires the exact approved logo citation and the PDF monthly-board-report functional requirement, creates the criterion only when the model omitted it, restores bidirectional requirement linkage, and rebuilds the coverage ledger from emitted evidence. Missing approved evidence still fails closed. The published extractor `IiXGaUC7gCHwZmzI` and production v0.3.6 were not changed.
+
+The first isolated parent canary from `UfN7nVXaSipRgNz0` stopped at the gate handoff with `Workflow is not active and cannot be executed.` The correlated run ID was `RUN-REALISTIC-CONNECTED-1786758779698`; no extraction, Stage 5, downstream generation, or delivery occurred. This is an activation prerequisite, not a contract failure. Publishing the extractor and gate candidates requires explicit approval before the canary can continue.
 
 ## Objective
 
