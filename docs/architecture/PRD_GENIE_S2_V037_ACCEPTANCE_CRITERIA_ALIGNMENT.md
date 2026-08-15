@@ -49,6 +49,17 @@ The next candidate revision must correct all three issues and rerun before GitHu
 
 The final candidate behaves as intended: it will not render the logo condition unless both the PDF-export requirement and approved company-logo criterion are present in the current approved packet. This exposes an upstream extraction-repeatability issue; weakening the Stage 5 evidence control is not acceptable.
 
+### Extractor repeatability diagnosis
+
+A read-only comparison of extractor executions `11384` (successful) and `11411` (failed) isolates the issue upstream of Stage 5:
+
+- Both executions received citation `CIT-01-0074-640ddf26` with the same source sentence requiring the company logo at the top of every PDF page.
+- Execution `11384` emitted `For the PDF export, it must include the company logo at the top of every page.` as a standalone extracted acceptance criterion.
+- Execution `11411` retained the source sentence and citation in its evidence inventory but emitted only the broader requirement `Export to PDF for monthly board reports`; the logo condition was absent from the current extracted requirement set.
+- Therefore Stage 5 correctly failed closed. The defect is nondeterministic omission by the dynamic requirement extractor, not Stage 5 rendering, Stage 6 linkage, or Stage 7 validation.
+
+The minimal next candidate should make extraction of this approved criterion deterministic (or deterministically reconcile it from the citation inventory) before the v0.3.7 end-to-end canary is accepted. Production v0.3.6 remains unchanged.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
