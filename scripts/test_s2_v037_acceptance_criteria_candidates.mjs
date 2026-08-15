@@ -80,4 +80,13 @@ for (const unchanged of ['Execute Google Drive Clarification Gate v0.12.0','Exec
   assert.equal(references[unchanged], Object.fromEntries(parentBase.nodes.filter(node=>node.parameters?.workflowId?.value).map(node=>[node.name,node.parameters.workflowId.value]))[unchanged], `${unchanged} changed`);
 }
 
+const releaseRouter = find(parent, 'Release Authorized Path');
+assert.equal(releaseRouter.type, 'n8n-nodes-base.if', 'Release routing must use an explicit true/false branch');
+assert.equal(releaseRouter.parameters.conditions.conditions[0].leftValue, '={{ $json.production_loop.release_authorized }}');
+assert.equal(releaseRouter.parameters.conditions.conditions[0].operator.type, 'boolean');
+assert.equal(releaseRouter.parameters.conditions.conditions[0].operator.operation, 'true');
+assert.deepEqual(parent.connections['Production Agreement Gate v0.3 - Enforced'].main[0].map(edge => edge.node), ['Release Authorized Path']);
+assert.deepEqual(parent.connections['Release Authorized Path'].main[0].map(edge => edge.node), ['Execute Final Validator v0.1']);
+assert.deepEqual(parent.connections['Release Authorized Path'].main[1].map(edge => edge.node), ['Hold for Human Review Path']);
+
 console.log('v0.3.7 acceptance-criteria candidate contract checks passed.');

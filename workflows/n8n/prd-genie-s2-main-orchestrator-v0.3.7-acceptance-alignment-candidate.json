@@ -381,12 +381,33 @@
     },
     {
       "parameters": {
-        "jsCode": "const x = $input.first().json;\nif (x.production_loop?.release_authorized !== true) return [];\nreturn [{ json: { ...x, production_loop: { ...x.production_loop, route: 'release' } } }];"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "bda9f65f-53bd-4e60-ae72-bc04ef57b0bd",
+              "leftValue": "={{ $json.production_loop.release_authorized }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
       },
       "id": "95a21f31-a922-40e3-8552-340c0b9d311b",
       "name": "Release Authorized Path",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
         304,
         80
@@ -698,6 +719,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "Hold for Human Review Path",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -761,11 +789,6 @@
         [
           {
             "node": "Release Authorized Path",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Hold for Human Review Path",
             "type": "main",
             "index": 0
           }

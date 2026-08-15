@@ -124,6 +124,14 @@ A fresh parent was imported as workflow `TakmnVBH7BPiKWXx`. Only its clarificati
 
 The fresh import rules out stale workflow-editor state as the sole cause. The remaining v0.3.7 blocker is the post-Agreement-Gate routing design itself. Do not treat execution `11469` as full-pipeline acceptance evidence and do not promote v0.3.7 until an isolated routing correction reaches Stage 7, sizing, and delivery in one parent execution.
 
+### Explicit post-gate routing candidate
+
+The isolated parent definition now replaces the parallel release/hold code filters with one explicit boolean router on `production_loop.release_authorized`. Its true output invokes Stage 7; its false output invokes the existing human-review hold formatter. Contract tests verify both destinations and unchanged Stage 5–7 and sizing references.
+
+The corrected definition was imported as unpublished workflow `hkWIZY6MAH4KKpuq`, named `S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Explicit Post-Gate Routing Candidate`, and pointed only to isolated clarification gate `bi4Gvq9tNWcQ2wfR`. The imported polling handoff was rebuilt and saved as `v0.3.7 rebuilt polling handoff`.
+
+The subsequent controlled canary reached Stage 6 but failed closed before Langfuse or the routing decision. Correlated run `RUN-S2-11491-16e7090e` reported invalid Feature-AC links across the generated story set plus an unused feature acceptance criterion. No Stage 7, sizing, or delivery occurred. The explicit router therefore remains implemented but not yet release-path validated.
+
 ## Objective
 
 Make PRD acceptance criteria useful at feature level while preserving the existing user-story acceptance-criteria capability. Establish deterministic PRD-to-feature-to-story linkage without changing intake, extraction, gap analysis, approval, sizing policy, polling, Agreement Gate, credentials, or export controls.
