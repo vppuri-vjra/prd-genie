@@ -6,7 +6,7 @@ const code = workflow.nodes.find(node => node.name === 'Generate Dynamic Grounde
 const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 for (const node of workflow.nodes) if (node.parameters?.jsCode) assert.doesNotThrow(() => new AsyncFunction(node.parameters.jsCode), node.name);
 
-assert.ok(code.includes("approvedSourceItems=sourceItems.filter(item=>['functional_requirement','non_functional_requirement','acceptance_criterion'].includes(item.type))"));
+assert.ok(code.includes("approvedSourceItems=sourceItems.filter(item=>['functional_requirement','non_functional_requirement','acceptance_criterion','constraint'].includes(item.type))"));
 assert.ok(code.includes('prd_requirement_ids:[...new Set(approvedSourceItems.map(item=>item.item_id))]'));
 assert.ok(code.includes('prd_requirement_ids:[...new Set(criteria.flatMap(criterion=>criterion.prd_requirement_ids))]'));
 assert.ok(code.includes('approved preset and custom date ranges, category, and status'));

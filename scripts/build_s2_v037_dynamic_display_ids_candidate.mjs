@@ -31,7 +31,7 @@ replace(
 );
 replace(
   "facN++;return{id:'FAC-'",
-  "const approvedSourceItems=sourceItems.filter(item=>['functional_requirement','non_functional_requirement','acceptance_criterion'].includes(item.type));if(!approvedSourceItems.length)throw new Error('Missing approved requirement source for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'",
+  "const approvedSourceItems=sourceItems.filter(item=>['functional_requirement','non_functional_requirement','acceptance_criterion','constraint'].includes(item.type));if(!approvedSourceItems.length)throw new Error('Missing approved requirement source for '+feature.feature_id+' / '+story.title);facN++;return{id:'FAC-'",
   'approved source selection',
 );
 replace(
