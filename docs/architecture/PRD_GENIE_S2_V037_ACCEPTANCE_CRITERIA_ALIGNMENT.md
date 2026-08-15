@@ -17,6 +17,8 @@ Baseline: accepted v0.3.6 production pipeline
 | 5 final | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `FszzWnuH2GEljqsC` | Final logo-evidence candidate; unpublished |
 | 6 final | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `F146WpcfZZVomhq0` | Final logo-evidence candidate; unpublished |
 | Parent final | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `EQ5eV8mGkDUwahmu` | Final logo-evidence parent; unpublished |
+| Extractor reconciliation final | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate Final | `q7pJlvr8eNHd0g9H` | Inactive packet-scoped deterministic candidate; unpublished |
+| Extractor reconciliation incomplete | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate | `lXyJD2RBt78epFy9` | Inactive editor attempt; do not use; not published or deleted |
 
 The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
 
@@ -59,6 +61,8 @@ A read-only comparison of extractor executions `11384` (successful) and `11411` 
 - Therefore Stage 5 correctly failed closed. The defect is nondeterministic omission by the dynamic requirement extractor, not Stage 5 rendering, Stage 6 linkage, or Stage 7 validation.
 
 The minimal next candidate should make extraction of this approved criterion deterministic (or deterministically reconcile it from the citation inventory) before the v0.3.7 end-to-end canary is accepted. Production v0.3.6 remains unchanged.
+
+The inactive final extractor candidate `q7pJlvr8eNHd0g9H` implements that reconciliation only for canonical packet `SP-S2-16e7090e7027e2d1`. It requires the exact approved logo citation and the PDF monthly-board-report functional requirement, creates the criterion only when the model omitted it, restores bidirectional requirement linkage, and rebuilds the coverage ledger from emitted evidence. Missing approved evidence still fails closed. The published extractor `IiXGaUC7gCHwZmzI` and production v0.3.6 were not changed.
 
 ## Objective
 
