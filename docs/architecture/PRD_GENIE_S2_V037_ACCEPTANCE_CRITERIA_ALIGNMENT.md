@@ -1,6 +1,6 @@
 # PRD Genie S2 v0.3.7 — Acceptance Criteria Alignment
 
-Status: candidate design  
+Status: validated promotion candidate; awaiting explicit production promotion approval
 Date: 2026-08-14  
 Baseline: accepted v0.3.6 production pipeline
 
@@ -17,10 +17,11 @@ Baseline: accepted v0.3.6 production pipeline
 | 5 final | S2_ Dynamic Production PRD v0.2.2 - Feature Acceptance Criteria Candidate | `FszzWnuH2GEljqsC` | Final logo-evidence candidate; unpublished |
 | 6 final | S2_ Dynamic Story Breakdown v0.2.6 - Feature Acceptance Linkage Candidate | `F146WpcfZZVomhq0` | Final logo-evidence candidate; unpublished |
 | Parent final | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Acceptance Alignment Candidate | `EQ5eV8mGkDUwahmu` | Final logo-evidence parent; unpublished |
-| Extractor reconciliation final | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate Final | `q7pJlvr8eNHd0g9H` | Inactive packet-scoped deterministic candidate; unpublished |
+| Extractor reconciliation final | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate Final | `q7pJlvr8eNHd0g9H` | Superseded browser-edited candidate; unpublished |
 | Extractor reconciliation incomplete | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Candidate | `lXyJD2RBt78epFy9` | Inactive editor attempt; do not use; not published or deleted |
-| Gate reconciliation candidate | S2_ Dynamic Drive and Clarification Gate v0.2.5 - Acceptance Reconciliation Candidate | `bi4Gvq9tNWcQ2wfR` | Inactive; points only its extractor call to `q7pJlvr8eNHd0g9H` |
-| Parent reconciliation canary | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Deterministic Acceptance Canary | `UfN7nVXaSipRgNz0` | Inactive; points only its gate call to `bi4Gvq9tNWcQ2wfR` |
+| Extractor reconciliation clean import | S2_ Dynamic Requirement Extractor v0.1.2 - Acceptance Reconciliation Imported Clean | `FXXpNgmJQfWjKZlV` | Published only as an isolated canary dependency; credentials restored; production reference unchanged |
+| Gate reconciliation candidate | S2_ Dynamic Drive and Clarification Gate v0.2.5 - Acceptance Reconciliation Candidate | `bi4Gvq9tNWcQ2wfR` | Published only as an isolated canary dependency; points to `FXXpNgmJQfWjKZlV` |
+| Parent reconciliation canary | S2_ Dynamic Realistic Six-Source Main Orchestrator v0.3.7 - Deterministic Acceptance Canary | `UfN7nVXaSipRgNz0` | Manual isolated canary; points only its gate call to `bi4Gvq9tNWcQ2wfR` |
 
 The accepted v0.3.6 parent and published Stage 5–7 workflows remain unchanged.
 
@@ -69,6 +70,21 @@ The inactive final extractor candidate `q7pJlvr8eNHd0g9H` implements that reconc
 The first isolated parent canary from `UfN7nVXaSipRgNz0` stopped at the gate handoff with `Workflow is not active and cannot be executed.` The correlated run ID was `RUN-REALISTIC-CONNECTED-1786758779698`; no extraction, Stage 5, downstream generation, or delivery occurred. This is an activation prerequisite, not a contract failure. Publishing the extractor and gate candidates requires explicit approval before the canary can continue.
 
 After explicit approval, extractor `q7pJlvr8eNHd0g9H` and gate `bi4Gvq9tNWcQ2wfR` were published solely for the isolated canary. The rerun `RUN-REALISTIC-CONNECTED-1786758907139` reached the candidate extractor but stopped in its normalization code with `SyntaxError: Unexpected token 'const'`; no Stage 5, downstream generation, or delivery occurred. Browser inspection confirmed that the n8n draft contained editor residue in the normalization line despite the clean repository candidate and passing local contract tests. Both canary dependencies were immediately unpublished after the failed run. Production v0.3.6 and its published extractor/gate references remained unchanged.
+
+### Clean-import reconciliation canary evidence
+
+The repository candidate was imported into a fresh extractor workflow, avoiding the browser-editor residue in the superseded candidate. The clean extractor `FXXpNgmJQfWjKZlV` used OpenAI credential `OpenAI account 25`, model `gpt-5.6-terra`, and Langfuse credential `Langfuse US - PRD Genie`. It and gate `bi4Gvq9tNWcQ2wfR` were published only to support the isolated canary; production v0.3.6 references were not changed.
+
+- Parent execution `11425` succeeded in 1m 48.733s.
+- Correlated artifact run: `RUN-S2-11426-16e7090e`.
+- PRD hash: `sha256:f86e698aacc55386f70648e00cb2bc3a18c9db10b64a49a5b6077a2d8c2378cd`.
+- Stage 5 rendered 11 `FAC-*` criteria grouped beneath all 7 delivery features.
+- Stage 6 rendered 11 `SBAC-*` criteria, one for every story, with visible `FAC-*` and PRD-requirement linkage.
+- `FEAT-006` / `US-010` included the approved criterion: monthly board-report PDFs contain the company logo at the top of every page, grounded by `CIT-01-0074-640ddf26`.
+- Stage 6 validation reported approved-item coverage `37/37`, groundedness `100%`, unsupported claims `0`, JSON/Markdown synchronized, feature acceptance linkage passed, and zero orphan PRD or delivery elements.
+- Current-run Langfuse polling completed on attempt 1 with code evaluation passed, faithfulness `0.94`, and hallucination `0.22`; the Agreement Gate released the run.
+
+This run satisfies the v0.3.7 document contract and is the promotion-candidate evidence checkpoint. Promotion remains a separate explicit decision.
 
 ## Objective
 
