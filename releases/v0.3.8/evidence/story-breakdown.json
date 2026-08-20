@@ -1,0 +1,1011 @@
+{
+  "schema_version": "2.0.0",
+  "artifact_type": "story_breakdown",
+  "run_id": "RUN-S2-11902-16e7090e",
+  "packet_id": "SP-S2-16e7090e7027e2d1",
+  "parent_trace_id": "9dd67a8445d178a82dbf0fe15308b090",
+  "source_manifest": [
+    {
+      "source_id": "SRC-MEETING-TRANSCRIPTS-TXT-15111349",
+      "source_name": "meeting-transcripts.txt",
+      "drive_file_id": "1fdu9BukQpnQbqeCwX_A3ZFFdQIOOa9Wl"
+    },
+    {
+      "source_id": "SRC-STAKEHOLDER-CLARIFICATION-MOBILE-RELEASE-2026-08-07-MD-39001440",
+      "source_name": "stakeholder-clarification-mobile-release-2026-08-07.md",
+      "drive_file_id": "14yLJfbQ1ff6nUL_4Auvzxe5nfCPkiPUn"
+    },
+    {
+      "source_id": "SRC-STAKEHOLDER-NOTES-TXT-c4b97370",
+      "source_name": "stakeholder-notes.txt",
+      "drive_file_id": "1jZlo-Lp-Yl-GxvInQtxqcz-inPd_K-rS"
+    },
+    {
+      "source_id": "SRC-STAKEHOLDER-CLARIFICATIONS-2026-08-07-MD-a10d68b2",
+      "source_name": "stakeholder-clarifications-2026-08-07.md",
+      "drive_file_id": "1pP7bLAZSlyiUMVKfGrEMBZhRy__2khZg"
+    },
+    {
+      "source_id": "SRC-PRODUCT-BRIEF-TXT-a8f93fd8",
+      "source_name": "product-brief.txt",
+      "drive_file_id": "1h6r1F_JwXfodHiBUvsvtSQmYtITz2Zlb"
+    },
+    {
+      "source_id": "SRC-STAKEHOLDER-CLARIFICATION-AMENDMENT-2026-08-07-MD-4bb1edb4",
+      "source_name": "stakeholder-clarification-amendment-2026-08-07.md",
+      "drive_file_id": "1Bn-mw_ljmnc22W2ZVnvrZ_OJcOpEC3x5"
+    }
+  ],
+  "counts": {
+    "epics": 3,
+    "features": 7,
+    "user_stories": 11,
+    "acceptance_criteria": 11
+  },
+  "validation": {
+    "lineage_preserved": true,
+    "bidirectional_traceability": true,
+    "prd_markdown_preserved": true,
+    "story_markdown_preserved": true,
+    "review_markdown_generated": true,
+    "required_prd_sections": 10,
+    "feature_acceptance_criteria": 11,
+    "feature_acceptance_coverage": true,
+    "story_acceptance_linkage": true,
+    "groundedness_percent": 100,
+    "unsupported_claims": 0,
+    "orphan_citations": 0,
+    "orphan_items": 0,
+    "orphan_prd_elements": 0,
+    "orphan_delivery_items": 0,
+    "sizing_contract": true,
+    "sizing_non_blocking": true,
+    "sizing_story_count": 11
+  },
+  "epics": [
+    {
+      "epic_id": "EPIC-001",
+      "title": "Analytics Insights and Discovery",
+      "description": "Enable users to discover, review, and refresh approved analytics information.",
+      "status": "grounded_abstraction",
+      "item_ids": [
+        "FR-001",
+        "FR-002",
+        "FR-006",
+        "CON-002"
+      ],
+      "citation_ids": [
+        "CIT-05-0016-13c3d894",
+        "CIT-05-0017-f0ae7fbb",
+        "CIT-01-0012-f394e26d",
+        "CIT-04-0016-40b68902",
+        "CIT-04-0013-23ba34cb"
+      ],
+      "features": [
+        {
+          "feature_id": "FEAT-001",
+          "title": "Dashboard Insights",
+          "description": "Present approved analytics information and metrics.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-001"
+          ],
+          "citation_ids": [
+            "CIT-05-0016-13c3d894"
+          ],
+          "stories": [
+            {
+              "story_id": "US-001",
+              "title": "Display five core metrics",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "view five core metrics",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to view five core metrics so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-001"
+              ],
+              "citation_ids": [
+                "CIT-05-0016-13c3d894"
+              ],
+              "display_source_ids": [
+                "FR-001"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-001",
+                  "text": "The dashboard displays revenue, active users, churn rate, NPS score, and support ticket volume.",
+                  "item_ids": [
+                    "FR-001"
+                  ],
+                  "citation_ids": [
+                    "CIT-05-0016-13c3d894"
+                  ],
+                  "display_source_ids": [
+                    "FR-001"
+                  ],
+                  "parent_feature_id": "FEAT-001",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-001"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "S",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-001"
+          ]
+        },
+        {
+          "feature_id": "FEAT-002",
+          "title": "Report Filtering",
+          "description": "Narrow and find analytics results using approved controls.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-002"
+          ],
+          "citation_ids": [
+            "CIT-05-0017-f0ae7fbb",
+            "CIT-01-0012-f394e26d"
+          ],
+          "stories": [
+            {
+              "story_id": "US-002",
+              "title": "Preset and custom date-range filtering",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "filter reports using preset and custom date ranges",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to filter reports using preset and custom date ranges so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-002"
+              ],
+              "citation_ids": [
+                "CIT-05-0017-f0ae7fbb",
+                "CIT-01-0012-f394e26d"
+              ],
+              "display_source_ids": [
+                "FR-002"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-002",
+                  "text": "Reports can be filtered using the approved preset and custom date ranges, category, and status.",
+                  "item_ids": [
+                    "FR-002"
+                  ],
+                  "citation_ids": [
+                    "CIT-05-0017-f0ae7fbb",
+                    "CIT-01-0012-f394e26d"
+                  ],
+                  "display_source_ids": [
+                    "FR-002"
+                  ],
+                  "parent_feature_id": "FEAT-002",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-002"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "M",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-002"
+          ]
+        },
+        {
+          "feature_id": "FEAT-003",
+          "title": "Controlled Data Refresh",
+          "description": "Keep approved analytics information current using the specified controls.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-006",
+            "CON-002"
+          ],
+          "citation_ids": [
+            "CIT-04-0016-40b68902",
+            "CIT-04-0013-23ba34cb"
+          ],
+          "stories": [
+            {
+              "story_id": "US-003",
+              "title": "15-minute automatic refresh",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "have dashboard data refresh automatically every 15 minutes",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to have dashboard data refresh automatically every 15 minutes so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-006",
+                "CON-002"
+              ],
+              "citation_ids": [
+                "CIT-04-0016-40b68902",
+                "CIT-04-0013-23ba34cb"
+              ],
+              "display_source_ids": [
+                "FR-006",
+                "CON-002"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-003",
+                  "text": "Approved precomputed dashboard data refreshes automatically every 15 minutes.",
+                  "item_ids": [
+                    "FR-006",
+                    "CON-002"
+                  ],
+                  "citation_ids": [
+                    "CIT-04-0016-40b68902",
+                    "CIT-04-0013-23ba34cb"
+                  ],
+                  "display_source_ids": [
+                    "FR-006",
+                    "CON-002"
+                  ],
+                  "parent_feature_id": "FEAT-003",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-003"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "Pending refinement",
+                "confidence": "Low",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            },
+            {
+              "story_id": "US-004",
+              "title": "Manual refresh of latest precomputed data",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "manually refresh the latest precomputed data",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to manually refresh the latest precomputed data so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-006",
+                "CON-002"
+              ],
+              "citation_ids": [
+                "CIT-04-0016-40b68902",
+                "CIT-04-0013-23ba34cb"
+              ],
+              "display_source_ids": [
+                "FR-006",
+                "CON-002"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-004",
+                  "text": "A user can manually refresh the latest available precomputed warehouse data without querying the live database.",
+                  "item_ids": [
+                    "FR-006",
+                    "CON-002"
+                  ],
+                  "citation_ids": [
+                    "CIT-04-0016-40b68902",
+                    "CIT-04-0013-23ba34cb"
+                  ],
+                  "display_source_ids": [
+                    "FR-006",
+                    "CON-002"
+                  ],
+                  "parent_feature_id": "FEAT-003",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-004"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "Pending refinement",
+                "confidence": "Low",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            },
+            {
+              "story_id": "US-005",
+              "title": "Display last-updated timestamp",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "view the last-updated timestamp",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to view the last-updated timestamp so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-006"
+              ],
+              "citation_ids": [
+                "CIT-04-0016-40b68902"
+              ],
+              "display_source_ids": [
+                "FR-006"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-005",
+                  "text": "The dashboard displays the timestamp of the most recent completed data refresh.",
+                  "item_ids": [
+                    "FR-006"
+                  ],
+                  "citation_ids": [
+                    "CIT-04-0016-40b68902"
+                  ],
+                  "display_source_ids": [
+                    "FR-006"
+                  ],
+                  "parent_feature_id": "FEAT-003",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-005"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "XS",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            },
+            {
+              "story_id": "US-006",
+              "title": "Protect against excessive repeated requests",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "avoid excessive repeated refresh requests",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to avoid excessive repeated refresh requests so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-006"
+              ],
+              "citation_ids": [
+                "CIT-04-0016-40b68902"
+              ],
+              "display_source_ids": [
+                "FR-006"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-006",
+                  "text": "The refresh control protects the system from excessive repeated requests.",
+                  "item_ids": [
+                    "FR-006"
+                  ],
+                  "citation_ids": [
+                    "CIT-04-0016-40b68902"
+                  ],
+                  "display_source_ids": [
+                    "FR-006"
+                  ],
+                  "parent_feature_id": "FEAT-003",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-006"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "M",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-006",
+            "CON-002"
+          ]
+        }
+      ],
+      "display_source_ids": [
+        "FR-001",
+        "FR-002",
+        "FR-006",
+        "CON-002"
+      ]
+    },
+    {
+      "epic_id": "EPIC-002",
+      "title": "Secure and Accessible Experience",
+      "description": "Provide approved role-appropriate and accessible product experiences.",
+      "status": "grounded_abstraction",
+      "item_ids": [
+        "FR-003",
+        "FR-007"
+      ],
+      "citation_ids": [
+        "CIT-05-0019-192d5768",
+        "CIT-02-0009-2d08dd05"
+      ],
+      "features": [
+        {
+          "feature_id": "FEAT-004",
+          "title": "Role-Based Access",
+          "description": "Apply approved data-access boundaries.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-003"
+          ],
+          "citation_ids": [
+            "CIT-05-0019-192d5768"
+          ],
+          "stories": [
+            {
+              "story_id": "US-007",
+              "title": "Executive access to all data",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "access all approved dashboard data",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to access all approved dashboard data so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-003"
+              ],
+              "citation_ids": [
+                "CIT-05-0019-192d5768"
+              ],
+              "display_source_ids": [
+                "FR-003"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-007",
+                  "text": "Executives can access all approved dashboard data.",
+                  "item_ids": [
+                    "FR-003"
+                  ],
+                  "citation_ids": [
+                    "CIT-05-0019-192d5768"
+                  ],
+                  "display_source_ids": [
+                    "FR-003"
+                  ],
+                  "parent_feature_id": "FEAT-004",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-007"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "L",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            },
+            {
+              "story_id": "US-008",
+              "title": "Team-lead access to team data only",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "access only my team data",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to access only my team data so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-003"
+              ],
+              "citation_ids": [
+                "CIT-05-0019-192d5768"
+              ],
+              "display_source_ids": [
+                "FR-003"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-008",
+                  "text": "Team leads can access only data for their own team.",
+                  "item_ids": [
+                    "FR-003"
+                  ],
+                  "citation_ids": [
+                    "CIT-05-0019-192d5768"
+                  ],
+                  "display_source_ids": [
+                    "FR-003"
+                  ],
+                  "parent_feature_id": "FEAT-004",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-008"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "Pending refinement",
+                "confidence": "Low",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-003"
+          ]
+        },
+        {
+          "feature_id": "FEAT-005",
+          "title": "Responsive Web Access",
+          "description": "Provide approved responsive web access.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-007"
+          ],
+          "citation_ids": [
+            "CIT-02-0009-2d08dd05"
+          ],
+          "stories": [
+            {
+              "story_id": "US-009",
+              "title": "Responsive web access completed before production launch",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "use responsive web access before production launch",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to use responsive web access before production launch so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-007"
+              ],
+              "citation_ids": [
+                "CIT-02-0009-2d08dd05"
+              ],
+              "display_source_ids": [
+                "FR-007"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-009",
+                  "text": "Responsive web access is completed before the September 30, 2026 production launch.",
+                  "item_ids": [
+                    "FR-007"
+                  ],
+                  "citation_ids": [
+                    "CIT-02-0009-2d08dd05"
+                  ],
+                  "display_source_ids": [
+                    "FR-007"
+                  ],
+                  "parent_feature_id": "FEAT-005",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-009"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "XL",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-007"
+          ]
+        }
+      ],
+      "display_source_ids": [
+        "FR-003",
+        "FR-007"
+      ]
+    },
+    {
+      "epic_id": "EPIC-003",
+      "title": "Reporting and Export",
+      "description": "Deliver approved reporting and export capabilities.",
+      "status": "grounded_abstraction",
+      "item_ids": [
+        "FR-004",
+        "AC-001",
+        "FR-005"
+      ],
+      "citation_ids": [
+        "CIT-05-0020-1d09d883",
+        "CIT-01-0074-640ddf26",
+        "CIT-04-0015-1afd65a7"
+      ],
+      "features": [
+        {
+          "feature_id": "FEAT-006",
+          "title": "PDF Reporting",
+          "description": "Produce approved PDF reports.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-004",
+            "AC-001"
+          ],
+          "citation_ids": [
+            "CIT-05-0020-1d09d883",
+            "CIT-01-0074-640ddf26"
+          ],
+          "stories": [
+            {
+              "story_id": "US-010",
+              "title": "Export monthly board reports to PDF",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "export monthly board reports to PDF",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to export monthly board reports to PDF so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-004",
+                "AC-001"
+              ],
+              "citation_ids": [
+                "CIT-05-0020-1d09d883",
+                "CIT-01-0074-640ddf26"
+              ],
+              "display_source_ids": [
+                "FR-004",
+                "AC-001"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-010",
+                  "text": "Monthly board reports can be exported to PDF with the company logo at the top of every page.",
+                  "item_ids": [
+                    "FR-004",
+                    "AC-001"
+                  ],
+                  "citation_ids": [
+                    "CIT-05-0020-1d09d883",
+                    "CIT-01-0074-640ddf26"
+                  ],
+                  "display_source_ids": [
+                    "FR-004",
+                    "AC-001"
+                  ],
+                  "parent_feature_id": "FEAT-006",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-010"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "Pending refinement",
+                "confidence": "Low",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-004",
+            "AC-001"
+          ]
+        },
+        {
+          "feature_id": "FEAT-007",
+          "title": "Excel Export",
+          "description": "Produce approved spreadsheet exports.",
+          "status": "grounded_abstraction",
+          "item_ids": [
+            "FR-005"
+          ],
+          "citation_ids": [
+            "CIT-04-0015-1afd65a7"
+          ],
+          "stories": [
+            {
+              "story_id": "US-011",
+              "title": "Export XLSX with formulas preserved and approved label",
+              "persona": "product user",
+              "persona_status": "pending stakeholder confirmation",
+              "capability": "export an XLSX file with formulas preserved using the approved label",
+              "benefit": "[benefit pending stakeholder confirmation]",
+              "benefit_status": "pending stakeholder confirmation",
+              "story": "As a product user, I want to export an XLSX file with formulas preserved using the approved label so that [benefit pending stakeholder confirmation].",
+              "priority": "Unspecified",
+              "priority_basis": "no approved MoSCoW evidence",
+              "status": "partially_grounded",
+              "item_ids": [
+                "FR-005"
+              ],
+              "citation_ids": [
+                "CIT-04-0015-1afd65a7"
+              ],
+              "display_source_ids": [
+                "FR-005"
+              ],
+              "acceptance_criteria": [
+                {
+                  "criterion_id": "SBAC-011",
+                  "text": "The approved “Export to Excel” action produces an XLSX file with formulas preserved.",
+                  "item_ids": [
+                    "FR-005"
+                  ],
+                  "citation_ids": [
+                    "CIT-04-0015-1afd65a7"
+                  ],
+                  "display_source_ids": [
+                    "FR-005"
+                  ],
+                  "parent_feature_id": "FEAT-007",
+                  "feature_acceptance_criteria_ids": [
+                    "FAC-011"
+                  ],
+                  "status": "grounded"
+                }
+              ],
+              "dependencies": [],
+              "complexity_sizing": {
+                "proposed_size": "M",
+                "confidence": "Medium",
+                "sizing_status": "proposed_pending_team_confirmation",
+                "production_blocking": false,
+                "source_run_id": "RUN-S2-11902-16e7090e"
+              }
+            }
+          ],
+          "display_source_ids": [
+            "FR-005"
+          ]
+        }
+      ],
+      "display_source_ids": [
+        "FR-004",
+        "AC-001",
+        "FR-005"
+      ]
+    }
+  ],
+  "sizing": {
+    "schema_version": "0.2.0",
+    "mode": "non_blocking_proposal",
+    "status": "pending_delivery_team_confirmation",
+    "production_blocking": false,
+    "counts": {
+      "XS": 1,
+      "S": 1,
+      "M": 3,
+      "L": 1,
+      "XL": 1,
+      "Pending refinement": 4
+    },
+    "rows": [
+      {
+        "epic_number": 1,
+        "story_number": "1.1.1",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Dashboard Insights",
+        "source": "FR-001",
+        "user_story_scope": "Display five core metrics",
+        "priority": "Unspecified",
+        "proposed_size": "S",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.2.1",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Report Filtering",
+        "source": "FR-002",
+        "user_story_scope": "Preset and custom date-range filtering",
+        "priority": "Unspecified",
+        "proposed_size": "M",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.3.1",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Controlled Data Refresh",
+        "source": "FR-006",
+        "user_story_scope": "15-minute automatic refresh",
+        "priority": "Unspecified",
+        "proposed_size": "Pending refinement",
+        "confidence": "Low"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.3.2",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Controlled Data Refresh",
+        "source": "FR-006",
+        "user_story_scope": "Manual refresh of latest precomputed data",
+        "priority": "Unspecified",
+        "proposed_size": "Pending refinement",
+        "confidence": "Low"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.3.3",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Controlled Data Refresh",
+        "source": "FR-006",
+        "user_story_scope": "Display last-updated timestamp",
+        "priority": "Unspecified",
+        "proposed_size": "XS",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.3.4",
+        "epic": "Analytics Insights and Discovery",
+        "feature": "Controlled Data Refresh",
+        "source": "FR-006",
+        "user_story_scope": "Protect against excessive repeated requests",
+        "priority": "Unspecified",
+        "proposed_size": "M",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 2,
+        "story_number": "2.1.1",
+        "epic": "Secure and Accessible Experience",
+        "feature": "Role-Based Access",
+        "source": "FR-003",
+        "user_story_scope": "Executive access to all data",
+        "priority": "Unspecified",
+        "proposed_size": "L",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 2,
+        "story_number": "2.1.2",
+        "epic": "Secure and Accessible Experience",
+        "feature": "Role-Based Access",
+        "source": "FR-003",
+        "user_story_scope": "Team-lead access to team data only",
+        "priority": "Unspecified",
+        "proposed_size": "Pending refinement",
+        "confidence": "Low"
+      },
+      {
+        "epic_number": 2,
+        "story_number": "2.2.1",
+        "epic": "Secure and Accessible Experience",
+        "feature": "Responsive Web Access",
+        "source": "FR-007",
+        "user_story_scope": "Responsive web access completed before production launch",
+        "priority": "Unspecified",
+        "proposed_size": "XL",
+        "confidence": "Medium"
+      },
+      {
+        "epic_number": 3,
+        "story_number": "3.1.1",
+        "epic": "Reporting and Export",
+        "feature": "PDF Reporting",
+        "source": "FR-004",
+        "user_story_scope": "Export monthly board reports to PDF",
+        "priority": "Unspecified",
+        "proposed_size": "Pending refinement",
+        "confidence": "Low"
+      },
+      {
+        "epic_number": 3,
+        "story_number": "3.2.1",
+        "epic": "Reporting and Export",
+        "feature": "Excel Export",
+        "source": "FR-005",
+        "user_story_scope": "Export XLSX with formulas preserved and approved label",
+        "priority": "Unspecified",
+        "proposed_size": "M",
+        "confidence": "Medium"
+      }
+    ],
+    "refinements": [
+      {
+        "epic_number": 1,
+        "story_number": "1.3.1",
+        "source": "FR-006",
+        "user_story": "15-minute automatic refresh",
+        "missing_information": "Complete complexity evidence is not yet approved",
+        "next_action": "Review implementation and testing effort"
+      },
+      {
+        "epic_number": 1,
+        "story_number": "1.3.2",
+        "source": "FR-006",
+        "user_story": "Manual refresh of latest precomputed data",
+        "missing_information": "Complete complexity evidence is not yet approved",
+        "next_action": "Confirm technical and dependency signals"
+      },
+      {
+        "epic_number": 2,
+        "story_number": "2.1.2",
+        "source": "FR-003",
+        "user_story": "Team-lead access to team data only",
+        "missing_information": "Complete complexity evidence is not yet approved",
+        "next_action": "Confirm authorization and data-access complexity"
+      },
+      {
+        "epic_number": 3,
+        "story_number": "3.1.1",
+        "source": "FR-004",
+        "user_story": "Export monthly board reports to PDF",
+        "missing_information": "Human adjudication is required",
+        "next_action": "Confirm PDF generation, layout, and testing scope"
+      }
+    ],
+    "validation": {
+      "stories_evaluated": "11/11",
+      "story_hierarchy_preserved": true,
+      "approved_source_references_preserved": true,
+      "deterministic_size_mapping": true,
+      "unknown_information_policy": true
+    }
+  }
+}

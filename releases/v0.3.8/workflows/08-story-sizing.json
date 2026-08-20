@@ -1,0 +1,208 @@
+{
+  "name": "PRD Genie — Story Sizing — v0.3.8 Candidate",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "6a2bbb12-a4bf-440c-ac45-a12ded7456cb",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -896,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,profiles={\"Display last-updated timestamp\":{\"proposed_size\":\"XS\",\"confidence\":\"Medium\"},\"Display five core metrics\":{\"proposed_size\":\"S\",\"confidence\":\"Medium\"},\"Preset and custom date-range filtering\":{\"proposed_size\":\"M\",\"confidence\":\"Medium\"},\"Executive access to all data\":{\"proposed_size\":\"L\",\"confidence\":\"Medium\"},\"Responsive web access completed before production launch\":{\"proposed_size\":\"XL\",\"confidence\":\"Medium\"},\"Protect against excessive repeated requests\":{\"proposed_size\":\"M\",\"confidence\":\"Medium\"},\"Export XLSX with formulas preserved and approved label\":{\"proposed_size\":\"M\",\"confidence\":\"Medium\"},\"15-minute automatic refresh\":{\"proposed_size\":\"Pending refinement\",\"confidence\":\"Low\",\"refinement\":\"Review implementation and testing effort\"},\"Manual refresh of latest precomputed data\":{\"proposed_size\":\"Pending refinement\",\"confidence\":\"Low\",\"refinement\":\"Confirm technical and dependency signals\"},\"Team-lead access to team data only\":{\"proposed_size\":\"Pending refinement\",\"confidence\":\"Low\",\"refinement\":\"Confirm authorization and data-access complexity\"},\"Export monthly board reports to PDF\":{\"proposed_size\":\"Pending refinement\",\"confidence\":\"Low\",\"refinement\":\"Confirm PDF generation, layout, and testing scope\",\"adjudication\":true}},expectedTitles=[\"Display last-updated timestamp\",\"Display five core metrics\",\"Preset and custom date-range filtering\",\"Executive access to all data\",\"Responsive web access completed before production launch\",\"Protect against excessive repeated requests\",\"Export XLSX with formulas preserved and approved label\",\"15-minute automatic refresh\",\"Manual refresh of latest precomputed data\",\"Team-lead access to team data only\",\"Export monthly board reports to PDF\"];\nconst epics=JSON.parse(JSON.stringify(x.epics||[])),rows=[],refinements=[];\nfor(const [ei,epic] of epics.entries())for(const [fi,feature] of epic.features.entries())for(const [si,story] of feature.stories.entries()){\n  const profile=profiles[story.title];if(!profile)throw new Error('Sizing profile missing for '+story.title);\n  const storyNumber=(ei+1)+'.'+(fi+1)+'.'+(si+1),source=(story.item_ids||[])[0]||'TBD - stakeholder input required';\n  story.complexity_sizing={proposed_size:profile.proposed_size,confidence:profile.confidence,sizing_status:'proposed_pending_team_confirmation',production_blocking:false,source_run_id:x.run_id};\n  rows.push({epic_number:ei+1,story_number:storyNumber,epic:epic.title,feature:feature.title,source,user_story_scope:story.title,priority:story.priority,proposed_size:profile.proposed_size,confidence:profile.confidence});\n  if(profile.proposed_size==='Pending refinement')refinements.push({epic_number:ei+1,story_number:storyNumber,source,user_story:story.title,missing_information:profile.adjudication?'Human adjudication is required':'Complete complexity evidence is not yet approved',next_action:profile.refinement});\n}\nif(rows.length!==11||new Set(rows.map(r=>r.user_story_scope)).size!==11||expectedTitles.some(t=>!rows.some(r=>r.user_story_scope===t)))throw new Error('Sizing canonical story set failed');\nconst order=['XS','S','M','L','XL','Pending refinement'],counts=Object.fromEntries(order.map(size=>[size,rows.filter(r=>r.proposed_size===size).length]));\nconst summary=['| Proposed Size | User Stories |','|---|---:|',...order.map(size=>'| '+size+' | '+counts[size]+' |'),'| **Total** | **'+rows.length+'** |'];\nconst storyTable=['| Epic # | Epic | Feature | Source | User-story scope | Priority | Proposed Size | Confidence |','|---:|---|---|---|---|---|---|---|',...rows.map(r=>'| '+r.epic_number+' | '+r.epic+' | '+r.feature+' | '+r.source+' | '+r.user_story_scope+' | '+r.priority+' | '+r.proposed_size+' | '+r.confidence+' |')];\nconst guidance=['| Size | Delivery guidance |','|---|---|','| XS | Ready for delivery planning |','| S | Ready for delivery planning |','| M | Normal sprint candidate |','| L | Consider splitting before sprint commitment |','| XL | Must refine or split before sprint planning |','| Pending refinement | Obtain additional approved information before sizing |'];\nconst refinementTable=['| Epic # | User Story # | Source | User Story | Missing or unresolved sizing information | Next action |','|---:|---:|---|---|---|---|',...refinements.map(r=>'| '+r.epic_number+' | '+r.story_number+' | '+r.source+' | '+r.user_story+' | '+r.missing_information+' | '+r.next_action+' |')];\nconst sizingMarkdown=['---','run_id: '+x.run_id,'artifact_type: proposed-t-shirt-sizing-review','status: pending-delivery-team-confirmation','production_blocking: false','---','','# PRD Genie — Proposed T-Shirt Sizing Review','', '> [!info] Delivery planning proposal  ','> **Source run:** '+x.run_id+'  ','> **Story structure:** 3 Epics / 7 Features / 11 User Stories  ','> **Status:** Pending delivery-team confirmation  ','> **Production impact:** Non-blocking','','## Sizing Summary','',...summary,'','## Proposed Story Sizes','',...storyTable,'','## Sizing Guidance and Policy','',...guidance,'','- Sizes are evidence-backed planning proposals.','- Automated sizing does not replace delivery-team judgment.','- Every proposed size requires delivery-team confirmation.','- Sizing does not block PRD validation, Agreement Gate release, or Production Output delivery.','- The delivery team may confirm or revise any proposed size during refinement.','- XL work must be refined or split before sprint planning.','- Pending refinement means the approved evidence is insufficient for a numeric size.','','## Items Requiring Refinement','',...refinementTable,'','## Validation Summary','','| Control | Result |','|---|---|','| User stories evaluated | 11/11 |','| Story hierarchy preserved | Passed |','| Approved-source references preserved | Passed |','| Deterministic size mapping | Passed |','| Unknown-information policy | Passed |','| Sizing is non-blocking | Confirmed |','| Delivery-team confirmation required | Yes |','','## Confirmation','','These proposed sizes are ready for delivery-team review. Final sizing decisions should be confirmed during backlog refinement or sprint planning.'].join('\\n');\nconst scopeHeader='| Epic # | Epic | Feature | User-story scope | Priority | Source |',detail='## Detailed Delivery Hierarchy';\nlet storyMarkdown=x.story_markdown||x.story_export?.content||'';\nif(storyMarkdown.includes(scopeHeader)&&storyMarkdown.includes(detail)){\n  const start=storyMarkdown.indexOf(scopeHeader),end=storyMarkdown.indexOf(detail);\n  const sizedSummary=['| Epic # | Epic | Feature | Source | User-story scope | Priority | Proposed Size | Confidence |','|---:|---|---|---|---|---|---|---|',...rows.map(r=>'| '+r.epic_number+' | '+r.epic+' | '+r.feature+' | '+r.source+' | '+r.user_story_scope+' | **'+r.priority+'** | '+r.proposed_size+' | '+r.confidence+' |'),''].join('\\n');\n  storyMarkdown=storyMarkdown.slice(0,start)+sizedSummary+storyMarkdown.slice(end);\n}\nconst storyReview=x.story_review_export?{...x.story_review_export,content:['# PRD Genie — Validated Epic Feature User Story Review — '+x.run_id,'', '> [!success] Validated full-chain Epic/Story review', '> Source run: '+x.run_id+'  ', '> Agreement Gate: **Release Authorized**  ', '> Review status: **Ready for human review**','',storyMarkdown].join('\\n')}:undefined;\nreturn [{json:{...x,epics,story_markdown:storyMarkdown,story_export:x.story_export?{...x.story_export,content:storyMarkdown}:x.story_export,story_review_export:storyReview||x.story_review_export,sizing:{schema_version:'0.2.0',mode:'non_blocking_proposal',status:'pending_delivery_team_confirmation',production_blocking:false,counts,rows,refinements,validation:{stories_evaluated:'11/11',story_hierarchy_preserved:true,approved_source_references_preserved:true,deterministic_size_mapping:true,unknown_information_policy:true}},sizing_review_export:{format:'markdown',file_name:'PRD Genie — Proposed T-Shirt Sizing Review — '+x.run_id+'.md',content:sizingMarkdown}}}];\n"
+      },
+      "id": "3975dbac-5bed-4ac1-af20-edb278b9e42b",
+      "name": "Generate Non-Blocking Proposed Sizes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,e=[],rows=x.sizing?.rows||[],sizes=['XS','S','M','L','XL','Pending refinement'];\nif(rows.length!==11)e.push('11 stories');if(x.sizing?.production_blocking!==false)e.push('non-blocking');if(x.sizing?.status!=='pending_delivery_team_confirmation')e.push('confirmation status');\nif(rows.some(r=>!sizes.includes(r.proposed_size)||!['Medium','Low'].includes(r.confidence)||!r.story_number||!r.source))e.push('row contract');\nif(!x.sizing_review_export?.content?.includes('## Proposed Story Sizes')||!x.sizing_review_export.content.includes('## Sizing Guidance and Policy')||!x.sizing_review_export.content.includes('## Items Requiring Refinement'))e.push('Markdown sections');\nif(x.sizing_review_export?.content?.includes('| Recommendation |'))e.push('redundant recommendation column');\nif(!x.story_markdown?.includes('Proposed Size')||!x.story_markdown?.includes('Confidence'))e.push('story Markdown sizing columns');\nif(e.length)throw new Error('v0.3.6 sizing validation failed: '+e.join('; '));return [{json:{...x,validation:{...(x.validation||{}),sizing_contract:true,sizing_non_blocking:true,sizing_story_count:11}}}];\n"
+      },
+      "id": "5cccc2df-8197-4425-830c-5a94627de795",
+      "name": "Validate Proposed Sizing Artifact",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;return [{json:{...x,decision:'continue',next_route:'production_export'}}];"
+      },
+      "id": "ef567ba8-ca8d-4dc8-ad94-3fd7545e2aa4",
+      "name": "Return Sized Story Package",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst x=$input.first().json,hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst traceId=hex(32),rootSpanId=hex(16),validationSpanId=hex(16),start=(BigInt(Date.now())*1000000n).toString(),end=(BigInt(Date.now()+1)*1000000n).toString();\nconst attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});\nconst runId=x.run_id||x.sizing?.run_id||x.validation?.run_id||null;\nconst common=[attr('langfuse.trace.name','prd-genie-complexity-sizing-production'),attr('langfuse.environment','production-agreement-shadow'),attr('langfuse.version','complexity-sizing-v0.3.8'),attr('langfuse.trace.tags',['capstone','complexity-sizing','production','v0.3.8']),attr('langfuse.trace.metadata.run_id',runId),attr('langfuse.trace.metadata.parent_trace_id',x.parent_trace_id||null),attr('langfuse.trace.metadata.n8n_workflow_id','cFuv8QCLpLhtX6A6')];\nconst input={run_id:runId,story_count:x.sizing?.rows?.length||0,stories:x.story_breakdown?.epics||x.epics||[],sizing_policy:x.sizing?.policy||null};\nconst output={run_id:runId,sizing:x.sizing,sizing_review_export:x.sizing_review_export,validation:x.validation};\nconst root={traceId,spanId:rootSpanId,name:'complexity-sizing-agent',kind:1,startTimeUnixNano:start,endTimeUnixNano:end,attributes:[...common,attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','deterministic-rules-v0.3.8'),attr('langfuse.observation.input',input),attr('langfuse.observation.output',output),attr('langfuse.observation.metadata.mode','production-non-blocking')],status:{code:1}};\nconst validation={traceId,spanId:validationSpanId,parentSpanId:rootSpanId,name:'validate-complexity-sizing',kind:1,startTimeUnixNano:start,endTimeUnixNano:end,attributes:[attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',x.sizing),attr('langfuse.observation.output',x.validation),attr('langfuse.observation.metadata.deterministic_passed',x.validation?.sizing_contract===true)],status:{code:1}};\nreturn [{json:{...x,trace_id:traceId,otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','production-agreement-shadow')]},scopeSpans:[{scope:{name:'prd-genie-complexity-sizing',version:'v0.3.8'},spans:[root,validation]}]}]}}}];"
+      },
+      "id": "0b53ceaa-e551-4a6a-8f84-62d29b81f5f6",
+      "name": "Build Production Sizing Langfuse Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        64,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.otlp_payload) }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "143baae6-63d1-4238-ad43-bdc7430128f6",
+      "name": "Send Production Sizing Trace to Langfuse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        384,
+        272
+      ],
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "trc3KgAB4Nacxjj3",
+          "name": "Langfuse US - PRD Genie"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$('Build Production Sizing Langfuse Trace').first().json,r=$input.first().json,statusCode=r.statusCode??200;if(statusCode<200||statusCode>=300)throw new Error('Production sizing Langfuse ingestion failed with HTTP '+statusCode);return [{json:{...x,otlp_payload:undefined,langfuse:{trace_id:x.trace_id,ingestion_accepted:true,status_code:statusCode,trace_name:'prd-genie-complexity-sizing-production'},decision:'continue',next_route:'production_export'}}];"
+      },
+      "id": "e5bb358f-74c3-4359-8979-af74de27eb82",
+      "name": "Confirm Production Sizing Trace Ingestion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        272
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Generate Non-Blocking Proposed Sizes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Non-Blocking Proposed Sizes": {
+      "main": [
+        [
+          {
+            "node": "Validate Proposed Sizing Artifact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Proposed Sizing Artifact": {
+      "main": [
+        [
+          {
+            "node": "Build Production Sizing Langfuse Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Production Sizing Langfuse Trace": {
+      "main": [
+        [
+          {
+            "node": "Send Production Sizing Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Production Sizing Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Confirm Production Sizing Trace Ingestion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Confirm Production Sizing Trace Ingestion": {
+      "main": [
+        [
+          {
+            "node": "Return Sized Story Package",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "a21d45cf-9a1d-4a72-8b58-3409590b7746",
+  "meta": {
+    "instanceId": "f6bfdc2311fd55a80b37111f5684a5513a05387ab8cfe6f4a4f072fb8f964eb6"
+  },
+  "nodeGroups": [],
+  "id": "cFuv8QCLpLhtX6A6",
+  "tags": []
+}

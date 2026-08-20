@@ -1,0 +1,27 @@
+{
+  "run_id": "RUN-S2-11902-16e7090e",
+  "starting_point": {
+    "input_documents": 6,
+    "citations": 145
+  },
+  "ending_point": {
+    "epics": 3,
+    "features": 7,
+    "user_stories": 11,
+    "acceptance_criteria": 11
+  },
+  "reconciliation": {
+    "source_documents": 6,
+    "citations_indexed": 145,
+    "citations_dispositioned": 145,
+    "prd_elements": 31,
+    "delivery_items": 11,
+    "governance_mappings": 22,
+    "orphan_citations": 0,
+    "orphan_items": 0,
+    "orphan_prd_elements": 0,
+    "orphan_delivery_items": 0
+  },
+  "groundedness_percent": 100,
+  "unsupported_claims": 0
+}

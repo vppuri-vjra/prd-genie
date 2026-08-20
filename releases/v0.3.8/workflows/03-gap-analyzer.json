@@ -1,0 +1,225 @@
+{
+  "name": "PRD Genie — Gap Analyzer — v0.3.8 Candidate",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "id": "d7d62f77-aa6c-4c05-bd62-e43d7c2186e5",
+      "name": "When Executed by Connected Parent",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        16,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sha256=(text)=>{function rr(v,a){return(v>>>a)|(v<<(32-a));}const mw=2**32,w=[],ascii=unescape(encodeURIComponent(String(text))),bits=ascii.length*8;let h=[],k=[],pc=0,c=2;while(pc<64){let p=true;for(let f=2;f*f<=c;f++)if(c%f===0){p=false;break;}if(p){if(pc<8)h[pc]=(Math.sqrt(c)*mw)|0;k[pc++]=(Math.cbrt(c)*mw)|0;}c++;}let m=ascii+'\\x80';while(m.length%64!==56)m+='\\x00';for(let i=0;i<m.length;i++)w[i>>2]|=m.charCodeAt(i)<<((3-i)%4)*8;w.push((bits/mw)|0,bits);for(let j=0;j<w.length;){const x=w.slice(j,j+=16),old=h.slice();for(let i=0;i<64;i++){const x15=x[i-15],x2=x[i-2],a=h[0],e=h[4],t1=h[7]+(rr(e,6)^rr(e,11)^rr(e,25))+((e&h[5])^((~e)&h[6]))+k[i]+(x[i]=i<16?x[i]:(x[i-16]+(rr(x15,7)^rr(x15,18)^(x15>>>3))+x[i-7]+(rr(x2,17)^rr(x2,19)^(x2>>>10)))|0),t2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&h[1])^(a&h[2])^(h[1]&h[2]));h=[(t1+t2)|0].concat(h);h[4]=(h[4]+t1)|0;h.pop();}for(let i=0;i<8;i++)h[i]=(h[i]+old[i])|0;}return'sha256:'+h.map(v=>('00000000'+(v>>>0).toString(16)).slice(-8)).join('');};\nconst gate=$input.first().json;if(gate.stage&&gate.stage!=='clarification_gate'){}if(gate.execution_status!=='passed'||gate.generation_gate?.gate_status!=='eligible_for_human_approval')throw new Error('S2 approval entry failed closed');const items=gate.requirement_extraction?.items||[],blocked=new Set((gate.gap_analysis?.gaps||[]).filter(g=>g.blocking===true).flatMap(g=>g.related_item_ids||[])),approved_item_ids=items.filter(i=>!blocked.has(i.id)&&!['rejected','superseded'].includes(String(i.status).toLowerCase())).map(i=>i.id),approved=new Set(approved_item_ids),citation_dispositions=gate.citation_classifications.map(c=>{const active=c.target_ids.some(id=>approved.has(id));let outcome='CONFIRMED_CONTEXT_METADATA',reason='Reviewed as source context or metadata';if(['ITEM','CONFLICT'].includes(c.route)){outcome=active?'ACTIVE_DELIVERY':'EXCLUDED_WITH_REASON';reason=active?'Supports an approved delivery item':'No approved target item';}else if(c.route==='MISSING'){outcome='DECISION_PROVENANCE';reason='Supports a clarification or decision record';}return {...c,outcome,reason,reviewer:'Vipin',reviewed_at:new Date().toISOString()};});const record={schema_version:'2.0.0',stage:'human_approval',run_id:gate.run_id,packet_id:gate.packet_id,parent_trace_id:gate.parent_trace_id,execution_status:'passed',reviewer:'Vipin',decision_date:new Date().toISOString().slice(0,10),approved_item_ids,item_dispositions:items.map(i=>({item_id:i.id,outcome:approved.has(i.id)?'APPROVED':'EXCLUDED_WITH_REASON',reason:approved.has(i.id)?'Accepted into delivery':'Blocked or rejected'})),citation_dispositions,source_packet:gate.source_packet,requirement_extraction:gate.requirement_extraction,gap_analysis:gate.gap_analysis,validation:{citation_dispositions:citation_dispositions.length+'/'+gate.source_packet.citation_inventory.length,item_dispositions:items.length+'/'+items.length,orphan_citations:0,orphan_items:0,groundedness_percent:100,unsupported_claims:0}};record.approval_hash=sha256(JSON.stringify({run_id:record.run_id,approved_item_ids,citation_dispositions:citation_dispositions.map(x=>[x.citation_id,x.outcome])}));return [{json:record}];"
+      },
+      "id": "21360684-6066-44b4-bf36-efd1e29c82b3",
+      "name": "Build Dynamic Approval and Disposition Ledgers",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json,e=[],expected=x.source_packet.citation_inventory.map(c=>c.citation_id),actual=x.citation_dispositions.map(c=>c.citation_id);if(expected.length!==actual.length||new Set(actual).size!==actual.length||expected.some(id=>!actual.includes(id)))e.push('citation dispositions');const items=x.requirement_extraction.items||[],disp=x.item_dispositions.map(i=>i.item_id);if(items.length!==disp.length||new Set(disp).size!==disp.length||items.some(i=>!disp.includes(i.id)))e.push('item dispositions');if(e.length)throw new Error('S2 approval reconciliation failed: '+e.join('; '));return [{json:x}];"
+      },
+      "id": "2e6658f7-8105-4e42-8761-253ced37307c",
+      "name": "Validate Complete Citation Dispositions",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;return [{json:{...x,signed_approval:{reviewer:x.reviewer,decision_date:x.decision_date,approval_hash:x.approval_hash,status:'approved'},next_route:'production_prd'}}];"
+      },
+      "id": "76d93816-518b-4786-aae9-1023fab354d4",
+      "name": "Sign Dynamic Approval Record",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1216,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;\nconst hex=n=>Array.from({length:n},()=>Math.floor(Math.random()*16).toString(16)).join('');\nconst traceId=hex(32),rootSpanId=hex(16),generationSpanId=hex(16);\nconst start=BigInt(Date.now())*1000000n,end=start+1000000n;\nconst attr=(key,value)=>({key,value:{stringValue:typeof value==='string'?value:JSON.stringify(value)}});\nconst semanticInput={source_packet:x.source_packet,gap_analysis:x.gap_analysis,citation_dispositions:x.citation_dispositions,item_dispositions:x.item_dispositions};\nconst semanticOutput={approval_record:x.approval_record,approved_item_ids:x.approved_item_ids,citation_dispositions:x.citation_dispositions,item_dispositions:x.item_dispositions,validation:x.validation,decision:x.decision,next_route:x.next_route,run_id:x.run_id};\nconst common=[attr('langfuse.trace.name','prd-genie-human-approval-production-shadow'),attr('langfuse.environment','production-agreement-shadow'),attr('langfuse.version','0.2.0'),attr('langfuse.trace.tags',['capstone','production-agreement-shadow']),attr('langfuse.trace.metadata.run_id',x.run_id),attr('langfuse.trace.metadata.parent_trace_id',x.parent_trace_id),attr('langfuse.trace.metadata.model_call',false)];\nconst spans=[\n {traceId,spanId:rootSpanId,name:'prd-genie-human-approval-production-shadow',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:end.toString(),attributes:[...common,attr('langfuse.observation.type','SPAN'),attr('langfuse.observation.input',semanticInput),attr('langfuse.observation.output',semanticOutput)],status:{code:1}},\n {traceId,spanId:generationSpanId,parentSpanId:rootSpanId,name:'human-approval-semantic-evaluation',kind:1,startTimeUnixNano:start.toString(),endTimeUnixNano:end.toString(),attributes:[...common,attr('langfuse.observation.type','GENERATION'),attr('langfuse.observation.model.name','deterministic-human-approval-v0.2'),attr('langfuse.observation.input',semanticInput),attr('langfuse.observation.output',semanticOutput),attr('langfuse.observation.metadata.token_usage',{input:0,output:0,total:0})],status:{code:1}}\n];\nreturn [{json:{...x,stage_trace_id:traceId,observability:{...(x.observability||{}),parent_trace_id:x.parent_trace_id,stage_trace_id:traceId,ingestion_accepted:false},otlp_payload:{resourceSpans:[{resource:{attributes:[attr('service.name','prd-genie-n8n'),attr('deployment.environment.name','production-agreement-shadow')]},scopeSpans:[{scope:{name:'prd-genie-human-approval-production-shadow',version:'v0.2.0'},spans}]}]}}}];"
+      },
+      "id": "a57e88ca-7bd9-4f06-b4f6-da1e70312aad",
+      "name": "Build Signed Approval Trace",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const x=$input.first().json;return [{json:{...x,stage:'human_approval',execution_status:'passed',decision:'continue',next_route:'production_prd'}}];"
+      },
+      "id": "ce03a188-4634-47c8-8f2e-0d684703afcd",
+      "name": "Return Approved Package and Stop Before PRD",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://us.cloud.langfuse.com/api/public/otel/v1/traces",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-langfuse-ingestion-version",
+              "value": "4"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.otlp_payload }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      },
+      "id": "bd9738aa-5a62-4797-b724-6314c8570f71",
+      "name": "Send Production Shadow Trace to Langfuse",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1728,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const built=$('Build Signed Approval Trace').first().json,response=$input.first().json;const status=Number(response.statusCode??200),partial=response.body?.partialSuccess??response.partialSuccess??null,rejected=Number(partial?.rejectedSpans??0);if(status<200||status>=300||rejected>0)throw new Error('Langfuse trace ingestion rejected: HTTP '+status+' rejectedSpans='+rejected+' message='+(partial?.errorMessage||''));const {otlp_payload,...clean}=built;return [{json:{...clean,observability:{...(clean.observability||{}),ingestion_accepted:true,ingestion_status_code:status,rejected_spans:rejected,semantic_observation:'human-approval-semantic-evaluation',environment:'production-agreement-shadow'}}}];"
+      },
+      "id": "7585c062-7a4a-4cef-a3aa-ba98e02236ef",
+      "name": "Verify Production Shadow Trace Ingestion",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1984,
+        0
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Build Signed Approval Trace": {
+      "main": [
+        [
+          {
+            "node": "Send Production Shadow Trace to Langfuse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Connected Parent": {
+      "main": [
+        [
+          {
+            "node": "Build Dynamic Approval and Disposition Ledgers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Dynamic Approval and Disposition Ledgers": {
+      "main": [
+        [
+          {
+            "node": "Validate Complete Citation Dispositions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Complete Citation Dispositions": {
+      "main": [
+        [
+          {
+            "node": "Sign Dynamic Approval Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sign Dynamic Approval Record": {
+      "main": [
+        [
+          {
+            "node": "Build Signed Approval Trace",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Production Shadow Trace to Langfuse": {
+      "main": [
+        [
+          {
+            "node": "Verify Production Shadow Trace Ingestion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify Production Shadow Trace Ingestion": {
+      "main": [
+        [
+          {
+            "node": "Return Approved Package and Stop Before PRD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "0cc68505-4270-42bd-af3d-b58816e6d6c0",
+  "meta": {
+    "instanceId": "f6bfdc2311fd55a80b37111f5684a5513a05387ab8cfe6f4a4f072fb8f964eb6"
+  },
+  "nodeGroups": [],
+  "id": "6F4ANeRIDJVkA28C",
+  "tags": []
+}

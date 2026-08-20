@@ -6,6 +6,8 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 **Phase:** Iterations 1 and 2 are complete for the current T1–T10 scope. Human-approved ground truth, automated evaluation, n8n execution evidence, and Langfuse traces are recorded; the promoted v1.5 Requirement Extractor passed the unchanged T1–T10 release gate 10/10.
 
+**Submission candidate:** The complete accepted v0.3.8 workflow and evidence package is available at [`releases/v0.3.8/`](releases/v0.3.8/README.md). It preserves parent execution `11901`, run `RUN-S2-11902-16e7090e`, all nine workflow exports, the three planning artifacts, and the complete citation disposition evidence.
+
 The planned implementation uses:
 
 - **n8n** for sequential workflow orchestration
