@@ -17,6 +17,9 @@ This release package preserves the complete nine-workflow v0.3.8 candidate and t
 
 ## Reviewer-facing artifacts
 
+- [Business Requirements Document](final-artifacts/business-requirements-document.md)
+- [Product Requirements Document](final-artifacts/product-requirements-document.md)
+- [Architecture Design](final-artifacts/architecture-design.md)
 - [Validated Full PRD Review](<evidence/PRD Genie — Validated Full PRD Review — RUN-S2-11902-16e7090e.md>)
 - [Validated Epic, Feature, and User Story Review](<evidence/PRD Genie — Validated Epic Feature User Story Review — RUN-S2-11902-16e7090e.md>)
 - [Proposed T-Shirt Sizing Review](<evidence/PRD Genie — Proposed T-Shirt Sizing Review — RUN-S2-11902-16e7090e.md>)
