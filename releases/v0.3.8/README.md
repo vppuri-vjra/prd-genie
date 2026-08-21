@@ -2,6 +2,8 @@
 
 This release package preserves the complete nine-workflow v0.3.8 candidate and the evidence from the first accepted end-to-end run.
 
+> **Authoritative baseline:** execution `11901` / run `RUN-S2-11902-16e7090e` is the formal v0.3.8 submission baseline. Execution `11958` is supplementary post-tidy-up verification only and does not replace or alter the accepted baseline.
+
 ## Accepted run
 
 | Field | Value |
@@ -52,3 +54,12 @@ The accepted parent intentionally uses a minimal-change hybrid call graph. Stabl
 ## External runtime evidence
 
 The seven accepted outputs remain available in Google Drive. Their file IDs and the corresponding n8n and Langfuse evidence are recorded in the [workflow inventory](evidence/workflow-inventory-v0.3.8.md).
+
+## Supplementary post-tidy-up verification
+
+Execution `11958` / run `RUN-S2-11959-16e7090e` repeated the complete governed pipeline after visual canvas tidying. It succeeded without changing workflow logic, evaluator configuration, release controls, or the formal submission baseline.
+
+- [Complete Langfuse Trace Evidence — execution 11958](evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html)
+- [High-resolution workflow and accepted-baseline screenshots](screenshots-and-traces/README.md)
+
+The supplementary run recorded 541,720 fully loaded tokens, `$1.460813` fully loaded cost, 43 generation/evaluator calls, 145/145 citation dispositions, zero orphans, seven delivered artifacts, and 11/11 advisory sizing results. These records support demonstration and post-tidy-up verification; all formal v0.3.8 acceptance claims remain anchored to execution `11901`.
