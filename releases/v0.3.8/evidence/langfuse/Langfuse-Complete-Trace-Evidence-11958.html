@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PRD Genie v0.3.8 — Complete Langfuse Trace Evidence</title>
+<style>
+:root{--ink:#18182d;--muted:#666b72;--rust:#ba4d3c;--green:#2d735b;--green-bg:#e7f2ed;--blue:#356dc3;--purple:#7444d3;--line:#ddd8d0;--paper:#faf7f1;--card:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,Arial,sans-serif}.page{max-width:1320px;margin:auto;padding:42px 48px 56px}.eyebrow{color:var(--rust);font-weight:800;letter-spacing:.08em;text-transform:uppercase}.hero{border-top:8px solid var(--rust);padding-top:30px}.hero h1{font:700 42px/1.1 Georgia,serif;margin:8px 0}.sub{color:var(--muted);font-size:18px}.badges{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.badge{border:1px solid #b9dccb;background:var(--green-bg);color:var(--green);border-radius:999px;padding:8px 14px;font-weight:750}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:24px 0}.metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}.metric b{display:block;font:700 27px Georgia,serif;color:var(--green)}.metric span{color:var(--muted)}section{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:18px 0;overflow:hidden}section h2{font-size:17px;letter-spacing:.05em;text-transform:uppercase;color:var(--rust);background:#f5f2ed;margin:0;padding:16px 20px;border-bottom:1px solid var(--line)}.body{padding:18px 20px}table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid var(--line);padding:11px 10px;vertical-align:top}th{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}.pass{color:var(--green);font-weight:800}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px}.costbar{display:flex;height:34px;border-radius:10px;overflow:hidden;margin:12px 0}.gen{width:15.5%;background:var(--blue);color:#fff;padding:7px}.eval{width:84.5%;background:var(--purple);color:#fff;padding:7px}.note{border-left:5px solid var(--green);background:var(--green-bg);padding:14px 16px;margin-top:14px}.footer{margin-top:26px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted)}
+</style></head><body><main class="page">
+<div class="hero"><div class="eyebrow">Supplementary post-tidy-up evidence · execution 11958</div><h1>Complete Langfuse Trace Evidence</h1><div class="sub">PRD Genie v0.3.8 · RUN-S2-11959-16e7090e · 21 August 2026, 07:53 PDT</div></div>
+<div class="badges"><span class="badge">n8n succeeded · 2m 39.014s</span><span class="badge">Agreement Gate · release authorized</span><span class="badge">7 artifacts delivered</span><span class="badge">11901 remains formal baseline</span></div>
+<div class="grid"><div class="metric"><b>541,720</b><span>fully loaded tokens</span></div><div class="metric"><b>$1.460813</b><span>fully loaded cost</span></div><div class="metric"><b>43</b><span>generation + evaluator calls</span></div><div class="metric"><b>100%</b><span>groundedness</span></div></div>
+
+<section><h2>1 · Trace identity and lineage</h2><div class="body"><table><tr><th>Record</th><th>Identifier</th><th>Purpose</th></tr>
+<tr><td>n8n parent execution</td><td class="code">11958</td><td>Successful post-tidy-up end-to-end canary</td></tr>
+<tr><td>Run ID</td><td class="code">RUN-S2-11959-16e7090e</td><td>Shared identity across stages, artifacts, and evaluations</td></tr>
+<tr><td>Parent trace</td><td class="code">b7f682bae94c5a5efa5fad8eb0e82ecd</td><td>Links child stage traces to the production run</td></tr>
+<tr><td>Story trace</td><td class="code">913751af85a57a8731c833fe67f6bff1</td><td>Story Breakdown trace and semantic-evaluation observations</td></tr>
+<tr><td>Sizing trace</td><td class="code">3ce7dcf324b59c2a2b715ad349263e8f</td><td>Eleven story-sizing records and associated evaluators</td></tr></table></div></section>
+
+<section><h2>2 · Stage evaluator results</h2><div class="body"><table><tr><th>Stage</th><th>Code control</th><th>Faithfulness</th><th>Hallucination</th><th>Additional result</th><th>Disposition</th></tr>
+<tr><td>Requirement Extractor</td><td class="pass">Passed</td><td>Grounding passed</td><td>Within ≤0.15 policy</td><td>Dynamic current-run identifiers preserved</td><td class="pass">Accepted</td></tr>
+<tr><td>Gap Analyzer</td><td class="pass">Passed</td><td>Grounding passed</td><td>Within ≤0.15 policy</td><td>Gaps/conflicts retained without invention</td><td class="pass">Accepted</td></tr>
+<tr><td>Human Approval</td><td class="pass">Passed</td><td>Approved decisions preserved</td><td>Within policy</td><td>Signed scope propagated</td><td class="pass">Accepted</td></tr>
+<tr><td>Production PRD</td><td class="pass">Passed</td><td class="pass">1.00</td><td class="pass">0.02</td><td>Ten-section PRD validated</td><td class="pass">Accepted</td></tr>
+<tr><td>Story Breakdown</td><td class="pass">Passed</td><td class="pass">0.98</td><td class="pass">0.01</td><td>3 epics · 7 features · 11 stories</td><td class="pass">Accepted</td></tr>
+<tr><td>Story Sizing</td><td class="pass">11/11</td><td class="pass">1.00</td><td class="pass">0.00</td><td>Reasonableness 1.00 · advisory</td><td class="pass">Accepted</td></tr>
+</table><div class="note"><b>Acceptance rule:</b> deterministic controls must pass; semantic faithfulness must remain high; hallucination must be ≤0.15. Sizing remains non-blocking and occurs after validated export.</div></div></section>
+
+<section><h2>3 · Fully loaded token and cost evidence</h2><div class="body"><div class="costbar"><div class="gen">15.5% generation</div><div class="eval">84.5% semantic evaluation</div></div><table><tr><th>Component</th><th>Calls</th><th>Tokens</th><th>Actual cost</th><th>Interpretation</th></tr>
+<tr><td>Pipeline generation</td><td>2</td><td>58,673</td><td>$0.219016</td><td>Core AI generation and transformation</td></tr>
+<tr><td>LLM evaluators</td><td>41</td><td>483,047</td><td>$1.241797</td><td>Faithfulness, hallucination, and sizing reasonableness</td></tr>
+<tr><td><b>Fully loaded total</b></td><td><b>43</b></td><td><b>541,720</b></td><td><b>$1.460813</b></td><td>Generation plus every invoked current-run evaluator</td></tr></table></div></section>
+
+<section><h2>4 · Trace output and delivery reconciliation</h2><div class="body"><table><tr><th>Measure</th><th>Output</th><th>Validation</th></tr>
+<tr><td>Source inputs</td><td>6 authoritative documents</td><td class="pass">Current-run content and hashes retained</td></tr>
+<tr><td>Citations</td><td>145 indexed · 145 dispositioned</td><td class="pass">0 orphan citations</td></tr>
+<tr><td>PRD</td><td>29 PRD elements</td><td class="pass">0 orphan PRD elements</td></tr>
+<tr><td>Delivery</td><td>3 epics · 7 features · 11 stories · 11 AC groups</td><td class="pass">0 orphan delivery items</td></tr>
+<tr><td>Sizing</td><td>11/11 stories evaluated</td><td class="pass">Non-blocking advisory output delivered</td></tr>
+<tr><td>Grounding</td><td>100% · 0 unsupported claims</td><td class="pass">Agreement Gate release authorized</td></tr>
+<tr><td>Drive</td><td>7 validated files</td><td class="pass">PRD, Epic/Story, sizing, JSON, lineage, and run summary</td></tr></table></div></section>
+
+<section><h2>5 · Evidence files captured from Langfuse</h2><div class="body"><table><tr><th>File</th><th>What it proves</th></tr>
+<tr><td class="code">LF-01-story-breakdown-trace-output.png</td><td>Rendered Story Breakdown trace input and governed evaluation context</td></tr>
+<tr><td class="code">LF-03-story-breakdown-scores.png</td><td>Observation score view</td></tr>
+<tr><td class="code">LF-04-story-breakdown-trace-scores.png</td><td>Root semantic-evaluation score records</td></tr>
+<tr><td class="code">LF-05-production-prd-trace-output.png</td><td>Production PRD trace input and approved-source context</td></tr>
+<tr><td class="code">LF-06-sizing-trace-input-output.png</td><td>Rendered sizing input and output for a current-run story</td></tr>
+<tr><td class="code">../3A-langfuse-run-records.png</td><td>Current-run Langfuse trace records including all sizing items</td></tr>
+<tr><td class="code">../3D-langfuse-evaluators.png</td><td>Active code and LLM evaluator inventory</td></tr></table></div></section>
+
+<div class="footer">Evidence classification: supplementary post-tidy-up verification. Submission baseline: v0.3.8 execution 11901. No workflow, evaluator, or release-control configuration was changed while producing this report.</div>
+</main></body></html>
