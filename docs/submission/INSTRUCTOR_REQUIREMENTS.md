@@ -1,35 +1,39 @@
-# Additional Instructor Requirements
+# Additional Instructor Requirements - Final Status
 
-These requirements were communicated verbally by the instructor on 2026-08-02 and are tracked alongside the written problem statement, rubric, and Capstone Project Playbook.
+These requirements were communicated verbally on 2026-08-02 and are tracked alongside the written Problem Statement, rubric, and Capstone Project Playbook.
 
-| Required artifact | Expected format and content | Current status | Planned location |
-|---|---|---|---|
-| Business Requirements Document (BRD) | Business problem, users, current process, business objectives, scope, stakeholders, business requirements, success measures, assumptions, constraints, risks, and approvals | Not started | `docs/requirements/BRD.md` |
-| Product Requirements Document (PRD) | Product goals, personas, functional and non-functional requirements, acceptance criteria, dependencies, assumptions, open questions, out-of-scope items, and timeline | Not started as a project artifact; the official PRD template is already represented in the output contract | `docs/requirements/PRD.md` |
-| Architecture Design | System context, agent workflow, data flow, human approval gate, integrations, security boundaries, observability, failure handling, and deployment view | Partially documented across the README, ADRs, schemas, and workflow mapping; consolidated document still required | `docs/architecture/ARCHITECTURE_DESIGN.md` |
-| Architecture Decisions | Important choices documented with context, decision, rationale, alternatives, consequences, and status | In progress through ADR-001 to ADR-003; additional ADRs will be added as decisions are made | `docs/decisions/ADR-*.md` |
-| Ground Truth Dataset | Versioned, human-reviewed expected outputs for evaluation inputs, including exact values, classifications, evidence, allowed variation, prohibited claims, and pass criteria | Partial: T1-T10 fixtures currently contain checks, not complete canonical outputs | `evaluation/ground-truth/` |
+| Required artifact | Final status | Evidence |
+|---|---|---|
+| Business Requirements Document | Complete | [BRD](../requirements/BRD.md) |
+| Product Requirements Document | Complete | [Product PRD](../requirements/PRODUCT_PRD.md) |
+| Architecture Design | Complete | [Consolidated Architecture Design](../architecture/ARCHITECTURE_DESIGN.md) |
+| Architecture Decisions | Complete for the submitted scope | [ADR-001](../decisions/ADR-001-platform-and-observability.md), [ADR-002](../decisions/ADR-002-structured-contracts.md), and [ADR-003](../decisions/ADR-003-openai-model-baseline.md) |
+| Ground Truth Dataset | Complete for T1-T12 | [Human-reviewed ground truth](../../evaluation/ground-truth/README.md) |
+| Final baseline evaluation | Complete - 12/12 passed | [T1-T12 baseline summary](../../evaluation/results/baseline-summary.md) |
+| Accepted implementation package | Complete | [v0.3.8 release](../../releases/v0.3.8/README.md) |
+| Presentation and demonstration | Complete | [Presentation package](../../releases/v0.3.8/presentation/README.md) and [Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) |
 
-## Ground Truth Quality Requirements
+## Ground-truth quality controls
 
-Ground truth is stronger than a list of expected keywords. Each case should include:
+The final evaluation package provides:
 
-- Stable test ID and source input.
-- Canonical expected structured output using the applicable JSON contract.
-- Exact names, numbers, dates, versions, units, and source quotations that must be preserved.
-- Required classifications and relationships.
-- Explicitly allowed variations where wording may differ without changing meaning.
-- Prohibited unsupported claims and hallucinations.
-- Expected ambiguity, contradiction, missing-information, or refusal behavior.
-- Human reviewer, review date, dataset version, and approval status.
-- Automated checks where fields can be evaluated deterministically.
+- Stable T1-T12 test identifiers and preserved source inputs.
+- Canonical expected structured outputs using the applicable workflow contracts.
+- Exact-value preservation for names, numbers, dates, versions, units, and source evidence.
+- Required classifications, traceable relationships, and explicit allowed variation.
+- Prohibited unsupported claims and hallucination controls.
+- Expected ambiguity, contradiction, missing-information, clarification, and refusal behavior.
+- Human-review records, dataset versions, and approval status.
+- Deterministic controls plus applicable Langfuse semantic-evaluation receipts.
 
-The ground truth should cover T1-T10 Requirement Extraction, T11 PRD Generation, and T12 Story Breakdown. Baseline model outputs must never overwrite the approved ground truth; corrections require a reviewed dataset version change.
+## Final verification sequence
 
-## Immediate Sequence
+1. The corrected extraction, gap-analysis, approval, PRD, story, validator, sizing, and delivery stages were preserved in the nine-workflow v0.3.8 package.
+2. The T1-T12 baseline was completed against approved ground truth with 12/12 passing, 100% groundedness, and zero unsupported claims.
+3. Parent execution `11901` / `RUN-S2-11902-16e7090e` was retained as the formal submission baseline.
+4. Execution `11958` / `RUN-S2-11959-16e7090e` was published as supplementary demonstration evidence without changing the baseline.
+5. The public repository, Q1-Q4 submission portal, presentation, evidence files, and complete demo were linked for reviewer access.
 
-1. Complete and verify the T10 prompt correction using a before-and-after trace comparison.
-2. Create the BRD, project PRD, and consolidated Architecture Design in Markdown.
-3. Review existing ADRs and add missing decisions for orchestration, human approval, grounding, failure handling, and evaluation.
-4. Build and human-review the T1-T12 ground truth dataset.
-5. Run the final baseline against the approved ground truth and retain evaluation evidence.
+## Final disposition
+
+The instructor-required documents and evaluation controls are complete for the submitted v0.3.8 scope. Future model optimization or workflow expansion belongs to a later version and is not required to validate this submission.
