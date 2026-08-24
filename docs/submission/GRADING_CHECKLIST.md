@@ -46,6 +46,18 @@ Final verification status for the accepted PRD Genie v0.3.8 submission package.
 - [x] Repository scan found no committed API keys or private-key blocks; `.env.example` contains placeholders only
 - [x] New and updated evidence-index links were verified before publication
 
+## Interview Kickstart final upload
+
+- [x] Final submission form identified: [Applied Agentic AI Capstone Project — Final Submission](https://forms.gle/oRqsBx2i6fZFnkhS9)
+- [ ] Final submission ZIP created with all required project files
+- [ ] ZIP contents compared with the final submission manifest
+- [ ] ZIP opens successfully and required documents are readable
+- [ ] ZIP size verified at no more than 1 GB
+- [ ] Email, learner name, and Capstone Project Name entered consistently
+- [ ] Correct ZIP selected in the form
+- [ ] Final pre-submit review completed, acknowledging that the file cannot be edited or removed after submission
+- [ ] Form submitted and confirmation receipt retained
+
 ## Final disposition
 
-All tracked submission controls are complete. Historical failed and partial development runs remain preserved as iteration evidence; final acceptance claims are anchored to execution `11901` and the approved T1-T12 release results.
+All content and evidence controls are complete. Administrative submission remains open until the verified single ZIP is uploaded and the Interview Kickstart form confirmation is retained. Historical failed and partial development runs remain preserved as iteration evidence; final acceptance claims are anchored to execution `11901` and the approved T1-T12 release results.
