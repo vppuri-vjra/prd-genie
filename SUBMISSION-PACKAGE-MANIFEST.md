@@ -10,6 +10,10 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Published submission page:** https://vjra.us/prd-genie.html  
 > **Published GitHub Download section:** https://vjra.us/prd-genie.html#github-download
 > **Approved six-input inventory:** https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/fixtures/multi-source/realistic-v1
+> **T1–T12 baseline results:** https://github.com/vppuri-vjra/prd-genie/blob/main/evaluation/results/baseline-summary.md
+> **T1–T12 ground-truth evidence:** https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/ground-truth
+> **Formal 11901 screenshots and traces:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8/screenshots-and-traces
+> **Supplementary 11958 screenshots and traces:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8/screenshots-and-traces/supplementary-11958
 > **Q1 — Ideation:** [Published view](https://vjra.us/prd-genie.html#q1-ideation) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q1-Ideation-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q1-ideation.md)
 > **Q2 — Program Charter:** [Published view](https://vjra.us/prd-genie.html#q2-program-charter) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q2-Program-Charter-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q2-program-charter.md)
 > **Q3 — Build and Architecture:** [Published view](https://vjra.us/prd-genie.html#q3-build-architecture) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q3-Build-and-Architecture-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q3-build-prd-orchestrator.md)
