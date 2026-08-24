@@ -102,14 +102,14 @@ The project began with three immutable discovery sources. The governed clarifica
 
 ## Final ZIP verification record
 
-The archive is a clean snapshot of Git commit `31b2134154fccfa3259eb62b3538147d5d9ca181` plus the final named demo. The checksum is recorded externally because an archive cannot contain its own final checksum without changing that checksum.
+The rebuilt archive contains the finalized manifest, a clean snapshot of Git commit `f1f35572f1cf7d2803fc2b4ce239f035618e9f6a`, and the final named demo. The in-package manifest contains a final verification note; the closed-archive checksum is recorded here and in the sibling `.sha256` file because an archive cannot contain its own final checksum without changing that checksum.
 
 | Control | Result |
 | --- | --- |
 | Archive filename | `PRD-Genie-v0.3.8-IK-Final-Submission.zip` |
-| Source Git commit | `31b2134154fccfa3259eb62b3538147d5d9ca181` |
-| Archive size | 40,322,401 bytes (38.45 MiB); below the 1 GB limit |
-| SHA-256 checksum | `ae15037a356d281eb2c4abf0f6a950e5cf32dbae26ddd1bcef204766c7f154d3` |
+| Source Git commit | `f1f35572f1cf7d2803fc2b4ce239f035618e9f6a` plus the finalized in-package manifest note |
+| Archive size | 40,322,761 bytes (38.45 MiB); below the 1 GB limit |
+| SHA-256 checksum | `c366f103f3ee12d619a0d0bc06961038fbc8d7dbbdfcafd43782583a807c32d7` |
 | Archive opens successfully | Passed; `unzip -t` reported no errors |
 | Required paths compared with this manifest | Passed; no required path missing, 9/9 workflow JSON files present, and 6/6 approved physical inputs present |
 | Secrets and temporary-file scan | Passed; no forbidden credential files or genuine secret patterns found. One `sk-` substring in a test fixture identifier was reviewed as a false positive. |
