@@ -52,7 +52,7 @@ The Gap Analyzer immediately follows Requirement Extraction to test the normaliz
 | Human Approval | Passed | 0.99 | 0.00 | Approval lineage preserved |
 | Production PRD | Passed | 0.99 | 0.05 | Required ten-section structure present |
 | Story Breakdown | 1.00 | 0.98 | 0.02 | 11 stories and criteria reconciled |
-| Story Sizing | 1.00 | 1.00 | 0.00 | Reasonableness 1.00 |
+| Scope Estimator (T-shirt size estimates) | 1.00 | 1.00 | 0.00 | Reasonableness 1.00 |
 
 T1–T10 test detailed, vague, contradictory, incomplete, persona, technical, dependency, and empty inputs. T11 validates PRD generation; T12 validates Epic and Story generation. Exact values are preserved, ambiguity is flagged without invention, acceptance criteria are preserved and mapped, and evidence is retained through n8n executions, Langfuse traces, and result files.
 

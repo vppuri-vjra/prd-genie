@@ -43,7 +43,7 @@ The Requirement Extractor first creates a normalized, citation-linked statement 
 | Production PRD | Approved evidence → ten-section PRD | Generate only approved content; preserve stable IDs; mark controlled unknowns rather than fabricate. |
 | Story Breakdown | Validated PRD → Epics, Features, Stories, criteria | Preserve requirement lineage and hierarchy; reject duplicates, orphans, or unsupported decomposition. |
 | Final Validator + Export | All governed artifacts → authorized delivery | Reconcile sets and bidirectional mappings; Agreement Gate fails closed; export only validated artifacts. |
-| Post-story Sizing | Approved stories → size, confidence, guidance | Provide non-blocking advisory estimates; never represent AI sizing as an engineering commitment. |
+| Scope Estimator | Approved stories → T-shirt size estimate, confidence, guidance | Provide non-blocking advisory estimates; never represent AI sizing as an engineering commitment. |
 
 ## Cost analysis
 
@@ -51,16 +51,17 @@ Formal baseline execution `11901` used **545,467 tokens** at a fully loaded cost
 
 ## Evaluation strategy and production metrics
 
-1. **Accuracy and completeness:** percentage of governed requirement, acceptance-criteria, and hierarchy IDs reconciled from source through export; target 100% with zero orphans.
-2. **Trustworthiness:** unsupported-claim count and stage hallucination score; target zero unsupported claims and hallucination at or below the enforced 0.15 threshold.
-3. **Usefulness and efficiency:** planning artifacts accepted without rework, reviewer time saved, latency, adoption, and fully loaded cost per governed run.
+1. **Extraction completeness:** percentage of stated requirements correctly captured; target 100%, with requirement and acceptance-criteria IDs reconciled from source through export and zero orphans.
+2. **Hallucination rate:** percentage of PRD items not traceable to approved source material; target zero unsupported claims and an enforced stage hallucination score at or below 0.15.
+3. **Format compliance:** percentage of generated PRDs that follow the required ten-section template and pass schema validation; target 100%.
 
-Evaluation combines T1–T12 ground truth, deterministic schema/exact-value/set controls, Langfuse code evaluation, semantic faithfulness and hallucination judges, sizing reasonableness, and the fail-closed Agreement Gate.
+Evaluation combines T1–T12 ground truth, deterministic schema/exact-value/set controls, Langfuse code evaluation, semantic faithfulness and hallucination judges, Scope Estimator reasonableness, and the fail-closed Agreement Gate. Supporting operational measures include reviewer time saved, artifact acceptance without rework, latency, adoption, and fully loaded cost per governed run.
 
 ## Testing observations and fixes
 
-- Detailed, vague, contradictory, incomplete, persona, technical, dependency, and empty inputs showed that typed contracts and explicit insufficient-information behavior prevent polished but unsupported outputs.
-- Early semantic failures exposed hallucination and incomplete-score risks; prompts were tightened, trace correlation was made strict, and the Agreement Gate was configured to hold incomplete or failing evidence for human review.
+- **What worked:** detailed, vague, contradictory, incomplete, persona, technical, dependency, and empty inputs showed that typed contracts, explicit insufficient-information behavior, human approval, and fail-closed validation prevent unsupported output from reaching delivery.
+- **Where the system hallucinated:** in T6, the Requirement Extractor incorrectly classified microservices and a single-page application as contradictory even though they can coexist; the independent hallucination judge scored the case `0.40`.
+- **What was fixed and verified:** the unsupported contradiction and constraint cross-links were removed while the genuinely unresolved approval, deadline, and scope gaps remained visible. The targeted rerun passed code evaluation and reduced T6 hallucination from `0.40` to `0.08`.
 - Cross-stage duplicate and orphan risks were addressed with stable IDs, set equality, bidirectional lineage, and final reconciliation before export.
 - Duplicate semantic scoring increased cost without adding coverage; removing it retained quality controls while reducing evaluator overhead.
 

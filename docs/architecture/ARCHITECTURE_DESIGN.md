@@ -12,7 +12,7 @@ owner: Vipin Puri
 
 ## 1. Purpose and status
 
-This document defines the accepted v0.3.8 technical architecture for PRD Genie. A manual n8n parent coordinates Drive Intake and Clarification, Requirement Extraction, Gap Analysis, signed Human Approval, Production PRD, Story Breakdown, Final Validation and Export, plus post-export advisory Story Sizing. OpenAI supplies bounded semantic reasoning; deterministic code controls and an enforced Agreement Gate govern release; Langfuse records traces, evaluator results, latency, tokens, and cost; and Google Drive receives seven validated run-specific artifacts.
+This document defines the accepted v0.3.8 technical architecture for PRD Genie. A manual n8n parent coordinates Drive Intake and Clarification, Requirement Extraction, Gap Analysis, signed Human Approval, Production PRD, Story Breakdown, Final Validation and Export, plus the post-export advisory **Scope Estimator**, whose role is to produce T-shirt size estimates. OpenAI supplies bounded semantic reasoning; deterministic code controls and an enforced Agreement Gate govern release; Langfuse records traces, evaluator results, latency, tokens, and cost; and Google Drive receives seven validated run-specific artifacts.
 
 Formal parent execution `11901` / run `RUN-S2-11902-16e7090e` completed the governed path in 2m 33.201s. It reconciled 145/145 citation dispositions with zero orphaned governed records, delivered three Epics, seven Features, eleven Stories and eleven mapped acceptance criteria, authorized release, exported seven artifacts, and returned advisory sizing for 11/11 stories. Fully loaded usage was 545,467 tokens at `$1.474409`. Execution `11958` is supplementary post-tidy-up demonstration evidence and does not replace the formal baseline.
 
@@ -40,7 +40,7 @@ flowchart LR
     I["Google Drive<br/>6 authoritative inputs"] --> P["v0.3.8 manual parent<br/>run identity and stage contracts"]
     P --> D1["01 Drive + clarification"] --> D2["02 Requirement Extractor"] --> D3["03 Gap Analyzer"] --> D4["04 Human Approval"]
     D4 --> D5["05 Production PRD"] --> D6["06 Story Breakdown"] --> D7["07 Validator + Export"] --> O["Google Drive<br/>7 validated artifacts"]
-    D7 --> S["Post: advisory T-shirt sizing"]
+    D7 --> S["Post: Scope Estimator (T-shirt size estimates)"]
     AI["OpenAI GPT-5.6 Terra"] -. "bounded semantic reasoning" .-> P
     P -. "traces, evaluators, latency, tokens, cost" .-> L["Langfuse US"]
     G["Schemas, grounding, approval,<br/>set equality, orphan prevention"] -. "fail-closed governance" .-> P
@@ -96,7 +96,7 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Story Breakdown | Produce epics, features, stories, and story acceptance criteria | Approved PRD | Story Breakdown | Implemented; accepted v0.3.8 produced 3 Epics / 7 Features / 11 Stories / 11 mapped criteria |
 | Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected final result and artifact package | Implemented; formal parent execution `11901` completed the accepted v0.3.8 path |
 | Final Validator and Export | Enforce cross-stage grounding, set equality, orphan prevention, Agreement Gate release, and seven-artifact export | All downstream outputs | Evaluation Result and delivery package | Implemented and accepted in execution `11901` |
-| Story Sizing | Propose non-blocking size, confidence, rationale, and refinement guidance | Validated stories | Advisory sizing artifact | Implemented post-export; 11/11 stories sized in execution `11901` |
+| Scope Estimator | Propose non-blocking T-shirt size estimates, confidence, rationale, and refinement guidance | Validated stories | Advisory sizing artifact | Implemented post-export; 11/11 stories sized in execution `11901` |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
 | Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace and evaluator evidence | Implemented across the governed run; fully loaded baseline usage and cost are preserved |
 

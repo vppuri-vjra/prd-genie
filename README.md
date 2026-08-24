@@ -4,7 +4,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** The v0.3.8 capstone implementation and submission package are complete. The governed pipeline covers intake, requirement extraction, gap analysis, signed human approval, ten-section PRD generation, story breakdown, final validation and export, and non-blocking story sizing. All prescribed T1–T12 baseline cases passed against human-reviewed ground truth with 100% groundedness and zero unsupported claims.
+**Phase:** The v0.3.8 capstone implementation and submission package are complete. The governed pipeline covers intake, requirement extraction, gap analysis, signed human approval, ten-section PRD generation, story breakdown, final validation and export, and the non-blocking **Scope Estimator** agent, whose role is to propose T-shirt size estimates. All prescribed T1–T12 baseline cases passed against human-reviewed ground truth with 100% groundedness and zero unsupported claims.
 
 **Submission candidate:** The complete accepted v0.3.8 workflow and evidence package is available at [`releases/v0.3.8/`](releases/v0.3.8/README.md). It preserves parent execution `11901`, run `RUN-S2-11902-16e7090e`, all nine workflow exports, the three planning artifacts, and the complete citation disposition evidence.
 
