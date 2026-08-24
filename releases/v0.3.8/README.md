@@ -61,5 +61,6 @@ Execution `11958` / run `RUN-S2-11959-16e7090e` repeated the complete governed p
 
 - [Complete Langfuse Trace Evidence — execution 11958](evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html)
 - [High-resolution workflow and accepted-baseline screenshots](screenshots-and-traces/README.md)
+- [Complete supplementary execution 11958 screenshot and trace package](screenshots-and-traces/supplementary-11958/README.md)
 
-The supplementary run recorded 541,720 fully loaded tokens, `$1.460813` fully loaded cost, 43 generation/evaluator calls, 145/145 citation dispositions, zero orphans, seven delivered artifacts, and 11/11 advisory sizing results. These records support demonstration and post-tidy-up verification; all formal v0.3.8 acceptance claims remain anchored to execution `11901`.
+The supplementary run recorded 541,720 fully loaded tokens, `$1.460813` fully loaded cost, 43 generation/evaluator calls, 145/145 citation dispositions, zero orphans, seven delivered artifacts, and 11/11 advisory sizing results. At one fully evaluated run per user per week, its modeled cost is approximately `$0.21` per user per day and `$6.33` per user per month. These records support demonstration and post-tidy-up verification; all formal v0.3.8 acceptance claims remain anchored to execution `11901`.

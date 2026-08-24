@@ -50,7 +50,11 @@ This package documents the accepted v0.3.8 candidate in the visual-evidence form
 
 Execution `11958` / run `RUN-S2-11959-16e7090e` is a successful post-tidy-up verification run. Its evidence is supplementary: execution `11901` remains the formal v0.3.8 submission baseline.
 
+- [Complete supplementary screenshot and trace package](supplementary-11958/README.md)
 - [Complete Langfuse Trace Evidence — execution 11958](../evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html)
+- 15 n8n, Google Drive, artifact, and traceability screenshots
+- 6 detailed Langfuse trace and evaluator screenshots
 - Fully loaded usage: 541,720 tokens / `$1.460813`
+- Modeled usage at one fully evaluated run per user per week: approximately `$0.21` per user per day / `$6.33` per user per month
 - Agreement Gate: release authorized
 - Delivery: seven validated artifacts; 145/145 citations dispositioned; zero orphans; sizing 11/11
