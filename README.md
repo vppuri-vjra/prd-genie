@@ -12,6 +12,8 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 **Submission portal:** [Q1–Q4 responses, overall deliverables, presentation, and download index](https://vjra.us/prd-genie.html).
 
+**Written submissions:** [`Q1 — Ideation`](docs/assignments/q1-ideation.md) · [`Q2 — Program Charter`](docs/assignments/q2-program-charter.md) · [`Q3 — Build PRD Orchestrator`](docs/assignments/q3-build-prd-orchestrator.md) · [`Q4 — Reflection`](docs/assignments/q4-reflection.md)
+
 The implemented system uses:
 
 - **n8n** for sequential workflow orchestration
