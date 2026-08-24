@@ -8,6 +8,8 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 **Submission candidate:** The complete accepted v0.3.8 workflow and evidence package is available at [`releases/v0.3.8/`](releases/v0.3.8/README.md). It preserves parent execution `11901`, run `RUN-S2-11902-16e7090e`, all nine workflow exports, the three planning artifacts, and the complete citation disposition evidence.
 
+**Final package inventory:** [`SUBMISSION-PACKAGE-MANIFEST.md`](SUBMISSION-PACKAGE-MANIFEST.md) identifies every required deliverable, its GitHub location, whether it will be physically included in the Interview Kickstart ZIP, and which runtime evidence remains external by design.
+
 **Complete demo:** [PRD Genie v0.3.8 — Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) is a 7:08 reviewer walkthrough. Execution `11958` / `RUN-S2-11959-16e7090e` is supplementary demonstration evidence and does not replace the formal baseline.
 
 **Submission portal:** [Q1–Q4 responses, overall deliverables, presentation, and download index](https://vjra.us/prd-genie.html).
