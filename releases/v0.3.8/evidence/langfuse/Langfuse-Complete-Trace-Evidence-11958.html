@@ -28,7 +28,8 @@
 <section><h2>3 · Fully loaded token and cost evidence</h2><div class="body"><div class="costbar"><div class="gen">15.5% generation</div><div class="eval">84.5% semantic evaluation</div></div><table><tr><th>Component</th><th>Calls</th><th>Tokens</th><th>Actual cost</th><th>Interpretation</th></tr>
 <tr><td>Pipeline generation</td><td>2</td><td>58,673</td><td>$0.219016</td><td>Core AI generation and transformation</td></tr>
 <tr><td>LLM evaluators</td><td>41</td><td>483,047</td><td>$1.241797</td><td>Faithfulness, hallucination, and sizing reasonableness</td></tr>
-<tr><td><b>Fully loaded total</b></td><td><b>43</b></td><td><b>541,720</b></td><td><b>$1.460813</b></td><td>Generation plus every invoked current-run evaluator</td></tr></table></div></section>
+<tr><td><b>Fully loaded total</b></td><td><b>43</b></td><td><b>541,720</b></td><td><b>$1.460813</b></td><td>Generation plus every invoked current-run evaluator</td></tr></table>
+<div class="note"><b>Supplementary modeled operating cost:</b> At one fully evaluated execution per user per week, execution 11958 models to approximately <b>$0.21 per user per day</b> and <b>$6.33 per user per month</b>. These figures are derived from the supplementary run's $1.460813 fully loaded cost and do not replace the formal execution 11901 baseline economics.</div></div></section>
 
 <section><h2>4 · Trace output and delivery reconciliation</h2><div class="body"><table><tr><th>Measure</th><th>Output</th><th>Validation</th></tr>
 <tr><td>Source inputs</td><td>6 authoritative documents</td><td class="pass">Current-run content and hashes retained</td></tr>
