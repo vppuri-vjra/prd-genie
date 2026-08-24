@@ -9,6 +9,7 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Accepted v0.3.8 candidate package:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8
 > **Published submission page:** https://vjra.us/prd-genie.html  
 > **Published GitHub Download section:** https://vjra.us/prd-genie.html#github-download
+> **Approved six-input inventory:** https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/fixtures/multi-source/realistic-v1
 > **Q1 — Ideation:** [Published view](https://vjra.us/prd-genie.html#q1-ideation) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q1-Ideation-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q1-ideation.md)
 > **Q2 — Program Charter:** [Published view](https://vjra.us/prd-genie.html#q2-program-charter) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q2-Program-Charter-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q2-program-charter.md)
 > **Q3 — Build and Architecture:** [Published view](https://vjra.us/prd-genie.html#q3-build-architecture) · [PDF](https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/written-responses/PRD-Genie-Q3-Build-and-Architecture-v0.3.8.pdf) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q3-build-prd-orchestrator.md)
@@ -30,12 +31,12 @@ The project began with three immutable discovery sources. The governed clarifica
 
 | Input phase | File | Evidence role |
 | --- | --- | --- |
-| Initial discovery | `product-brief.txt` | Original product brief; immutable source evidence |
-| Initial discovery | `meeting-transcripts.txt` | Original meeting record; immutable source evidence |
-| Initial discovery | `stakeholder-notes.txt` | Original stakeholder notes; immutable source evidence |
-| Governed clarification — August 7, 2026 | `stakeholder-clarifications-2026-08-07.md` | Dated stakeholder decisions resolving, deferring, or controlling recorded gaps |
-| Governed amendment — August 7, 2026 | `stakeholder-clarification-amendment-2026-08-07.md` | Approved amendments with explicit decision IDs and supersession scope |
-| Governed mobile-release clarification — August 7, 2026 | `stakeholder-clarification-mobile-release-2026-08-07.md` | Approved mobile-release decision and production-launch applicability |
+| Initial discovery | [`product-brief.txt`](evaluation/fixtures/multi-source/realistic-v1/product-brief.txt) | Original product brief; immutable source evidence |
+| Initial discovery | [`meeting-transcripts.txt`](evaluation/fixtures/multi-source/realistic-v1/meeting-transcripts.txt) | Original meeting record; immutable source evidence |
+| Initial discovery | [`stakeholder-notes.txt`](evaluation/fixtures/multi-source/realistic-v1/stakeholder-notes.txt) | Original stakeholder notes; immutable source evidence |
+| Governed clarification — August 7, 2026 | [`stakeholder-clarifications-2026-08-07.md`](evaluation/fixtures/multi-source/realistic-v1/stakeholder-clarifications-2026-08-07.md) | Dated stakeholder decisions resolving, deferring, or controlling recorded gaps |
+| Governed amendment — August 7, 2026 | [`stakeholder-clarification-amendment-2026-08-07.md`](evaluation/fixtures/multi-source/realistic-v1/stakeholder-clarification-amendment-2026-08-07.md) | Approved amendments with explicit decision IDs and supersession scope |
+| Governed mobile-release clarification — August 7, 2026 | [`stakeholder-clarification-mobile-release-2026-08-07.md`](evaluation/fixtures/multi-source/realistic-v1/stakeholder-clarification-mobile-release-2026-08-07.md) | Approved mobile-release decision and production-launch applicability |
 
 **Counting convention:** “three original inputs” describes the discovery starting point; “six approved inputs” describes the complete packet used by the formal submission baseline. Both statements are correct when their phase is stated.
 
@@ -61,6 +62,7 @@ The project began with three immutable discovery sources. The governed clarifica
 | Consolidated architecture design | Instructor-required technical design | [`docs/architecture/ARCHITECTURE_DESIGN.md`](docs/architecture/ARCHITECTURE_DESIGN.md) | Yes | GitHub | Supporting design | Current |
 | Architecture decisions | Tool choice, contracts, and model baseline rationale | [`docs/decisions/`](docs/decisions/) | Yes | GitHub | Supporting design | Current |
 | Architecture diagram | Playbook diagram requirement | Embedded in the architecture DOCX/PDF and presentation slide 7; editable Mermaid sources in [`assets/diagrams/`](assets/diagrams/) | Yes | GitHub and presentation | Formal baseline | Current |
+| Approved six-document input packet | Formal execution inputs, provenance, hashes, and governed clarification history | [`evaluation/fixtures/multi-source/realistic-v1/`](evaluation/fixtures/multi-source/realistic-v1/README.md) | Yes | [GitHub input inventory](https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/fixtures/multi-source/realistic-v1) | Formal baseline `11901` | 6/6 physical inputs present and tracked; v4 packet accepted |
 | Nine v0.3.8 n8n workflow exports | Implementation and reproducibility | [`releases/v0.3.8/workflows/`](releases/v0.3.8/workflows/) | Yes | GitHub download | Formal baseline | 9/9 present |
 | Workflow inventory and live IDs | Reproducibility, call graph, execution evidence | [`releases/v0.3.8/evidence/workflow-inventory-v0.3.8.md`](releases/v0.3.8/evidence/workflow-inventory-v0.3.8.md) | Yes | GitHub | Formal baseline | Current |
 | Schemas, prompts, and supporting implementation | Rebuild and contract inspection | [`schemas/`](schemas/), [`prompts/`](prompts/), [`workflows/`](workflows/) | Yes | GitHub | Supporting implementation | Included by repository snapshot policy |
