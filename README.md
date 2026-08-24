@@ -148,7 +148,7 @@ The current cross-stage status and evidence chain are maintained in the [`PRD Ge
 
 The production-style ingestion route is defined by [`SOURCE_PACKET_CONTRACT.md`](docs/architecture/SOURCE_PACKET_CONTRACT.md). It represents T1 as separate Product Brief, Meeting Transcript and Stakeholder Notes fixtures while keeping `eval_prdgenie_inputs` as an alternative regression/control producer of the same logical Requirement Extractor input boundary. n8n execution `9638` passed this route at 100% groundedness with zero unsupported claims and accepted Langfuse trace `2f0e20055d7765ca3bb0bb0d2bea866b`.
 
-The broader [`realistic-v1`](evaluation/fixtures/multi-source/realistic-v1/) intake preserves the three supplied capstone resources byte-for-byte with 70 reviewed citations. Input grounding is 100%; model execution remains gated on approval of its expected unified extraction.
+The accepted [`realistic-v1`](evaluation/fixtures/multi-source/realistic-v1/README.md) production fixture records an auditable input-set evolution: three immutable discovery sources followed by three human-authored clarification records dated August 7, 2026. Formal baseline execution `11901` consumed the resulting six-document approved packet. The directory includes all six physical source files, the v4 machine-readable packet, full hashes, decision ledgers, supersession mappings, ground truth, and validated outputs.
 
 The project includes 12 required baseline cases:
 

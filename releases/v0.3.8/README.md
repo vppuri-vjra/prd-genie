@@ -21,6 +21,10 @@ This release package preserves the complete nine-workflow v0.3.8 candidate and t
 | Fully loaded usage | 545,467 tokens / `$1.474409` |
 | Protected fallback | v0.3.7 remains unchanged |
 
+## Approved input set
+
+The project began with three immutable discovery sources and added three human-authored clarification records through the governed decision process on August 7, 2026. Formal execution `11901` consumed the resulting six-document approved packet. All six physical source files, hashes, decision precedence, historical packet versions, and the accepted v4 packet are available in the [`realistic-v1` input inventory](../../evaluation/fixtures/multi-source/realistic-v1/README.md). Original evidence remains preserved when a later decision has bounded supersession authority.
+
 ## Reviewer-facing artifacts
 
 ### Q1–Q4 written responses
