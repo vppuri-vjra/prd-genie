@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Business Requirements Document
-version: 0.2
-status: Draft
-last_updated: 2026-08-03
+version: 0.3.8
+status: Accepted submission baseline
+last_updated: 2026-08-24
 owner: Vipin Puri
 ---
 
@@ -109,10 +109,10 @@ The table deliberately distinguishes direct source requirements from project sel
 | Unsupported factual claim rate | 0% in the final evaluated baseline |
 | Baseline completion | T1-T12 executed and documented |
 | Grounding traceability | 100% of factual downstream items linked to approved source or requirement IDs |
-| Extraction completeness | Measured against approved T1-T10 ground truth; final target to be confirmed after ground-truth review |
+| Extraction completeness | 100% conformance to the human-reviewed expected outcomes for the final T1-T10 baseline |
 | PRD template compliance | 100% of required template sections present, using explicit TBDs where source information is absent |
 | Documentation completeness | All instructor, rubric, and submission artifacts present and linked from the repository |
-| User time saved | TBD - stakeholder input required |
+| User time saved | Establish baseline and target in a controlled PM pilot; no unsupported capstone savings claim |
 
 ## 9. Assumptions and constraints
 
@@ -120,7 +120,7 @@ The table deliberately distinguishes direct source requirements from project sel
 - Source files remain read-only and are not modified by the implementation.
 - The capstone uses n8n, OpenAI, and Langfuse unless a documented ADR changes the decision.
 - API usage must remain within the project owner's available budget.
-- The formal plan models four one-week iterations, while actual completion is targeted within one week.
+- The implementation followed the four-iteration capability sequence on a compressed schedule and is complete for the v0.3.8 capstone scope.
 - Unknown business values are recorded as `TBD - stakeholder input required`.
 
 ## 10. Business risks and controls
@@ -136,11 +136,12 @@ The table deliberately distinguishes direct source requirements from project sel
 
 ## 11. Delivery milestones
 
-The formal delivery plan contains four one-week iterations. The project owner intends to execute the work on a compressed one-week schedule. Details are maintained in `docs/planning/ITERATION_PLAN.md`.
+The four-iteration delivery sequence is complete for the submitted scope: foundation and extraction; evaluation hardening; connected orchestration and governed generation; and final regression, evidence, presentation, and submission assembly. Historical planning details remain in `docs/planning/ITERATION_PLAN.md`.
 
-## 12. Approval and open questions
+## 12. Approval and final disposition
 
-- Business sponsor or stakeholder approver: TBD - stakeholder input required.
-- Target time-saving outcome: TBD - stakeholder input required.
-- Expected production runs per user per day: TBD - stakeholder input required.
-- Final acceptance requires the rubric, instructor requirements, and ground-truth evaluation to be satisfied.
+- Human approval is implemented as a signed, mandatory checkpoint before production PRD generation; the project owner serves as the capstone reviewer for the accepted demonstration path.
+- User time saved remains a future product-pilot metric because no production user study was conducted within the capstone scope.
+- The submitted operating-cost model assumes one fully evaluated run per user per week, equivalent to approximately `$0.21` per user per day and `$6.38` per user per month for formal execution `11901`.
+- Final content acceptance is satisfied: T1-T12 passed 12/12, the accepted end-to-end run is execution `11901` / `RUN-S2-11902-16e7090e`, and the required repository, evidence, presentation, architecture write-up, and demonstration artifacts are published.
+- Administrative closure remains pending only until the verified single ZIP is uploaded and the Interview Kickstart form confirmation is retained.

@@ -1,0 +1,62 @@
+flowchart LR
+    subgraph INPUT["Google Drive · authoritative input boundary"]
+        SRC["6 approved source files<br/>Drive IDs · content · SHA-256 hashes"]
+    end
+
+    subgraph N8N["n8n Cloud · v0.3.8 governed execution"]
+        PARENT["00 Candidate Parent<br/>manual trigger · run identity · dynamic contracts"]
+        D1["01 Drive Intake<br/>+ Clarification Gate"]
+        D2["02 Requirement<br/>Extractor"]
+        D3["03 Gap<br/>Analyzer"]
+        D4["04 Human<br/>Approval"]
+        D5["05 Production<br/>PRD"]
+        D6["06 Story<br/>Breakdown"]
+        D7["07 Final Validator<br/>+ Export"]
+        SIZE["08 Post-export<br/>T-shirt Sizing"]
+
+        PARENT --> D1 --> D2 --> D3 --> D4 --> D5 --> D6 --> D7
+        D7 --> SIZE
+    end
+
+    subgraph OUTPUT["Google Drive · authorized output boundary"]
+        ART["7 validated artifacts<br/>summary · PRD · stories · sizing · lineage"]
+    end
+
+    SRC --> PARENT
+    D7 --> ART
+
+    subgraph INTELLIGENCE["OpenAI intelligence"]
+        MODEL["GPT-5.6 Terra<br/>bounded semantic reasoning"]
+    end
+
+    MODEL -. "extraction · analysis · generation · decomposition · sizing" .-> N8N
+
+    subgraph ASSURANCE["Governance and trust"]
+        RULES["Versioned contracts · grounding<br/>signed approval · exact-value checks<br/>set equality · orphan prevention"]
+        GATE["Enforced Agreement Gate<br/>fail closed before export"]
+    end
+
+    RULES -. "deterministic controls" .-> N8N
+    GATE -. "release authorization" .-> D7
+
+    subgraph OBS["Langfuse observability"]
+        LF["Parent and stage traces<br/>code + semantic evaluators<br/>latency · tokens · loaded cost"]
+    end
+
+    N8N -. "correlated evidence" .-> LF
+
+    subgraph PUBLIC["Public submission evidence"]
+        GH["GitHub · v0.3.8 package<br/>workflows · artifacts · screenshots · documents"]
+        SITE["vjra.us<br/>evaluator-facing index"]
+    end
+
+    N8N -. "submission-safe exports" .-> GH
+    LF -. "captured trace evidence" .-> GH
+    GH --> SITE
+
+    classDef source fill:#e7eff9,stroke:#3974c6,color:#19192f
+    classDef control fill:#f3e7e4,stroke:#bd503f,color:#19192f
+    classDef output fill:#e5f0eb,stroke:#2e765c,color:#19192f
+    class SRC,MODEL source
+    class PARENT,D1,D2,D3,D4,D5,D6,D7,RULES,GATE control
+    class SIZE,ART,LF,GH,SITE output

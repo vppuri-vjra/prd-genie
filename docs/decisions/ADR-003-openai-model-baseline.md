@@ -3,6 +3,8 @@
 - **Status:** Accepted
 - **Date:** 2026-07-31
 
+> **Final-state note — 2026-08-24:** The selected model configuration remains accepted. The credential blocker described in the original consequences was resolved before v0.3.8 acceptance. Formal runtime evidence is execution `11901` / `RUN-S2-11902-16e7090e`; see ADR-004 for the final submission topology and release baseline.
+
 ## Context
 
 The Requirement Extractor must distinguish stated, suggested, ambiguous, and contradictory content; preserve exact values; produce strict JSON; and remain cost-conscious across baseline and regression runs.
@@ -36,7 +38,7 @@ Run T1-T10 with the fixed baseline and record quality, unsupported claims, exact
 
 - The n8n workflow must expose the model ID and reasoning effort as configuration, not hide them inside prompts.
 - If the installed n8n OpenAI node lacks the required API parameters or strict schema support, use an authenticated HTTP Request node rather than weakening the contract.
-- Actual execution remains blocked until an OpenAI API credential is configured in n8n.
+- At the time of this decision, execution depended on configuring the OpenAI credential in n8n. That prerequisite was subsequently satisfied and is no longer an active blocker.
 
 ## Sources
 

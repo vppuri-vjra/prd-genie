@@ -7,7 +7,7 @@ These requirements include the instructions communicated verbally on 2026-08-02 
 | Business Requirements Document | Complete | [BRD](../requirements/BRD.md) |
 | Product Requirements Document | Complete | [Product PRD](../requirements/PRODUCT_PRD.md) |
 | Architecture Design | Complete | [Consolidated Architecture Design](../architecture/ARCHITECTURE_DESIGN.md) |
-| Architecture Decisions | Complete for the submitted scope | [ADR-001](../decisions/ADR-001-platform-and-observability.md), [ADR-002](../decisions/ADR-002-structured-contracts.md), and [ADR-003](../decisions/ADR-003-openai-model-baseline.md) |
+| Architecture Decisions | Complete for the submitted scope | [ADR-001](../decisions/ADR-001-platform-and-observability.md), [ADR-002](../decisions/ADR-002-structured-contracts.md), [ADR-003](../decisions/ADR-003-openai-model-baseline.md), and final-state [ADR-004](../decisions/ADR-004-v0.3.8-submission-topology-and-release-baseline.md) |
 | Ground Truth Dataset | Complete for T1-T12 | [Human-reviewed ground truth](../../evaluation/ground-truth/README.md) |
 | Final baseline evaluation | Complete - 12/12 passed | [T1-T12 baseline summary](../../evaluation/results/baseline-summary.md) |
 | Accepted implementation package | Complete | [v0.3.8 release](../../releases/v0.3.8/README.md) |

@@ -1,8 +1,8 @@
 ---
 title: PRD Genie Product Requirements Document
-version: 0.2
-status: Draft
-last_updated: 2026-08-03
+version: 0.3.8
+status: Accepted submission baseline
+last_updated: 2026-08-24
 owner: Vipin Puri
 ---
 
@@ -25,7 +25,7 @@ PRD Genie is an AI-powered documentation assistant that converts meeting transcr
 
 | Metric | Definition | Target |
 |---|---|---|
-| Extraction completeness | Required ground-truth elements captured / total required elements | Final threshold to be approved with ground truth |
+| Extraction completeness | Required ground-truth elements captured / total required elements | 100% conformance to approved T1-T10 expected outcomes |
 | Unsupported-claim rate | Unsupported factual items / total factual items | 0% |
 | PRD format compliance | Required template sections produced correctly / total required sections | 100% |
 | Exact-value preservation | Required exact values preserved / total required exact values | 100% |
@@ -62,7 +62,8 @@ Every product requirement links to the business or project requirement it suppor
 | FR-010 | Preserve requirement IDs through PRD and story outputs. | Cross-stage traceability | Must Have | BR-004 | SRC-GP; SRC-ADR-002 | Derived control plus design decision |
 | FR-011 | Record agent-level and run-level evidence in Langfuse. | Observability | Must Have | BR-007 | SRC-PS evaluation; SRC-PB Step 6; SRC-ADR-001 | Direct requirement plus tool decision |
 | FR-012 | Validate structured outputs before allowing downstream execution. | Validation | Must Have | BR-004, BR-007 | SRC-ADR-002; SRC-GP | Architecture decision |
-| FR-013 | Export final product documentation as Markdown. | Output management | Must Have | BR-002, BR-008 | SRC-PS output/tools and submission guidance; SRC-IR | Direct and instructor requirement |
+| FR-013 | Export seven run-specific Markdown and JSON artifacts after release authorization. | Output management | Must Have | BR-002, BR-008 | SRC-PS output/tools and submission guidance; SRC-IR | Direct and instructor requirement |
+| FR-014 | Propose non-blocking T-shirt sizes, confidence, rationale, and refinement guidance for validated stories. | Planning readiness | Should Have | BR-001, BR-002 | Approved v0.3.8 extension | Product extension with human-review boundary |
 
 ### Non-functional requirements
 
@@ -98,9 +99,11 @@ This PRD reuses the source IDs defined in `docs/requirements/BRD.md` and adds th
 5. Contradictions are preserved and surfaced for resolution.
 6. Exact required values are not altered.
 7. The human approval record controls PRD-generation eligibility.
-8. Each successful LLM stage produces a Langfuse trace with usage and latency evidence.
+8. Each successful LLM stage produces correlated Langfuse trace and evaluator evidence; the accepted run also preserves fully loaded usage and cost.
 9. Invalid structured output fails visibly and does not silently continue downstream.
 10. The final repository contains the required documentation and submission artifacts.
+11. Final validation reconciles 145/145 citation dispositions and all governed PRD and delivery IDs with zero orphans before export.
+12. Post-export sizing returns advisory results for 11/11 stories without controlling release authorization.
 
 ## 6. Out of scope
 
@@ -119,7 +122,7 @@ This PRD reuses the source IDs defined in `docs/requirements/BRD.md` and adds th
 | OpenAI model access | Available |
 | Langfuse US project and credentials | Available |
 | Supplied resource files and PRD template | Available and treated as read-only |
-| Human review for ground truth and approval steps | Required; reviewer identity TBD where not the project owner |
+| Human review for ground truth and approval steps | Available; project owner is the capstone reviewer, with future production role ownership outside scope |
 | Public GitHub repository | Available |
 | Obsidian project vault | Available |
 
@@ -129,15 +132,16 @@ This PRD reuses the source IDs defined in `docs/requirements/BRD.md` and adds th
 - The same sequential flow is appropriate for all supported source types after normalization.
 - Human review is feasible before PRD generation.
 - Missing source information may be represented as explicit TBDs but may not be invented.
-- The four-week plan may be executed on a compressed one-week schedule.
+- The four-iteration capability sequence was completed on a compressed schedule for v0.3.8.
 
-## 9. Open questions
+## 9. Resolved submission decisions and future product questions
 
-- What production daily run volume should be used for cost-per-user estimates?
-- What extraction-completeness threshold should be adopted after ground-truth review?
-- Who is the formal human approver for the capstone demonstration?
-- Is a document format beyond Markdown required for the final demo?
-- Will the instructor require complete raw outputs in the repository or accept linked/redacted trace evidence for large outputs?
+- **Operating-cost model:** one fully evaluated run per user per week; formal execution `11901` models to approximately `$0.21` per user per day and `$6.38` per user per month.
+- **Extraction acceptance:** 100% conformance to the human-reviewed expected outcomes across the final T1-T10 baseline.
+- **Human approver:** the signed Human Approval workflow is mandatory; the project owner serves as capstone reviewer for the accepted demonstration path.
+- **Submission formats:** Markdown remains the product-output format; the submission also includes DOCX/PDF architecture write-up, PPTX/PDF presentation, JSON workflows and evidence, screenshots, HTML trace evidence, and a linked MP4 demonstration.
+- **Evidence packaging:** complete submission-safe exports and screenshots are stored in GitHub; live n8n, Langfuse, and Google Drive records remain external with their identifiers and captured evidence preserved.
+- **Future product validation:** production time saved, adoption, role-based approval ownership, and routine-versus-release evaluation profiles require a controlled PM pilot.
 
 ## 10. Timeline
 
@@ -148,4 +152,15 @@ This PRD reuses the source IDs defined in `docs/requirements/BRD.md` and adds th
 | 3 | Week 3 | Gap Analyzer, Human Approval, PRD Generator, Story Breakdown, T11-T12, and connected pipeline |
 | 4 | Week 4 | Final regression, cost and metrics, assignments, screenshots, slides, demo, and submission audit |
 
-Actual execution is targeted for completion within one week. Progress is tracked in `docs/planning/ITERATION_PLAN.md`.
+All four capability increments are complete for the accepted v0.3.8 submission baseline. Historical progress is retained in `docs/planning/ITERATION_PLAN.md`; final operational evidence is anchored to execution `11901` / `RUN-S2-11902-16e7090e`.
+
+## 11. Accepted v0.3.8 result
+
+- Nine coordinated workflow exports.
+- Six authoritative input documents and 145 indexed citations.
+- Three Epics, seven Features, eleven User Stories, and eleven mapped acceptance criteria.
+- 145/145 citation dispositions, 100% governed reconciliation, and zero orphaned records.
+- Seven validated delivery artifacts and 11/11 advisory sizing results.
+- Agreement Gate release authorization.
+- Formal baseline usage of 545,467 tokens at `$1.474409` fully loaded cost.
+- Supplementary execution `11958` is demonstration evidence only and does not replace formal execution `11901`.

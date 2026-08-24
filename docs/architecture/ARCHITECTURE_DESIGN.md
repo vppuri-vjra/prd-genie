@@ -1,22 +1,20 @@
 ---
 title: PRD Genie Architecture Design
-version: 0.4
-status: Technical system architecture v0.4; connected final export and realistic Gap Analysis verified
-last_updated: 2026-08-06
+version: 0.3.8
+status: Accepted submission architecture
+last_updated: 2026-08-24
 owner: Vipin Puri
 ---
 
 # PRD Genie Architecture Design
 
-> Current canonical version: **v0.4**. Immutable prior snapshots are maintained in [`docs/architecture/versions/`](versions/README.md).
+> Current canonical submission version: **v0.3.8**. Formal runtime evidence is anchored to parent execution `11901` / `RUN-S2-11902-16e7090e`. Immutable prior snapshots remain in [`docs/architecture/versions/`](versions/README.md).
 
 ## 1. Purpose and status
 
-This document defines the technical system architecture for PRD Genie. Requirement Extraction, Gap Analysis, deterministic generation routing, signed Human Approval, PRD Generation, Story Breakdown, Final Validation/export, and Langfuse tracing are implemented. Connected Orchestrator v0.5 proved the contiguous T1 source-to-final Markdown path at 100% groundedness. The realistic PB+MT+SN route passed Requirement Extraction execution `9661` and Gap Analysis execution `9667`; the deterministic gate correctly selected clarification with zero unsupported claims and 100% groundedness.
+This document defines the accepted v0.3.8 technical architecture for PRD Genie. A manual n8n parent coordinates Drive Intake and Clarification, Requirement Extraction, Gap Analysis, signed Human Approval, Production PRD, Story Breakdown, Final Validation and Export, plus post-export advisory Story Sizing. OpenAI supplies bounded semantic reasoning; deterministic code controls and an enforced Agreement Gate govern release; Langfuse records traces, evaluator results, latency, tokens, and cost; and Google Drive receives seven validated run-specific artifacts.
 
-The clarification return loop preserves the original PB/MT/SN sources and adds a dated stakeholder clarification source as later evidence before re-entering Requirement Extraction. The v2 live attempt (`9678`) demonstrated fail-closed behavior: an invalid clarification citation-ledger relationship was rejected before Gap Analysis, Human Approval, PRD generation or accepted tracing.
-
-Execution `9684` subsequently verified the corrected loop at 100% groundedness with zero unsupported claims. The deterministic gate retained two unresolved controls and routed back to clarification rather than allowing Human Approval or PRD generation.
+Formal parent execution `11901` / run `RUN-S2-11902-16e7090e` completed the governed path in 2m 33.201s. It reconciled 145/145 citation dispositions with zero orphaned governed records, delivered three Epics, seven Features, eleven Stories and eleven mapped acceptance criteria, authorized release, exported seven artifacts, and returned advisory sizing for 11/11 stories. Fully loaded usage was 545,467 tokens at `$1.474409`. Execution `11958` is supplementary post-tidy-up demonstration evidence and does not replace the formal baseline.
 
 ## 2. Architecture principles
 
@@ -37,19 +35,17 @@ PRD Genie receives either one evaluation-control input or a production-style sou
 
 ```mermaid
 flowchart LR
-    I["Separate input routes<br/>evaluation control or PB + MT + SN"] --> N["n8n Cloud<br/>orchestration, validators, gates and Human Approval"]
-    N --> U["Unified Requirement Packet"] --> G["Gap Analysis and deterministic routing"]
-    G --> D["PRD, stories and final export"]
-    O["OpenAI<br/>model calls"] <--> N
-    N -. "traces" .-> L["Langfuse US"]
-    S["JSON Schemas and grounding policy"] -. "deterministic validation" .-> N
-    C["n8n credentials<br/>approved environment configuration"] -. "authenticated connections" .-> O
-    C -. "authenticated connections" .-> L
-    N -. "errors" .-> F["Failure Observer"] -. "failure traces" .-> L
-    D --> A["Versioned artifacts and evidence"] --> H["Private GitHub"] -. "documentation sync" .-> B["Obsidian"]
+    I["Google Drive<br/>6 authoritative inputs"] --> P["v0.3.8 manual parent<br/>run identity and stage contracts"]
+    P --> D1["01 Drive + clarification"] --> D2["02 Requirement Extractor"] --> D3["03 Gap Analyzer"] --> D4["04 Human Approval"]
+    D4 --> D5["05 Production PRD"] --> D6["06 Story Breakdown"] --> D7["07 Validator + Export"] --> O["Google Drive<br/>7 validated artifacts"]
+    D7 --> S["Post: advisory T-shirt sizing"]
+    AI["OpenAI GPT-5.6 Terra"] -. "bounded semantic reasoning" .-> P
+    P -. "traces, evaluators, latency, tokens, cost" .-> L["Langfuse US"]
+    G["Schemas, grounding, approval,<br/>set equality, orphan prevention"] -. "fail-closed governance" .-> P
+    P -. "submission-safe exports and evidence" .-> H["Public GitHub"]
 ```
 
-The compact diagram above is the document overview. The complete editable technical system diagram is stored in `assets/diagrams/prd-genie-architecture-v0.4.mmd`; it explicitly separates input, n8n Cloud, contract/validation, external-service, credential, and artifact/documentation boundaries. Versions 0.1 and 0.2 are retained as historical baselines.
+The compact diagram above is the document overview. The complete editable submission diagram is stored in `assets/diagrams/prd-genie-architecture-v0.3.8.mmd`; it separates input, n8n orchestration, semantic reasoning, governance, observability, delivery, and public evidence boundaries. Earlier diagram versions remain historical records.
 
 ## 5. Orchestration pattern
 
@@ -95,11 +91,12 @@ Decision-rationale groundedness: **100%**. The placement follows the approved se
 | Generation Gate | Route according to sufficiency and safety | Gap Analysis | Gate decision | Implemented and verified across T1-T10 |
 | Human Approval | Approve, condition, reject, or redirect grounded items | Extraction, Gap Analysis and gate result | Human Review | Implemented; all five eligible T-test routes passed at 100% with Langfuse evidence |
 | PRD Generator | Produce the ten-section Markdown PRD | Approved extraction and template | PRD Output | Implemented for T11/T1; observable release passed at 100%, actual JSON/Markdown preserved, Langfuse accepted |
-| Story Breakdown | Produce epics, features, stories, and story acceptance criteria | Approved PRD | Story Breakdown | T12/T1 observable v0.2 release passed; realistic-v4 v0.1 execution `9726` is retained failure evidence; isolated v0.2 per-level uniqueness correction passes locally and awaits native import |
-| Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected final result and Markdown export | Implemented through v0.5; execution `9578` completed at 100% |
-| Final Validator | Enforce cross-stage grounding and consistency | All downstream outputs | Evaluation Result | Planned |
+| Story Breakdown | Produce epics, features, stories, and story acceptance criteria | Approved PRD | Story Breakdown | Implemented; accepted v0.3.8 produced 3 Epics / 7 Features / 11 Stories / 11 mapped criteria |
+| Connected Orchestrator | Own the run envelope, invoke children, preserve trace context, and enforce routes | Workflow Input and stage envelopes | Connected final result and artifact package | Implemented; formal parent execution `11901` completed the accepted v0.3.8 path |
+| Final Validator and Export | Enforce cross-stage grounding, set equality, orphan prevention, Agreement Gate release, and seven-artifact export | All downstream outputs | Evaluation Result and delivery package | Implemented and accepted in execution `11901` |
+| Story Sizing | Propose non-blocking size, confidence, rationale, and refinement guidance | Validated stories | Advisory sizing artifact | Implemented post-export; 11/11 stories sized in execution `11901` |
 | Failure Observer | Record workflow failures | n8n error event | Failure trace | Implemented |
-| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace | Implemented for Requirement Extractor, Gap Analyzer, Human Approval, PRD Generation, Story Breakdown, and connected canaries; model token counts remain unavailable where n8n chain output does not expose them |
+| Langfuse Adapter | Emit trace, generation, validation, usage, cost, and deterministic approval-audit data | Run context and stage data | Accepted trace and evaluator evidence | Implemented across the governed run; fully loaded baseline usage and cost are preserved |
 
 ## 7. Data contracts
 
@@ -125,7 +122,7 @@ The approval stage receives the extraction, Gap Analysis, and deterministic gate
 
 Each LLM stage should create a Langfuse generation nested under one pipeline trace. Required metadata includes run ID, test ID, agent name, prompt version, model, input, output, validation, latency, input/output tokens, estimated cost, environment, and error details. Validation and failure observations remain visible even when the pipeline stops.
 
-The Requirement Extractor, Gap Analyzer, PRD Generator, and Story Breakdown stages use root, generation, and validation observations plus deterministic stage observations. Human Approval emits a non-LLM `human-approval` span with the decision, route, evidence checks, 100% groundedness, `model_call=false`, and zero token usage. Connected Orchestrator v0.4 preserves one parent trace ID across stage envelopes while each child records its own stage trace. The verified connected Story Breakdown trace is `8e7fc5b6a49f0ef550fdee4f4b76f4ca` in Langfuse US.
+The Requirement Extractor, Gap Analyzer, Production PRD, Story Breakdown, and Story Sizing stages preserve model and evaluator observations alongside deterministic controls. Human Approval emits a non-LLM audit span with decision, route, and evidence checks. One run identity connects parent and child executions, source and delivery artifacts, evaluator results, and cost. The complete formal inventory is recorded in `releases/v0.3.8/evidence/workflow-inventory-v0.3.8.md`; execution `11958` adds a supplementary reviewer-facing HTML trace report without changing the formal baseline.
 
 ## 11. Failure handling
 
@@ -145,15 +142,15 @@ The Requirement Extractor, Gap Analyzer, PRD Generator, and Story Breakdown stag
 - Workflow exports are inspected before commit.
 - Screenshots exclude credentials, account identifiers, personal email addresses, and secret-bearing URLs.
 - Supplied project resources remain read-only.
-- The repository remains private during active development and contains only submission-safe artifacts; visibility can be changed before grading if the submission rules require reviewer access.
+- The submission repository is public and contains only submission-safe artifacts. Secret scans exclude credentials, signed resume URLs, private keys, and environment-specific values; `.env.example` contains placeholders only.
 
 ## 13. Deployment and environments
 
-The capstone baseline runs in n8n Cloud and sends evaluation traces to the Langfuse US project. The exported workflows remain inactive by default in GitHub. Production deployment, scaling, retention, identity management, and enterprise access controls are outside the MVP and require future design.
+The accepted capstone baseline runs manually in n8n Cloud, reads controlled Google Drive inputs, sends traces and evaluator evidence to Langfuse US, and writes authorized outputs to Google Drive. Exported JSON workflows are versioned in GitHub and do not execute from the repository. Autonomous production triggers, scaling, retention, enterprise identity, and role-based access remain outside the MVP.
 
 ## 14. Architecture evolution
 
-This architecture baseline is version 0.4. Material changes are reflected in this document and in an ADR. Earlier accepted ADRs are not silently rewritten; a new ADR may supersede an earlier decision. Implementation status is updated as components move from planned to implemented and evaluated.
+This accepted submission architecture is version 0.3.8. Material final-state decisions are recorded in ADR-004; earlier accepted ADRs remain historical and are not silently rewritten.
 
 ### Version history
 
@@ -161,4 +158,5 @@ This architecture baseline is version 0.4. Material changes are reflected in thi
 |---|---|---|---|
 | 0.2 | 2026-08-04 | Standalone architecture baseline before connected downstream completion | [`ARCHITECTURE_DESIGN-v0.2.md`](versions/ARCHITECTURE_DESIGN-v0.2.md) |
 | 0.3 | 2026-08-06 | Connected T1-to-T12 path verified; logical architecture updated for parent/child orchestration | [`ARCHITECTURE_DESIGN-v0.3.md`](versions/ARCHITECTURE_DESIGN-v0.3.md) |
-| 0.4 | 2026-08-06 | Technical system boundaries added for n8n Cloud, OpenAI, Langfuse, contracts, credentials, storage, GitHub, Obsidian and failure handling | Current canonical document; editable diagram [`prd-genie-architecture-v0.4.mmd`](../../assets/diagrams/prd-genie-architecture-v0.4.mmd) |
+| 0.4 | 2026-08-06 | Technical system boundaries added for n8n Cloud, OpenAI, Langfuse, contracts, credentials, storage, GitHub, Obsidian and failure handling | Historical design source [`prd-genie-architecture-v0.4.mmd`](../../assets/diagrams/prd-genie-architecture-v0.4.mmd) |
+| 0.3.8 | 2026-08-24 | Accepted nine-workflow submission topology, enforced release, post-export sizing, seven-artifact delivery, fully loaded observability, public evidence, and formal execution `11901` | Current canonical submission; editable diagram [`prd-genie-architecture-v0.3.8.mmd`](../../assets/diagrams/prd-genie-architecture-v0.3.8.mmd) |

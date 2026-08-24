@@ -132,7 +132,7 @@ The initial extractor implementation package includes:
 - [`scripts/validate_extractor_package.py`](scripts/validate_extractor_package.py) - offline integrity checks for prompt controls and baseline coverage
 - [`evaluation/results/t1-requirement-extractor-rerun.md`](evaluation/results/t1-requirement-extractor-rerun.md) - successful corrected T1 run evidence and learning
 
-The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md).
+The model decision and comparison plan are documented in [`ADR-003`](docs/decisions/ADR-003-openai-model-baseline.md). The accepted v0.3.8 topology, release baseline, supplementary-evidence classification, sizing placement, and rollback decision are documented in final-state [`ADR-004`](docs/decisions/ADR-004-v0.3.8-submission-topology-and-release-baseline.md). The canonical technical design and editable diagram are [`ARCHITECTURE_DESIGN.md`](docs/architecture/ARCHITECTURE_DESIGN.md) and [`prd-genie-architecture-v0.3.8.mmd`](assets/diagrams/prd-genie-architecture-v0.3.8.mmd).
 
 ## Additional n8n recovery exports
 

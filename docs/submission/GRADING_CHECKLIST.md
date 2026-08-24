@@ -18,7 +18,7 @@ Final verification status for the accepted PRD Genie v0.3.8 submission package.
 - [x] [Business Requirements Document](../requirements/BRD.md)
 - [x] [Product Requirements Document](../requirements/PRODUCT_PRD.md)
 - [x] [Consolidated Architecture Design](../architecture/ARCHITECTURE_DESIGN.md)
-- [x] Material architecture decisions are documented in [ADR-001](../decisions/ADR-001-platform-and-observability.md), [ADR-002](../decisions/ADR-002-structured-contracts.md), and [ADR-003](../decisions/ADR-003-openai-model-baseline.md)
+- [x] Material architecture decisions are documented in [ADR-001](../decisions/ADR-001-platform-and-observability.md), [ADR-002](../decisions/ADR-002-structured-contracts.md), [ADR-003](../decisions/ADR-003-openai-model-baseline.md), and final-state [ADR-004](../decisions/ADR-004-v0.3.8-submission-topology-and-release-baseline.md)
 - [x] [Versioned, human-reviewed T1-T12 ground truth](../../evaluation/ground-truth/README.md)
 - [x] [Final T1-T12 baseline results](../../evaluation/results/baseline-summary.md) compare preserved outputs with approved ground truth
 
@@ -37,7 +37,7 @@ Final verification status for the accepted PRD Genie v0.3.8 submission package.
 
 - [x] Nine importable v0.3.8 n8n workflow JSON files are included - [workflow package](../../releases/v0.3.8/workflows/)
 - [x] [Root README](../../README.md) contains the current submission status, evidence index, and validation instructions
-- [x] Architecture diagram and technical architecture are included
+- [x] Current v0.3.8 architecture diagram, two-page write-up, and consolidated technical architecture are included
 - [x] Workflow canvas and execution screenshots are preserved in the release evidence
 - [x] Langfuse evidence is preserved for the formal baseline and [supplementary execution 11958](../../releases/v0.3.8/evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html)
 - [x] [Editable PPTX and fixed-layout PDF](../../releases/v0.3.8/presentation/README.md) are included

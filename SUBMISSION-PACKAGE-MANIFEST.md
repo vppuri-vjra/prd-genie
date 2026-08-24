@@ -5,7 +5,12 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Formal submission baseline:** n8n execution `11901` · run `RUN-S2-11902-16e7090e`  
 > **Supplementary demonstration evidence:** execution `11958` · run `RUN-S2-11959-16e7090e`  
 > **Repository:** https://github.com/vppuri-vjra/prd-genie  
+> **Accepted v0.3.8 candidate package:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8
 > **Published submission page:** https://vjra.us/prd-genie.html  
+> **Published GitHub Download section:** https://vjra.us/prd-genie.html#github-download
+> **31-slide presentation — PDF:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf
+> **31-slide presentation — PPTX:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pptx
+> **Complete Demo with Artifacts:** https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo
 > **ZIP status:** Not yet assembled. “Yes” below means required physical inclusion in the final ZIP; it does not claim that ZIP verification has already passed.
 
 ## Packaging policy
