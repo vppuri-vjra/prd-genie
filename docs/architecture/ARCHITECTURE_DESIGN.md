@@ -31,6 +31,8 @@ Formal parent execution `11901` / run `RUN-S2-11902-16e7090e` completed the gove
 
 PRD Genie receives either one evaluation-control input or a production-style source packet from a PM, TPM, evaluator, or file-ingestion step. The source packet preserves separate source IDs, types, raw text, provenance, line citations, metadata, and SHA-256 hashes. n8n normalizes and validates the selected route, coordinates agents, applies routing and approval gates, and exports the final Markdown. OpenAI performs structured language tasks. Langfuse records traces and evaluation evidence. GitHub stores versioned implementation and submission artifacts; Obsidian mirrors working project documentation.
 
+The production packet is represented as an auditable evolution rather than a static claim that the project began with six inputs. The initial discovery set contains the immutable Product Brief, Meeting Transcripts, and Stakeholder Notes. The governed clarification history adds three human-authored decision records dated August 7, 2026: the primary clarification, its approved amendment, and the mobile-release clarification. Formal baseline execution `11901` consumed all six approved documents. The clarification contract preserves original evidence, explicit decision IDs, and bounded supersession rules so later decisions change the applicable state without erasing history.
+
 ## 4. Logical architecture
 
 ```mermaid

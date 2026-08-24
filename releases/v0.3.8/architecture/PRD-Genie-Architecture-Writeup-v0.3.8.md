@@ -1,11 +1,14 @@
 # PRD Genie Architecture Write-up — v0.3.8
 
-**Formal submission baseline:** n8n execution `11901` · run `RUN-S2-11902-16e7090e`  
-**Supplementary demonstration evidence:** execution `11958` · run `RUN-S2-11959-16e7090e`
+**Formal submission baseline — use for grading and all acceptance claims:** n8n execution `11901` · run `RUN-S2-11902-16e7090e`
+
+**Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` · run `RUN-S2-11959-16e7090e`
 
 ## Problem summary
 
 NeuronForge PMs and TPMs manually reconcile product briefs, meeting transcripts, stakeholder notes, and clarifications before creating PRDs and delivery backlogs. This process is slow, inconsistent, and difficult to audit because evidence, decisions, and downstream artifacts can drift apart. PRD Genie creates a governed path from authoritative evidence to planning-ready documentation while retaining human approval, visible uncertainty, and source-to-delivery traceability.
+
+**Auditable input-set evolution:** the project began with three immutable discovery sources (`product-brief.txt`, `meeting-transcripts.txt`, and `stakeholder-notes.txt`). The governed clarification history then added three human-authored decision sources dated August 7, 2026. Formal baseline execution `11901` consumed the resulting six-document approved packet. Later decisions preserve original statements and use explicit decision IDs and supersession scope rather than rewriting history.
 
 ## Architecture diagram
 
@@ -24,6 +27,10 @@ The approved system architecture is shown on slide 7 of the [v0.3.8 presentation
 ## Orchestration pattern and justification
 
 PRD Genie uses a **sequential parent/child pipeline with conditional fail-closed branches**. Each downstream artifact depends on a validated upstream contract: intake precedes extraction; extraction precedes gap analysis; human approval precedes production generation; the PRD precedes story decomposition; and reconciliation precedes export. Clarification, rejection, validation failure, and human revision stop or redirect the run instead of allowing unsupported content to propagate. Specialized child workflows remain independently testable while one parent run identity connects sources, decisions, artifacts, evaluations, and delivery.
+
+### Why Gap Analysis follows Requirement Extraction
+
+The Requirement Extractor first creates a normalized, citation-linked statement of what the evidence says. The Gap Analyzer then tests that structured result for missing information, ambiguity, contradiction, dependencies, risks, and generation readiness before human approval or document generation. This placement is intentionally fail-fast: unresolved evidence cannot be silently converted into polished PRD content, and the system avoids the cost and rework of generating a PRD and stories that must later be discarded. Post-generation validators still check grounding, structure, coverage, and cross-stage reconciliation; they complement rather than replace the pre-generation Gap Analyzer.
 
 ## Agent and control responsibilities
 

@@ -46,8 +46,8 @@ The final evaluation package provides:
 
 1. The corrected extraction, gap-analysis, approval, PRD, story, validator, sizing, and delivery stages were preserved in the nine-workflow v0.3.8 package.
 2. The T1-T12 baseline was completed against approved ground truth with 12/12 passing, 100% groundedness, and zero unsupported claims.
-3. Parent execution `11901` / `RUN-S2-11902-16e7090e` was retained as the formal submission baseline.
-4. Execution `11958` / `RUN-S2-11959-16e7090e` was published as supplementary demonstration evidence without changing the baseline.
+3. **Formal submission baseline — use for grading and all acceptance claims:** parent execution `11901` / run `RUN-S2-11902-16e7090e`.
+4. **Supplementary demonstration evidence only — does not replace the formal baseline:** execution `11958` / run `RUN-S2-11959-16e7090e`.
 5. The public repository, Q1-Q4 submission portal, presentation, evidence files, and complete demo were linked for reviewer access.
 6. The final submission must be packaged as one ZIP under 1 GB and uploaded through the Interview Kickstart form only after the closure audit and archive-integrity checks pass.
 

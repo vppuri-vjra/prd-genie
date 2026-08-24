@@ -4,7 +4,9 @@ Final GitHub-versus-ZIP packaging is governed by the repository-root [`SUBMISSIO
 
 This release package preserves the complete nine-workflow v0.3.8 candidate and the evidence from the first accepted end-to-end run.
 
-> **Authoritative baseline:** execution `11901` / run `RUN-S2-11902-16e7090e` is the formal v0.3.8 submission baseline. Execution `11958` is supplementary post-tidy-up verification only and does not replace or alter the accepted baseline.
+> **Formal submission baseline — use for grading and all acceptance claims:** execution `11901` / run `RUN-S2-11902-16e7090e`.
+>
+> **Supplementary demonstration evidence only — does not replace the formal baseline:** execution `11958` / run `RUN-S2-11959-16e7090e`.
 
 ## Accepted run
 

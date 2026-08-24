@@ -5,7 +5,8 @@ This screenshot set documents the successful post-tidy-up canary executed on 202
 - n8n parent execution: `11958`
 - Run ID: `RUN-S2-11959-16e7090e`
 - Result: succeeded in `2m 39.014s`
-- Formal submission baseline remains execution `11901`; these images are supplementary visual and trace evidence.
+- **Formal submission baseline — use for grading and all acceptance claims:** execution `11901` / run `RUN-S2-11902-16e7090e`.
+- **Supplementary demonstration evidence only — does not replace the formal baseline:** execution `11958` / run `RUN-S2-11959-16e7090e`; these images are supplementary visual and trace evidence.
 
 ## Workflow and execution
 

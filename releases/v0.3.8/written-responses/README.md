@@ -9,4 +9,6 @@ Standalone fixed-layout copies of the four Capstone written responses. The Markd
 | Q3 — Build and Architecture | [PDF](PRD-Genie-Q3-Build-and-Architecture-v0.3.8.pdf) | [`q3-build-prd-orchestrator.md`](../../../docs/assignments/q3-build-prd-orchestrator.md) | [vjra.us](https://vjra.us/prd-genie.html#q3-build-architecture) |
 | Q4 — Reflection | [PDF](PRD-Genie-Q4-Reflection-v0.3.8.pdf) | [`q4-reflection.md`](../../../docs/assignments/q4-reflection.md) | [vjra.us](https://vjra.us/prd-genie.html#q4-reflection) |
 
-The formal submission baseline remains n8n execution `11901` / run `RUN-S2-11902-16e7090e`. Execution `11958` / run `RUN-S2-11959-16e7090e` is supplementary demonstration evidence.
+**Formal submission baseline — use for grading and all acceptance claims:** n8n execution `11901` / run `RUN-S2-11902-16e7090e`.
+
+**Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` / run `RUN-S2-11959-16e7090e`.

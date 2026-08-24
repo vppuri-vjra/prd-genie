@@ -2,8 +2,9 @@
 
 This is the complete written response for **Q3**. The presentation uses a concise summary and links back to this evidence.
 
-**Submission baseline:** v0.3.8 · execution `11901` · `RUN-S2-11902-16e7090e`  
-**Supplementary demonstration evidence:** execution `11958` · `RUN-S2-11959-16e7090e`  
+**Formal submission baseline — use for grading and all acceptance claims:** v0.3.8 · n8n execution `11901` · run `RUN-S2-11902-16e7090e`
+
+**Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` · run `RUN-S2-11959-16e7090e`
 **Published view:** https://vjra.us/prd-genie.html#q3-build-architecture
 
 ## A governed multi-agent pipeline from source evidence to planning-ready delivery
@@ -11,6 +12,8 @@ This is the complete written response for **Q3**. The presentation uses a concis
 Specialized agents accelerate documentation without replacing product judgment. PRD Orchestrator ingests six approved source documents, extracts and clarifies requirements, requires human approval, generates a corrected PRD, creates a dynamic Epic–Feature–User Story hierarchy, validates bidirectional traceability, and proposes non-blocking story sizes.
 
 The v0.3.8 candidate uses the complete governed topology, restores sizing evaluation, removes duplicate semantic scoring, and captures fully loaded token and cost evidence.
+
+**Input-set evolution:** three immutable discovery sources were followed by three human-authored clarification records dated August 7, 2026. Formal execution `11901` consumed the resulting six-document approved packet; decision IDs and bounded supersession preserve both original evidence and current governing state.
 
 ### Architecture
 
@@ -24,6 +27,8 @@ The v0.3.8 candidate uses the complete governed topology, restores sizing evalua
 | Observability | Langfuse | Traces, evaluators, latency, tokens, cache, cost | Accepted parent/stage traces and evaluator evidence |
 | Delivery | Google Drive Outputs | Validated Markdown and JSON artifact storage | Artifact identity, run association, delivery receipt |
 | Evidence | GitHub · Obsidian · vjra.us | Version control, living inventory, submission walkthrough | Commits, snapshots, exported workflows, published views |
+
+The Gap Analyzer immediately follows Requirement Extraction to test the normalized, citation-linked contract before approval or PRD generation. This fail-fast boundary prevents unresolved gaps from becoming polished content; downstream validators separately check grounding, coverage, structure, and reconciliation.
 
 ### Delivered capability
 

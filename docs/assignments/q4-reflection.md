@@ -2,8 +2,9 @@
 
 This is the complete written response for **Q4**. The presentation uses a concise summary and links back to this evidence.
 
-**Submission baseline:** v0.3.8 · execution `11901` · `RUN-S2-11902-16e7090e`  
-**Supplementary demonstration evidence:** execution `11958` · `RUN-S2-11959-16e7090e`  
+**Formal submission baseline — use for grading and all acceptance claims:** v0.3.8 · n8n execution `11901` · run `RUN-S2-11902-16e7090e`
+
+**Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` · run `RUN-S2-11959-16e7090e`
 **Published view:** https://vjra.us/prd-genie.html#q4-reflection
 
 ## Trustworthy AI comes from governed verification, not confident prose

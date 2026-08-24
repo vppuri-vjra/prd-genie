@@ -2,9 +2,9 @@
 
 Final verification status for the accepted PRD Genie v0.3.8 submission package.
 
-> **Formal submission baseline:** n8n execution `11901` / `RUN-S2-11902-16e7090e`.
+> **Formal submission baseline — use for grading and all acceptance claims:** n8n execution `11901` / run `RUN-S2-11902-16e7090e`.
 >
-> **Supplementary demonstration evidence:** n8n execution `11958` / `RUN-S2-11959-16e7090e`. It does not replace or alter the formal baseline.
+> **Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` / run `RUN-S2-11959-16e7090e`.
 
 ## Required assignments
 

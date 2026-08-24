@@ -2,8 +2,9 @@
 
 This manifest is the source of truth for the final Interview Kickstart ZIP. It distinguishes files stored in the public GitHub repository, files that will be physically included in the ZIP, and evidence that remains external by design.
 
-> **Formal submission baseline:** n8n execution `11901` · run `RUN-S2-11902-16e7090e`  
-> **Supplementary demonstration evidence:** execution `11958` · run `RUN-S2-11959-16e7090e`  
+> **Formal submission baseline — use for grading and all acceptance claims:** n8n execution `11901` · run `RUN-S2-11902-16e7090e`
+>
+> **Supplementary demonstration evidence only — does not replace the formal baseline:** n8n execution `11958` · run `RUN-S2-11959-16e7090e`
 > **Repository:** https://github.com/vppuri-vjra/prd-genie  
 > **Accepted v0.3.8 candidate package:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8
 > **Published submission page:** https://vjra.us/prd-genie.html  
@@ -22,6 +23,21 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 ## Packaging policy
 
 The final archive will contain a clean snapshot of the complete public repository working tree plus the final 7:08 MP4 demonstration. Repository-relative paths will be preserved so internal links continue to work. The demo will be stored at `demo/PRD-Genie-Complete-Demo-with-Artifacts-v0.3.8.mp4`. The archive will exclude Git metadata, local configuration, secrets, caches, temporary files, duplicate video exports, and raw section clips. The exact Git commit, archive filename, byte size, SHA-256 checksum, and open-test result will be recorded after assembly.
+
+## Authoritative input-set evolution
+
+The project began with three immutable discovery sources. The governed clarification process then added three dated stakeholder-decision sources. Formal baseline execution `11901` consumed the resulting six-document approved packet. The later clarification files are human-authored governance evidence, not model-generated assumptions, and they do not erase the original source statements. Where a later decision supersedes an earlier position, both remain traceable and the applicable decision ID records the controlled precedence.
+
+| Input phase | File | Evidence role |
+| --- | --- | --- |
+| Initial discovery | `product-brief.txt` | Original product brief; immutable source evidence |
+| Initial discovery | `meeting-transcripts.txt` | Original meeting record; immutable source evidence |
+| Initial discovery | `stakeholder-notes.txt` | Original stakeholder notes; immutable source evidence |
+| Governed clarification — August 7, 2026 | `stakeholder-clarifications-2026-08-07.md` | Dated stakeholder decisions resolving, deferring, or controlling recorded gaps |
+| Governed amendment — August 7, 2026 | `stakeholder-clarification-amendment-2026-08-07.md` | Approved amendments with explicit decision IDs and supersession scope |
+| Governed mobile-release clarification — August 7, 2026 | `stakeholder-clarification-mobile-release-2026-08-07.md` | Approved mobile-release decision and production-launch applicability |
+
+**Counting convention:** “three original inputs” describes the discovery starting point; “six approved inputs” describes the complete packet used by the formal submission baseline. Both statements are correct when their phase is stated.
 
 ## Required deliverables and evidence
 

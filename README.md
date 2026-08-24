@@ -10,7 +10,7 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 **Final package inventory:** [`SUBMISSION-PACKAGE-MANIFEST.md`](SUBMISSION-PACKAGE-MANIFEST.md) identifies every required deliverable, its GitHub location, whether it will be physically included in the Interview Kickstart ZIP, and which runtime evidence remains external by design.
 
-**Complete demo:** [PRD Genie v0.3.8 — Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) is a 7:08 reviewer walkthrough. Execution `11958` / `RUN-S2-11959-16e7090e` is supplementary demonstration evidence and does not replace the formal baseline.
+**Complete demo:** [PRD Genie v0.3.8 — Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) is a 7:08 reviewer walkthrough. **Formal submission baseline — use for grading and all acceptance claims:** execution `11901` / run `RUN-S2-11902-16e7090e`. **Supplementary demonstration evidence only — does not replace the formal baseline:** execution `11958` / run `RUN-S2-11959-16e7090e`.
 
 **Submission portal:** [Q1–Q4 responses, overall deliverables, presentation, and download index](https://vjra.us/prd-genie.html).
 
