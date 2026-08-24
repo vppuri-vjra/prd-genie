@@ -4,11 +4,15 @@ AI-powered product documentation assistant that converts meeting transcripts, pr
 
 ## Project status
 
-**Phase:** Iterations 1 and 2 are complete for the current T1–T10 scope. Human-approved ground truth, automated evaluation, n8n execution evidence, and Langfuse traces are recorded; the promoted v1.5 Requirement Extractor passed the unchanged T1–T10 release gate 10/10.
+**Phase:** The v0.3.8 capstone implementation and submission package are complete. The governed pipeline covers intake, requirement extraction, gap analysis, signed human approval, ten-section PRD generation, story breakdown, final validation and export, and non-blocking story sizing. All prescribed T1–T12 baseline cases passed against human-reviewed ground truth with 100% groundedness and zero unsupported claims.
 
 **Submission candidate:** The complete accepted v0.3.8 workflow and evidence package is available at [`releases/v0.3.8/`](releases/v0.3.8/README.md). It preserves parent execution `11901`, run `RUN-S2-11902-16e7090e`, all nine workflow exports, the three planning artifacts, and the complete citation disposition evidence.
 
-The planned implementation uses:
+**Complete demo:** [PRD Genie v0.3.8 — Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) is a 7:08 reviewer walkthrough. Execution `11958` / `RUN-S2-11959-16e7090e` is supplementary demonstration evidence and does not replace the formal baseline.
+
+**Submission portal:** [Q1–Q4 responses, overall deliverables, presentation, and download index](https://vjra.us/prd-genie.html).
+
+The implemented system uses:
 
 - **n8n** for sequential workflow orchestration
 - **Langfuse** for observability and evaluation
@@ -150,9 +154,7 @@ The project includes 12 required baseline cases:
 
 The target release gate is **12/12 baseline tests passing with zero unsupported requirements** in the final evaluated run.
 
-Results will be summarized in [`evaluation/results/baseline-summary.md`](evaluation/results/baseline-summary.md) and supported by detailed run evidence.
-
-T1-T10 have documented Requirement Extractor results. T10 includes a passing v0.8 before/after correction trace. Earlier partial and failed cases remain honest baseline evidence and will inform the ground-truth evaluation and final regression. T11-T12 will be executed after the remaining agents and human-approval gate are implemented.
+Final results are recorded in the [`T1–T12 baseline summary`](evaluation/results/baseline-summary.md) and supported by preserved run metadata, n8n execution receipts, Langfuse traces, ground-truth records, and presentation Appendices A5–A7. Earlier partial and failed development runs remain in repository history as iteration evidence; they do not replace the final 12/12 release disposition.
 
 ## Grounding principles
 
@@ -166,7 +168,7 @@ T1-T10 have documented Requirement Extractor results. T10 includes a passing v0.
 
 ## Running the project
 
-The Requirement Extractor and its Langfuse/failure-observability path are implemented. Remaining agents are planned. To validate the current contract package:
+The full v0.3.8 workflow set is preserved under [`releases/v0.3.8/workflows/`](releases/v0.3.8/workflows/). To validate the repository contract package locally:
 
 ```bash
 python3 -m venv .venv
@@ -179,7 +181,7 @@ No credentials or secrets should be committed. Copy `.env.example` to your local
 
 ## Submission evidence
 
-The final repository will contain:
+The final repository contains:
 
 - Exported n8n workflow JSON
 - Architecture and orchestration rationale
@@ -187,8 +189,9 @@ The final repository will contain:
 - Baseline outputs and results for T1-T12
 - Langfuse trace screenshots and evaluation evidence
 - Cost and latency analysis
-- Assignment responses and reflection
-- Demo script and five-minute video link
+- Q1–Q4 assignment responses and reflection through the [submission portal](https://vjra.us/prd-genie.html)
+- [Complete Demo with Artifacts](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo)
+- [Supplementary Langfuse evidence for execution 11958](releases/v0.3.8/evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html)
 - Screenshots of the workflow canvas and PRD Genie in action
 
 ## Limitations
