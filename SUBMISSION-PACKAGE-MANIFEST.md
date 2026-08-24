@@ -9,6 +9,7 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Accepted v0.3.8 candidate package:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8
 > **Published submission page:** https://vjra.us/prd-genie.html  
 > **Published GitHub Download section:** https://vjra.us/prd-genie.html#github-download
+> **Complete Demo with Artifacts — 7:08 walkthrough, included in the ZIP:** https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo
 > **Approved six-input inventory:** https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/fixtures/multi-source/realistic-v1
 > **T1–T12 baseline results:** https://github.com/vppuri-vjra/prd-genie/blob/main/evaluation/results/baseline-summary.md
 > **T1–T12 ground-truth evidence:** https://github.com/vppuri-vjra/prd-genie/tree/main/evaluation/ground-truth
@@ -22,7 +23,6 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Two-page Architecture Write-up — Word:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/architecture/PRD-Genie-Architecture-Writeup-v0.3.8.docx
 > **31-slide presentation — PDF:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf
 > **31-slide presentation — PPTX:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pptx
-> **Complete Demo with Artifacts:** https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo
 > **ZIP status:** Assembled and verified as `PRD-Genie-v0.3.8-IK-Final-Submission.zip`. “Yes” below means the item was reconciled for physical inclusion in the final ZIP.
 
 ## Packaging policy
