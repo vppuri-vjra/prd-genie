@@ -15,7 +15,7 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 
 ## Packaging policy
 
-The final archive will contain a clean snapshot of the complete public repository working tree. Repository-relative paths will be preserved so internal links continue to work. The archive will exclude Git metadata, local configuration, secrets, caches, temporary files, and externally hosted media. The exact Git commit, archive filename, byte size, SHA-256 checksum, and open-test result will be recorded after assembly.
+The final archive will contain a clean snapshot of the complete public repository working tree plus the final 7:08 MP4 demonstration. Repository-relative paths will be preserved so internal links continue to work. The demo will be stored at `demo/PRD-Genie-Complete-Demo-with-Artifacts-v0.3.8.mp4`. The archive will exclude Git metadata, local configuration, secrets, caches, temporary files, duplicate video exports, and raw section clips. The exact Git commit, archive filename, byte size, SHA-256 checksum, and open-test result will be recorded after assembly.
 
 ## Required deliverables and evidence
 
@@ -51,7 +51,7 @@ The final archive will contain a clean snapshot of the complete public repositor
 | Supplementary Langfuse HTML report | Traces, evaluators, latency, tokens, and cost | [`releases/v0.3.8/evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html`](releases/v0.3.8/evidence/langfuse/Langfuse-Complete-Trace-Evidence-11958.html) | Yes | [Published report](https://vjra.us/prd-genie-langfuse-11958.html) | Supplementary `11958` | Current |
 | Editable presentation | Slide-deck deliverable | [`releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pptx`](releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pptx) | Yes | GitHub open/download | Submission | Current |
 | Fixed-layout presentation | Slide-deck review copy | [`releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf`](releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf) | Yes | GitHub open/download | Submission | Current; 31 pages |
-| Complete Demo with Artifacts | Demonstration of architecture, execution, artifacts, evaluation, release, and lessons | GitHub Release asset; not stored in the Git working tree | **No — link only** | [7:08 demo release](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) | Demonstration using `11958`; `11901` remains formal baseline | Published and runtime disclosed |
+| Complete Demo with Artifacts | Demonstration of architecture, execution, artifacts, evaluation, release, and lessons | GitHub Release asset; not stored in the Git working tree | **Yes — `demo/PRD-Genie-Complete-Demo-with-Artifacts-v0.3.8.mp4`** | [7:08 demo release](https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo) | Demonstration using `11958`; `11901` remains formal baseline | Published; local source is 34,315,747 bytes |
 | Instructor and upload checklists | Final submission controls | [`docs/submission/INSTRUCTOR_REQUIREMENTS.md`](docs/submission/INSTRUCTOR_REQUIREMENTS.md), [`docs/submission/GRADING_CHECKLIST.md`](docs/submission/GRADING_CHECKLIST.md) | Yes | GitHub | Submission administration | Current; final ZIP/form steps pending |
 
 ## External or reference-only items
@@ -62,7 +62,7 @@ The final archive will contain a clean snapshot of the complete public repositor
 | Live n8n executions `11901` and `11958` | No | No | Platform records are external. Workflow JSON, execution IDs, run IDs, output evidence, and screenshots are included. |
 | Live Langfuse project and traces | No | No | Platform records are external. Evaluator values, trace captures, and the supplementary HTML evidence report are included. |
 | vjra.us submission portal | No | No | Public evaluator-facing index; link is recorded above and in the repository README. |
-| Complete MP4 demo asset | GitHub Release only | No | The public release is the authoritative media location; the ZIP contains the presentation and evidence used by the demo. |
+| Duplicate continuous-timeline MP4 and raw section clips | No | No | The final named 7:08 demo is included once; duplicate exports and editing components are excluded to keep the package unambiguous. |
 | Capstone Project Playbook and PRD Genie Problem Statement PDFs | No | No | Course-provided reference material, not student-authored deliverables. Evaluators already possess the governing documents. |
 | Obsidian working vault and recording work files | No | No | Working documentation and raw production material are not required submission deliverables; final evidence is preserved in GitHub. |
 | Credentials, `.env` files, API keys, signed n8n resume URLs, caches, and temporary files | No | No | Explicitly excluded for security and privacy. `.env.example` contains placeholders only and may be included. |
