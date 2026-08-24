@@ -23,7 +23,7 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **31-slide presentation — PDF:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf
 > **31-slide presentation — PPTX:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pptx
 > **Complete Demo with Artifacts:** https://github.com/vppuri-vjra/prd-genie/releases/tag/v0.3.8-complete-demo
-> **ZIP status:** Not yet assembled. “Yes” below means required physical inclusion in the final ZIP; it does not claim that ZIP verification has already passed.
+> **ZIP status:** Assembled and verified as `PRD-Genie-v0.3.8-IK-Final-Submission.zip`. “Yes” below means the item was reconciled for physical inclusion in the final ZIP.
 
 ## Packaging policy
 
@@ -102,20 +102,21 @@ The project began with three immutable discovery sources. The governed clarifica
 
 ## Final ZIP verification record
 
-Complete this section only after the archive is assembled and tested.
+The archive is a clean snapshot of Git commit `31b2134154fccfa3259eb62b3538147d5d9ca181` plus the final named demo. The checksum is recorded externally because an archive cannot contain its own final checksum without changing that checksum.
 
 | Control | Result |
 | --- | --- |
-| Archive filename | Pending |
-| Source Git commit | Pending |
-| Archive size | Pending; must be no more than 1 GB |
-| SHA-256 checksum | Pending |
-| Archive opens successfully | Pending |
-| Required paths compared with this manifest | Pending |
-| Secrets and temporary-file scan | Pending |
-| Demo URL opened successfully | Pending |
-| vjra.us submission page opened successfully | Pending |
-| Ready for Interview Kickstart upload | **No — pending final ZIP assembly and verification** |
+| Archive filename | `PRD-Genie-v0.3.8-IK-Final-Submission.zip` |
+| Source Git commit | `31b2134154fccfa3259eb62b3538147d5d9ca181` |
+| Archive size | 40,322,401 bytes (38.45 MiB); below the 1 GB limit |
+| SHA-256 checksum | `ae15037a356d281eb2c4abf0f6a950e5cf32dbae26ddd1bcef204766c7f154d3` |
+| Archive opens successfully | Passed; `unzip -t` reported no errors |
+| Required paths compared with this manifest | Passed; no required path missing, 9/9 workflow JSON files present, and 6/6 approved physical inputs present |
+| Secrets and temporary-file scan | Passed; no forbidden credential files or genuine secret patterns found. One `sk-` substring in a test fixture identifier was reviewed as a false positive. |
+| Demo included | Passed; `demo/PRD-Genie-Complete-Demo-with-Artifacts-v0.3.8.mp4`, 34,315,747 bytes |
+| Demo URL opened successfully | Passed; GitHub release URL recorded above |
+| vjra.us submission page opened successfully | Passed; published page and direct evaluator links verified |
+| Ready for Interview Kickstart upload | **Yes — verified single ZIP, below 1 GB** |
 
 ## Submission form values
 
