@@ -19,6 +19,12 @@ This release package preserves the complete nine-workflow v0.3.8 candidate and t
 
 ## Reviewer-facing artifacts
 
+### Architecture write-up
+
+- [`architecture/PRD-Genie-Architecture-Writeup-v0.3.8.md`](architecture/PRD-Genie-Architecture-Writeup-v0.3.8.md) — editable source.
+- [`architecture/PRD-Genie-Architecture-Writeup-v0.3.8.docx`](architecture/PRD-Genie-Architecture-Writeup-v0.3.8.docx) — editable submission copy.
+- [`architecture/PRD-Genie-Architecture-Writeup-v0.3.8.pdf`](architecture/PRD-Genie-Architecture-Writeup-v0.3.8.pdf) — fixed-layout two-page Playbook deliverable.
+
 - [Validated Full PRD Review](<evidence/PRD Genie — Validated Full PRD Review — RUN-S2-11902-16e7090e.md>)
 - [Validated Epic, Feature, and User Story Review](<evidence/PRD Genie — Validated Epic Feature User Story Review — RUN-S2-11902-16e7090e.md>)
 - [Proposed T-Shirt Sizing Review](<evidence/PRD Genie — Proposed T-Shirt Sizing Review — RUN-S2-11902-16e7090e.md>)
