@@ -21,6 +21,13 @@ This release package preserves the complete nine-workflow v0.3.8 candidate and t
 
 ## Reviewer-facing artifacts
 
+### Q1–Q4 written responses
+
+- [`written-responses/PRD-Genie-Q1-Ideation-v0.3.8.pdf`](written-responses/PRD-Genie-Q1-Ideation-v0.3.8.pdf)
+- [`written-responses/PRD-Genie-Q2-Program-Charter-v0.3.8.pdf`](written-responses/PRD-Genie-Q2-Program-Charter-v0.3.8.pdf)
+- [`written-responses/PRD-Genie-Q3-Build-and-Architecture-v0.3.8.pdf`](written-responses/PRD-Genie-Q3-Build-and-Architecture-v0.3.8.pdf)
+- [`written-responses/PRD-Genie-Q4-Reflection-v0.3.8.pdf`](written-responses/PRD-Genie-Q4-Reflection-v0.3.8.pdf)
+
 ### Architecture write-up
 
 - [`architecture/PRD-Genie-Architecture-Writeup-v0.3.8.md`](architecture/PRD-Genie-Architecture-Writeup-v0.3.8.md) — editable source.
