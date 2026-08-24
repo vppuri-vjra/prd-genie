@@ -8,10 +8,10 @@ This manifest is the source of truth for the final Interview Kickstart ZIP. It d
 > **Accepted v0.3.8 candidate package:** https://github.com/vppuri-vjra/prd-genie/tree/main/releases/v0.3.8
 > **Published submission page:** https://vjra.us/prd-genie.html  
 > **Published GitHub Download section:** https://vjra.us/prd-genie.html#github-download
-> **Q1 — Ideation:** https://vjra.us/prd-genie.html#q1-ideation
-> **Q2 — Program Charter:** https://vjra.us/prd-genie.html#q2-program-charter
-> **Q3 — Build and Architecture:** https://vjra.us/prd-genie.html#q3-build-architecture
-> **Q4 — Reflection:** https://vjra.us/prd-genie.html#q4-reflection
+> **Q1 — Ideation:** [Published view](https://vjra.us/prd-genie.html#q1-ideation) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q1-ideation.md)
+> **Q2 — Program Charter:** [Published view](https://vjra.us/prd-genie.html#q2-program-charter) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q2-program-charter.md)
+> **Q3 — Build and Architecture:** [Published view](https://vjra.us/prd-genie.html#q3-build-architecture) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q3-build-prd-orchestrator.md)
+> **Q4 — Reflection:** [Published view](https://vjra.us/prd-genie.html#q4-reflection) · [GitHub source](https://github.com/vppuri-vjra/prd-genie/blob/main/docs/assignments/q4-reflection.md)
 > **Two-page Architecture Write-up — PDF:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/architecture/PRD-Genie-Architecture-Writeup-v0.3.8.pdf
 > **Two-page Architecture Write-up — Word:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/architecture/PRD-Genie-Architecture-Writeup-v0.3.8.docx
 > **31-slide presentation — PDF:** https://github.com/vppuri-vjra/prd-genie/blob/main/releases/v0.3.8/presentation/PRD-Genie-Capstone-Presentation-v0.3.8.pdf
